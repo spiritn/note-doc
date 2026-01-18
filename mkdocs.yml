@@ -35,6 +35,7 @@ extra_javascript:
 
 # 导航  
 nav:
+  - 首页: index.md
   - 数据库: 
     - mySQL架构: database/02-mysql架构.md
     - 基础: database/00-基础.md
