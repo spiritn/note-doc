@@ -1,41 +1,94 @@
+# 站点基本信息配置
 site_name: 我的技术文档
 site_url: https://spiritn.github.io/note-doc/
 
+# 主题配置 - 使用 Material for MkDocs 主题
 theme:
-  name: material
+  name: material  # 使用 Material 主题
+
+  # 调色板配置
   palette:
-    - scheme: default
-      primary: blue
+    - scheme: default  # 默认配色方案
+      primary: indigo  # 主色调为靛蓝色
+
+  # 主题功能特性 - 添加右侧目录功能
   features:
-    - search.highlight
-    - navigation.instant
-    - navigation.tracking
-    - navigation.tabs
-    - navigation.expand
-    - toc.integrate
-    - content.code.copy
+    - navigation.tabs       # 顶部标签页导航
+    - navigation.sections   # 章节导航
+    - navigation.expand     # 可展开的导航菜单
+    - navigation.top        # 返回顶部按钮
+    - navigation.instant    # 即时页面加载（无刷新）
+    - navigation.tracking   # 导航位置跟踪
+    #- toc.integrate         # 集成目录到侧边栏（已禁用）
+    - toc.follow            # 目录跟随高亮当前阅读位置
+    - toc.integrate         # 或保留这个，但修改nav配置
+    - search.highlight      # 搜索关键词高亮
+    - search.suggest        # 搜索建议
+    - content.code.copy     # 代码块复制按钮
 
+  # 语法高亮配置
+  hljs_style: github-dark  # 使用 GitHub 深色主题的语法高亮
+
+  # 目录配置
+  toc:
+    toc_depth: 4      # 目录显示深度（1-6级）
+    toc_levels: 2-4   # 支持显示的标题级别范围
+    permalink: true   # 为标题生成永久链接
+    permalink_symbol: "🔗"  # 永久链接的显示符号
+    # ✅ 新增：确保目录在右侧显示
+    toc_position: right  # 明确指定目录位置
+
+  # ✅ 新增：侧边栏配置
+  navigation:
+    # 左侧导航栏配置
+    nav_width: 260
+
+  # 布局配置
+  layout:
+    toc: true  # 启用目录
+
+# 插件配置
 plugins:
-  - search
+  - search  # 内置搜索插件
 
-# 使用 CDN 加速静态资源
+# 额外 JavaScript 资源
 extra_javascript:
+  # 加载 MathJax 数学公式渲染库
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
-# 引入自定义CSS，显著增强字体和排版
+# 额外 CSS 样式表
 extra_css:
+  # 自定义 CSS 文件，用于增强字体和排版
   - stylesheets/extra.css
 
-# 导航
+# 导航菜单配置
 nav:
-  - 首页: index.md
-  - 数据库: 
-    - mySQL架构: database/02-mysql架构.md
-    - 基础: database/00-基础.md
-    - InnoDB存储引擎: database/03-InnoDB存储引擎.md
-    - 索引: database/04-索引.md
-    - 日志系统: database/05-日志系统.md
+  - 首页: index.md  # 网站首页
 
+  # 数据库相关文档
+  - 数据库:
+      - mySQL架构: database/02-mysql架构.md
+      - 基础: database/00-基础.md
+      - InnoDB存储引擎: database/03-InnoDB存储引擎.md
+      - 索引: database/04-索引.md
+      - 日志系统: database/05-日志系统.md
+
+  # Java 相关文档
   - Java:
-    - JAVA8: java/java8.md
-    - spring: java/spring/spring/IocContainer.md
+      - JAVA8: java/java8.md
+
+  # Spring 框架相关文档
+  - spring:
+      - 概览Overview: java/spring/spring/Overview.md
+      - spring-core: java/spring/spring/spring-core.md
+      - IOC容器: java/spring/spring/IocContainer.md
+      - Resource: java/spring/spring/Resource.md
+      - Validation: java/spring/spring/Validation-DataBinding-Type-Conversion.md
+      - AOP: java/spring/spring/spring-AOP.md
+      - 其他: java/spring/spring/Null-safetyAndLogging.md
+      - spring常见问题: java/spring/spring/Spring常见问题.md
+  - springboot:
+      - 简介: java/spring/spring-boot/GettingStarted.md
+      - 如何使用: java/spring/spring-boot/UsingSpringBoot.md
+      - 功能特性: java/spring/spring-boot/spring-boot-features.md
+      - 核心概念: java/spring/spring-boot/spring-boot核心概念.md

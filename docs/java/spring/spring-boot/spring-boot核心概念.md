@@ -1,4 +1,15 @@
-## springboot启动流程
+# 1. 核心注解
+
+## 1.1 @Import 
+注解的主要作用是将指定的类实例注入到 Spring IOC 容器中。
+- 导入普通类或@Configuration配置类
+- 导入 ImportSelector 实现类,这是 Spring Boot 自动配置的核心模式。允许根据条件动态决定要导入哪些全限定类名
+- 导入 ImportBeanDefinitionRegistrar 实现类,是最高级的扩展模式，允许你直接操作 Bean 定义注册表（BeanDefinitionRegistry）。MyBatis 的 @MapperScan 就是用它来扫描接口并生成代理 Bean 的。
+
+> Spring Boot 自动配置是如何实现的？（必考） 解析与思路：启动类上的 @SpringBootApplication 包含 @EnableAutoConfiguration。@EnableAutoConfiguration 内部使用了 @Import(AutoConfigurationImportSelector.class)。AutoConfigurationImportSelector 会读取 META-INF/spring.factories（或新版 imports 文件）中的配置类列表。结合 @Conditional 系列注解进行过滤，最终将符合条件的配置类注入容器
+  •实现 @EnableXXX 功能特性，，会发现各种开启功能的注解底层都是 @Import
+
+# 2. 启动流程
 
 1. main方法里调用 `SpringApplication.run()`*，里面*`return new SpringApplication(primarySources).run(args);`先去创建了SpringApplication对象，然后调用run方法
 2. 创建SpringApplication对象：
