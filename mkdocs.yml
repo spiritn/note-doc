@@ -10,6 +10,7 @@ theme:
     - search.highlight
     - navigation.instant
     - navigation.tracking
+    - navigation.tabs
     - navigation.expand
     - toc.integrate
     - content.code.copy
@@ -17,23 +18,15 @@ theme:
 plugins:
   - search
 
-# 扩展配置
-markdown_extensions:
-  - admonition
-  - codehilite
-  - toc:
-      permalink: true
-      toc_depth: 2-4
-  - tables
-  - pymdownx.superfences
-  - pymdownx.tabbed:
-      alternate_style: true
-      
 # 使用 CDN 加速静态资源
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
-# 导航  
+# 引入自定义CSS，显著增强字体和排版
+extra_css:
+  - stylesheets/extra.css
+
+# 导航
 nav:
   - 首页: index.md
   - 数据库: 
