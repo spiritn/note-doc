@@ -5,7 +5,7 @@ on:
   push:
     branches: [ main ]
 
-# 定义一个名为 “deploy” 的作业
+# 定义一个名为 “deploy” 的作业1
 jobs:
   deploy:
     # 在最新的Ubuntu虚拟环境中运行
