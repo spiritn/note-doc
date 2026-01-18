@@ -1,0 +1,49 @@
+site_name: 我的技术文档
+site_url: https://julian.gitee.io/docs/
+
+theme:
+  name: material
+  language: zh
+  palette:
+    - scheme: default
+      primary: blue
+      accent: blue
+  features:
+    - search.highlight
+    - navigation.instant
+    - navigation.tracking
+    - navigation.expand
+    - toc.integrate
+    - content.code.copy
+
+plugins:
+  - search
+
+# 扩展配置
+markdown_extensions:
+  - admonition
+  - codehilite
+  - toc:
+      permalink: true
+      toc_depth: 2-4
+  - tables
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+      
+# 使用 CDN 加速静态资源
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+# 导航  
+nav:
+  - 数据库: 
+    - mySQL架构: database/02-mysql架构.md
+    - 基础:database/01-基础.md
+    - InnoDB存储引擎: database/03-InnoDB存储引擎.md
+    - 索引: database/04-索引.md
+    - 日志系统: database/05-日志系统.md
+
+  - Java:
+    - JAVA8: java/java8.md
+    - spring: java/spring/spring/IocContainer.md
