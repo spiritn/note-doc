@@ -1,0 +1,717 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://spiritn.github.io/note-doc/database/08-%E6%89%A9%E5%B1%95%E5%AD%A6%E4%B9%A0/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>08 扩展学习 - 我的技术文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mysql80" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="我的技术文档" class="md-header__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的技术文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              08 扩展学习
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="我的技术文档" class="md-nav__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    我的技术文档
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-mysql%E6%9E%B6%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mySQL架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-基础.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    InnoDB存储引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日志系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JAVA8
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/spring/spring/IocContainer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h2 id="mysql80">mySQL8.0的新特性<a class="headerlink" href="#mysql80" title="Permanent link">&para;</a></h2>
+<p>SQL相关：
+•快速DDL。大表的加列操作通常要好几个小时，而且会产生大的临时表。有了快速DDL，就可以避免这些问题，注意仅支持在最后添加列。适用于添加列、修改列的默认值、修改列表
+•窗口函数， 支持 over 字句，ROW_NUMBER(), RANK(), LEAD(), LAG() 等，实现一些复杂的分析查询。
+• 从8.0开始，UTF8mb4成为MySQL默认支持的字符集，完美支持各类火星文、😆emoji表情等特殊字符。</p>
+<p>索引相关：
+- 可将索引设为不可见测试性能影响，确认无影响后再删除。alter table t1 alter index idx_name invisible
+- 支持降序索引，即指定DESC，避免反向扫描索引。之前默认都是按升序方式存储。
+- 支持函数索引。将某列作用函数后作为索引</p>
+<p>优化器相关：
+主从复制的改进：</p>
+<p>InnoDB相关：
+- CATS 锁的调度。多个事务的锁等待时不再是FIFI策略，而是CATS，事务拥有权重属性，即一个事务已经锁定许多热点行时，权重更高，请求新锁时将获得优先权。公交车司机即使比出租车后到，但也给他先加油，这样会让更多人更快到达目的地。
+- 重启时，InnoDB根据服务器内存自动优化 InnoDB 参数，以尽可能使用更多的服务器资源。减少 DBA 手动配置。</p>
+<h2 id="mysql-group-replicationmgr">MySQL Group Replication（MGR）<a class="headerlink" href="#mysql-group-replicationmgr" title="Permanent link">&para;</a></h2>
+<p>是 MySQL 官方提供的一个高可用、高可靠、强一致性的数据库集群解决方案。
+•核心本质：它是一个 基于 Paxos 协议的分布式状态机复制系统。
+•简单理解：MGR 将多个 MySQL 实例组成一个 “组”，这个组对外就像一个单一的数据库。组内任何节点执行的事务都会通过组内协商一致后同步到其他所有节点，从而实现数据的强一致性。
+•单主节点，还有多主节点。
+通过mySQL Router应用层代理暴露给客户端 </p>
+<h2 id="binlog-server">binlog server<a class="headerlink" href="#binlog-server" title="Permanent link">&para;</a></h2>
+<p>mySQL master 会通过协议同步到salve，但是一般企业会基于binlog做更多事情。
+binlog的应用场景：服务实例扩容、binlog订阅；读写分离、HA切换等场景，应用非常广泛。
+binlog server 的基本原理和作用机制：通过实时备份master的binlog，并向下游同步binlog，释放master的压力。
+binlog server作用很大，因此实现方式有很多种，业界也有很多方案，如
+- mysqbinlog：模拟MySQL的从机，向master发送binlog dump命令将从master收到的binlog存放在本地。简单，mysql自带，但是不能作为下游slave的中继节点。 
+- kingbus：基于raft强一致协议实现的分布式MySQL binlog 存储系统。它能够充当一个MySQL Slave从真正的Master上同步binlog，并存储在分布式集群中。同时又充当一个MySQL Master将集群中的binlog 同步给其他Slave 
+- Google Mysql-ripple、Blackhole存储引擎等。 </p>
+<h2 id="performance-schema">Performance Schema<a class="headerlink" href="#performance-schema" title="Permanent link">&para;</a></h2>
+<p>是一种专门用来监控服务器执行情况的存储引擎，它会把监控服务器执行情况的数据记录在系统自带的数据库performance_schema。setup_instruments保存的数据，表示哪些对象发生的事件可以被系统捕获，
+setup_consumers保存的数据用来控制保存哪些事件的信息。我们可以调取监控数据来查看执行情况，从而定位和解决问题。</p>
+<h1 id="mysql">MySQL高性能秒杀<a class="headerlink" href="#mysql" title="Permanent link">&para;</a></h1>
+<h2 id="1">1. 背景<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>在用户下单时，无论是外卖、闪购，还是优选、团好货、各产品线发放优惠券，在技术上，都可以抽象成对库存进行扣减。业务必须保证库存的绝对准确，否则就会发生超卖或者少卖。如外卖券 券是有限的，事先会做估算，所以外卖券的发放涉及到秒杀，还有电影券，迪士尼券等等</p>
+<p><strong>秒杀失败的案例</strong></p>
+<p>现象：数据库一主三从变成一主二从，最后一主一从。然后DBA迅速进行限流。</p>
+<p>问题：业务进行了限流，QPS600.。然后分到三个库。结果流量全部打到一个库上，单机QPS只有200，不满足600的QPS，</p>
+<p><strong>已有秒杀方案：</strong></p>
+<ul>
+<li>MysQL</li>
+</ul>
+<p>高并发下性能低，社区版MySQL数据库在处理扣减库存上能力不足，尤其是在海量用户抢购相同的商品时，系统的响应时间急剧恶化，吞吐量大大降低</p>
+<ul>
+<li>redis</li>
+</ul>
+<p>目前还没有非常成熟的机制，在机器出现故障时，保证数据的准确性，因此需要业务耗费较大精力去处理各种异常情况，造成解决方案复杂，易出错鲁棒性低。</p>
+<ul>
+<li>新方案？</li>
+</ul>
+<p>如何使用MySQL的事务高一致性，又能保持高性能呢？SQL内核团队在数据库中内置了秒杀功能，业务只需通过简单适配，就可以既保证库存准确性，也能获得较为满意的性能。</p>
+<h2 id="2">2. 原理<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>先分析业务和数据库的交互</p>
+<p>mySQL是一致性要求非常强的关系数据库系统，对任何记录的修改都要经过一个完整的事务过程，包含“开启事务-&gt;加锁修改-&gt;提交解锁"三个步骤，不同的事务如果修改完全不同的记录，在数据库中可以完全并行，有比较好的性能。</p>
+<p>但如果修改的是同一条记录，则不同会话的事务在数据库里的执行是串行的，形成我们的讲的热点记录，对应到业务则是热点业务。这种热点情况是普遍存在的，比如物美价廉的优质商品的库存记录、发放红包/优惠卷的内部账号、或财务中的企业账号或中间账号。我们来看一下一个典型的减库存的逻辑，如下所示：</p>
+<div class="highlight"><pre><span></span><code><span class="k">begin</span><span class="p">;</span>
+<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="err">库存变动记录</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p">(....);</span>
+<span class="k">update</span><span class="w"> </span><span class="err">库存余数记录</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="err">余数</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">余数</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="err">商品</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="err">余数</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">commit</span><span class="p">;</span>
+</code></pre></div>
+<p>在Update语句之前，不同会话的事务可以并行，在Update语句执行时，需要加锁然后直到commit语句执行成功才能解锁。我们可以想象一下在Update和Commit中间会经历哪些事情？可能的事情有</p>
+<p>​   •   update/commit两条命令之间，需要应用从DB服务器取得Update语句的返回值，然后再将commit语句发过去，涉及一个网络来回，应用和数据库之间可能在同一个AZ内，也可能是跨AZ的。一条简单的纯内存的Update语句的内核执行时间大约在100us以内，同城一个网络来回的时间可能是200us到1500us之间，可以看到网络对热点场景并发能力的影响。</p>
+<p>​   •   Update语句不一定放在事务的最后面，比如前面的Update和Insert语句换一个位置，则Update锁的持有时间会明显偏长。这里可以优化应用，进行SQL语句位置的调整。</p>
+<p>​   •   目前很多应用是用Java编写的，也可能在Update和commit两条命令之间，发生GC的行为，一次Young GC的时间大约为几十毫秒，如果是一次Full GC，则时间可能达到秒级。</p>
+<p>​   •   有些应用逻辑中，可能需要在Update和Commit中间通知其他的应用进行协作，如果涉及外部的应用，时间上会更不可控。这里可以先在本地记录一个事件，然后在事务提交后，通过事件进行外部系统交互。</p>
+<p>当我们不用事务模式测试Update语句，执行就会非常快，这里其实是省掉了Update和Commit两个语句之间的时间差。因此我们可以考虑将检查Update语句是否成功的条件，也包括在语句中，直接发到数据库服务器，让数据库服务代为检查Update语句是否成功，如果成功则直接提交，如果失败则直接回滚，<strong>以省略Update和Commit之间的时间差</strong>，从而提升热点业务的处理能力。另外一面，当太多的热点相关的会话进入到数据库事务引擎层中，会增加数据库内部的事务调度（主要是锁冲突和死锁检测相关）的成本，为了更好的并发性能，还可以对进入到事务引擎层的热点更新会话数使用排队机制做出一定的限制，类似于Java应用中普遍使用的线程池机制，对于同一个热点的更新，只允许少量的并行进入。</p>
+<p>秒杀场景，从业务角度来看</p>
+<p>- 单语句单商品，也就是只有一张表，如优惠券数量</p>
+<p>* 事务单商品。如开启事务，插入流水表，还需要更新一个库存表，最后提交事务。</p>
+<p>* 事务多商品。如购物车一次提交多个商品。就是开球事务，然后更新多个表，最后提交事务。</p>
+<h2 id="3">3. 实现方式<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<h3 id="31-updatecommit">3.1 降低update和commit之间的时间差<a class="headerlink" href="#31-updatecommit" title="Permanent link">&para;</a></h3>
+<p>从图1可以看出，对于一般业务来说，事务提交需要显式的执行set auto_commit=1或者commit语句，那么热点行持有的锁，最少会持续一个网络来回时间。特别是应用服务器与数据库服务器不在同一个机房时，<strong>网络来回时间大概为2ms，由于行锁的存在，那么对于单行更新tps的理论上限为500</strong>。如何减少或避免这个网络交互开销就非常重要。</p>
+<p>通过调查发现，业务一般会根据update语句是否成功，来决定业务逻辑。比如在扣库存情况下，如果update成功执行，即affect_row为1，则提交事务，否则认为失败，则回滚事务。因此如果我们在SQL中通过hint指导数据库进行相应操作，就可以尽早的释放锁，提升数据库TPS的理论上限。为此我们引入了三个SQL Hint来用传递指令，如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>SQL Hint</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TARGET_AFFECT_ROW_H</td>
+<td>用来指定Update必须成功更新的记录数，如果记录数不匹配视为更新不成功。</td>
+</tr>
+<tr>
+<td>COMMIT_ON_SUCCESS_H</td>
+<td>如果SQL执行不报错，并且更新记录数符合TARGET_AFFECT_ROW_H要求，则自动提交事务。</td>
+</tr>
+<tr>
+<td>ROLLBACK_ON_FAIL_H</td>
+<td>如果SQL执行失败，或更新记录数不符合TARGET_AFFECT_ROW_H要求，则自动回滚事务。</td>
+</tr>
+</tbody>
+</table>
+<p>在不加上面3个hint的情况下，需要业务主动提交。如果加上COMMIT_ON_SUCCESS_H(1) TARGET_AFFECT_ROW_H(1)，表示当update成功更新一行时，则立即提交，否则等待业务主动发起commit或者rollback操作；如果加上ROLLBACK_ON_FAIL_H(1) TARGET_AFFECT_ROW_H(1)，则表示如果update更新的行数不为1，则立即回滚，否则等待业务主动发起commit或者rollback操作；如果三个hint一起加上，则表示假如update更新的行数为1，则立即提交，否则立即回滚。</p>
+<p>把持有关键锁的SQL作为最后一句，添加commit_on_success_rollback_on_fail_target_affect_row,意思就是只要这个SQL执行成功就提交事务，及时释放锁。1.避免了之前SQL执行成功返回，业务再发出commit的网络时间开销。2.也避免了客户端本身阻塞数据库</p>
+<p><img alt="SQL-hint" src="/Users/wangjun/Documents/work/code/github/doc-for-java/pages/java/database/images/SQL-hint.png" /></p>
+<h3 id="32-innodb">3.2 控制和限制进入InnoDB事务引擎层的热点数量<a class="headerlink" href="#32-innodb" title="Permanent link">&para;</a></h3>
+<p>这里主要涉及一个热点<strong>ID</strong>的标识，使用<strong>QUEUE_ON_PK_H</strong>标识</p>
+<div class="highlight"><pre><span></span><code><span class="k">update</span><span class="w"> </span><span class="cm">/*+ QUEUE_ON_PK_H(12345) */</span><span class="w"> </span><span class="n">tb1</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="mi">12345</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span>
+</code></pre></div>
+<p>如上所示，热点ID的标识依靠用户在SQL中以hint的方式注入，该方式有两大优点：</p>
+<ul>
+<li>业务人员可以根据业务自身情况，只对可能有热点更新的语句使用该优化。</li>
+<li>不支持该hint的社区版本，也能正常执行该SQL，只是少了秒杀效果。</li>
+</ul>
+<p>实现上，值创建一个等待队列，然后直接执行，否则在该等待队列上休眠。在update执行完之后，唤醒相关等待线程继续执行</p>
+<p><img alt="热点会话" src="/Users/wangjun/Documents/work/code/github/doc-for-java/pages/java/database/images/热点会话.jpg" /></p>
+<p>这样有效的避免死锁检测和锁冲突</p>
+<hr />
+<p>业务上只需要再SQL中合理的加上前面的四个SQL hint，就可以开启秒杀，不限客户端，也不限框架。</p>
+<p>另外需要避免外部调用，尽量采用回调机制。优化事务内SQL语句的顺序，将冲突重的SQL尽可能放后面。如把select放在前面，不要先update后select，这样持有锁的时间更加延长了。。</p>
+<h2 id="4">4. 效果<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p>线上压测进行性能评估。关注主从延迟。测试各种场景，如成功提交，失败回滚，库存不足等场景，购物车batch SQL是否正确。</p>
+<p>开启优化后，2048个线程时仍能保持6000-7000TPS。</p>
+<p>在少量线程时，和没有优化的差不多。</p>
+<p>而且这样的方案很方便复用。</p>
+<p><img alt="多商品高性能TPS" src="/Users/wangjun/Documents/work/code/github/doc-for-java/pages/java/database/images/多商品高性能TPS.png" /></p>
+<p><img alt="高性能TPS" src="/Users/wangjun/Documents/work/code/github/doc-for-java/pages/java/database/images/高性能TPS.png" /></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["search.highlight", "navigation.instant", "navigation.tracking", "navigation.expand", "toc.integrate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

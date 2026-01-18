@@ -1,0 +1,907 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://spiritn.github.io/note-doc/note/hik/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>加密 - 我的技术文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dh" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="我的技术文档" class="md-header__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的技术文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              加密
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="我的技术文档" class="md-nav__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    我的技术文档
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database/02-mysql%E6%9E%B6%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mySQL架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database/01-基础.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database/03-InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    InnoDB存储引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database/04-%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database/05-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日志系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JAVA8
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/spring/spring/IocContainer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">加密<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="dh">DH秘钥交换算法<a class="headerlink" href="#dh" title="Permanent link">&para;</a></h2>
+<p>作用就是将对称加密的秘钥，通过非对称算法来进行交换。（非对称加密算法性能比较低）</p>
+<p>1.调用端A，产生P，g,publicKey，privateKey，支持的AES加密算法列表，P，g,publicKey给B（通过Token来检验身份）。</p>
+<p>2.被调用端通过P,g产生自己的publicKeyB，privateKeyB，然后结合publicKeyA，来生成一个秘钥（秘钥+向量两部分）。利用秘钥加密数据形成密文s(data).然后传输publicKeyB，密文，AES算法给A</p>
+<p>3.调用端A通过publicKeyB结合自己的privateKeyA来生成秘钥（秘钥+向量两部分，同B中的秘钥一致），利用这个秘钥解密B传过来的密文，就可以拿到数据了。</p>
+<p>注：在第二步还可以传一个ExpireTime过期时间，会话ID，这样拿这个会话ID在过期时间之前都可以进行安全的数据传递。</p>
+<p>A直接调用B的数据，B直接在响应中返回密文。还有一种是A要设置敏感数据，就需要先和B建立连接拿到秘钥，再传递数据。这两种情况有所区别，要注意。B要主动推送数据的话，就需要提前建立会话ID，设置过期时间，在这期间可以进行主动推送数据。</p>
+<h2 id="digital-digest">数字摘要（Digital Digest）<a class="headerlink" href="#digital-digest" title="Permanent link">&para;</a></h2>
+<p>数字摘要Message Digest用来保证数据的一致性和完整性</p>
+<p>MD5一般用来做数字摘要。把原文和原文的MD5串一起发送给接收方，接收方对原文进行MD5，然后和接收到的MD5串进行比较，确认原文是否被篡改（MD5的特性，只要原文有一点点改变，MD5结果就会大不相同）。比较流行的还有sha-1，HAVAL</p>
+<h2 id="digital-signature">签名（Digital Signature）<a class="headerlink" href="#digital-signature" title="Permanent link">&para;</a></h2>
+<p>签名用来用来确认发送方的身份，确实是某人发出的，不可抵赖。</p>
+<p>RSA可以用来做数字签名。发送方将原文的摘要再用私钥加密，形成签名，接收方接受信息后将签名利用发送方的公钥解密，证实这个消息确实是发送方发出来的，并将解密的摘要进行比较，证明信息没有被篡改。</p>
+<p>但是一般微信，支付宝接口都是用MD5加上秘钥进行数字签名。</p>
+<h2 id="_2">对称加密和非对称加密<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>加密用来加密原文，解密密文得到原文，分为对称加密和非对称加密</p>
+<p>对称加密的代表算法是AES算法。使用一个秘钥key，但是这个key的传输很难确保安全，这是他的唯一缺点。</p>
+<p>非对称加密的算法是RSA算法，RSA算法可以用来加密，也可以用来做签名（流程有点相反）。但是RSA加密算法非常慢，性能比对称加密慢三个数量级，所以适用小数据量的传输，如可以用来传递对称加密算法的秘钥。DH秘钥交换算法也可以用来交换对称加密算法的秘钥。</p>
+<h2 id="base64">Base64编码<a class="headerlink" href="#base64" title="Permanent link">&para;</a></h2>
+<p>是用来在一些只适合文本传输协议的情况传输二进制流等不可见字符，即将不可见字符进行Base64编码转变为可见的字符（ASCII的64个字符），然后进行传输。并不是加密算法，可以很轻松的进行编码，解码。</p>
+<p>encrypt加密 decrypt解密</p>
+<h2 id="web">Web前后端敏感数据传输<a class="headerlink" href="#web" title="Permanent link">&para;</a></h2>
+<p>平台在启动时，自动随机生成一对RSA公私钥，将私钥缓存于服务端，将公钥以接口形式公开。
+前端首先请求服务端公钥获取接口并缓存，在之后涉及敏感数据提交前，使用公钥加密数据，并进行Base64编码后提交；后端获取加密后数据，使用Base64解码，再利用私钥解密获取明文数据</p>
+<h2 id="_3">公司登录加密流程<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>Md5加密 SHA加密 挑战码 盐值 Cas认证</p>
+<p>用户登录输入用户名密码，调用getSalt（携带用户名），返回盐值，挑战码，加密算法，然后前端加密SHA256（SHA256(password+salt）+challengeCode)，生成密文去后台验证。后台从数据库取出密码和盐值，结合挑战码生成密文，与前台生成的比对，相同则去cas单点登录获取TGT</p>
+<p>登录时输错密码两次后要进行验证码校验，五次后要锁定ip。注意周剑提出要先对验证码进行校验（这不属于业务校验），然后再对ip校验（是否锁定，是否在限制区间），这可以防止暴力攻击，节省流量（不能高频输入验证码）。成功后记得清除登录失败信息。</p>
+<p>公司的服务间认证的token生成和配置文件里的密码采用AES加密然后base64编码，调用的底层native的方法。共享秘钥应该是根据授权文件的东西生成传输。敏感数据传输，包括获取和发送。采用的DH秘钥交换技术先交换秘钥。</p>
+<h2 id="_4">内部服务间调用<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>从物理网络上对外网是隔离的，内部的认证机制相对做到轻量，具体方式如下：</p>
+<ol>
+<li>为每一个内部服务分配唯一服务标识；</li>
+<li>所有内部服务都共享一个秘钥；</li>
+<li>服务调用方发起请求时，使用“被调用方应用标识” + “共享秘钥” + 当前时间（精确到小时），得到一个拼接字符串，再对该字符串进行MD5生成摘要，带入到请求头中，记为Token。</li>
+<li>服务提供方校验请求头中的Token，使用几个因子经过相同算法生成摘要，对Token进行比对，相同则认证通过；</li>
+</ol>
+<h1 id="_5">要点<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h1>
+<h2 id="maven">maven打包<a class="headerlink" href="#maven" title="Permanent link">&para;</a></h2>
+<p>idea的maven插件可以打包</p>
+<p>也可以使用命令行maven命令来打包，具体可以百度。</p>
+<p>svn上有install.bat很好用，可以直接点击运行打包，非常好用。内容为</p>
+<div class="highlight"><pre><span></span><code>call mvn -Dmaven.test.skip=true clean package
+</code></pre></div>
+<p>会自动退出，在exit退出时，整个脚本进程会结束。</p>
+<h2 id="tomcatwar">tomcat下放两个war包<a class="headerlink" href="#tomcatwar" title="Permanent link">&para;</a></h2>
+<p>1.tomcat下有两个war包时，war包的名字就是上下文的路径，很方便。</p>
+<p>2.好像也可以去serfver.xml配置，</p>
+<h2 id="_6">出现问题的组件：<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>由于上述原因是导致tomca阻塞的原因之一，特提供排查方法和排查原理以备不时之需：</p>
+<p>1、使用jstack [pid] &gt; stack.txt 输出栈信息
+2、检查是否存在死锁
+3、检查startStop线程是否是睡眠状态或者阻塞状态
+4、检查startStop线程在哪个方法内阻塞或者睡眠了
+5、分析代码寻找原因</p>
+<p>排查原理背景介绍：</p>
+<p>tomcat部分知识：</p>
+<p>tomcat启动时使用callable多线程去初始化每个servlet，多线程的名称是中包含startStop字符串，</p>
+<p>servlet初始化成功后会打印类似于一下日志</p>
+<p>13-Jan-2020 19:46:32.249 信息 [localhost-startStop-26] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/opt/hik/web/components/tomcat85linux64.1/webapps/fpfas] has finished in [56,183] ms</p>
+<p>tomcat启动成功后会打印</p>
+<p>16-Jan-2020 20:12:10.893 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 175421 ms</p>
+<p>当startStop线程阻塞，第二条日志不会打印。因为tomcat是通过callable线程的get方法判断servlet是否启动完成， 一旦startStop线程阻塞，会导致tomcat一直等待启动线程结束。</p>
+<p>spring的bean加载知识：</p>
+<p>@Scope即bean的作用域不同代理类的不同状态，以及代理类的动态加载。bean的初始化的流程。</p>
+<p>处理意见：
+按目前已发现的阻塞问题,提供如下处理意见。</p>
+<p>1、将<a href="https://www.yuque.com/PostConstruct注解，改为实现ApplionRunner接口、或者接听项目启动事件@EventListener(classes ) = ApplicationReadyEvent.class">@PostConstruct注解，改为实现ApplionRunner接口、或者接听项目启动事件@EventListener(classes </a> </p>
+<p>2、不要在@Bean方法内使用远程调用</p>
+<p>区别在于</p>
+<p>修改前当单个bean加载成功后就执行被注解的代码，
+修改后所有bean加载成功后才同样的代码，绕开多线程初始化spring的bean。</p>
+<div class="highlight"><pre><span></span><code><span class="na">VM</span><span class="w"> </span><span class="s">Flags:</span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">CICompilerCount=2 </span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">ConcGCThreads=2 </span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">G1ConcRefinementThreads=2 </span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">G1HeapRegionSize=1048576 </span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">G1ReservePercent=10 </span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">GCDrainStackTargetSize=64 </span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">+HeapDumpOnOutOfMemoryError </span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">HeapDumpPath=/opt/hik/web/components/tomcat85linux64.2/dump </span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">InitialHeapSize=1073741824 </span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">InitiatingHeapOccupancyPercent=70 </span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">MarkStackSize=4194304 </span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">MaxDirectMemorySize=67108864 </span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">MaxHeapSize=2684354560 </span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">MaxNewSize=1610612736 </span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">MinHeapDeltaBytes=1048576 </span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">NonNMethodCodeHeapSize=5825164 </span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">NonProfiledCodeHeapSize=122916538 </span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">ParallelGCThreads=2 </span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">ProfiledCodeHeapSize=122916538 </span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">ReservedCodeCacheSize=251658240 </span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">+SegmentedCodeCache </span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">ThreadStackSize=512 </span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">+UseCompressedClassPointers </span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">+UseCompressedOops </span>
+<span class="na">-XX</span><span class="o">:</span><span class="s">+UseG1GC</span>
+</code></pre></div>
+<h2 id="rabbitmq">rabbitMQ<a class="headerlink" href="#rabbitmq" title="Permanent link">&para;</a></h2>
+<p>参数配置：</p>
+<div class="highlight"><pre><span></span><code><span class="na">spring.rabbitmq.host</span><span class="o">=</span><span class="s">localhost</span>
+
+<span class="na">spring.rabbitmq.port</span><span class="o">=</span><span class="s">5672</span>
+
+<span class="na">spring.rabbitmq.http.port</span><span class="o">=</span><span class="s">15672</span>
+
+<span class="na">spring.rabbitmq.username</span><span class="o">=</span><span class="s">iotadmin</span>
+
+<span class="na">spring.rabbitmq.password</span><span class="o">=</span><span class="s">passw0rd</span>
+
+<span class="na">spring.rabbitmq.virtual-host</span><span class="o">=</span><span class="s">iotdev</span>
+
+<span class="na">rabbitmq.simple.consumer</span><span class="o">=</span><span class="s">1</span>
+
+<span class="na">rabbitmq.simple.maxconsumer</span><span class="o">=</span><span class="s">3</span>
+
+<span class="na">rabbitmq.simple.prefetchcount</span><span class="o">=</span><span class="s">30</span>
+
+<span class="na">rabbitmq.simple.threadpool</span><span class="o">=</span><span class="s">3</span>
+
+<span class="na">rabbitmq.listener.consumer</span><span class="o">=</span><span class="s">1</span>
+
+<span class="na">rabbitmq.listener.maxconsumer</span><span class="o">=</span><span class="s">10</span>
+
+<span class="na">rabbitmq.listener.prefetchcount</span><span class="o">=</span><span class="s">100</span>
+
+<span class="na">rabbitmq.listener.threadpool</span><span class="o">=</span><span class="s">10</span>
+</code></pre></div>
+<p>rabbitmq的发布者确认机制
+confirm和returnback监听。<a href="http://baijiahao.baidu.com/s?id=1590386092002156339&amp;wfr=spider&amp;for=pc">参考这里</a>
+消息可以发送到Exchange时Ack为true，否则为false。
+如果消息无法发送到指定的消息队列那么ReturnCallBack回调方法会被调用，setMandatory必须为true。不过这种增加了生产方的逻辑，一般设置备份队列</p>
+<p>mq消费端一旦挂掉之后，队列中会大量堆积消息为被消费，消费端重启后还会去消费，但已经超时不应该再消费了。</p>
+<p>添加一个时间戳，消费端进行判断，如果超时就不再消费，就可以解决这类问题。</p>
+<p>rabbitmq使用线程共享技术，多个channel共享一些线程。详细查看<a href="https://blog.csdn.net/weinianjie1/article/details/50611379">多个channel共享线程池</a> 和 <a href="https://blog.csdn.net/csdnofzhc/article/details/79422858">如何配置多个消费者线程</a></p>
+<h2 id="_7">恒大项目中你认为有何不足？也就是你认为微服务架构有何缺点？<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>1.对运维和测试来说更加复杂，要求运维较高的技术水平，因为部署更加复杂要理清组件间的依赖，一个功能的实现涉及到多个组件时，部署时都要部署，很容易漏掉，从一开始一定要构建起自动化测试和自动化部署。多个docker部署。对测试来说，一条用例涉及到多个组件的会比较沟通困难，定位问题的时候也很麻烦。</p>
+<p>2.拆分了服务，但是业务逻辑从代码上的依赖变成了组件间通信的依赖，接口设计要非常谨慎遵循一定的原则进行完善的管理，否则一个接口改变影响多个组件，极大影响开发效率。恒大是通过client封装httpclient接口，mq调用。</p>
+<p>3.拆分服务后，多个组件独立部署各自进程内，构成了分布式环境，有些情况下的考虑分布式事务，网络延迟，还有异步消息通信问题就要考虑解决。</p>
+<p>4.系统的维护复杂度大大提升，系统中出现故障的频率大大提升，虽然有高可用机制的保障，但是也需要做好良好的自动化监控，不断收集各个组件服务情况，及时发现处理问题。</p>
+<h2 id="_8">恒大项目开发工具：<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<p>项目管理平台：开始是redmine，进入开发阶段后转为jira。 Wiki</p>
+<p>版本管理服务器：gitlab 可视化git管理开源项目</p>
+<p>项目计划工具：Projects 2013 架构工具 visio</p>
+<p>平台运行环境是ubantu，一种linux开源免费系统</p>
+<p>前端框架使用vue.js（还有react和angularJS可以用）。前后端完全分离，静态文件放在nginx下面。</p>
+<h2 id="_9">数据库序列<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<p>serial内部其实帮助我们实现了:</p>
+<p>创建了一个sequence,名字是表名<em>字段名</em>seq</p>
+<p>设置id字段为NOT NULL DEFAULT nextval('此sequence')</p>
+<p>关联此sequence到相关字段.因为这个sequence关联在表的字段上,所以删除表字段会一起删除,除非owner没有指定</p>
+<p>serial类型有3中,smallserial,serial,bigserial,底层分别对应smallint,integer,bigint,分别占2bit,4bit,8bit.</p>
+<h2 id="gpucpu">GPU和CPU对比<a class="headerlink" href="#gpucpu" title="Permanent link">&para;</a></h2>
+<ul>
+<li>由于CPU需要很强的通用性来处理各种不同的数据类型，同时有需要逻辑判断又需要引入大量的分支跳转和中断的处理。这些都使得CPU的内部结构异常复杂，CPU不仅被Cache占据了大量空间，而且还有很复杂的控制逻辑和优化电路。相比之下计算能力只是CPU很小的一部分。 GPU面对的则是类型高度统一，相互无依赖的3大规模数据和不需要被打断的纯净的环境，GPU基于大的吞吐量设计，采用了数量众多的计算单元和超长的流水线，但只有简单的控制逻辑并省去了Cache,计算能力突出。综上所述，CPU擅长的是逻辑控制，串行的运算，GPU擅长的是大规模的并发运算。</li>
+</ul>
+<p>9.最智能的地方就体现在各个摄像头的功能。人员徘徊 人脸识别 人体检测 重点人员 业主 访客 陌生人 。业主可以方便的开门呼梯，访客可以在获得权限后一定时间内开门呼梯，走到指路牌前，指路牌人脸识别给你指示方向。可以跟踪重点业主交物业费，快递等。可以识别一些人 车的来访次数。</p>
+<p>10.两个线程收到联动规则然后去抓图，可以在发送抓图命令时 加锁，rennternlock然后sleep(2000)</p>
+<h2 id="_10">人脸图片识别方案<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<p>建立好人脸库后，传入人脸图片识别有三种方案可选</p>
+<ol>
+<li>百度人脸识别 传入一张图片即可返回结果</li>
+<li>阿里的人脸识别只能传入两张图片，比较是否为同一人</li>
+<li>face recongnition是来源的识别算法，识别度较差，也只能传入两张照片来比较</li>
+</ol>
+<h1 id="_11">其他<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h1>
+<ul>
+<li>
+<p>win10删除需要权限的文件夹：可以参考：http://www.xitongzhijia.net/xtjc/20161115/87360.html。</p>
+</li>
+<li>
+<p>使用 gradle init --type pom 即可将maven项目转换为gradle项目</p>
+</li>
+<li>
+<p>webflux响应式变成 异步的非阻塞的响应式流 https://blog.csdn.net/get_set/article/details/79480233</p>
+</li>
+<li>
+<p>集群多实例的任务执行为避免错误 可以在redis中</p>
+</li>
+<li>
+<p>jsonutil的转json的时候，是根据get方法来判断的，所以不能有额外的get方法</p>
+</li>
+<li>
+<p>aop实现方法日志记录，参考cas实现</p>
+</li>
+<li>
+<p>要加紧学习tomcat nginx的基本用法，了解war包等的生成结构。</p>
+</li>
+<li>
+<p>openresty是基于nginx的快速开发web的框架，性能非常好，并发轻松上一万，可以把一些不太复杂的业务放到nginx层。</p>
+</li>
+<li>
+<p>gogs比gitlab安装简单，功能差不多。是国人写的开源产品，适合自己托管或小项目。</p>
+</li>
+<li>
+<p>批量更新的小方法</p>
+</li>
+</ul>
+<p>场景:传入通道对象集合，要根据indexCode和Version去修改status字段的值。</p>
+<p>方法：<code>update channel set status =1 where indexCode || "_" || version in &lt;forEach/&gt;</code> 循环里传入的是拼好的indexCode_version字符串。</p>
+<ul>
+<li>
+<p>记住proxy_pass 地址的最后一个斜杠是关键 访问/netdata/xxx/bbb时，如果代理地址最后3有/，那么会转发到http://localhost:19999/xxx/bbb; 访问 /netdata/xxx/bbb时，如果代理地址最后没有/，那么会转发到http://localhost:19999/netdat...</p>
+</li>
+<li>
+<p>acunetix程序平台漏洞扫描工具，百度awvs。登录可以录播，从而创建脚本来模拟登录</p>
+</li>
+<li>
+<p>wireshark抓包体会三次握手四次挥手</p>
+</li>
+<li>
+<p>用户需求 产品需求 设计交互图，总体设计 概要设计，UCD效果图，详细开发计划</p>
+</li>
+<li>
+<p>海康日志是在代码里硬编写逻辑，然后会放到一个长度为10000的BLOCKINGQUEUE里。这个队列会在类加载时初始化好。</p>
+</li>
+<li>
+<p>apache common的utils写的很好，如果能看一遍就厉害了。</p>
+</li>
+<li>
+<p>xml语言： extention markup language ，可扩展的标记语言。有两种解析方式，DOM解析是将文档一次性的加载进内存，形成树型结构再解析。如果文档特别大，容易导致内存溢出，但是可以很方便的对xml进行编辑。SAX解析是事件驱动的方式，一行一行的解析，不能对文档进行增删改的操作，但是当文档特别大时不会导致内存溢出。XML约束有DTD和schema约束。现在都是使用schema约束了。</p>
+</li>
+<li>
+<p>1.DTD语法是自成一体的.Schema语法就是XML的语法.</p>
+</li>
+<li>
+<ul>
+<li>2.Schema的语法就是XML的语法所以更容易被解析器所解析.</li>
+</ul>
+</li>
+<li>3.Schema支持名称空间.</li>
+<li>
+<p>4.Schema有比DTD更加强大的语义和语法的约束.</p>
+</li>
+<li>
+<p>常见的web服务器：Apache webSphere（IBM公司研发,收费的大型服务器软件） WebLogic（BEA公司研发,收费的大型服务器软件） Tomcat （Apache组织研发,免费的小型的服务器软件） JBoss</p>
+</li>
+<li>
+<p><strong>我亲自比较</strong>了下两种代理方式的性能差距，在1.6和1.7的时候，JDK动态代理的速度要比CGLib动态代理的速度要慢，但是并没有教科书上的10倍差距，在JDK1.8的时候，JDK动态代理的速度已经比CGLib动态代理的速度快很多了，希望小伙伴在遇到这个问题的时候能够有的放矢！</p>
+</li>
+<li>
+<p>http1.1的特点是长连接，而且现在几乎都是1.1</p>
+</li>
+<li>
+<p>为什么前段的请求都带一个时间戳？怎么解决重复提交？ 用户点击一次后只有等后台返回了结果才允许点击下一次！</p>
+</li>
+<li>
+<p>foreach循环怎么跳出去 在foreach里return的作用和continue一样</p>
+</li>
+<li>
+<p>1.只想取出某一个对象，可转成map.jsonObject取值</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">LinkedHashMap</span><span class="w"> </span><span class="n">linkedHashMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">LinkedHashMap</span><span class="p">)</span><span class="w"> </span><span class="n">triggerClientImpl</span><span class="p">.</span><span class="na">queryTriggerByEventKey</span><span class="p">(</span><span class="n">triggerDto</span><span class="p">).</span><span class="na">getData</span><span class="p">();</span>
+<span class="n">TriggerDto</span><span class="w"> </span><span class="n">triggerResDto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JSONObject</span><span class="p">(</span><span class="n">linkedHashMap</span><span class="p">).</span><span class="na">toJavaObject</span><span class="p">(</span><span class="n">TriggerDto</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li>
+<p>海康定时任务，会监听contextrefreshedEvent事件，然后去开启定时任务，利用scheduler的api来添加，修改，删除任务，还有trigger等</p>
+</li>
+<li>
+<p>get请求也可以用一个对象来接受参数，前面不用任何注解</p>
+</li>
+<li>
+<p>h_mxc</p>
+</li>
+<li>
+<p>IBM的学习里都是高质量的文章好好计划学习</p>
+</li>
+<li>
+<p>时间同步。NTP是网络时间协议(Network Time Protocol)，它是用来同步网络中各个计算机的时间的协议</p>
+</li>
+<li>
+<p>Rest接口。必须要有服务名和版本号 资源编号IndexCode。如https：<a href="https://127.0.0.1/userService/v1.0/getUSer/1242">//127.0.0.1/userService/v1.0/getUSer/1242</a></p>
+</li>
+<li>
+<p>参数校验。一般来说，不涉及dao层的校验都放到controller层。 可以拦截到达controller方法的请求，利用@validated注解来进行参数的校验，不合法可以直接抛出异常，在统一异常处理器中处理，返回需要的信息。spring validate就是实现了这个功能的框架。</p>
+</li>
+<li>
+<p>连接远程主机可以用serity CRT,也可以用XSheel。</p>
+</li>
+<li>
+<p>卸载服务。在命令行通过 sc delete 服务名就可以卸载电脑上的服务。服务名可以通过services.msc，右键点击相应的服务可以查看服务名</p>
+</li>
+<li>
+<p>如何在使用andLike（“name","%"+name+"%"）防止sql注入的问题,需要将name字段进行工具类进行过滤<em>和%。工具类中进行sql.replace("</em>","/_").replace("%","/%")过滤。然后andLike（”name","%"+name+"%"）就可以防止sql注入了。</p>
+</li>
+<li>
+<p>海康图片服务器用的是自己开发的pss，后来变成pstore图片服务器。开源的有fastDFS。</p>
+</li>
+<li>
+<p>easyexcel在poi的基础上做了二次优化，解决了poi的内存占用问题，解决了poi的并发造成的报错问题。在大数据量的情况下导入导出性能较强排查出一个组件概率性死锁问题，导致的tomcat启动阻塞。</p>
+</li>
+<li>
+<p>语言国际化本地化要考虑长度，西方语会显示不下。而且，有些语言是从右到左的，需要镜面显示</p>
+</li>
+</ul>
+<h1 id="career">career<a class="headerlink" href="#career" title="Permanent link">&para;</a></h1>
+<p><em>2017.9.13入职。</em></p>
+<p><em>12.4到广州参与恒大项目，6.9结束。</em></p>
+<p><em>11.22日 架构设计完成</em></p>
+<p><em>12.08日 技术验证初步完成 1</em></p>
+<p><em>2.28日 POC1正式退出测试</em> </p>
+<p><em>02.10日 POC2正式退出测试</em> </p>
+<p><em>03.22日 POC3正式退出测试</em></p>
+<p><em>6.15参与定制项目 重庆百货商场 和陈号29。要求6.25部署到项目现场</em></p>
+<p><em>7.18前完成立体防控模块的开发，7月底Ar设备立体防控模块要随着产品卖出去</em></p>
+<p><em>8月9月完成区域入侵的开发，从产品需求文档，总体设计，概要设计，交互，效果图都参与了其中，（前期分配了三个人）但由于人员紧张独立完成代码的编写</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["search.highlight", "navigation.instant", "navigation.tracking", "navigation.expand", "toc.integrate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

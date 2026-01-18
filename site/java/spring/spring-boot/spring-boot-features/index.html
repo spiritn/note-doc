@@ -1,0 +1,1363 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://spiritn.github.io/note-doc/java/spring/spring-boot/spring-boot-features/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>3. Profiles - 我的技术文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#31-profiles" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="我的技术文档" class="md-header__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的技术文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3. Profiles
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="我的技术文档" class="md-nav__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    我的技术文档
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/02-mysql%E6%9E%B6%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mySQL架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/01-基础.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/03-InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    InnoDB存储引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/04-%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/05-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日志系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JAVA8
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/IocContainer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="3-profiles">3.  Profiles<a class="headerlink" href="#3-profiles" title="Permanent link">&para;</a></h1>
+<p>Spring Profiles提供了一种隔离应用程序配置部分的方法，使其仅在特定环境中可用。任何@Component、@Configuration或@ConfigurationProperties都可以用@Profile来标记，以限制它被加载的时间，如下例所示：</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Configuration</span><span class="p">(</span><span class="n">proxyBeanMethods</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
+<span class="nd">@Profile</span><span class="p">(</span><span class="s">&quot;production&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProductionConfiguration</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// ...</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>如果@ConfigurationProperties Bean是通过@EnableConfigurationProperties而不是自动扫描注册的，则需要在具有@EnableConfigurationProperties注解的@Configuration类上指定@Profile注解。在扫描@ConfigurationProperties的情况下，可以在@ConfigurationProperties类本身上指定@Profile。</p>
+<p>你可以使用spring.profile.active环境属性来指定哪些配置文件是激活的。你可以用本章前面描述的任何一种方式来指定该属性。例如，您可以将其包含在您的application.properties中，如下例所示：</p>
+<div class="highlight"><pre><span></span><code><span class="na">spring.profiles.active</span><span class="o">=</span><span class="s">dev,hsqldb</span>
+</code></pre></div>
+<p>也可以在命令行中添加<code>--spring.profiles.active=dev,hsqldb</code></p>
+<h2 id="31-profiles">3.1 增加激活的Profiles<a class="headerlink" href="#31-profiles" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>The spring.profiles.active property follows the same ordering rules as other properties: The highest PropertySource wins. This means that you can specify active profiles in application.properties and then replace them by using the command line switch.</p>
+<p>Sometimes, it is useful to have properties that add to the active profiles rather than replace them. The SpringApplication entry point has a Java API for setting additional profiles (that is, on top of those activated by the spring.profiles.active property). See the setAdditionalProfiles() method in SpringApplication. Profile groups, which are described in the next section can also be used to add active profiles if a given profile is active.</p>
+</blockquote>
+<p><code>spring.profile.active</code>属性与其他属性遵循相同的排序规则。最高的PropertySource获胜。这意味着你可以在application.properties中指定活动配置文件，然后在命令行里替换它们。</p>
+<p>有时，添加属性到激活的配置文件而不是替换它们是有用的。SpringApplication入口点有一个Java API用于设置额外的配置文件（即在那些由spring.profile.active属性激活的配置文件之上）。参见SpringApplication中的<code>setAdditionalProfiles()</code>方法。如果一个给定的配置文件是活跃的，那么下一节中描述的Profile groups也可以用来添加活跃的配置文件。</p>
+<h2 id="32-profile">3.2 Profile 组<a class="headerlink" href="#32-profile" title="Permanent link">&para;</a></h2>
+<p>有时，您在应用程序中定义和使用的配置文件过于细化，使用起来会变得很麻烦。例如，您可能会有 proddb 和 prodmq的profiles ，用于独立启用数据库和消息功能。</p>
+<p>为了帮助解决这个问题，Spring Boot允许您定义配置文件组。配置文件组允许您为相关的配置文件组定义一个逻辑名称。</p>
+<p>例如，我们可以创建一个由 proddb 和 prodmq 配置文件组成的生产组:</p>
+<div class="highlight"><pre><span></span><code><span class="na">spring.profiles.group.production[0]</span><span class="o">=</span><span class="s">proddb</span>
+<span class="na">spring.profiles.group.production[1]</span><span class="o">=</span><span class="s">prodmq</span>
+</code></pre></div>
+<p>现在可以使用<code>--spring.profile.active=production</code>启动我们的应用程序，一次性激活production、proddb和prodmq配置文件。</p>
+<h2 id="33-profiles">3.3 编程设置Profiles<a class="headerlink" href="#33-profiles" title="Permanent link">&para;</a></h2>
+<p>您可以在应用程序运行前调用SpringApplication.setAdditionalProfiles(...)来编程设置活动的配置文件。也可以通过使用Spring的ConfigurableEnvironment接口来激活配置文件。</p>
+<h2 id="34-profile-specific">3.4 Profile-specific 配置文件<a class="headerlink" href="#34-profile-specific" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Profile-specific variants of both application.properties (or application.yml) and files referenced through @ConfigurationProperties are considered as files and loaded. See "Profile Specific Files" for details.</p>
+</blockquote>
+<p>application.properties（或application.yml）和通过<code>@ConfigurationProperties</code>引用的配置文件，都被视为files并被加载。详情请参见 "配置文件特定文件"。</p>
+<h1 id="4-logging">4. logging<a class="headerlink" href="#4-logging" title="Permanent link">&para;</a></h1>
+<p>Spring Boot对所有内部日志记录使用 <a href="https://commons.apache.org/logging">Commons Logging</a> ，但开放底层日志实现。为 Java Util Logging、Log4J2 和 <a href="https://logback.qos.ch/">Logback</a> 提供了默认配置。在每种情况下，日志记录器都被预先配置为使用控制台输出，也可选择文件输出。</p>
+<p>默认情况下，如果您使用 "Starters"，将使用Logback。还包括适当的Logback路由，以确保使用Java Util Logging、Commons Logging、Log4J或SLF4J的依赖库都能正常工作。</p>
+<p>Java有很多可用的日志框架。如果上面的列表看起来很混乱，不要担心。一般来说，你不需要改变你的日志依赖关系，Spring Boot的默认值也能正常工作。
+当您将应用程序部署到 servlet 容器或应用程序服务器时，通过 Java Util Logging API 执行的日志不会被路由到应用程序的日志中。这就防止了由容器或已部署到容器的其他应用程序执行的日志记录出现在您应用程序的日志中。</p>
+<h2 id="41">4.1 日志格式<a class="headerlink" href="#41" title="Permanent link">&para;</a></h2>
+<p>springboot默认的日志输出如下图：</p>
+<div class="highlight"><pre><span></span><code>2019-03-05 10:57:51.112  INFO 45469 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/7.0.52
+2019-03-05 10:57:51.253  INFO 45469 --- [ost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-03-05 10:57:51.253  INFO 45469 --- [ost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1358 ms
+2019-03-05 10:57:51.698  INFO 45469 --- [ost-startStop-1] o.s.b.c.e.ServletRegistrationBean        : Mapping servlet: &#39;dispatcherServlet&#39; to [/]
+2019-03-05 10:57:51.702  INFO 45469 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: &#39;hiddenHttpMethodFilter&#39; to: [/*]
+</code></pre></div>
+<p>按照以下输出</p>
+<ul>
+<li>Date and Time：毫秒级别排序</li>
+<li>Log level：<code>ERROR</code>, <code>WARN</code>, <code>INFO</code>, <code>DEBUG</code>, 或者 <code>TRACE</code></li>
+<li>进程ID</li>
+<li><code>--</code> 分隔符，来区分实际的日志输出</li>
+<li>线程名称，使用中括号括起</li>
+<li>Logger name:通常是source class名称，一般会缩写</li>
+<li>实际的日志信息</li>
+</ul>
+<h2 id="42-console">4.2 Console 输出<a class="headerlink" href="#42-console" title="Permanent link">&para;</a></h2>
+<p>默认的日志配置在消息写入时将其回传到控制台。默认情况下，ERROR级别、WARN级别和INFO级别的消息会被记录下来。你也可以通过使用--debug标志启动你的应用程序来启用 "调试 "模式：</p>
+<div class="highlight"><pre><span></span><code>$ java -jar myapp.jar --debug
+</code></pre></div>
+<p>也可以在<code>application.properties</code>文件里debug=true开启</p>
+<p>当启用调试模式时，核心日志器（嵌入式容器、Hibernate和Spring Boot）被配置为输出更多信息。启用调试模式不会将您的应用程序配置为记录所有具有DEBUG级别的消息。</p>
+<p>或者，你可以通过使用--trace标志（或在application.properties中<code>trace=true</code>）来启用 "跟踪 "模式。这样做可以使选定的核心日志记录器（嵌入式容器、Hibernate模式生成和整个Spring组合）进行trace logging。</p>
+<h3 id="421">4.2.1彩色输出<a class="headerlink" href="#421" title="Permanent link">&para;</a></h3>
+<p>如果你的终端支持ANSI，则会使用彩色输出来帮助阅读。你可以将<code>spring.output.ansi.enabled</code>设置为一个<a href="https://docs.spring.io/spring-boot/docs/2.4.3/api/org/springframework/boot/ansi/AnsiOutput.Enabled.html">supported value</a>如always来覆盖自动检测。</p>
+<p>颜色编码是通过使用<code>%clr</code>转换字来配置的。在其最简单的形式中，转换器根据日志级别对输出进行着色，如下例所示:<code>%clr(%5p)</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Level</th>
+<th style="text-align: left;">Color</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>FATAL</code></td>
+<td style="text-align: left;">Red</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>ERROR</code></td>
+<td style="text-align: left;">Red</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>WARN</code></td>
+<td style="text-align: left;">Yellow</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>INFO</code></td>
+<td style="text-align: left;">Green</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>DEBUG</code></td>
+<td style="text-align: left;">Green</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>TRACE</code></td>
+<td style="text-align: left;">Green</td>
+</tr>
+</tbody>
+</table>
+<p>另外，您也可以通过为转换提供一个选项来指定应该使用的颜色或样式。例如，要使文本为黄色，请使用以下设置:<code>%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){yellow}</code>,支持以下颜色和格式：</p>
+<ul>
+<li><code>blue</code></li>
+<li><code>cyan</code></li>
+<li><code>faint</code></li>
+<li><code>green</code></li>
+<li><code>magenta</code></li>
+<li><code>red</code></li>
+<li><code>yellow</code></li>
+</ul>
+<h2 id="43">4.3 文件输出<a class="headerlink" href="#43" title="Permanent link">&para;</a></h2>
+<p>springboot日志默认只会输出到控制台，不会记录到文件。如果想输出到文件需要设置<code>logging.file.name</code> 或<code>logging.file.path</code>属性（如application.properties文件）</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><code>logging.file.name</code></th>
+<th style="text-align: left;"><code>logging.file.path</code></th>
+<th style="text-align: left;">Example</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><em>(none)</em></td>
+<td style="text-align: left;"><em>(none)</em></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">只输出到控制台.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Specific file</td>
+<td style="text-align: left;"><em>(none)</em></td>
+<td style="text-align: left;"><code>my.log</code></td>
+<td style="text-align: left;">写入指定的日志文件。名称可以是确切的位置，也可以是当前目录的相对位置。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><em>(none)</em></td>
+<td style="text-align: left;">Specific directory</td>
+<td style="text-align: left;"><code>/var/log</code></td>
+<td style="text-align: left;">将 "spring.log "写入指定目录。名称可以是确切的位置，也可以是相对于当前目录的位置。</td>
+</tr>
+</tbody>
+</table>
+<p>日志文件达到 10 MB 时会轮换，与控制台输出一样，默认情况下会记录 ERROR 级、WARN 级和 INFO 级消息。</p>
+<blockquote>
+<p>日志属性独立于实际的日志实现。因此，spring Boot 不管理特定的配置键（如Logback的 Logback.configurationFile 属性 ）。</p>
+</blockquote>
+<h2 id="44">4.4 日志滚动<a class="headerlink" href="#44" title="Permanent link">&para;</a></h2>
+<p>如果你使用的是Logback，那么可以使用你的application.properties或者application.yaml文件对日志轮换设置进行微调。对于其他日志系统，你需要自己直接配置轮换设置（例如，如果你使用Log4J2，那么你可以添加一个log4j.xml文件）。</p>
+<p>支持以下轮换策略属性：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>logging.logback.rollingpolicy.file-name-pattern</code></td>
+<td style="text-align: left;">用来归档的文件名称pattern</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>logging.logback.rollingpolicy.clean-history-on-start</code></td>
+<td style="text-align: left;">是否在应用程序启动时进行日志存档清理？</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>logging.logback.rollingpolicy.max-file-size</code></td>
+<td style="text-align: left;">The maximum size of log file 在归档前</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>logging.logback.rollingpolicy.total-size-cap</code></td>
+<td style="text-align: left;">The maximum amount of size log archives can take before being deleted.日志存档在被删除前所能承受的最大数量。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>logging.logback.rollingpolicy.max-history</code></td>
+<td style="text-align: left;">归档的天数 (默认7天)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="45">4.5 日志级别<a class="headerlink" href="#45" title="Permanent link">&para;</a></h2>
+<p>所有支持的日志系统都可以通过使用<code>logging.level.&lt;logger-name&gt;=&lt;level&gt;</code>在Spring  Environment中设置日志器级别（例如在application.properties中），其中级别可以为TRACE、DEBUG、INFO、WARN、ERROR、FATAL或OFF。可以通过使用logging.level.root配置root。</p>
+<p>下面的示例显示了application.properties中潜在的日志记录设置：</p>
+<div class="highlight"><pre><span></span><code><span class="na">logging.level.root</span><span class="o">=</span><span class="s">warn</span>
+<span class="na">logging.level.org.springframework.web</span><span class="o">=</span><span class="s">debug</span>
+<span class="na">logging.level.org.hibernate</span><span class="o">=</span><span class="s">error</span>
+</code></pre></div>
+<p>也可以使用环境变量来设置日志级别。例如，<code>LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_WEB=DEBUG</code>将把org.springframework.web设置为DEBUG。</p>
+<p>这种方式挺有用的，比如像单独调试追踪某个包下的问题，就可以<strong>只开启某个包的日志级别为debug</strong>，方便追踪问题！</p>
+<blockquote>
+<p>以上方法只适用于package 包级日志。由于松弛绑定总是将环境变量转换为小写，所以不可能用这种方式为单个类配置日志记录。如果需要为一个类配置日志记录，可以使用SPRING_APPLICATION_JSON变量。</p>
+</blockquote>
+<h2 id="46">4.6 日志组<a class="headerlink" href="#46" title="Permanent link">&para;</a></h2>
+<p>能够将相关的日志记录器分组在一起，以便在同一时间对它们进行配置，这通常很有用。例如，您可能通常会更改所有 Tomcat 相关日志程序的日志级别，但您无法轻松记住顶级包。</p>
+<p>为了帮助解决这个问题，Spring Boot允许您在Spring环境中定义日志组。例如，您可以通过将其添加到您的 application.properties 中来定义一个 "Tomcat "组：</p>
+<div class="highlight"><pre><span></span><code><span class="na">logging.group.tomcat</span><span class="o">=</span><span class="s">org.apache.catalina,org.apache.coyote,org.apache.tomcat</span>
+</code></pre></div>
+<p>定义后，您可以通过一行改变组中所有包的级别：</p>
+<div class="highlight"><pre><span></span><code><span class="na">logging.level.tomcat</span><span class="o">=</span><span class="s">trace</span>
+</code></pre></div>
+<p>springboot包含以下预先定义好的日志组，开箱即用：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Loggers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">web</td>
+<td style="text-align: left;"><code>org.springframework.core.codec</code>, <code>org.springframework.http</code>, <code>org.springframework.web</code>, <code>org.springframework.boot.actuate.endpoint.web</code>, <code>org.springframework.boot.web.servlet.ServletContextInitializerBeans</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">sql</td>
+<td style="text-align: left;"><code>org.springframework.jdbc.core</code>, <code>org.hibernate.SQL</code>, <code>org.jooq.tools.LoggerListener</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="47">4.7 使用日志关闭钩子<a class="headerlink" href="#47" title="Permanent link">&para;</a></h2>
+<p>为了释放日志资源，通常在应用程序终止时停止日志系统是一个好主意。不幸的是，没有一种方法可以适用于所有应用程序类型。如果您的应用程序具有复杂的上下文层次结构或作为war文件部署，您将需要研究由底层日志系统直接提供的选项。例如，Logback 提供了上下文选择器，允许在自己的上下文中创建每个 Logger。</p>
+<p>对于部署在自己JVM中的简单的 "单jar "应用程序，你可以使用logging.register-shutdown-hook属性。将<code>logging.register-shutdown-hook</code>设置为true将注册一个关机钩子，该钩子将在JVM退出时触发日志系统清理。</p>
+<p>您可以在application.properties或application.yaml文件中设置该属性:</p>
+<div class="highlight"><pre><span></span><code><span class="na">logging.register-shutdown-hook</span><span class="o">=</span><span class="s">true</span>
+</code></pre></div>
+<h2 id="48">4.8 自定义日志配置<a class="headerlink" href="#48" title="Permanent link">&para;</a></h2>
+<p>可以通过在classpath上包含适当的库来激活各种日志系统，并可通过在classpath的根目录下或在以下Spring环境属性指定的位置提供合适的配置文件来进一步定制：logging.config。</p>
+<p>您可以通过使用 o<code>rg.springframework.boot.logging.LoggingSystem</code> system 属性强制 Spring Boot 使用特定的日志系统。该值应该是 LoggingSystem 实现的完全限定类名。您也可以通过使用 none 的值完全禁用 Spring Boot 的日志配置。</p>
+<blockquote>
+<p>由于日志记录是在ApplicationContext创建之前初始化的，所以无法通过Spring @Configuration文件中的@PropertySources来控制日志记录。唯一的方法是通过系统属性来改变日志系统或完全禁用它。</p>
+</blockquote>
+<p>根据不同的日志系统实现，会加载不同的配置文件，如下表</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Logging System</th>
+<th style="text-align: left;">Customization</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Logback</strong></td>
+<td style="text-align: left;"><code>logback-spring.xml</code>, <code>logback-spring.groovy</code>, <code>logback.xml</code>, or <code>logback.groovy</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Log4j2</td>
+<td style="text-align: left;"><code>log4j2-spring.xml</code> or <code>log4j2.xml</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">JDK (Java Util Logging)</td>
+<td style="text-align: left;"><code>logging.properties</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>When possible, we recommend that you use the <code>-spring</code> variants for your logging configuration (for example, <code>logback-spring.xml</code> rather than <code>logback.xml</code>). If you use standard configuration locations, Spring cannot completely control log initialization.</p>
+</blockquote>
+<p>在可能的情况下，我们建议您使用-spring变体来进行日志配置（例如，<strong>logback-spring.xml而不是logback.xml</strong>）。如果您使用标准配置位置，Spring无法完全控制日志初始化。</p>
+<p>为了帮助定制，一些其他属性从Spring Environment转移到系统属性，如下表所述:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Spring Environment</th>
+<th style="text-align: left;">System Property</th>
+<th style="text-align: left;">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>logging.exception-conversion-word</code></td>
+<td style="text-align: left;"><code>LOG_EXCEPTION_CONVERSION_WORD</code></td>
+<td style="text-align: left;">The conversion word used when logging exceptions.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>logging.file.name</code></td>
+<td style="text-align: left;"><code>LOG_FILE</code></td>
+<td style="text-align: left;">如果定义了，则在默认的日志配置中使用。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>logging.file.path</code></td>
+<td style="text-align: left;"><code>LOG_PATH</code></td>
+<td style="text-align: left;">If defined, it is used in the default log configuration.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>logging.pattern.console</code></td>
+<td style="text-align: left;"><code>CONSOLE_LOG_PATTERN</code></td>
+<td style="text-align: left;">The log pattern to use on the console (stdout).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>logging.pattern.dateformat</code></td>
+<td style="text-align: left;"><code>LOG_DATEFORMAT_PATTERN</code></td>
+<td style="text-align: left;">Appender pattern for log date format.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>logging.charset.console</code></td>
+<td style="text-align: left;"><code>CONSOLE_LOG_CHARSET</code></td>
+<td style="text-align: left;">The charset to use for console logging.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>logging.pattern.file</code></td>
+<td style="text-align: left;"><code>FILE_LOG_PATTERN</code></td>
+<td style="text-align: left;">The log pattern to use in a file (if <code>LOG_FILE</code> is enabled).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>logging.charset.file</code></td>
+<td style="text-align: left;"><code>FILE_LOG_CHARSET</code></td>
+<td style="text-align: left;">The charset to use for file logging (if <code>LOG_FILE</code> is enabled).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>logging.pattern.level</code></td>
+<td style="text-align: left;"><code>LOG_LEVEL_PATTERN</code></td>
+<td style="text-align: left;">The format to use when rendering the log level (default <code>%5p</code>).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>PID</code></td>
+<td style="text-align: left;"><code>PID</code></td>
+<td style="text-align: left;">The current process ID (discovered if possible and when not already defined as an OS environment variable).</td>
+</tr>
+</tbody>
+</table>
+<p>如果使用的是logback，还支持以下</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Spring Environment</th>
+<th style="text-align: left;">System Property</th>
+<th style="text-align: left;">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>logging.logback.rollingpolicy.file-name-pattern</code></td>
+<td style="text-align: left;"><code>LOGBACK_ROLLINGPOLICY_FILE_NAME_PATTERN</code></td>
+<td style="text-align: left;">Pattern for rolled-over log file names (default <code>${LOG_FILE}.%d{yyyy-MM-dd}.%i.gz</code>).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>logging.logback.rollingpolicy.clean-history-on-start</code></td>
+<td style="text-align: left;"><code>LOGBACK_ROLLINGPOLICY_CLEAN_HISTORY_ON_START</code></td>
+<td style="text-align: left;">Whether to clean the archive log files on startup.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>logging.logback.rollingpolicy.max-file-size</code></td>
+<td style="text-align: left;"><code>LOGBACK_ROLLINGPOLICY_MAX_FILE_SIZE</code></td>
+<td style="text-align: left;">Maximum log file size.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>logging.logback.rollingpolicy.total-size-cap</code></td>
+<td style="text-align: left;"><code>LOGBACK_ROLLINGPOLICY_TOTAL_SIZE_CAP</code></td>
+<td style="text-align: left;">Total size of log backups to be kept.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>logging.logback.rollingpolicy.max-history</code></td>
+<td style="text-align: left;"><code>LOGBACK_ROLLINGPOLICY_MAX_HISTORY</code></td>
+<td style="text-align: left;">Maximum number of archive log files to keep.</td>
+</tr>
+</tbody>
+</table>
+<p>所有支持的日志系统在解析其配置文件时都可以参考系统属性。请参阅spring-boot.jar中的默认配置示例：</p>
+<ul>
+<li><a href="https://github.com/spring-projects/spring-boot/tree/v2.4.3/spring-boot-project/spring-boot/src/main/resources/org/springframework/boot/logging/logback/defaults.xml">Logback</a></li>
+<li><a href="https://github.com/spring-projects/spring-boot/tree/v2.4.3/spring-boot-project/spring-boot/src/main/resources/org/springframework/boot/logging/log4j2/log4j2.xml">Log4j 2</a></li>
+<li><a href="https://github.com/spring-projects/spring-boot/tree/v2.4.3/spring-boot-project/spring-boot/src/main/resources/org/springframework/boot/logging/java/logging-file.properties">Java Util logging</a></li>
+</ul>
+<blockquote>
+<p>如果您想在日志属性中使用占位符，您应该使用 Spring Boot 的语法，而不是底层框架的语法。值得注意的是，如果您使用 Logback，您应该使用 : 作为属性名与其默认值之间的分隔符，而不是使用 <code>:-</code></p>
+<p>您可以只通过覆盖LOG_LEVEL_PATTERN（或使用Logback的logging.pattern.level）来向日志行添加MDC和其他临时内容。例如，如果你使用<code>logging.pattern.level=user:%X{user} %5p</code>，那么默认的日志格式就包含了 "user "的MDC条目，如果它存在的话，如下例所示</p>
+<div class="highlight"><pre><span></span><code>2019-08-30 12:30:04.031 user:someone INFO 22174 --- [  nio-8080-exec-0] demo.Controller
+Handling authenticated request
+</code></pre></div>
+</blockquote>
+<h2 id="49-logback">4.9 logback扩展<a class="headerlink" href="#49-logback" title="Permanent link">&para;</a></h2>
+<p>Spring Boot 包含了许多有助于高级配置的 Logback 扩展。您可以在您的 logback-spring.xml 配置文件中使用这些扩展。</p>
+<blockquote>
+<p>因为标准的logback.xml配置文件加载得太早，所以你不能在其中使用扩展。你需要使用logback-spring.xml或者定义一个logging.config属性。</p>
+</blockquote>
+<p>这些扩展名不能与Logback的配置扫描一起使用。如果您试图这样做，对配置文件进行更改会导致类似于以下的错误记录。</p>
+<h3 id="492-environment-properties">4.9.2 Environment Properties<a class="headerlink" href="#492-environment-properties" title="Permanent link">&para;</a></h3>
+<p><springProperty>标签让您可以从Spring Environment中公开属性，以便在Logback中使用。如果你想在Logback配置中访问application.property文件中的值，这样做很有用。该标签的工作方式与 Logback 的标准 <property> 标签类似。然而，你不是直接指定一个值，而是指定属性的来源（来自Environment）。如果你需要将属性存储在本地范围以外的地方，你可以使用 scope 属性。如果你需要一个后备值（在环境中没有设置属性的情况下），你可以使用defaultValue属性。下面的示例展示了如何在 Logback 中公开属性。</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;springProperty</span><span class="w"> </span><span class="na">scope=</span><span class="s">&quot;context&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;fluentHost&quot;</span><span class="w"> </span><span class="na">source=</span><span class="s">&quot;myapp.fluentd.host&quot;</span>
+<span class="w">        </span><span class="na">defaultValue=</span><span class="s">&quot;localhost&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;appender</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;FLUENT&quot;</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;ch.qos.logback.more.appenders.DataFluentAppender&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;remoteHost&gt;</span>${fluentHost}<span class="nt">&lt;/remoteHost&gt;</span>
+<span class="w">    </span>...
+<span class="nt">&lt;/appender&gt;</span>
+</code></pre></div>
+<p>下面是实际参考案例</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;define</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;appId&quot;</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;com.zhangmen.arch.logger.component.common.AppIdDefiner&quot;</span><span class="nt">/&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;springProperty</span><span class="w"> </span><span class="na">scope=</span><span class="s">&quot;context&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;springAppName&quot;</span><span class="w"> </span><span class="na">source=</span><span class="s">&quot;spring.application.name&quot;</span><span class="nt">/&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;springProperty</span><span class="w"> </span><span class="na">scope=</span><span class="s">&quot;context&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;logSwitch&quot;</span><span class="w"> </span><span class="na">source=</span><span class="s">&quot;port.http.server&quot;</span><span class="nt">/&gt;</span>
+
+<span class="w">    </span><span class="cm">&lt;!-- log maxFileSize --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;springProperty</span><span class="w"> </span><span class="na">scope=</span><span class="s">&quot;context&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MAX_FILE_SIZE&quot;</span><span class="w"> </span><span class="na">source=</span><span class="s">&quot;spring.logback.max-file-size&quot;</span><span class="w"> </span><span class="na">defaultValue=</span><span class="s">&quot;100MB&quot;</span><span class="nt">/&gt;</span>
+
+<span class="w">    </span><span class="cm">&lt;!-- log maxIndex --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;springProperty</span><span class="w"> </span><span class="na">scope=</span><span class="s">&quot;context&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MAX_INDEX&quot;</span><span class="w"> </span><span class="na">source=</span><span class="s">&quot;spring.logback.max-index&quot;</span><span class="w"> </span><span class="na">defaultValue=</span><span class="s">&quot;5&quot;</span><span class="nt">/&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;springProperty</span><span class="w"> </span><span class="na">scope=</span><span class="s">&quot;context&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MASK_FIELDS&quot;</span><span class="w"> </span><span class="na">source=</span><span class="s">&quot;log.mask.fields&quot;</span><span class="w"> </span><span class="na">defaultValue=</span><span class="s">&quot;message,input_param,output_param,header_param&quot;</span><span class="nt">/&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;springProperty</span><span class="w"> </span><span class="na">scope=</span><span class="s">&quot;context&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MASK_REGEX_TYPES&quot;</span><span class="w"> </span><span class="na">source=</span><span class="s">&quot;log.mask.regex.types&quot;</span><span class="w"> </span><span class="na">defaultValue=</span><span class="s">&quot;mobile&quot;</span><span class="nt">/&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;springProperty</span><span class="w"> </span><span class="na">scope=</span><span class="s">&quot;context&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MASK_REGEX_MATCH_MAX_DEPTH&quot;</span><span class="w"> </span><span class="na">source=</span><span class="s">&quot;log.mask.regex.match.max.depth&quot;</span><span class="w"> </span><span class="na">defaultValue=</span><span class="s">&quot;12&quot;</span><span class="nt">/&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;springProperty</span><span class="w"> </span><span class="na">scope=</span><span class="s">&quot;context&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MASK_REGEX_MATCH_MAX_LENGTH&quot;</span><span class="w"> </span><span class="na">source=</span><span class="s">&quot;log.mask.regex.match.max.length&quot;</span><span class="w"> </span><span class="na">defaultValue=</span><span class="s">&quot;2048&quot;</span><span class="nt">/&gt;</span>
+</code></pre></div>
+<p>source可以来自配置文件和系统属性</p>
+<h1 id="5">5. 国际化<a class="headerlink" href="#5" title="Permanent link">&para;</a></h1>
+<p>Spring boot支持本地化信息，所以你的程序可以满足不同语言的用户。默认Spring Boot会在classpath寻找resource bundle的messages。</p>
+<blockquote>
+<p>自动配置适用于已配置的 resource bundle的默认属性文件可用时（即默认的 messages.properties）。如果您的 resource bundle只包含特定语言的属性文件，您需要添加默认的。如果没有找到与任何配置的基础名称相匹配的属性文件，则不会有自动配置的MessageSource。</p>
+</blockquote>
+<p>resource bundle资源包的basename 以及其他一些属性可以使用spring.messages命名空间进行配置，如下例所示:</p>
+<div class="highlight"><pre><span></span><code><span class="na">spring.messages.basename</span><span class="o">=</span><span class="s">messages,config.i18n.messages</span>
+<span class="na">spring.messages.fallback-to-system-locale</span><span class="o">=</span><span class="s">false</span>
+</code></pre></div>
+<p><code>spring.messages.basename</code>支持以逗号分隔的，可以是包限定符，也可以是从classpath根目录解析的资源。</p>
+<p>更多细节查看 <a href="https://github.com/spring-projects/spring-boot/tree/v2.4.3/spring-boot-project/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/context/MessageSourceProperties.java"><code>MessageSourceProperties</code></a></p>
+<h1 id="6-json">6. JSON<a class="headerlink" href="#6-json" title="Permanent link">&para;</a></h1>
+<p>spring提供了三种JSON库的集成，包括Gson，jackson, JSON-B，</p>
+<p>Jackson是首选和默认的库</p>
+<h2 id="61-jackson">6.1 Jackson<a class="headerlink" href="#61-jackson" title="Permanent link">&para;</a></h2>
+<p>Jackson 的自动配置已提供，是<code>spring-boot-starter-json</code>的一部分。当Jackson 在类路径时，ObjectMapper会被自动配置，配置项参看 <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto-customize-the-jackson-objectmapper">customizing the configuration of the <code>ObjectMapper</code></a>。</p>
+<h2 id="62-gson">6.2 Gson<a class="headerlink" href="#62-gson" title="Permanent link">&para;</a></h2>
+<p>Gson自动配置已提供，这里不再赘述。</p>
+<h2 id="63-json-b">6.3  JSON-B<a class="headerlink" href="#63-json-b" title="Permanent link">&para;</a></h2>
+<p>JSON-B自动配置已提供，这里不再赘述。</p>
+<h1 id="8-shutdown">8. 优雅的shutdown服务<a class="headerlink" href="#8-shutdown" title="Permanent link">&para;</a></h1>
+<p>所有四种嵌入式Web服务器（Jetty、Reactor Netty、Tomcat和Undertow）以及反应式和基于Servlet的Web应用程序都支持优雅关闭。它作为关闭应用程序上下文的一部分发生，并在停止SmartLifecycle beans的最早阶段执行。这个停止处理使用了一个超时，它提供了一个宽限期，在这个宽限期内，现有的请求将被允许完成，但不允许有新的请求。不允许新请求的具体方式根据使用的Web服务器而不同。Jetty、Reactor Netty和Tomcat将在网络层停止接受请求。Undertow将接受请求，但会立即以服务不可用（503）响应。</p>
+<p>Graceful shutdown 要求Tomcat 版本在9.0.33+。</p>
+<p>开启优雅的停止服务，需要配置</p>
+<div class="highlight"><pre><span></span><code><span class="na">server.shutdown</span><span class="o">=</span><span class="s">graceful</span>
+</code></pre></div>
+<p>配置过期时间如：</p>
+<div class="highlight"><pre><span></span><code><span class="na">spring.lifecycle.timeout-per-shutdown-phase</span><span class="o">=</span><span class="s">20s</span>
+</code></pre></div>
+<p>注意：Using graceful shutdown with your IDE may not work properly if it does not send a proper <code>SIGTERM</code> signal.</p>
+<h1 id="13-caching">13. Caching<a class="headerlink" href="#13-caching" title="Permanent link">&para;</a></h1>
+<p>Spring框架提供了对应用程序透明地添加缓存的支持。其核心是将缓存应用于方法，从而基于缓存中的可用信息减少方法的执行次数。缓存逻辑是透明的，对调用者没有任何干扰。只要通过@EnableCaching注解启用了缓存，Spring Boot就会自动配置缓存基础架构。</p>
+<p>更多细节参见Spring的<a href="https://docs.spring.io/spring/docs/5.3.3/reference/html/integration.html#cache">relevant section</a> 。</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.cache.annotation.Cacheable</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MathService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Cacheable</span><span class="p">(</span><span class="s">&quot;piDecimals&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">computePiDecimal</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>这个例子演示了在一个潜在的耗时操作上使用缓存。在调用computePiDecimal方法之前，抽象在piDecimals缓存中寻找与i参数匹配的条目。如果找到了一个条目，缓存中的内容会立即返回给调用者，该方法不会被调用。否则，该方法将被调用，并在返回之前更新缓存。</p>
+<blockquote>
+<p>您也可以透明地使用标准的JSR-107（JCache）注解（如@CacheResult）。然而，我们强烈建议您不要混合和匹配Spring Cache和JCache注解。</p>
+</blockquote>
+<p>如果您没有添加任何特定的缓存库，Spring Boot 会自动配置一个基于内存的concurrent map的简单提供者。当需要缓存时（如前面例子中的piDecimals），该提供者会为您创建缓存。这个简单的提供者并不推荐用于生产用途，但它对于入门和确保你了解其功能是非常好的。当您决定使用缓存提供者时，请务必阅读它的文档，以了解如何配置您的应用程序使用的缓存。几乎所有的提供者都要求你明确配置你使用的每个缓存。有些提供了一种方法来定制由spring.cache.cache-name属性定义的默认缓存。</p>
+<blockquote>
+<p>当然也提供了缓存的 <a href="https://docs.spring.io/spring/docs/5.3.3/reference/html/integration.html#cache-annotations-put">update</a> 或 <a href="https://docs.spring.io/spring/docs/5.3.3/reference/html/integration.html#cache-annotations-evict">evict</a> 。</p>
+</blockquote>
+<h2 id="131">13.1 缓存提供者的支持<a class="headerlink" href="#131" title="Permanent link">&para;</a></h2>
+<p>缓存抽象并不提供实际的存储，而是依赖于 <code>org.springframework.cache.Cache</code> 和 <code>org.springframework.cache.CacheManager</code> 接口所实现的抽象。</p>
+<p>如果您没有定义<code>CacheManager</code>类型的bean或名为<code>cacheResolver</code>的CacheResolver（参见 <a href="https://docs.spring.io/spring/docs/5.3.3/javadoc-api/org/springframework/cache/annotation/CachingConfigurer.html"><code>CachingConfigurer</code></a>），Spring Boot会尝试检测以下提供者（按指定顺序）:</p>
+<ol>
+<li><a href="https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-caching-provider-generic">Generic</a></li>
+<li><a href="https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-caching-provider-jcache">JCache (JSR-107)</a> (EhCache 3, Hazelcast, Infinispan, and others)</li>
+<li><a href="https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-caching-provider-ehcache2">EhCache 2.x</a></li>
+<li><a href="https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-caching-provider-hazelcast">Hazelcast</a></li>
+<li><a href="https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-caching-provider-infinispan">Infinispan</a></li>
+<li><a href="https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-caching-provider-couchbase">Couchbase</a></li>
+<li><a href="https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-caching-provider-redis">Redis</a></li>
+<li><a href="https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-caching-provider-caffeine">Caffeine</a></li>
+<li><a href="https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-caching-provider-simple">Simple</a></li>
+</ol>
+<blockquote>
+<p>也可以通过设置<code>spring.cache.type</code>属性来强制使用特定的缓存提供者。如果你需要在特定的环境中（比如测试）完全禁止缓存，请使用这个属性。</p>
+<p>使用spring-boot-starter-cache, "starter "会快速添加基本的缓存依赖。引入spring-context-support。如果不使用starter即手动添加依赖关系，你必须包含spring-context-support才能使用JCache、EhCache 2.x或Caffeine支持。</p>
+</blockquote>
+<p>如果CacheManager是由Spring Boot自动配置的，您可以在它完全初始化之前，通过实现<code>CacheManagerCustomizer</code>接口的Bean来进一步调整它的配置。下面的例子设置了一个标志，表示null值应该被传递给底层map:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Bean</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">CacheManagerCustomizer</span><span class="o">&lt;</span><span class="n">ConcurrentMapCacheManager</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">cacheManagerCustomizer</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CacheManagerCustomizer</span><span class="o">&lt;</span><span class="n">ConcurrentMapCacheManager</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">customize</span><span class="p">(</span><span class="n">ConcurrentMapCacheManager</span><span class="w"> </span><span class="n">cacheManager</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">cacheManager</span><span class="p">.</span><span class="na">setAllowNullValues</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>在上面的例子中，我们希望有一个自动配置的 ConcurrentMapCacheManager。如果不是这样的话(你提供了自己的配置或者是自动配置了其他的缓存提供者)，定制器根本不会被调用。你可以拥有任意多的自定义器，你也可以通过使用@Order或Ordered来指定顺序。</p>
+<h3 id="1311-generic">13.1.1 Generic<a class="headerlink" href="#1311-generic" title="Permanent link">&para;</a></h3>
+<p>如果上下文定义了至少一个<code>org.springframework.cache.Cache</code> bean，则使用通用缓存。会创建一个包裹该类型所有bean的CacheManager。</p>
+<h3 id="1317-redis">13.1.7 Redis<a class="headerlink" href="#1317-redis" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>If <a href="https://redis.io/">Redis</a> is available and configured, a <code>RedisCacheManager</code> is auto-configured. It is possible to create additional caches on startup by setting the <code>spring.cache.cache-names</code> property and cache defaults can be configured by using <code>spring.cache.redis.*</code> properties. For instance, the following configuration creates <code>cache1</code> and <code>cache2</code> caches with a <em>time to live</em> of 10 minutes:</p>
+</blockquote>
+<p>如果Redis可用并配置了，则会自动配置RedisCacheManager。可以在启动时通过设置<code>spring.cache.cache-name</code>属性来创建额外的缓存，缓存默认值可以通过<code>spring.cache.redis.*</code>属性来配置。例如，下面的配置会创建cache1和cache2缓存，生存时间为10分钟:</p>
+<div class="highlight"><pre><span></span><code><span class="na">spring.cache.cache-names</span><span class="o">=</span><span class="s">cache1,cache2</span>
+<span class="na">spring.cache.redis.time-to-live</span><span class="o">=</span><span class="s">10m</span>
+</code></pre></div>
+<p>默认情况下，会添加一个键前缀，这样，即使两个独立的缓存使用相同的键，Redis也不会有重叠的键，不会返回无效的值。如果你创建了自己的RedisCacheManager，我们强烈建议保持这个设置。</p>
+<p>你可以通过<code>RedisCacheConfiguration</code> 的@Bean来完全控制默认配置。如果你想定制默认的序列化策略，这很有用。</p>
+<p>如果你需要控制更多的配置，可以考虑注册一个<code>RedisCacheManagerBuilderCustomizer</code> bean。下面的例子显示了一个自定义器，它为cache1和cache2配置了一个特定的生存时间。</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Bean</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">RedisCacheManagerBuilderCustomizer</span><span class="w"> </span><span class="nf">myRedisCacheManagerBuilderCustomizer</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">builder</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">builder</span>
+<span class="w">            </span><span class="p">.</span><span class="na">withCacheConfiguration</span><span class="p">(</span><span class="s">&quot;cache1&quot;</span><span class="p">,</span><span class="w">                   </span><span class="n">RedisCacheConfiguration</span><span class="p">.</span><span class="na">defaultCacheConfig</span><span class="p">().</span><span class="na">entryTtl</span><span class="p">(</span><span class="n">Duration</span><span class="p">.</span><span class="na">ofSeconds</span><span class="p">(</span><span class="mi">10</span><span class="p">)))</span>
+<span class="w">            </span><span class="p">.</span><span class="na">withCacheConfiguration</span><span class="p">(</span><span class="s">&quot;cache2&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="n">RedisCacheConfiguration</span><span class="p">.</span><span class="na">defaultCacheConfig</span><span class="p">().</span><span class="na">entryTtl</span><span class="p">(</span><span class="n">Duration</span><span class="p">.</span><span class="na">ofMinutes</span><span class="p">(</span><span class="mi">1</span><span class="p">)));</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="1318-caffeine">13.1.8 Caffeine<a class="headerlink" href="#1318-caffeine" title="Permanent link">&para;</a></h3>
+<p>Caffeine是Java 8对Guava缓存的重写，取代了对Guava的支持。如果存在Caffeine，则会自动配置一个<code>CaffeineCacheManager</code>（由<code>spring-boot-starter-cache</code> "Starter "提供）。缓存可以在启动时通过设置<code>spring.cache.cache-names</code>属性来创建，并且可以通过以下之一来定制（按指示顺序）:</p>
+<ol>
+<li><code>spring.cache.caffeine.spec</code>定义的缓存</li>
+<li><code>com.github.benmanes.caffeine.cache.CaffeineSpec</code> bean所定义的</li>
+<li><code>com.github.benmanes.caffeine.cache.Caffeine</code> bean所定义的</li>
+</ol>
+<p>例如，以下配置创建了cache1和cache2缓存，最大大小为500，生存时间为10分钟。</p>
+<div class="highlight"><pre><span></span><code><span class="n">spring</span><span class="p">.</span><span class="na">cache</span><span class="p">.</span><span class="na">cache</span><span class="o">-</span><span class="n">names</span><span class="o">=</span><span class="n">cache1</span><span class="p">,</span><span class="n">cache2</span>
+<span class="n">spring</span><span class="p">.</span><span class="na">cache</span><span class="p">.</span><span class="na">caffeine</span><span class="p">.</span><span class="na">spec</span><span class="o">=</span><span class="n">maximumSize</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">expireAfterAccess</span><span class="o">=</span><span class="mi">600</span><span class="n">s</span>
+</code></pre></div>
+<p>如果定义了<code>com.github.benmanes.caffeine.cache.CacheLoader</code> bean，它将自动关联到CaffeineCacheManager。由于CacheLoader将与缓存管理器管理的所有缓存相关联，所以它必须被定义为CacheLoader<Object, Object>。自动配置会忽略任何其他通用类型。</p>
+<p><a href="https://www.cnblogs.com/rickiyang/p/11074158.html">参考文章</a></p>
+<h3 id="1319-simple">13.1.9 Simple<a class="headerlink" href="#1319-simple" title="Permanent link">&para;</a></h3>
+<p>如果找不到其他的提供者，则使用ConcurrentHashMap作为缓存存储。如果您的应用程序中没有缓存库，这是默认的。默认情况下，缓存是根据需要创建的，但您可以通过设置cache-name属性来限制可用缓存的列表。例如，如果你只想要cache1和cache2缓存，则设置cache-name属性如下。</p>
+<div class="highlight"><pre><span></span><code><span class="na">spring.cache.cache-names</span><span class="o">=</span><span class="s">cache1,cache2</span>
+</code></pre></div>
+<p>如果您这样做，并且您的应用程序使用了未列出的缓存，那么当需要缓存时，它会在运行时失败，但在启动时不会。这与 "真正的 "缓存提供者在使用未声明的缓存时的行为方式类似。</p>
+<h3 id="13110-none">13.1.10 None<a class="headerlink" href="#13110-none" title="Permanent link">&para;</a></h3>
+<p>当你的配置中存在@EnableCaching时，也希望有合适的缓存配置。如果你需要在某些环境中完全禁止缓存，可以强制缓存类型为none，使用无操作的实现，如下例所示。</p>
+<div class="highlight"><pre><span></span><code><span class="na">spring.cache.type</span><span class="o">=</span><span class="s">none</span>
+</code></pre></div>
+<h1 id="17-validation">17. Validation<a class="headerlink" href="#17-validation" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>The method validation feature supported by Bean Validation 1.1 is automatically enabled as long as a JSR-303 implementation (such as Hibernate validator) is on the classpath. This lets bean methods be annotated with <code>javax.validation</code> constraints on their parameters and/or on their return value. Target classes with such annotated methods need to be annotated with the <code>@Validated</code> annotation at the type level for their methods to be searched for inline constraint annotations.</p>
+</blockquote>
+<p>只要classpath上有JSR-303d的实现（如Hibernate validator），Bean Validation 1.1支持的方法验证功能就会自动启用。这使得bean方法可以在其参数和/或返回值上使用javax.validation约束进行注解。具有这种注解方法的目标类需要在类上添加@Validated注解，以便搜索其方法的内联约束注解。</p>
+<p>下面的代码会触发第一个参数的校验，确保其大小在8到10之间：</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Service</span>
+<span class="nd">@Validated</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyBean</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Archive</span><span class="w"> </span><span class="nf">findByCodeAndAuthor</span><span class="p">(</span><span class="nd">@Size</span><span class="p">(</span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">code</span><span class="p">,</span>
+<span class="w">            </span><span class="n">Author</span><span class="w"> </span><span class="n">author</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="29">29. 创建自定义的自动配置<a class="headerlink" href="#29" title="Permanent link">&para;</a></h1>
+<p>如果你在一个开发共享库的公司工作，或者你在一个开源或商业库上工作，你可能想开发自己的自动配置。自动配置类可以捆绑在外部jars中，但仍然可以被Spring Boot接收。</p>
+<p>自动配置可以关联到一个 "starter"，该starter提供自动配置代码以及您将使用的依赖库。我们首先介绍您需要知道的构建您自己的自动配置，然后我们继续介绍创建自定义启动器所需的典型步骤。</p>
+<p>这里有一个参考示例：<a href="https://github.com/snicoll-demos/spring-boot-master-auto-configuration">demo project</a></p>
+<h2 id="291-auto-configuredbean">29.1 理解 Auto-configured的Bean<a class="headerlink" href="#291-auto-configuredbean" title="Permanent link">&para;</a></h2>
+<p>在外壳下，自动配置是通过标准的<code>@Configuration</code>类实现的。额外的@Conditional注解用于限制自动配置何时应用。通常，自动配置类使用 @ConditionalOnClass 和 @ConditionalOnMissingBean 注解。这确保了自动配置只在找到相关的类并且你没有声明自己的@Configuration时才会应用。</p>
+<p>你可以浏览spring-boot-autoconfigure的源代码来查看Spring提供的@Configuration类（参见<a href="https://github.com/spring-projects/spring-boot/tree/v2.4.2/spring-boot-project/spring-boot-autoconfigure/src/main/resources/META-INF/spring.factories"><code>META-INF/spring.factories</code></a>文件）。</p>
+<h2 id="292">29.2 查找自动配置的候选人<a class="headerlink" href="#292" title="Permanent link">&para;</a></h2>
+<p>springboot会在发布的jar包中寻找<code>META-INF/spring.factories</code>文件，这个文件会列出EnableAutoConfiguration这个key对应value，</p>
+<div class="highlight"><pre><span></span><code><span class="na">org.springframework.boot.autoconfigure.EnableAutoConfiguration</span><span class="o">=</span><span class="se">\</span>
+<span class="s">com.mycorp.libx.autoconfigure.LibXAutoConfiguration,</span><span class="se">\</span>
+<span class="s">com.mycorp.libx.autoconfigure.LibXWebAutoConfiguration</span>
+</code></pre></div>
+<p>自动配置必须只能以这种方式加载。确保它们被定义在一个特定的包空间中，并且它们绝不是组件扫描的目标。此外，自动配置类不应该启用组件扫描来寻找额外的组件。应该使用特定的@Imports来代替。</p>
+<blockquote>
+<p>You can use the @AutoConfigureAfter or @AutoConfigureBefore annotations if your configuration needs to be applied in a specific order. For example, if you provide web-specific configuration, your class may need to be applied after WebMvcAutoConfiguration.</p>
+<p>If you want to order certain auto-configurations that should not have any direct knowledge of each other, you can also use @AutoConfigureOrder. That annotation has the same semantic as the regular @Order annotation but provides a dedicated order for auto-configuration classes.</p>
+<p>As with standard @Configuration classes, the order in which auto-configuration classes are applied only affects the order in which their beans are defined. The order in which those beans are subsequently created is unaffected and is determined by each bean’s dependencies and any @DependsOn relationships.</p>
+</blockquote>
+<p>如果您的配置需要以特定的顺序应用，您可以使用 <code>@AutoConfigureAfter</code> 或 @AutoConfigureBefore 注解。例如，如果您提供特定于 Web 的配置，您的类可能需要在 WebMvcAutoConfiguration 之后应用。</p>
+<p>如果您想对某些不应该有任何直接知识的自动配置进行排序，您也可以使用@AutoConfigureOrder。该注解与常规的 @Order 注解具有相同的语义，但为自动配置类提供了一个专用的顺序。</p>
+<p>与标准的 @Configuration 类一样，应用自动配置类的顺序只影响其 bean 的定义顺序。这些Bean随后被创建的顺序不受影响，它由每个Bean的依赖关系和任何@DependsOn关系决定。</p>
+<h2 id="293-condition">29.3 条件注解Condition<a class="headerlink" href="#293-condition" title="Permanent link">&para;</a></h2>
+<p>你几乎总是希望在你的自动配置类中包含一个或多个@Conditional注解。<code>@ConditionalOnMissingBean</code> 注解是一个常见的例子，用于允许开发人员在对您的默认配置不满意时进行覆盖。</p>
+<p>Spring Boot包含了许多@Conditional注解，您可以在自己的代码中应用于@Configuration类或单个@Bean方法来重用这些注解。这些注解包括：</p>
+<ul>
+<li><a href="https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-class-conditions">Class Conditions</a></li>
+<li><a href="https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-bean-conditions">Bean Conditions</a></li>
+<li><a href="https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-property-conditions">Property Conditions</a></li>
+<li><a href="https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-resource-conditions">Resource Conditions</a></li>
+<li><a href="https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-web-application-conditions">Web Application Conditions</a></li>
+<li><a href="https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-spel-conditions">SpEL Expression Conditions</a></li>
+</ul>
+<h3 id="2931-class">29.3.1 Class 条件注解<a class="headerlink" href="#2931-class" title="Permanent link">&para;</a></h3>
+<p>@ConditionalOnClass和@ConditionalOnMissingClass注解让@Configuration类基于特定类的存在或缺失而加载。由于注解元数据是通过使用 ASM 来解析的，因此您可以使用 value 属性来引用真正的类，即使该类实际上可能不会出现在正在运行的应用程序 classpath 上。如果你喜欢使用String值来指定类名，也可以使用name属性。</p>
+<p>这种机制并不适用@Bean方法，通常返回类型是条件的目标：在方法上的条件应用之前，JVM将已经加载了类，并可能处理方法引用，如果类不存在，这些方法将失败。</p>
+<p>为了处理这种情况，可以使用一个单独的@Configuration类来隔离条件，如下例所示：</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Configuration</span><span class="p">(</span><span class="n">proxyBeanMethods</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
+<span class="c1">// Some conditions</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyAutoConfiguration</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// Auto-configured beans</span>
+<span class="w">    </span><span class="nd">@Configuration</span><span class="p">(</span><span class="n">proxyBeanMethods</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@ConditionalOnClass</span><span class="p">(</span><span class="n">EmbeddedAcmeService</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">EmbeddedConfiguration</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="nd">@Bean</span>
+<span class="w">        </span><span class="nd">@ConditionalOnMissingBean</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">EmbeddedAcmeService</span><span class="w"> </span><span class="nf">embeddedAcmeService</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>如果你使用@ConditionalOnClass或@ConditionalOnMissingClass作为元注解的一部分来组成你自己的注解，你必须使用name作为指代类，在这种情况下是不处理的。</p>
+<h3 id="2932-bean">29.3.2 Bean条件注解<a class="headerlink" href="#2932-bean" title="Permanent link">&para;</a></h3>
+<p>@ConditionalOnBean和@ConditionalOnMissingBean注解让一个bean基于特定bean的存在或缺失而被包含。您可以使用 value 属性按类型指定 bean，或使用 name 按名称指定 bean。搜索属性可以让您限制搜索bean时应考虑的ApplicationContext层次结构。</p>
+<p>当放在@Bean方法上时，目标类型默认为该方法的返回类型，如下例所示。</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Configuration</span><span class="p">(</span><span class="n">proxyBeanMethods</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyAutoConfiguration</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="nd">@ConditionalOnMissingBean</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">MyService</span><span class="w"> </span><span class="nf">myService</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>在这个例子中，如果应用ApplicationContext不包含一个MyService的Bean，则这个myService这个Bean就会创建。</p>
+<p>你需要注意添加的bean定义顺序，因为这些条件是基于到目前为止所处理的内容来评估的。出于这个原因，我们建议在自动配置类上只使用@ConditionalOnBean和@ConditionalOnMissingBean注解（因为这些注解保证在任何用户定义的bean定义被添加后加载）。</p>
+<p>@ConditionalOnBean和@ConditionalOnMissingBean不会阻止@Configuration类的创建。在类上使用这些条件和用注解标记每个包含的@Bean方法之间的唯一区别是，如果条件不匹配，前者会阻止@Configuration类注册为bean。</p>
+<p>在声明一个@Bean方法时，在方法的返回类型中提供尽可能多的类型信息。例如，如果你的Bean的具体类实现了一个接口，那么Bean方法的返回类型应该是具体类而不是接口。在@Bean方法中提供尽可能多的类型信息在使用bean条件时尤为重要，因为它们的评估只能依赖于方法签名中可用的类型信息。</p>
+<h3 id="2933-property">29.3.3 Property 条件注解<a class="headerlink" href="#2933-property" title="Permanent link">&para;</a></h3>
+<p>@ConditionalOnProperty注解允许基于Spring环境属性的配置被加载。使用前缀和名称属性来指定应检查的属性。默认情况下，任何存在且不等于false的属性都会被匹配。您还可以通过使用havingValue和matchIfMissing属性创建更高级的检查。</p>
+<h3 id="2934-resource">29.3.4 Resource 条件注解<a class="headerlink" href="#2934-resource" title="Permanent link">&para;</a></h3>
+<p>通过@ConditionalOnResource注解，可以只在存在特定资源时才包含配置。可以使用通常的Spring约定来指定资源，如下例所示：<code>file:/home/user/test.dat</code>。</p>
+<h3 id="2935-web">29.3.5 Web应用条件注解<a class="headerlink" href="#2935-web" title="Permanent link">&para;</a></h3>
+<p><code>@ConditionalOnWebApplication</code>和<code>@ConditionalOnNotWebApplication</code>注解允许根据应用程序是否是 "Web应用程序 "来包含配置。基于servlet的Web应用程序是任何使用Spring WebApplicationContext、定义session范围或具有<code>ConfigurableWebEnvironment</code>。reactive Web应用是指任何使用ReactiveWebApplicationContext或拥有ConfigurableReactiveWebEnvironment。</p>
+<p>@ConditionalOnWarDeployment 注解允许根据应用程序是否是部署到容器中的传统 WAR 应用程序来包含配置。对于使用嵌入式服务器运行的应用程序，这个条件将不匹配。</p>
+<h3 id="2936-spel">29.3.6 SpEL表达式<a class="headerlink" href="#2936-spel" title="Permanent link">&para;</a></h3>
+<p>基于SpEL表达式的结果来加载配置</p>
+<h2 id="294">29.4 测试你的自动配置<a class="headerlink" href="#294" title="Permanent link">&para;</a></h2>
+<p>一个自动配置可能会受到许多因素的影响：用户配置（@Bean定义和自定义的Environment ），条件评估（特定库的存在）等等。具体来说，每个测试都应该创建一个定义良好的ApplicationContext，代表这些自定义的组合。ApplicationContextRunner提供了一个很好的方法来实现这个目标。</p>
+<p><code>ApplicationContextRunner</code>通常被定义为测试类的一个字段，用来收集基础的、常用的配置。下面的例子确保<code>UserServiceAutoConfiguration</code>总是被调用:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ApplicationContextRunner</span><span class="w"> </span><span class="n">contextRunner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ApplicationContextRunner</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">withConfiguration</span><span class="p">(</span><span class="n">AutoConfigurations</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">UserServiceAutoConfiguration</span><span class="p">.</span><span class="na">class</span><span class="p">));</span>
+</code></pre></div>
+<p>​   如果必须定义多个自动配置，则无需对它们的声明进行排序，因为它们的调用顺序与运行应用程序时完全相同。</p>
+<p>每个测试都可以使用runner 来代表一个特定的用例。例如，下面的示例调用了一个用户配置（UserConfiguration），并检查自动配置是否正确回退。调用run提供了一个回调上下文，可以和AssertJ一起使用。</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Test</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">defaultServiceBacksOff</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">contextRunner</span><span class="p">.</span><span class="na">withUserConfiguration</span><span class="p">(</span><span class="n">UserConfiguration</span><span class="p">.</span><span class="na">class</span><span class="p">).</span><span class="na">run</span><span class="p">((</span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">assertThat</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="na">hasSingleBean</span><span class="p">(</span><span class="n">UserService</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">    </span><span class="n">assertThat</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="na">getBean</span><span class="p">(</span><span class="s">&quot;myUserService&quot;</span><span class="p">).</span><span class="na">isSameAs</span><span class="p">(</span><span class="n">context</span><span class="p">.</span><span class="na">getBean</span><span class="p">(</span><span class="n">UserService</span><span class="p">.</span><span class="na">class</span><span class="p">));</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+
+<span class="nd">@Configuration</span><span class="p">(</span><span class="n">proxyBeanMethods</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
+<span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserConfiguration</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="n">UserService</span><span class="w"> </span><span class="nf">myUserService</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserService</span><span class="p">(</span><span class="s">&quot;mine&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="295-springboot">29.5 springboot的自动配置原理<a class="headerlink" href="#295-springboot" title="Permanent link">&para;</a></h2>
+<ol>
+<li>启动入口main方法启动，里面调用SpringApplication.的静态<em>run()，最重要的一个方法</em><code>this.refreshContext(context);</code>，容器还会在启动各个阶段会发布相应的event。</li>
+<li>在refreshCcontext()方法中加载对应的配置类等，最关键的@SpringBootApplication注解包含三个关键的注解，最重要的是<strong>@</strong>EnableAutoConfiguration</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="nd">@SpringBootConfiguration</span>
+<span class="nd">@EnableAutoConfiguration</span>
+<span class="nd">@ComponentScan</span><span class="p">(</span><span class="n">excludeFilters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nd">@Filter</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FilterType</span><span class="p">.</span><span class="na">CUSTOM</span><span class="p">,</span><span class="w"> </span><span class="n">classes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TypeExcludeFilter</span><span class="p">.</span><span class="na">class</span><span class="p">),</span>
+<span class="w">        </span><span class="nd">@Filter</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FilterType</span><span class="p">.</span><span class="na">CUSTOM</span><span class="p">,</span><span class="w"> </span><span class="n">classes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AutoConfigurationExcludeFilter</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w"> </span><span class="p">})</span>
+<span class="kd">public</span><span class="w"> </span><span class="nd">@interface</span><span class="w"> </span><span class="n">SpringBootApplication</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<ol>
+<li>有一个AutoConfigurationImportSelector，非常非常关键，它的作用是去加载相应的自动配置类</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="nd">@AutoConfigurationPackage</span>
+<span class="nd">@Import</span><span class="p">(</span><span class="n">AutoConfigurationImportSelector</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="nd">@interface</span><span class="w"> </span><span class="n">EnableAutoConfiguration</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<ol>
+<li>AutoConfigurationImportSelector里利用一个类加载器SpringFactoriesLoader去加载META-INF/spring.factories配置文件下所有的自动配置类，</li>
+<li>自动配置类里基本都有一个ConditionalOnClass注解，也就是只有引入相应的依赖，才会去加载当前配置类。并且会替你生成默认的RedisTemplate，当然用户可以覆盖它。并且注意EnableConfigurationProperties，这就是为什么有默认的配置项</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="nd">@Configuration</span><span class="p">(</span><span class="n">proxyBeanMethods</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span><span class="w"> </span>
+<span class="nd">@ConditionalOnClass</span><span class="p">(</span><span class="n">RedisOperations</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="nd">@EnableConfigurationProperties</span><span class="p">(</span><span class="n">RedisProperties</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="nd">@Import</span><span class="p">({</span><span class="w"> </span><span class="n">LettuceConnectionConfiguration</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">JedisConnectionConfiguration</span><span class="p">.</span><span class="na">class</span><span class="w"> </span><span class="p">})</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RedisAutoConfiguration</span><span class="w"> </span><span class="p">{</span>
+
+<span class="nd">@Bean</span>
+<span class="nd">@ConditionalOnMissingBean</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;redisTemplate&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">RedisTemplate</span><span class="o">&lt;</span><span class="n">Object</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">redisTemplate</span><span class="p">(</span><span class="n">RedisConnectionFactory</span><span class="w"> </span><span class="n">redisConnectionFactory</span><span class="p">)</span>
+<span class="w">        </span><span class="kd">throws</span><span class="w"> </span><span class="n">UnknownHostException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">RedisTemplate</span><span class="o">&lt;</span><span class="n">Object</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RedisTemplate</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">template</span><span class="p">.</span><span class="na">setConnectionFactory</span><span class="p">(</span><span class="n">redisConnectionFactory</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">template</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nd">@Bean</span>
+<span class="nd">@ConditionalOnMissingBean</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">StringRedisTemplate</span><span class="w"> </span><span class="nf">stringRedisTemplate</span><span class="p">(</span><span class="n">RedisConnectionFactory</span><span class="w"> </span><span class="n">redisConnectionFactory</span><span class="p">)</span>
+<span class="w">        </span><span class="kd">throws</span><span class="w"> </span><span class="n">UnknownHostException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">StringRedisTemplate</span><span class="w"> </span><span class="n">template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringRedisTemplate</span><span class="p">();</span>
+<span class="w">    </span><span class="n">template</span><span class="p">.</span><span class="na">setConnectionFactory</span><span class="p">(</span><span class="n">redisConnectionFactory</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">template</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="starter">学习如何编写自己的starter<a class="headerlink" href="#starter" title="Permanent link">&para;</a></h1>
+<ol>
+<li>首先是编写AutoConfiguration自动配置类</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="nd">@Configuration</span><span class="p">(</span><span class="n">proxyBeanMethods</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span><span class="w"> </span><span class="c1">// 指定这是一个配置类</span>
+<span class="nd">@ConditionalOnClass</span><span class="p">(</span><span class="n">KafkaTemplate</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w"> </span><span class="c1">// 在指定类存在时自动配置类生效</span>
+<span class="nd">@EnableConfigurationProperties</span><span class="p">(</span><span class="n">KafkaProperties</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w"> </span><span class="c1">// 生效相关的Properties，方便引入使用</span>
+<span class="nd">@Import</span><span class="p">({</span><span class="w"> </span><span class="n">KafkaAnnotationDrivenConfiguration</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">KafkaStreamsAnnotationDrivenConfiguration</span><span class="p">.</span><span class="na">class</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="c1">// 导入其他配置类</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">KafkaAutoConfiguration</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">KafkaProperties</span><span class="w"> </span><span class="n">properties</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="nf">KafkaAutoConfiguration</span><span class="p">(</span><span class="n">KafkaProperties</span><span class="w"> </span><span class="n">properties</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">properties</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="nd">@ConditionalOnMissingBean</span><span class="p">(</span><span class="n">KafkaTemplate</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w"> </span><span class="c1">// 提供默认的配置，使用者可以覆盖</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">KafkaTemplate</span><span class="o">&lt;?</span><span class="p">,</span><span class="w"> </span><span class="o">?&gt;</span><span class="w"> </span><span class="n">kafkaTemplate</span><span class="p">(</span><span class="n">ProducerFactory</span><span class="o">&lt;</span><span class="n">Object</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">kafkaProducerFactory</span><span class="p">,</span>
+<span class="w">            </span><span class="n">ProducerListener</span><span class="o">&lt;</span><span class="n">Object</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">kafkaProducerListener</span><span class="p">,</span>
+<span class="w">            </span><span class="n">ObjectProvider</span><span class="o">&lt;</span><span class="n">RecordMessageConverter</span><span class="o">&gt;</span><span class="w"> </span><span class="n">messageConverter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">KafkaTemplate</span><span class="o">&lt;</span><span class="n">Object</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">kafkaTemplate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">KafkaTemplate</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">kafkaProducerFactory</span><span class="p">);</span>
+<span class="w">        </span><span class="n">messageConverter</span><span class="p">.</span><span class="na">ifUnique</span><span class="p">(</span><span class="n">kafkaTemplate</span><span class="p">::</span><span class="n">setMessageConverter</span><span class="p">);</span>
+<span class="w">        </span><span class="n">kafkaTemplate</span><span class="p">.</span><span class="na">setProducerListener</span><span class="p">(</span><span class="n">kafkaProducerListener</span><span class="p">);</span>
+<span class="w">        </span><span class="n">kafkaTemplate</span><span class="p">.</span><span class="na">setDefaultTopic</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">properties</span><span class="p">.</span><span class="na">getTemplate</span><span class="p">().</span><span class="na">getDefaultTopic</span><span class="p">());</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">kafkaTemplate</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="nd">@ConditionalOnProperty</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;spring.kafka.producer.transaction-id-prefix&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@ConditionalOnMissingBean</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">KafkaTransactionManager</span><span class="o">&lt;?</span><span class="p">,</span><span class="w"> </span><span class="o">?&gt;</span><span class="w"> </span><span class="n">kafkaTransactionManager</span><span class="p">(</span><span class="n">ProducerFactory</span><span class="o">&lt;?</span><span class="p">,</span><span class="w"> </span><span class="o">?&gt;</span><span class="w"> </span><span class="n">producerFactory</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">KafkaTransactionManager</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">producerFactory</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<ol>
+<li>要能加载到上面我们编写的自动配置类，将上面的自动配置类的全路径放在META-INF/spring.factority中，springboot启动时才能加载到我们自定义的配置类</li>
+</ol>
+<div class="highlight"><pre><span></span><code># Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.springframework.boot.autoconfigure.jsonb.JsonbAutoConfiguration,\
+org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration,\
+</code></pre></div>
+<ol>
+<li>starter规范
+   starter模块是一个空的jar文件，仅提供辅助性的依赖管理，和保护依赖</li>
+</ol>
+<p>一般专门写一个自动配置模块，是真正实现功能的地方，starter依赖这个。别人使用只要依赖starter即可。</p>
+<ol>
+<li>命令规范：
+   官方的starter命名都是spring-boot-starter-{name}，如spring-boot-starter-web，spring-boot-starter-test。
+   自定义的starter一般建议{name}-spring-boot-starter，如mybatis-plus-boot-starter</li>
+</ol>
+<p>使用者只需要导入starter的依赖，然后添加配置文件（会提供默认值），然后就可以注入service使用了</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["search.highlight", "navigation.instant", "navigation.tracking", "navigation.expand", "toc.integrate", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

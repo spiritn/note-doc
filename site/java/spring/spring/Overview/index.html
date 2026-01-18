@@ -1,0 +1,684 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://spiritn.github.io/note-doc/java/spring/spring/Overview/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Overview - 我的技术文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="我的技术文档" class="md-header__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的技术文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="我的技术文档" class="md-nav__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    我的技术文档
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/02-mysql%E6%9E%B6%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mySQL架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/01-基础.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/03-InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    InnoDB存储引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/04-%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/05-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日志系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JAVA8
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IocContainer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/">https://docs.spring.io/spring-framework/docs/current/reference/html/</a></p>
+<h1 id="spring-framework-documentation">Spring Framework Documentation<a class="headerlink" href="#spring-framework-documentation" title="Permanent link">&para;</a></h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/overview.html#overview"><strong>Overview</strong></a></td>
+<td>history, design philosophy, feedback, getting started.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#spring-core"><strong>Core</strong></a></td>
+<td>IoC Container, Events, Resources, i18n, Validation, Data Binding, Type Conversion, SpEL, AOP.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/testing.html#testing">Testing</a></td>
+<td>Mock Objects, TestContext Framework, Spring MVC Test, WebTestClient.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#spring-data-tier">Data Access</a></td>
+<td>Transactions, DAO Support, JDBC, R2DBC, O/R Mapping, XML Marshalling.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#spring-web">Web Servlet</a></td>
+<td><strong>Spring MVC</strong>, WebSocket, SockJS, STOMP Messaging.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#spring-webflux">Web Reactive</a></td>
+<td>Spring WebFlux, WebClient, WebSocket, RSocket.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#spring-integration">Integration</a></td>
+<td>Remoting, JMS, JCA, JMX, Email, Tasks, Scheduling, Caching.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/languages.html#languages">Languages</a></td>
+<td>Kotlin, Groovy, Dynamic Languages.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/appendix.html#appendix">Appendix</a></td>
+<td>Spring properties.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/spring-projects/spring-framework/wiki"><strong>Wiki</strong></a></td>
+<td>What’s New, Upgrade Notes, Supported Versions, and other cross-version information.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Spring makes it easy to create Java enterprise applications. It provides everything you need to embrace the Java language in an enterprise environment, with support for Groovy and Kotlin as alternative languages on the JVM, and with the flexibility to create many kinds of architectures depending on an application’s needs. As of Spring Framework 5.1, Spring requires JDK 8+ (Java SE 8+) and provides out-of-the-box support for JDK 11 LTS. Java SE 8 update 60 is suggested as the minimum patch release for Java 8, but it is generally recommended to use a recent patch release.</p>
+<p>Spring supports a wide range of application scenarios. In a large enterprise, applications often exist for a long time and have to run on a JDK and application server whose upgrade cycle is beyond developer control. Others may run as a single jar with the server embedded, possibly in a cloud environment. Yet others may be standalone applications (such as batch or integration workloads) that do not need a server.</p>
+<p>Spring is open source. It has a large and active community that provides continuous feedback based on a diverse range of real-world use cases. This has helped Spring to successfully evolve over a very long time.</p>
+</blockquote>
+<p>spring让开发企业应用变得更简单。他提供了在企业环境中拥抱java语言所需的一切，支持Groovy和Kotlin作为JVM上的替代语言，并根据应用程序的需求灵活地创建多种架构。从Spring Framework 5.1开始，Spring需要JDK 8+（Java SE 8+），并提供对JDK 11 LTS的开箱支持。建议将Java SE 8更新60作为Java 8的最小补丁版本，但一般建议使用最近的补丁版本。</p>
+<p>spring支持广泛的应用场景。在大型企业应用中，应用程序经常存在很长时间，而且必须运行在JDK和应用程序服务器上，其升级周期超出了开发人员的控制范围。其他的应用可能运行以嵌入服务器的形式，以单个jar运行，例如云服务器上。也有一些可能是独立的应用（如批处理或者集成工作负载），不需要服务器。</p>
+<p>spring 是开源的。它拥有庞大而广泛的社区，根据各种不同的实际用例提供持续反馈。这帮助spring能在很长一段时间内保持成功。</p>
+<h1 id="1-what-we-mean-by-spring">1. What We Mean by "Spring"<a class="headerlink" href="#1-what-we-mean-by-spring" title="Permanent link">&para;</a></h1>
+<p>'spring'在不同的语境下有不同的含义。它可以用来指spring框架项目本身，这是最开始的时候。随着时间的推移，其他的spring项目也建立在spring框架之上。大多数情况，当人们说“spring”时，意味着整个spring项目家族。本文档关注的是spring框架本身。</p>
+<p>spring框架分为多个模块，应用程序可以选择自己需要的模块。最重要的是核心容器，包含配置模块和依赖注入。除此之外，spring框架还为不同的应用程序提供基础性的支持，包括消息传递，事务和持久化，以及web服务。也还包括基于servlet的spring mvc框架，以及Spring WebFlux的reactive web框架。</p>
+<p>关于模块的说明：简单说就是jar支持JDK9。</p>
+<h1 id="2-history-of-spring-and-the-spring-framework">2. History of Spring and the Spring Framework<a class="headerlink" href="#2-history-of-spring-and-the-spring-framework" title="Permanent link">&para;</a></h1>
+<p>spring诞生于2003年，是为了应对早期复杂的J2EE规范。虽然有些人认为java EE和spring是竞争关系，但事实上，spring是对java EE的补充。spring编程并不包含java EE平台规范；相反spring集成了java EE中的个别规范：</p>
+<ul>
+<li>Servlet API (<a href="https://jcp.org/en/jsr/detail?id=340">JSR 340</a>)</li>
+<li>WebSocket API (<a href="https://www.jcp.org/en/jsr/detail?id=356">JSR 356</a>)</li>
+<li>Concurrency Utilities (<a href="https://www.jcp.org/en/jsr/detail?id=236">JSR 236</a>)</li>
+<li>JSON Binding API (<a href="https://jcp.org/en/jsr/detail?id=367">JSR 367</a>)</li>
+<li>Bean Validation (<a href="https://jcp.org/en/jsr/detail?id=303">JSR 303</a>)</li>
+<li>JPA (<a href="https://jcp.org/en/jsr/detail?id=338">JSR 338</a>)</li>
+<li>JMS (<a href="https://jcp.org/en/jsr/detail?id=914">JSR 914</a>)</li>
+<li>as well as JTA/JCA setups for transaction coordination, if necessary.</li>
+</ul>
+<p>spring框架还支持依赖注入 (<a href="https://www.jcp.org/en/jsr/detail?id=330">JSR 330</a>)和通用注解(<a href="https://jcp.org/en/jsr/detail?id=250">JSR 250</a>) 规范。开发者可以选择使用这些java EE规范来代替spring框架提供的。</p>
+<p>从Spring Framework 5.0开始，Spring至少需要Java EE 7级别（如Servlet 3.1+、JPA 2.1+）--同时在运行时遇到Java EE 8级别（如Servlet 4.0、JSON Binding API）的较新API时，提供开箱即用的集成。这使得Spring与Tomcat 8和9、WebSphere 9和JBoss EAP 7等完全兼容。</p>
+<p>随着时间的推移，Java EE在应用程序开发中的作用也在不断发展。在Java EE和Spring的早期，应用程序的创建是为了部署到应用服务器上。今天，在Spring Boot的帮助下，应用程序是以开发和云友好的方式创建的，嵌入了Servlet容器，改变起来也很简单。从Spring Framework 5开始，WebFlux应用甚至不直接使用Servlet API，可以在非Servlet容器的服务器（如Netty）上运行。</p>
+<p>Spring不断创新，不断发展。在Spring框架之外，还有其他项目，如Spring Boot、Spring Security、Spring Data、Spring Cloud、Spring Batch等。需要记住的是，每个项目都有自己的源代码库、问题跟踪器和发布节奏。请参阅spring.io/projects了解Spring项目的完整列表。</p>
+<h1 id="3-design-philosophy">3. Design Philosophy 设计哲学<a class="headerlink" href="#3-design-philosophy" title="Permanent link">&para;</a></h1>
+<p>当你了解一个框架时，不仅要知道他能做什么，还要知道它遵循什么原则。以下是spring的指导原则：</p>
+<ul>
+<li>在每个层面提供选择。spring让你尽可能地推迟设计决策的时间。例如，你可以通过做配置来切换持久化依赖，而无需改变代码。对于其他基础框架和第三方的集成也是如此。</li>
+<li>适应不同的观点。spring拥抱灵活性，不会去决定事情应该如何做。它以不同的视角提供广泛的应用需求</li>
+<li>保持强大的向后兼容性。Spring的进化经过精心管理，迫使不同版本之间很少有中断性的变化。Spring支持一系列精心选择的JDK版本和第三方库，以方便维护依赖Spring的应用程序和库。</li>
+<li>关心API设计。Spring团队花了大量的心思和时间来制作直观的API，并在许多版本和许多年内保持不变。</li>
+<li>设置高质量的代码标准。spring强调有意义的、最新的和标准的Javadoc。它是极少数可以宣称代码结构干净，包之间没有循环依赖的项目之一。</li>
+</ul>
+<h1 id="4getting-started">4.Getting Started<a class="headerlink" href="#4getting-started" title="Permanent link">&para;</a></h1>
+<p>如果您刚刚开始使用Spring，您可能希望通过Spring Boot来开始使用Spring框架。Spring Boot提供了一种快速（可选地）的方法来创建一个基于Spring的生产就绪的应用程序。它基于Spring框架，偏重于约定而非配置，旨在让您尽快启动并运行。</p>
+<p>你可以使用start.spring.io来生成一个基本的项目，或者遵循 "<a href="https://spring.io/guides">"Getting Started" guides</a> "指南，比如 "<a href="https://spring.io/guides/gs/rest-service/">[Getting Started Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)</a>"。除了更容易消化之外，这些指南还非常注重任务，而且大多数指南都是基于Spring Boot的。它们还涵盖了Spring组合中的其他项目，在解决某个问题时，你可能要考虑这些项目。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["search.highlight", "navigation.instant", "navigation.tracking", "navigation.expand", "toc.integrate", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

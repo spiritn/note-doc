@@ -1,0 +1,858 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://spiritn.github.io/note-doc/java/spring/spring-mvc/spring-mvc/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Spring mvc - 我的技术文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-handlermethodargumentresolverhandlermethodreturnvaluehandler" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="我的技术文档" class="md-header__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的技术文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Spring mvc
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="我的技术文档" class="md-nav__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    我的技术文档
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/02-mysql%E6%9E%B6%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mySQL架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/01-基础.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/03-InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    InnoDB存储引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/04-%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/05-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日志系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JAVA8
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/IocContainer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><a href="https://docs.spring.io/spring-framework/docs/5.3.1/reference/html/web.html#mvc">https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#mvc</a></p>
+<p><a href="https://www.w3cschool.cn/spring_mvc_documentation_linesh_translation/spring_mvc_documentation_linesh_translation-dgcm27r3.htm">w3cSchool spring-mvc中文文档</a></p>
+<h1 id="webmvcconfigurer">WebMvcConfigurer<a class="headerlink" href="#webmvcconfigurer" title="Permanent link">&para;</a></h1>
+<p><em>@EnableWebMvc会import导入</em>DelegatingWebMvcConfiguration类，这个类继承了WebMvcConfigurationSupport，并且持有WebMvcConfigurerComposite属性，</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">WebMvcConfigurerComposite</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">WebMvcConfigurer</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// 持有所有的WebMvcConfigurer实现，包括自定义的</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">WebMvcConfigurer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">delegates</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addWebMvcConfigurers</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">WebMvcConfigurer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">configurers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">CollectionUtils</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">(</span><span class="n">configurers</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">delegates</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">configurers</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>所以我们只需要实现自己的WebMvcConfigurer，去定义自己的配置即可。</p>
+<p>接下来我们看下WebMvcConfigurer提供了哪些配置接口出来：</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">WebMvcConfigurer</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">    * 用来配置HandlerMappings时的斜杠支持，后缀，路径匹配等等</span>
+<span class="cm">    **/</span>
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">configurePathMatch</span><span class="p">(</span><span class="n">PathMatchConfigurer</span><span class="w"> </span><span class="n">configurer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 配置Convert和Formatter</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addFormatters</span><span class="p">(</span><span class="n">FormatterRegistry</span><span class="w"> </span><span class="n">registry</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * </span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addInterceptors</span><span class="p">(</span><span class="n">InterceptorRegistry</span><span class="w"> </span><span class="n">registry</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">    * 配置HttpMessageConverter用来解析request和responsede body的读和写。</span>
+<span class="cm">    * 新的List会覆盖默认的，如果不想覆盖使用下面的extendMessageConverters   </span>
+<span class="cm">    **/</span>
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">configureMessageConverters</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">HttpMessageConverter</span><span class="o">&lt;?&gt;&gt;</span><span class="w"> </span><span class="n">converters</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">extendMessageConverters</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">HttpMessageConverter</span><span class="o">&lt;?&gt;&gt;</span><span class="w"> </span><span class="n">converters</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span><span class="w">    </span>
+</code></pre></div>
+<h1 id="requestmappinghandleradapter">RequestMappingHandlerAdapter<a class="headerlink" href="#requestmappinghandleradapter" title="Permanent link">&para;</a></h1>
+<p>这个类主要实现了HandlerAdapter，InitializingBean和Order接口。用来服务支撑<em>@RequestMapping修饰的方法，</em></p>
+<p><em>支持自定义参数解析器（</em><em>setCustomArgumentResolvers</em><em>）和返回值处理器（</em><em>setCustomReturnValueHandlers</em><em>），也可以重新配置，装饰已有的参数解析器和返回值处理器。</em></p>
+<h2 id="1-handlermethodargumentresolverhandlermethodreturnvaluehandler">1. 初始化所有的HandlerMethodArgumentResolver和HandlerMethodReturnValueHandler。<a class="headerlink" href="#1-handlermethodargumentresolverhandlermethodreturnvaluehandler" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">afterPropertiesSet</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Do this first, it may add ResponseBody advice beans</span>
+<span class="w">    </span><span class="n">initControllerAdviceCache</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">argumentResolvers</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">HandlerMethodArgumentResolver</span><span class="o">&gt;</span><span class="w"> </span><span class="n">resolvers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getDefaultArgumentResolvers</span><span class="p">();</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">argumentResolvers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HandlerMethodArgumentResolverComposite</span><span class="p">().</span><span class="na">addResolvers</span><span class="p">(</span><span class="n">resolvers</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">initBinderArgumentResolvers</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">HandlerMethodArgumentResolver</span><span class="o">&gt;</span><span class="w"> </span><span class="n">resolvers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getDefaultInitBinderArgumentResolvers</span><span class="p">();</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">initBinderArgumentResolvers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HandlerMethodArgumentResolverComposite</span><span class="p">().</span><span class="na">addResolvers</span><span class="p">(</span><span class="n">resolvers</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">returnValueHandlers</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">HandlerMethodReturnValueHandler</span><span class="o">&gt;</span><span class="w"> </span><span class="n">handlers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getDefaultReturnValueHandlers</span><span class="p">();</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">returnValueHandlers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HandlerMethodReturnValueHandlerComposite</span><span class="p">().</span><span class="na">addHandlers</span><span class="p">(</span><span class="n">handlers</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="cm">/**</span>
+<span class="cm">* Return the list of return value handlers to use including built-in and</span>
+<span class="cm">* custom handlers provided via {@link #setReturnValueHandlers}.</span>
+<span class="cm">*/</span>
+<span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">HandlerMethodReturnValueHandler</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getDefaultReturnValueHandlers</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">HandlerMethodReturnValueHandler</span><span class="o">&gt;</span><span class="w"> </span><span class="n">handlers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Single-purpose return value types</span>
+<span class="w">    </span><span class="n">handlers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ModelAndViewMethodReturnValueHandler</span><span class="p">());</span>
+<span class="w">    </span><span class="n">handlers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ModelMethodProcessor</span><span class="p">());</span>
+<span class="w">    </span><span class="n">handlers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ViewMethodReturnValueHandler</span><span class="p">());</span>
+<span class="w">    </span><span class="n">handlers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ResponseBodyEmitterReturnValueHandler</span><span class="p">(</span><span class="n">getMessageConverters</span><span class="p">(),</span>
+<span class="w">                                                           </span><span class="k">this</span><span class="p">.</span><span class="na">reactiveAdapterRegistry</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">taskExecutor</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">contentNegotiationManager</span><span class="p">));</span>
+<span class="w">    </span><span class="n">handlers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">StreamingResponseBodyReturnValueHandler</span><span class="p">());</span>
+<span class="w">    </span><span class="n">handlers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">HttpEntityMethodProcessor</span><span class="p">(</span><span class="n">getMessageConverters</span><span class="p">(),</span>
+<span class="w">                                               </span><span class="k">this</span><span class="p">.</span><span class="na">contentNegotiationManager</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">requestResponseBodyAdvice</span><span class="p">));</span>
+<span class="w">    </span><span class="n">handlers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">HttpHeadersReturnValueHandler</span><span class="p">());</span>
+<span class="w">    </span><span class="n">handlers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CallableMethodReturnValueHandler</span><span class="p">());</span>
+<span class="w">    </span><span class="n">handlers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">DeferredResultMethodReturnValueHandler</span><span class="p">());</span>
+<span class="w">    </span><span class="n">handlers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">AsyncTaskMethodReturnValueHandler</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">beanFactory</span><span class="p">));</span>
+
+<span class="w">    </span><span class="c1">// Annotation-based return value types</span>
+<span class="w">    </span><span class="n">handlers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ModelAttributeMethodProcessor</span><span class="p">(</span><span class="kc">false</span><span class="p">));</span>
+<span class="w">    </span><span class="n">handlers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RequestResponseBodyMethodProcessor</span><span class="p">(</span><span class="n">getMessageConverters</span><span class="p">(),</span>
+<span class="w">                                                        </span><span class="k">this</span><span class="p">.</span><span class="na">contentNegotiationManager</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">requestResponseBodyAdvice</span><span class="p">));</span>
+
+<span class="w">    </span><span class="c1">// Multi-purpose return value types</span>
+<span class="w">    </span><span class="n">handlers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ViewNameMethodReturnValueHandler</span><span class="p">());</span>
+<span class="w">    </span><span class="n">handlers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">MapMethodProcessor</span><span class="p">());</span>
+
+<span class="w">    </span><span class="c1">// Custom return value types</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">getCustomReturnValueHandlers</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">handlers</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">getCustomReturnValueHandlers</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Catch-all</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">CollectionUtils</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">(</span><span class="n">getModelAndViewResolvers</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">handlers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ModelAndViewResolverMethodReturnValueHandler</span><span class="p">(</span><span class="n">getModelAndViewResolvers</span><span class="p">()));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">handlers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ModelAttributeMethodProcessor</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">handlers</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cm">/**</span>
+<span class="cm">* Return the list of argument resolvers to use including built-in resolvers</span>
+<span class="cm">* and custom resolvers provided via {@link #setCustomArgumentResolvers}.</span>
+<span class="cm">*/</span>
+<span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">HandlerMethodArgumentResolver</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getDefaultArgumentResolvers</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">HandlerMethodArgumentResolver</span><span class="o">&gt;</span><span class="w"> </span><span class="n">resolvers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Annotation-based argument resolution</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RequestParamMethodArgumentResolver</span><span class="p">(</span><span class="n">getBeanFactory</span><span class="p">(),</span><span class="w"> </span><span class="kc">false</span><span class="p">));</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RequestParamMapMethodArgumentResolver</span><span class="p">());</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">PathVariableMethodArgumentResolver</span><span class="p">());</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">PathVariableMapMethodArgumentResolver</span><span class="p">());</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">MatrixVariableMethodArgumentResolver</span><span class="p">());</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">MatrixVariableMapMethodArgumentResolver</span><span class="p">());</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ServletModelAttributeMethodProcessor</span><span class="p">(</span><span class="kc">false</span><span class="p">));</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RequestResponseBodyMethodProcessor</span><span class="p">(</span><span class="n">getMessageConverters</span><span class="p">(),</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">requestResponseBodyAdvice</span><span class="p">));</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RequestPartMethodArgumentResolver</span><span class="p">(</span><span class="n">getMessageConverters</span><span class="p">(),</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">requestResponseBodyAdvice</span><span class="p">));</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RequestHeaderMethodArgumentResolver</span><span class="p">(</span><span class="n">getBeanFactory</span><span class="p">()));</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RequestHeaderMapMethodArgumentResolver</span><span class="p">());</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ServletCookieValueMethodArgumentResolver</span><span class="p">(</span><span class="n">getBeanFactory</span><span class="p">()));</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ExpressionValueMethodArgumentResolver</span><span class="p">(</span><span class="n">getBeanFactory</span><span class="p">()));</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SessionAttributeMethodArgumentResolver</span><span class="p">());</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RequestAttributeMethodArgumentResolver</span><span class="p">());</span>
+
+<span class="w">    </span><span class="c1">// Type-based argument resolution</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ServletRequestMethodArgumentResolver</span><span class="p">());</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ServletResponseMethodArgumentResolver</span><span class="p">());</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">HttpEntityMethodProcessor</span><span class="p">(</span><span class="n">getMessageConverters</span><span class="p">(),</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">requestResponseBodyAdvice</span><span class="p">));</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RedirectAttributesMethodArgumentResolver</span><span class="p">());</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ModelMethodProcessor</span><span class="p">());</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">MapMethodProcessor</span><span class="p">());</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ErrorsMethodArgumentResolver</span><span class="p">());</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SessionStatusMethodArgumentResolver</span><span class="p">());</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">UriComponentsBuilderMethodArgumentResolver</span><span class="p">());</span>
+
+<span class="w">    </span><span class="c1">// Custom arguments</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">getCustomArgumentResolvers</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">resolvers</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">getCustomArgumentResolvers</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Catch-all</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RequestParamMethodArgumentResolver</span><span class="p">(</span><span class="n">getBeanFactory</span><span class="p">(),</span><span class="w"> </span><span class="kc">true</span><span class="p">));</span>
+<span class="w">    </span><span class="n">resolvers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ServletModelAttributeMethodProcessor</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">resolvers</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="2">2. 配置自定义的参数解析器和返回值处理器<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm">* Provide resolvers for custom argument types. Custom resolvers are ordered</span>
+<span class="cm">* after built-in ones. To override the built-in support for argument</span>
+<span class="cm">* resolution use {@link #setArgumentResolvers} instead.</span>
+<span class="cm">* 添加自定义的customArgumentResolvers，它的执行在内置的后面</span>
+<span class="cm">*</span>
+<span class="cm">**/</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setCustomArgumentResolvers</span><span class="p">(</span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">HandlerMethodArgumentResolver</span><span class="o">&gt;</span><span class="w"> </span><span class="n">argumentResolvers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">customArgumentResolvers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">argumentResolvers</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm">* 拿到内置的参数解析器列表，从而进行装饰加强，或覆盖</span>
+<span class="cm">*/</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setArgumentResolvers</span><span class="p">(</span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">HandlerMethodArgumentResolver</span><span class="o">&gt;</span><span class="w"> </span><span class="n">argumentResolvers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">argumentResolvers</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">argumentResolvers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">argumentResolvers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HandlerMethodArgumentResolverComposite</span><span class="p">();</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">argumentResolvers</span><span class="p">.</span><span class="na">addResolvers</span><span class="p">(</span><span class="n">argumentResolvers</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="cm">/**</span>
+<span class="cm">* 添加自定义的返回值处理器列表</span>
+<span class="cm">*/</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setCustomReturnValueHandlers</span><span class="p">(</span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">HandlerMethodReturnValueHandler</span><span class="o">&gt;</span><span class="w"> </span><span class="n">returnValueHandlers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">customReturnValueHandlers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">returnValueHandlers</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm">* 拿到内置的返回值处理器列表，从而进行装饰加强，或覆盖</span>
+<span class="cm">*/</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setReturnValueHandlers</span><span class="p">(</span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">HandlerMethodReturnValueHandler</span><span class="o">&gt;</span><span class="w"> </span><span class="n">returnValueHandlers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">returnValueHandlers</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">returnValueHandlers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">returnValueHandlers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HandlerMethodReturnValueHandlerComposite</span><span class="p">();</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">returnValueHandlers</span><span class="p">.</span><span class="na">addHandlers</span><span class="p">(</span><span class="n">returnValueHandlers</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="3-setrequestbodyadvicesetresponsebodyadvice">3. 设置setRequestBodyAdvice和setResponseBodyAdvice<a class="headerlink" href="#3-setrequestbodyadvicesetresponsebodyadvice" title="Permanent link">&para;</a></h2>
+<p>用来在responseBody转换之前的拦截通知。比如添加统一的返回对象</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm">* Add one or more {@code RequestBodyAdvice} instances to intercept the</span>
+<span class="cm">* request before it is read and converted for {@code @RequestBody} and</span>
+<span class="cm">* {@code HttpEntity} method arguments.</span>
+<span class="cm">*/</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setRequestBodyAdvice</span><span class="p">(</span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">RequestBodyAdvice</span><span class="o">&gt;</span><span class="w"> </span><span class="n">requestBodyAdvice</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">requestBodyAdvice</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">requestResponseBodyAdvice</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">requestBodyAdvice</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm">* Add one or more {@code ResponseBodyAdvice} instances to intercept the</span>
+<span class="cm">* response before {@code @ResponseBody} or {@code ResponseEntity} return</span>
+<span class="cm">* values are written to the response body.</span>
+<span class="cm">*/</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setResponseBodyAdvice</span><span class="p">(</span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ResponseBodyAdvice</span><span class="o">&lt;?&gt;&gt;</span><span class="w"> </span><span class="n">responseBodyAdvice</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">responseBodyAdvice</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">requestResponseBodyAdvice</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">responseBodyAdvice</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="1-filter">1. filter<a class="headerlink" href="#1-filter" title="Permanent link">&para;</a></h1>
+<p>spring-web提供了几个有用的filter：</p>
+<h4 id="formcontentfilter">FormContentFilter<a class="headerlink" href="#formcontentfilter" title="Permanent link">&para;</a></h4>
+<p>浏览器只能提交GET，POST方式的请求，非浏览器端可以使用如PUT，PATCH，DELETE等方式的请求。但是 Servlet API 的ServletRequest.getParameter*()方法只能支持POST HTTP。</p>
+<p>spring web提供了FormContentFilter，拦截content type为application/x-www-form-urlencodedPUT,PATCH，DELETE请求，从request body中读取数据，封装起来，使得 Servlet API 的ServletRequest.getParameter*()方法可以使用。</p>
+<h4 id="forwarded-headers">Forwarded Headers<a class="headerlink" href="#forwarded-headers" title="Permanent link">&para;</a></h4>
+<p>一个请求经过代理如负载均衡后，他的host，post等可能发生改变，这时想要获取正确的原始地址就十分困难。</p>
+<p>所以定义了forward header来存放原始的请求信息，如<code>X-Forwarded-Host</code>, <code>X-Forwarded-Port</code>, <code>X-Forwarded-Proto</code>, <code>X-Forwarded-Ssl</code>, and <code>X-Forwarded-Prefix。</code></p>
+<p>ForwardedHeaderFilter可以基于forward header修改请求的host，port，schema,并且去除这些header。这个filter会包装request，所以他必须在其他filter之前，如RequestContextFilter。</p>
+<h4 id="shallowetagheaderfilter">ShallowEtagHeaderFilter<a class="headerlink" href="#shallowetagheaderfilter" title="Permanent link">&para;</a></h4>
+<p>通过Etag，如果请求的内容没有发生改变，返回304。</p>
+<h4 id="corsfilter">CorsFilter<a class="headerlink" href="#corsfilter" title="Permanent link">&para;</a></h4>
+<p>spring mvc提供了细粒度 的CORS支持，可以在controller方法上添加注解的方式。</p>
+<p>注意如果使用Spring Security框架，注意CorsFilter保持在spring security的filter前面</p>
+<p>另外，spring mvc中的过滤器基本都继承自OncePerRequestFilter，这个接口好好看看。自己写的filter也可以继承这个类</p>
+<h1 id="2-httpmessageconverter">2. HttpMessageConverter<a class="headerlink" href="#2-httpmessageconverter" title="Permanent link">&para;</a></h1>
+<p>这篇文章介绍springmvc中的HttpMessageConverter，它负责将http请求中进行java object和json,xml之间的转换。</p>
+<p><strong><em>client和server之间的通信</em></strong>：</p>
+<p>每个HttpMessageConverter实现类都有支持的MIME Types。当接收到一个http请求时，spring会根据request header里的accept决定返回什么格式的内容。然后寻找MIME Type对应的HttpMessageConverter，利用它将entity进行转换返回。</p>
+<p>如果请求的body里是json数据，spring会根据Content-Type的application/json，来寻找一个<em>HttpMessageConverter来</em>解析request body的json反序列化为java object。</p>
+<p>默认启用的HttpMessageConverter有10个：</p>
+<p><img alt="image.png" src="../images/httpMessageConverter.png" /></p>
+<h1 id="json">传输json<a class="headerlink" href="#json" title="Permanent link">&para;</a></h1>
+<p>@<em>ResponseBody</em> 会将controller方法的返回值序列化为json写入到response。</p>
+<p>MappingJackson2HttpMessageConverter是我们最常用的，<em>主要用来json的转换，可以是指定的类型，也可以是无类型的如map。默认支持的</em><em>MediaType是</em><em>application/json</em>  <em>application/*+json with</em> <em>UTF-8，可以进行修改配置。</em></p>
+<p><em>其他的MediaType由其他默认的HttpMessageConverter负责转换：</em></p>
+<p><img alt="MappingJackson2HttpMessageConverter.jpg" src="../images/httpMessageConverter%E6%8E%A5%E5%8F%A3.jpeg" />*</p>
+<p><em>使用的json转换是利用</em><code>com.fasterxml.jackson.databind.ObjectMapper</code>，通常我们能做的也就是定义自己的ObjectMapper，来配置我们自己的特殊的json转换。比如定义自己的JavaTimeModule。spring5.0已经支持LocalDateTime，所有RequestBody里的LocalDateTime可以正常反序列化。</p>
+<p>所以，<em>HttpMessageConverter作用的范围也就是@RequestBody和@ResponseBody这两个需要json序列化和反序列化的地方??</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["search.highlight", "navigation.instant", "navigation.tracking", "navigation.expand", "toc.integrate", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

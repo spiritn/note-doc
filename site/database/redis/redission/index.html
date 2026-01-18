@@ -1,0 +1,736 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://spiritn.github.io/note-doc/database/redis/redission/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Redission - 我的技术文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_2" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="我的技术文档" class="md-header__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的技术文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Redission
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的技术文档" class="md-nav__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    我的技术文档
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-mysql%E6%9E%B6%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mySQL架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-基础.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    InnoDB存储引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日志系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/java8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JAVA8
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java/spring/spring/IocContainer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p>redisson在redis基础上提供了一系列的分布式Java对象和服务，如分布式锁，集合，同步器，分布式信号量等等。</p>
+<p><a href="https://redisson.org/">redisson官方网站</a>，<a href="https://github.com/redisson/redisson/wiki/%E7%9B%AE%E5%BD%95">redisson中文文档</a></p>
+<h1 id="_1">分布式锁的实现<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>redisson对分布式锁的实现十分完善，<code>public interface RLock extends Lock, RLockAsync</code>实现了<code>java.util.concurrent.locks.Lock</code>接口，提供了可重入锁，公平锁，读写锁等语义，还提供了Semaphore，CountDownLatch的支持。</p>
+<p>并且也有MultiLock,RedLock，防止单结点故障问题。</p>
+<p>先看分布式锁提供的功能：</p>
+<div class="highlight"><pre><span></span><code><span class="n">RLock</span><span class="w"> </span><span class="n">lock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">redisson</span><span class="p">.</span><span class="na">getLock</span><span class="p">(</span><span class="s">&quot;anyLock&quot;</span><span class="p">);</span>
+
+<span class="c1">// 最常见的使用方法</span>
+<span class="n">lock</span><span class="p">.</span><span class="na">lock</span><span class="p">();</span>
+
+<span class="c1">// 加锁以后10秒钟自动解锁，无需调用unlock方法手动解锁</span>
+<span class="n">lock</span><span class="p">.</span><span class="na">lock</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">SECONDS</span><span class="p">);</span>
+
+<span class="c1">// 异步获取锁</span>
+<span class="n">lock</span><span class="p">.</span><span class="na">lockAsync</span><span class="p">();</span>
+<span class="n">lock</span><span class="p">.</span><span class="na">lockAsync</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">SECONDS</span><span class="p">);</span>
+<span class="n">Future</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lock</span><span class="p">.</span><span class="na">tryLockAsync</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">SECONDS</span><span class="p">);</span>
+
+<span class="c1">// 构建公平锁</span>
+<span class="n">RLock</span><span class="w"> </span><span class="n">fairLock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">redisson</span><span class="p">.</span><span class="na">getFairLock</span><span class="p">(</span><span class="s">&quot;anyLock&quot;</span><span class="p">);</span>
+
+<span class="c1">// 构建读写锁</span>
+<span class="n">RReadWriteLock</span><span class="w"> </span><span class="n">rwlock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">redisson</span><span class="p">.</span><span class="na">getReadWriteLock</span><span class="p">(</span><span class="s">&quot;anyRWLock&quot;</span><span class="p">);</span>
+<span class="n">rwlock</span><span class="p">.</span><span class="na">readLock</span><span class="p">().</span><span class="na">lock</span><span class="p">();</span>
+<span class="n">rwlock</span><span class="p">.</span><span class="na">writeLock</span><span class="p">().</span><span class="na">lock</span><span class="p">();</span>
+</code></pre></div>
+<h2 id="_2">分布式锁的实现逻辑<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ol>
+<li>循环获取锁</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm">* 获取分布式锁的重要方法</span>
+<span class="cm">*/</span>
+<span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">lock</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">leaseTime</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">interruptibly</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 当前线程ID</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">threadId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getId</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// 先去异步判断锁是否被释放</span>
+<span class="w">    </span><span class="n">Long</span><span class="w"> </span><span class="n">ttl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tryAcquire</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">leaseTime</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">threadId</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// lock acquired</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ttl</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">RFuture</span><span class="o">&lt;</span><span class="n">RedissonLockEntry</span><span class="o">&gt;</span><span class="w"> </span><span class="n">future</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subscribe</span><span class="p">(</span><span class="n">threadId</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">interruptibly</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">commandExecutor</span><span class="p">.</span><span class="na">syncSubscriptionInterrupted</span><span class="p">(</span><span class="n">future</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">commandExecutor</span><span class="p">.</span><span class="na">syncSubscription</span><span class="p">(</span><span class="n">future</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 上面首次尝试没有获取锁后，这里不停循环 尝试获取锁</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">ttl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tryAcquire</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">leaseTime</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">threadId</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">// lock acquired 代表锁被释放了</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ttl</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="c1">// waiting for message</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ttl</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="c1">// ttl &gt;= 0代表锁被其他请求占有，等待ttl时间</span>
+<span class="w">                    </span><span class="n">future</span><span class="p">.</span><span class="na">getNow</span><span class="p">().</span><span class="na">getLatch</span><span class="p">().</span><span class="na">tryAcquire</span><span class="p">(</span><span class="n">ttl</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">MILLISECONDS</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="c1">// 如果允许中断，就抛出InterruptedException</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">interruptibly</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="k">throw</span><span class="w"> </span><span class="n">e</span><span class="p">;</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="n">future</span><span class="p">.</span><span class="na">getNow</span><span class="p">().</span><span class="na">getLatch</span><span class="p">().</span><span class="na">tryAcquire</span><span class="p">(</span><span class="n">ttl</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">MILLISECONDS</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// 如果ttl为null或者 &lt; 0表示锁已经释放，可以去获取了</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">interruptibly</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">future</span><span class="p">.</span><span class="na">getNow</span><span class="p">().</span><span class="na">getLatch</span><span class="p">().</span><span class="na">acquire</span><span class="p">();</span>
+<span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">future</span><span class="p">.</span><span class="na">getNow</span><span class="p">().</span><span class="na">getLatch</span><span class="p">().</span><span class="na">acquireUninterruptibly</span><span class="p">();</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">future</span><span class="p">,</span><span class="w"> </span><span class="n">threadId</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<ol>
+<li>异步获取锁，成功后如果没有指定leaseTime注册watchdog定时任务进行续约</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">RFuture</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">tryAcquireAsync</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">waitTime</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">leaseTime</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">threadId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">RFuture</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ttlRemainingFuture</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">leaseTime</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ttlRemainingFuture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tryLockInnerAsync</span><span class="p">(</span><span class="n">waitTime</span><span class="p">,</span><span class="w"> </span><span class="n">leaseTime</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">threadId</span><span class="p">,</span><span class="w"> </span><span class="n">RedisCommands</span><span class="p">.</span><span class="na">EVAL_LONG</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// leaseTime不传默认是30秒</span>
+<span class="w">        </span><span class="n">ttlRemainingFuture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tryLockInnerAsync</span><span class="p">(</span><span class="n">waitTime</span><span class="p">,</span><span class="w"> </span><span class="n">internalLockLeaseTime</span><span class="p">,</span>
+<span class="w">                                               </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">MILLISECONDS</span><span class="p">,</span><span class="w"> </span><span class="n">threadId</span><span class="p">,</span><span class="w"> </span><span class="n">RedisCommands</span><span class="p">.</span><span class="na">EVAL_LONG</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">ttlRemainingFuture</span><span class="p">.</span><span class="na">onComplete</span><span class="p">((</span><span class="n">ttlRemaining</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// 如果获取锁没有抛出异常，且ttlRemaining不为空，</span>
+<span class="w">        </span><span class="c1">// lock acquired</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ttlRemaining</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 如果用户设置了leaseTime，就不延期了</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">leaseTime</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">internalLockLeaseTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">unit</span><span class="p">.</span><span class="na">toMillis</span><span class="p">(</span><span class="n">leaseTime</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// 就注册watchdog后续进行锁延期</span>
+<span class="w">                </span><span class="n">scheduleExpirationRenewal</span><span class="p">(</span><span class="n">threadId</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ttlRemainingFuture</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm">* lua脚本去获取锁的情况</span>
+<span class="cm">*/</span>
+<span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">RFuture</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">tryLockInnerAsync</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">waitTime</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">leaseTime</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">threadId</span><span class="p">,</span><span class="w"> </span><span class="n">RedisStrictCommand</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">command</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 如果hash不存在，就用hincrby为名为 的hash结构存入 id + &quot;:&quot; + threadId = 1这样一个键值对，并设置过期时间leaseTime</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">evalWriteAsync</span><span class="p">(</span><span class="n">getRawName</span><span class="p">(),</span><span class="w"> </span><span class="n">LongCodec</span><span class="p">.</span><span class="na">INSTANCE</span><span class="p">,</span><span class="w"> </span><span class="n">command</span><span class="p">,</span>
+<span class="w">                          </span><span class="s">&quot;if (redis.call(&#39;exists&#39;, KEYS[1]) == 0) then &quot;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">                          </span><span class="s">&quot;redis.call(&#39;hincrby&#39;, KEYS[1], ARGV[2], 1); &quot;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">                          </span><span class="s">&quot;redis.call(&#39;pexpire&#39;, KEYS[1], ARGV[1]); &quot;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">                          </span><span class="s">&quot;return nil; &quot;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">                          </span><span class="s">&quot;end; &quot;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">                          </span><span class="c1">// 如果hash中已经存在id + &quot;:&quot; + threadId的键值对，就+1，实现锁的可重入性</span>
+<span class="w">                          </span><span class="s">&quot;if (redis.call(&#39;hexists&#39;, KEYS[1], ARGV[2]) == 1) then &quot;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">                          </span><span class="s">&quot;redis.call(&#39;hincrby&#39;, KEYS[1], ARGV[2], 1); &quot;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">                          </span><span class="s">&quot;redis.call(&#39;pexpire&#39;, KEYS[1], ARGV[1]); &quot;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">                          </span><span class="s">&quot;return nil; &quot;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">                          </span><span class="s">&quot;end; &quot;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">                          </span><span class="s">&quot;return redis.call(&#39;pttl&#39;, KEYS[1]);&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// 如果已经存在，就返回hash的过期时间，后面要根据此判断锁的状态</span>
+<span class="w">                          </span><span class="n">Collections</span><span class="p">.</span><span class="na">singletonList</span><span class="p">(</span><span class="n">getRawName</span><span class="p">()),</span><span class="w"> </span><span class="n">unit</span><span class="p">.</span><span class="na">toMillis</span><span class="p">(</span><span class="n">leaseTime</span><span class="p">),</span><span class="w"> </span><span class="n">getLockName</span><span class="p">(</span><span class="n">threadId</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["search.highlight", "navigation.instant", "navigation.tracking", "navigation.expand", "toc.integrate", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

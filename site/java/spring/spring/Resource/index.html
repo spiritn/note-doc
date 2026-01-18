@@ -1,0 +1,975 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://spiritn.github.io/note-doc/java/spring/spring/Resource/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Resource - 我的技术文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#231-urlresource" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="我的技术文档" class="md-header__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的技术文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Resource
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="我的技术文档" class="md-nav__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    我的技术文档
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/02-mysql%E6%9E%B6%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mySQL架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/01-基础.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/03-InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    InnoDB存储引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/04-%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/05-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日志系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JAVA8
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IocContainer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#resources">本章</a>介绍了Spring如何处理Resource 以及如何在Spring中使用Resource ，包括以下主题： </p>
+<ul>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#resources-introduction">Introduction</a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#resources-resource">The Resource Interface</a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#resources-implementations">Built-in Resource Implementations</a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#resources-resourceloader">The <code>ResourceLoader</code></a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#resources-resourceloaderaware">The <code>ResourceLoaderAware</code> interface</a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#resources-as-dependencies">Resources as Dependencies</a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#resources-app-ctx">Application Contexts and Resource Paths</a></li>
+</ul>
+<p><img alt="resource-package" src="../images/resource-package.png" /></p>
+<h1 id="21">2.1 介绍<a class="headerlink" href="#21" title="Permanent link">&para;</a></h1>
+<p>不幸的是，Java的标准java.net.URL类和各种URL前缀的标准Handler，对于所有访问低级资源的来说还不够充分。例如，没有标准化的URL实现可以用来访问需要从classpath或相对于ServletContext获取的资源。虽然可以为专门的URL前缀注册新的Handler（类似于http:等前缀的现有处理程序），但这通常是相当复杂的，URL接口仍然缺乏一些理想的功能，例如检查被指向的资源是否存在的方法。</p>
+<h1 id="22-resource">2.2 Resource接口<a class="headerlink" href="#22-resource" title="Permanent link">&para;</a></h1>
+<p>Spring的Resource接口旨在成为一个能力更强的接口，用于抽象对低级资源的访问。下面的列表显示了Resource接口的定义：</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Resource</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">InputStreamSource</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">exists</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isOpen</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">URL</span><span class="w"> </span><span class="nf">getURL</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">File</span><span class="w"> </span><span class="nf">getFile</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">Resource</span><span class="w"> </span><span class="nf">createRelative</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">relativePath</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">getFilename</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">getDescription</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>如上，Resource接口继承了InputStreamSource接口：</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">InputStreamSource</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">InputStream</span><span class="w"> </span><span class="nf">getInputStream</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Resource接口最重要的几个方法如下：</p>
+<ul>
+<li><code>getInputStream()</code>: Locates and opens the resource, returning an <code>InputStream</code> for reading from the resource. It is expected that each invocation returns a fresh <code>InputStream</code>. It is the responsibility of the caller to close the stream.定位并打开资源，返回一个用于读取资源的InputStream。预计每次调用都会返回一个新的InputStream。关闭输入流是调用者的责任。</li>
+<li><code>exists()</code>: 返回一个布尔值表示资源是否存在，以物理形式 in physical form.</li>
+<li><code>isOpen()</code>: Returns a <code>boolean</code> indicating whether this resource represents a handle with an open stream. If <code>true</code>, the <code>InputStream</code> cannot be read multiple times and must be read once only and then closed to avoid resource leaks. Returns <code>false</code> for all usual resource implementations, with the exception of <code>InputStreamResource</code>.返回一个布尔值，表示该资源是否代表一个具有开放流的句柄。如果为真，则不能多次读取InputStream，必须只读取一次，然后关闭，以避免资源泄漏。除了InputStreamResource之外，所有通常的资源实现都返回false。</li>
+<li><code>getDescription()</code>: Returns a description for this resource, to be used for error output when working with the resource. This is often the fully qualified file name or the actual URL of the resource.返回此资源的描述，用于处理资源时的错误输出。这通常是完全限定的文件名或资源的实际URL。</li>
+</ul>
+<blockquote>
+<p>Other methods let you obtain an actual <code>URL</code> or <code>File</code> object representing the resource (if the underlying implementation is compatible and supports that functionality).</p>
+</blockquote>
+<p>其他方法可以让你获得一个实际的URL或代表资源的File对象（如果底层实现兼容并支持该功能）。</p>
+<blockquote>
+<p>Spring itself uses the <code>Resource</code> abstraction extensively, as an argument type in many method signatures when a resource is needed. Other methods in some Spring APIs (such as the constructors to various <code>ApplicationContext</code> implementations) take a <code>String</code> which in unadorned or simple form is used to create a <code>Resource</code> appropriate to that context implementation or, via special prefixes on the <code>String</code> path, let the caller specify that a specific <code>Resource</code> implementation must be created and used.</p>
+<p>While the <code>Resource</code> interface is used a lot with Spring and by Spring, it is actually very useful to use as a general utility class by itself in your own code, for access to resources, even when your code does not know or care about any other parts of Spring. While this couples your code to Spring, it really only couples it to this small set of utility classes, which serve as a more capable replacement for <code>URL</code> and can be considered equivalent to any other library you would use for this purpose.</p>
+<p>The <code>Resource</code> abstraction does not replace functionality. It wraps it where possible. For example, a <code>UrlResource</code> wraps a URL and uses the wrapped <code>URL</code> to do its work.</p>
+</blockquote>
+<p>某些resource的实现类也实现了 <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/core/io/WritableResource.html"><code>WritableResource</code></a> 接口，可以支持写入。</p>
+<p>Spring本身广泛地使用了Resource抽象，当需要资源时，它可以作为许多方法签名中的参数类型。在一些Spring API中的其他方法（比如各种ApplicationContext实现的构造函数）会取一个String，这个String以不加修饰或简单的形式被用来创建一个适合该上下文实现的Resource，或者通过String路径上的特殊前缀，让调用者指定必须创建和使用一个特定的Resource实现。</p>
+<p>虽然Resource接口在Spring中使用得很多，但实际上，在你自己的代码中，它本身作为一个通用的实用类来使用是非常有用的，用于访问资源，即使你的代码不知道或不关心Spring的任何其他部分。虽然这将你的代码与Spring耦合，但它实际上只是将它与这一小套实用类耦合，它作为URL的一个更有能力的替代品，可以被认为等同于你为此目的而使用的任何其他库。</p>
+<p><code>Resource</code> 抽象并不取代功能。它尽可能地包装了它。例如，一个<code>UrlResource</code> 包装了一个URL，并使用被包装的URL来完成它的工作。</p>
+<h1 id="23-resource">2.3 内置的Resource实现<a class="headerlink" href="#23-resource" title="Permanent link">&para;</a></h1>
+<p>spring包含以下Resource实现：这里其实也是<strong>策略模式</strong>的体现！ApplicationContext 是策略模式中的决策者</p>
+<ul>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#resources-implementations-urlresource"><code>UrlResource</code></a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#resources-implementations-classpathresource"><code>ClassPathResource</code></a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#resources-implementations-filesystemresource"><code>FileSystemResource</code></a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#resources-implementations-servletcontextresource"><code>ServletContextResource</code></a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#resources-implementations-inputstreamresource"><code>InputStreamResource</code></a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#resources-implementations-bytearrayresource"><code>ByteArrayResource</code></a></li>
+</ul>
+<h2 id="231-urlresource">2.3.1 <code>UrlResource</code><a class="headerlink" href="#231-urlresource" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><code>UrlResource</code> wraps a <code>java.net.URL</code> and can be used to access any object that is normally accessible with a URL, such as files, an HTTP target, an FTP target, and others. All URLs have a standardized <code>String</code> representation, such that appropriate standardized prefixes are used to indicate one URL type from another. This includes <code>file:</code> for accessing filesystem paths, <code>http:</code> for accessing resources through the HTTP protocol, <code>ftp:</code> for accessing resources through FTP, and others.</p>
+</blockquote>
+<p>UrlResource包装了一个java.net.URL，可以用来访问任何通常可以用URL访问的对象，如<strong>files, HTTP target, FTP target</strong>等。所有的URL都有一个标准化的String表示法，比如用适当的标准化前缀来表示一种URL类型，包括<code>file：</code>用于访问文件系统路径，<code>http：</code>用于通过HTTP协议访问资源，<code>ftp：</code>用于通过FTP访问资源等。</p>
+<blockquote>
+<p>A <code>UrlResource</code> is created by Java code by explicitly using the <code>UrlResource</code> constructor but is often created implicitly when you call an API method that takes a <code>String</code> argument meant to represent a path. For the latter case, a JavaBeans <code>PropertyEditor</code> ultimately decides which type of <code>Resource</code> to create. If the path string contains well-known (to it, that is) prefix (such as <code>classpath:</code>), it creates an appropriate specialized <code>Resource</code> for that prefix. However, if it does not recognize the prefix, it assume the string is a standard URL string and creates a <code>UrlResource</code>.</p>
+</blockquote>
+<p>UrlResource是通过Java代码显式使用UrlResource构造函数创建的，但通常在调用API方法时隐式创建，该方法使用一个代表路径的String参数。对于后一种情况，JavaBeans <code>PropertyEditor</code>最终决定创建哪种类型的Resource。如果路径字符串包含众所周知的（对它来说，就是）前缀（如<code>classpath:</code>），它就会为该前缀创建一个适当的专用资源。但是，如果它不识别前缀，它就会认为该字符串是标准的URL字符串，并创建一个UrlResource。</p>
+<h2 id="232-classpathresource">2.3.2 <code>ClassPathResource</code><a class="headerlink" href="#232-classpathresource" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>This class represents a resource that should be obtained from the classpath. It uses either the thread context class loader, a given class loader, or a given class for loading resources.</p>
+<p>This <code>Resource</code> implementation supports resolution as <code>java.io.File</code> if the class path resource resides in the file system but not for classpath resources that reside in a jar and have not been expanded (by the servlet engine or whatever the environment is) to the filesystem. To address this, the various <code>Resource</code> implementations always support resolution as a <code>java.net.URL</code>.</p>
+<p>A <code>ClassPathResource</code> is created by Java code by explicitly using the <code>ClassPathResource</code> constructor but is often created implicitly when you call an API method that takes a <code>String</code> argument meant to represent a path. For the latter case, a JavaBeans <code>PropertyEditor</code> recognizes the special prefix, <code>classpath:</code>, on the string path and creates a <code>ClassPathResource</code> in that case.</p>
+</blockquote>
+<p>这个类代表了一个应该从classpath中获取的资源。它使用线程上下文类加载器，一个给定类加载器或给定类来加载资源。</p>
+<p>如果这个class path resource驻留在文件系统中，该Resource实现支持解析为java.io.File，但对于驻留在jar中且没有（被servlet引擎或任何环境）扩展到文件系统中的classpath资源则不支持。为了解决这个问题，各种资源实现总是支持解析为<code>java.net.URL</code>。</p>
+<p>一个<code>ClassPathResource</code>是通过Java代码显式使用<code>ClassPathResource</code>构造函数来创建的，但是当你调用一个API方法时，通常是隐式创建的，该方法使用一个String参数来表示一个路径。对于后一种情况，JavaBeans PropertyEditor会识别字符串路径上的特殊前缀<code>classpath:</code>，并在这种情况下创建一个<code>ClassPathResource</code>。</p>
+<p>相对于其他的 Resource 实现类，其主要优势是方便访问类加载路径里的资源，尤其对于 Web 应用，ClassPathResource 可自动搜索位于 WEB-INF/classes 下的资源文件，无须使用绝对路径访问。</p>
+<h2 id="233-filesystemresource">2.3.3 <code>FileSystemResource</code><a class="headerlink" href="#233-filesystemresource" title="Permanent link">&para;</a></h2>
+<p>这个Resource实现用来处理<code>java.io.File</code> 和<code>java.nio.file.Path</code> ，支持以File和URL的形式解析。</p>
+<h2 id="234-servletcontextresource">2.3.4 <code>ServletContextResource</code><a class="headerlink" href="#234-servletcontextresource" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>This is a <code>Resource</code> implementation for <code>ServletContext</code> resources that interprets relative paths within the relevant web application’s root directory.</p>
+<p>It always supports stream access and URL access but allows <code>java.io.File</code> access only when the web application archive is expanded and the resource is physically on the filesystem. Whether or not it is expanded and on the filesystem or accessed directly from the JAR or somewhere else like a database (which is conceivable) is actually dependent on the Servlet container.</p>
+</blockquote>
+<p>这是一个ServletContext资源的<code>Resource</code> 实现，它可以解释Web应用程序根目录内的相对路径。</p>
+<p>它始终支持流访问和 URL 访问，但只有当 Web 应用程序存档被展开且资源实际在文件系统中时，才允许 java.io.File 访问。是否展开，在文件系统上还是直接从JAR或其他地方（如数据库）访问（这是可以想象的），实际上取决于Servlet容器。</p>
+<h2 id="235-inputstreamresource">2.3.5 <code>InputStreamResource</code><a class="headerlink" href="#235-inputstreamresource" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>An <code>InputStreamResource</code> is a <code>Resource</code> implementation for a given <code>InputStream</code>. It should be used only if no specific <code>Resource</code> implementation is applicable. In particular, prefer <code>ByteArrayResource</code> or any of the file-based <code>Resource</code> implementations where possible.</p>
+<p>In contrast to other <code>Resource</code> implementations, this is a descriptor for an already-opened resource. Therefore, it returns <code>true</code> from <code>isOpen()</code>. Do not use it if you need to keep the resource descriptor somewhere or if you need to read a stream multiple times.</p>
+</blockquote>
+<p>InputStreamResource是给定输入流的资源实现。只有在没有特定的Resource实现适用的情况下，才应该使用它。特别是，在可能的情况下，优先选择ByteArrayResource或任何基于文件的Resource实现。</p>
+<p>与其他资源实现不同，这是一个已经打开的资源的描述符。因此，它从isOpen()返回true。如果您需要将资源描述符保存在某个地方，或者您需要多次读取一个流，请不要使用它。</p>
+<h2 id="236-bytearrayresource">2.3.6 <code>ByteArrayResource</code><a class="headerlink" href="#236-bytearrayresource" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>This is a <code>Resource</code> implementation for a given byte array. It creates a <code>ByteArrayInputStream</code> for the given byte array.</p>
+<p>It is useful for loading content from any given byte array without having to resort to a single-use <code>InputStreamResource</code>.</p>
+</blockquote>
+<p>这是一个针对给定字节数组的资源实现。它为给定的字节数组创建一个ByteArrayInputStream。</p>
+<p>它对于从任何给定的字节数组中加载内容是非常有用的，而不需要求助于一个单一使用的InputStreamResource。</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Service</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ResourceHandler</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ApplicationContext</span><span class="w"> </span><span class="n">applicationContext</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Value</span><span class="p">(</span><span class="s">&quot;classpath:/application.properties&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Resource</span><span class="w"> </span><span class="n">diResource</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@PostConstruct</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testGetResource</span><span class="p">(){</span>
+<span class="w">        </span><span class="c1">// ApplicationContext实现了ResourceLoader接口,所以下面可以getResource()</span>
+
+<span class="w">        </span><span class="c1">// 可以直接注入Resource</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">diResource</span><span class="p">.</span><span class="na">getDescription</span><span class="p">());</span>
+
+<span class="w">        </span><span class="c1">// 从本地File System获取</span>
+<span class="w">        </span><span class="n">Resource</span><span class="w"> </span><span class="n">resource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">applicationContext</span><span class="p">.</span><span class="na">getResource</span><span class="p">(</span><span class="s">&quot;file:///E:/code/github/doc-for-spring/pages/spring/Overview.md&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// 从classpath获取</span>
+<span class="w">         </span><span class="n">Resource</span><span class="w"> </span><span class="n">classpathResource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">applicationContext</span><span class="p">.</span><span class="na">getResource</span><span class="p">(</span><span class="s">&quot;classpath:/application.properties&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// 从网络获取http</span>
+<span class="w">        </span><span class="n">Resource</span><span class="w"> </span><span class="n">httpResource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">applicationContext</span><span class="p">.</span><span class="na">getResource</span><span class="p">(</span><span class="s">&quot;https://docs.spring.io/spring-framework/docs/current/reference/html/images/container-magic.png&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">resource</span><span class="p">.</span><span class="na">contentLength</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="24-resourceloader">2.4 <code>ResourceLoader</code><a class="headerlink" href="#24-resourceloader" title="Permanent link">&para;</a></h1>
+<p>ResourceLoader接口旨在返回（即加载）资源实例的对象。下面的列表显示了ResourceLoader接口定义:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">ResourceLoader</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">Resource</span><span class="w"> </span><span class="nf">getResource</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">location</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>所有的application contexts都实现了ResourceLoader接口，因此所有的application contexts都可以用来获取Resource实例。</p>
+<blockquote>
+<p>When you call <code>getResource()</code> on a specific application context, and the location path specified doesn’t have a specific prefix, you get back a <code>Resource</code> type that is appropriate to that particular application context. For example, assume the following snippet of code was run against a <code>ClassPathXmlApplicationContext</code> instance:</p>
+</blockquote>
+<p>当您在特定的应用程序上下文上调用getResource()，并且指定的位置路径没有特定的前缀时，您会得到一个适合该特定应用程序上下文的资源类型。例如，假设下面这段代码是针对ClassPathXmlApplicationContext实例运行的:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Resource</span><span class="w"> </span><span class="n">template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="na">getResource</span><span class="p">(</span><span class="s">&quot;some/resource/path/myTemplate.txt&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>针对一个<code>ClassPathXmlApplicationContext</code>，该代码返回一个<code>ClassPathResource</code>.如果针对一个<code>FileSystemXmlApplicationContext</code>实例运行同样的方法，它将返回一个<code>FileSystemResource</code>。对于<code>WebApplicationContext</code>，它将返回一个<code>ServletContextResource</code>。它同样会为每个上下文返回适当的对象。</p>
+<p>因此，你可以以适合特定应用上下文的方式来加载资源。</p>
+<p>另一方面，你也可以通过指定特殊的classpath:前缀来强制使用ClassPathResource，不管应用上下文类型如何，如下例所示:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Resource</span><span class="w"> </span><span class="n">template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="na">getResource</span><span class="p">(</span><span class="s">&quot;file:///some/resource/path/myTemplate.txt&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>同样，你可以通过指定任何标准的java.net.URL前缀来强制使用UrlResource。下面一对例子使用了文件和http前缀:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Resource</span><span class="w"> </span><span class="n">template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="na">getResource</span><span class="p">(</span><span class="s">&quot;file:///some/resource/path/myTemplate.txt&quot;</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Resource</span><span class="w"> </span><span class="n">template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="na">getResource</span><span class="p">(</span><span class="s">&quot;https://myhost.com/resource/path/myTemplate.txt&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>下表总结了将String对象转换为Resource对象的策略:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Prefix</th>
+<th style="text-align: left;">Example</th>
+<th style="text-align: left;">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">classpath:</td>
+<td style="text-align: left;"><code>classpath:com/myapp/config.xml</code></td>
+<td style="text-align: left;">从 classpath加载</td>
+</tr>
+<tr>
+<td style="text-align: left;">file:</td>
+<td style="text-align: left;"><code>file:///data/config.xml</code></td>
+<td style="text-align: left;">从文件系统加载Loaded as a <code>URL</code>. See also <a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#resources-filesystemresource-caveats"><code>FileSystemResource</code> Caveats</a>.</td>
+</tr>
+<tr>
+<td style="text-align: left;">http:</td>
+<td style="text-align: left;"><code>https://myserver/logo.png</code></td>
+<td style="text-align: left;">Loaded as a <code>URL</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;">(none)</td>
+<td style="text-align: left;"><code>/data/config.xml</code></td>
+<td style="text-align: left;">依赖于底层的 <code>ApplicationContext</code>.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="25resourcepatternresolver">2.5<code>ResourcePatternResolver</code>接口<a class="headerlink" href="#25resourcepatternresolver" title="Permanent link">&para;</a></h1>
+<p><code>ResourcePatternResolver</code>接口是ResourceLoader接口的扩展，定义策略，用来解析location pattern为Resource对象。</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">ResourcePatternResolver</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ResourceLoader</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">CLASSPATH_ALL_URL_PREFIX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;classpath*:&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">Resource</span><span class="o">[]</span><span class="w"> </span><span class="nf">getResources</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">locationPattern</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>从上面可以看出，这个接口还定义了一个特殊的<code>classpath*：</code>资源前缀，用于所有来自类路径的匹配资源。注意，在这种情况下，资源位置应该是一个没有占位符的路径--例如<code>classpath*:/config/beans.xml</code>。JAR文件或类路径中的不同目录可以包含具有相同路径和相同名称的多个文件。关于classpath*:资源前缀的通配符支持的进一步详情，请参见应用程序上下文构造器资源路径中的通配符及其分节。</p>
+<p>可以检查传入的 ResourceLoader（例如，通过 ResourceLoaderAware 语义提供的）是否也实现了这个扩展接口。</p>
+<p>PathMatchingResourcePatternResolver是一个独立的实现，可在ApplicationContext之外使用，也可由ResourceArrayPropertyEditor用于填充Resource[]bean属性。PathMatchingResourcePatternResolver能够将一个指定的资源位置路径解析为一个或多个匹配的资源对象。源路径可以是一个简单的路径，它与目标资源有一对一的映射，或者可以包含特殊的classpath*: 前缀和/或内部Ant风格的正则表达式（使用Spring的org.springframework.util.AntPathMatcher工具匹配）。后者都是有效的通配符。</p>
+<p>任何标准ApplicationContext中的<code>ResourceLoader</code>实际上是PathMatchingResourcePatternResolver的一个实例，它实现了ResourcePatternResolver接口。ApplicationContext实例本身也是如此，它也实现了ResourcePatternResolver接口并委托给默认的PathMatchingResourcePatternResolver。</p>
+<h1 id="26-resourceloaderaware">2.6 <code>ResourceLoaderAware</code> 接口<a class="headerlink" href="#26-resourceloaderaware" title="Permanent link">&para;</a></h1>
+<p>ResourceLoaderAware接口是一个特殊的回调接口，它标识一个组件，期望获得ResourceLoader引用。</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">ResourceLoaderAware</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">setResourceLoader</span><span class="p">(</span><span class="n">ResourceLoader</span><span class="w"> </span><span class="n">resourceLoader</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>当一个类实现了ResourceLoaderAware并被部署到应用上下文中（作为Spring管理的Bean），它将被应用上下文识别为ResourceLoaderAware。然后application context调用setResourceLoader(ResourceLoader)，提供自己作为参数（记住，Spring中的所有应用上下文都实现了ResourceLoader接口）。</p>
+<blockquote>
+<p>Since an <code>ApplicationContext</code> is a <code>ResourceLoader</code>, the bean could also implement the <code>ApplicationContextAware</code> interface and use the supplied application context directly to load resources. However, in general, it is better to use the specialized <code>ResourceLoader</code> interface if that is all you need. The code would be coupled only to the resource loading interface (which can be considered a utility interface) and not to the whole Spring <code>ApplicationContext</code> interface.</p>
+</blockquote>
+<p>由于ApplicationContext是一个<code>ResourceLoader</code>，所以你自定义的Bean也可以实现ApplicationContextAware接口，直接使用提供的应用上下文来加载资源。但是，一般来说，如果你只需要这个接口，最好使用专门的ResourceLoader接口。代码将只耦合到资源加载接口（可以认为是一个实用接口），而不是整个Spring ApplicationContext接口。</p>
+<blockquote>
+<p>In application components, you may also rely upon autowiring of the <code>ResourceLoader</code> as an alternative to implementing the <code>ResourceLoaderAware</code> interface. The “traditional” <code>constructor</code> and <code>byType</code> autowiring modes (as described in <a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-autowire">Autowiring Collaborators</a>) are capable of providing a <code>ResourceLoader</code> for either a constructor argument or a setter method parameter, respectively. For more flexibility (including the ability to autowire fields and multiple parameter methods), consider using the annotation-based autowiring features. In that case, the <code>ResourceLoader</code> is autowired into a field, constructor argument, or method parameter that expects the <code>ResourceLoader</code> type as long as the field, constructor, or method in question carries the <code>@Autowired</code> annotation. For more information, see <a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-autowired-annotation">Using <code>@Autowired</code></a>.</p>
+</blockquote>
+<p>在应用程序组件中，您也可以依赖 ResourceLoader 的自动注入来替代实现 ResourceLoaderAware 接口。传统的 "构造函数和byType自动配线模式（如Autowiring Collaborators中所述）能够分别为构造函数参数或setter方法参数提供ResourceLoader。为了获得更多的灵活性（包括自动装配字段和多个参数方法的能力），可以考虑使用基于注解的自动装配功能。在这种情况下，只要相关的字段、构造函数或方法携带<code>@Autowired</code>注解，资<code>ResourceLoader</code>就会自动装配到期望<code>ResourceLoader</code>类型的字段、构造函数参数或方法参数中。有关更多信息，请参见 <a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-autowired-annotation">Using <code>@Autowired</code></a>。</p>
+<h1 id="27-resources">2.7 Resources 作为依赖注入<a class="headerlink" href="#27-resources" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>If the bean itself is going to determine and supply the resource path through some sort of dynamic process, it probably makes sense for the bean to use the ResourceLoader interface to load resources. For example, consider the loading of a template of some sort, where the specific resource that is needed depends on the role of the user. If the resources are static, it makes sense to eliminate the use of the ResourceLoader interface completely, have the bean expose the Resource properties it needs, and expect them to be injected into it.</p>
+</blockquote>
+<p>如果bean本身要通过某种动态过程来确定和提供资源路径，那么bean使用ResourceLoader接口来加载资源可能是有意义的。例如，考虑加载某种模板，其中需要的具体资源取决于用户的角色。如果资源是静态的，那么完全取消使用ResourceLoader接口是有意义的，让Bean暴露它需要的Resource属性，并期望它们被注入进来。</p>
+<blockquote>
+<p>What makes it trivial to then inject these properties is that all application contexts register and use a special JavaBeans <code>PropertyEditor</code>, which can convert <code>String</code> paths to <code>Resource</code> objects. So, if <code>myBean</code> has a template property of type <code>Resource</code>, it can be configured with a simple string for that resource, as the following example shows:</p>
+</blockquote>
+<p>然后注入这些属性，所有的应用都注册并使用一个特殊的JavaBeans <code>PropertyEditor</code>，它可以将String路径转换为<code>Resource</code>对象。因此，如果<code>ResourceHandler</code>有一个类型为<code>Resource</code>的diResource属性，就可以为该资源配置一个简单的字符串，如下例所示。</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Service</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ResourceHandler</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Value</span><span class="p">(</span><span class="s">&quot;/application.properties&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Resource</span><span class="w"> </span><span class="n">diResource</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>请注意，资源路径没有前缀。因此，由于应用程序上下文本身将被用作ResourceLoader，资源本身是通过ClassPathResource、FileSystemResource或ServletContextResource加载的，这取决于上下文的确切类型。</p>
+<p>如果您需要强制使用特定的Resource类型，您可以使用前缀。下面的两个例子展示了如何强制使用ClassPathResource和UrlResource（后者用于访问文件系统文件）:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Service</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ResourceHandler</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Value</span><span class="p">(</span><span class="s">&quot;classpath:/application.properties&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Resource</span><span class="w"> </span><span class="n">diResource</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Value</span><span class="p">(</span><span class="s">&quot;file:///some/resource/path/myTemplate.txt&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Resource</span><span class="w"> </span><span class="n">fileResource</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="28-application-contexts-and-resource-paths">2.8 Application Contexts and Resource Paths<a class="headerlink" href="#28-application-contexts-and-resource-paths" title="Permanent link">&para;</a></h1>
+<p>本节介绍了如何使用资源创建应用程序上下文，包括与XML配合的快捷键、如何使用通配符等细节。</p>
+<h2 id="281-application-contexts">2.8.1 构造Application Contexts<a class="headerlink" href="#281-application-contexts" title="Permanent link">&para;</a></h2>
+<p>应用上下文构造函数（针对特定的应用上下文类型）一般采用一个字符串或字符串数组作为资源的位置路径，例如构成上下文定义的XML文件。</p>
+<p>当这样的位置路径没有前缀时，从该路径构建并用于加载bean定义的特定资源类型取决于并适合特定的应用上下文。例如，考虑下面的例子，它创建了一个ClassPathXmlApplicationContext。</p>
+<div class="highlight"><pre><span></span><code><span class="n">ApplicationContext</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClassPathXmlApplicationContext</span><span class="p">(</span><span class="s">&quot;conf/appContext.xml&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>因为使用了ClassPathResource，所以Bean定义是从classpath加载的。然而，考虑下面的例子，它创建了一个FileSystemXmlApplicationContext。</p>
+<div class="highlight"><pre><span></span><code><span class="n">ApplicationContext</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">FileSystemXmlApplicationContext</span><span class="p">(</span><span class="s">&quot;conf/appContext.xml&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>现在，bean定义从文件系统加载（在本例中，相对于当前工作目录）。</p>
+<p>请注意，在位置路径上使用特殊的 classpath 前缀或标准 URL 前缀会覆盖为加载定义而创建的资源的默认类型。考虑以下示例:</p>
+<div class="highlight"><pre><span></span><code><span class="n">ApplicationContext</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">FileSystemXmlApplicationContext</span><span class="p">(</span><span class="s">&quot;classpath:conf/appContext.xml&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>使用FileSystemXmlApplicationContext从classpath加载bean定义。然而，它仍然是一个FileSystemXmlApplicationContext。如果它随后被用作资源加载器，任何未固定的路径仍然被视为文件系统路径。</p>
+<p><strong>构造<code>ClassPathXmlApplicationContext</code>实例的快捷方式</strong></p>
+<p>ClassPathXmlApplicationContext 暴露了许多构造函数以方便实例化。基本的思路是，你可以只提供一个字符串数组，其中只包含XML文件本身的文件名（不包含前导路径信息），并提供一个Class.这个<code>ClassPathXmlApplicationContext</code>会从所提供的类中获取路径信息。然后ClassPathXmlApplicationContext从提供的类中获取路径信息。</p>
+<p>考虑以下目录结构：</p>
+<div class="highlight"><pre><span></span><code>com/
+  foo/
+    services.xml
+    daos.xml
+    MessengerService.class
+</code></pre></div>
+<p>以下示例显示如何实例化由在名为service.xml和daos.xml（位于类路径中）的文件中定义的bean组成的ClassPathXmlApplicationContext实例：</p>
+<div class="highlight"><pre><span></span><code><span class="n">ApplicationContext</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClassPathXmlApplicationContext</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;services.xml&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;daos.xml&quot;</span><span class="p">},</span><span class="w"> </span><span class="n">MessengerService</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="282-application-context">2.8.2  Application Context 构造函数中资源路径的通配符<a class="headerlink" href="#282-application-context" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>The resource paths in application context constructor values may be simple paths (as shown earlier), each of which has a one-to-one mapping to a target <code>Resource</code> or, alternately, may contain the special "classpath*:" prefix or internal Ant-style regular expressions (matched by using Spring’s <code>PathMatcher</code> utility). Both of the latter are effectively wildcards.</p>
+<p>One use for this mechanism is when you need to do component-style application assembly. All components can 'publish' context definition fragments to a well-known location path, and, when the final application context is created using the same path prefixed with <code>classpath*:</code>, all component fragments are automatically picked up.</p>
+<p>Note that this wildcarding is specific to the use of resource paths in application context constructors (or when you use the <code>PathMatcher</code> utility class hierarchy directly) and is resolved at construction time. It has nothing to do with the <code>Resource</code> type itself. You cannot use the <code>classpath*:</code> prefix to construct an actual <code>Resource</code>, as a resource points to just one resource at a time.</p>
+</blockquote>
+<p>应用上下文构造函数中的资源路径可以是简单的路径（如前所述），每个路径都有一个到目标<code>Resource</code>的一对一映射，或者也可以包含特殊的 "classpath*: "前缀或内部Ant风格的正则表达式（通过使用Spring的<code>PathMatcher</code>匹配）,两者都是有效的通配符。</p>
+<p>这种机制的一个用途是当你需要做component-style的application组装时。所有组件都可以将应用定义代码 "发布 "到一个众所周知的路径位置上，这样，当最终的应用程序使用以<code>classpath*:</code>为前缀的相同路径创建上下文时，所有组件片段都会被自动拾取。</p>
+<p>请注意，这种通配是特定于在应用上下文构造函数中使用资源路径的情况（或者直接使用PathMatcher实用类层次结构时），并在构造时解决。它与资源类型本身无关。您不能使用<code>classpath*:</code>前缀来构造一个实际的Resource，因为一个资源一次只指向一个资源。</p>
+<p><code>ResourcePatternResolver</code>在继承<code>ResourceLoader</code>的基础上，又引入了<code>Resource[] getResources(String)</code>的方法定义，以支持根据路径匹配模式返回多个Resource的功能。同时引入了一种的新的协议前缀<code>classpath*:</code></p>
+<p>PathMatchingResourcePatternResolver是<code>ResourcePatternResolver</code>的实现，</p>
+<h3 id="ant-style-patterns">Ant-style Patterns<a class="headerlink" href="#ant-style-patterns" title="Permanent link">&para;</a></h3>
+<p>Path locations可以包含Ant-style风格：</p>
+<div class="highlight"><pre><span></span><code>/WEB-INF/*-context.xml
+com/mycompany/**/applicationContext.xml
+file:C:/some/path/*-context.xml
+classpath:com/mycompany/**/applicationContext.xml
+</code></pre></div>
+<blockquote>
+<p>When the path location contains an Ant-style pattern, the resolver follows a more complex procedure to try to resolve the wildcard. It produces a <code>Resource</code> for the path up to the last non-wildcard segment and obtains a URL from it. If this URL is not a <code>jar:</code> URL or container-specific variant (such as <code>zip:</code> in WebLogic, <code>wsjar</code> in WebSphere, and so on), a <code>java.io.File</code> is obtained from it and used to resolve the wildcard by traversing the filesystem. In the case of a jar URL, the resolver either gets a <code>java.net.JarURLConnection</code> from it or manually parses the jar URL and then traverses the contents of the jar file to resolve the wildcards.</p>
+</blockquote>
+<p>当路径位置包含Ant-style模式时，解析器会遵循一个更复杂的程序来尝试解析通配符。它为路径生成一个<code>Resource</code> ，直到最后一个非通配符段，并从中获取一个 URL。如果这个 URL 不是 <code>jar:</code> URL 或容器特定的变体（如 WebLogic 中的 zip:、WebSphere 中的 wsjar 等），则从中获取一个 <code>java.io.File</code>，并通过遍历文件系统来解析通配符。在jar URL的情况下，解析器要么从中获取一个java.net.JarURLConnection，要么手动解析jar URL，然后遍历jar文件的内容来解析通配符。</p>
+<h3 id="_1">可移植性的含义<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>If the specified path is already a file URL (either implicitly because the base <code>ResourceLoader</code> is a filesystem one or explicitly), wildcarding is guaranteed to work in a completely portable fashion.</p>
+<p>If the specified path is a classpath location, the resolver must obtain the last non-wildcard path segment URL by making a <code>Classloader.getResource()</code> call. Since this is just a node of the path (not the file at the end), it is actually undefined (in the <code>ClassLoader</code> javadoc) exactly what sort of a URL is returned in this case. In practice, it is always a <code>java.io.File</code> representing the directory (where the classpath resource resolves to a filesystem location) or a jar URL of some sort (where the classpath resource resolves to a jar location). Still, there is a portability concern on this operation.</p>
+<p>If a jar URL is obtained for the last non-wildcard segment, the resolver must be able to get a <code>java.net.JarURLConnection</code> from it or manually parse the jar URL, to be able to walk the contents of the jar and resolve the wildcard. This does work in most environments but fails in others, and we strongly recommend that the wildcard resolution of resources coming from jars be thoroughly tested in your specific environment before you rely on it.</p>
+</blockquote>
+<p>如果指定的路径已经是一个文件 URL（因为基础 ResourceLoader 是文件系统的 URL，所以隐式地或显式地），则保证以完全可移植的方式进行通配。</p>
+<p>如果指定的路径是一个classpath位置，解析器必须通过调用Classloader.getResource()来获取最后一个非通配的路径段URL。由于这只是路径的一个节点（而不是最后的文件），所以在这种情况下，究竟返回什么样的URL，实际上是没有定义的（在ClassLoader javadoc中）。在实践中，它总是一个代表目录的java.io.File(classpath资源解析到文件系统的位置)或某种类型的jar URL(classpath资源解析到jar的位置)。不过，在这个操作上还是有一个可移植性的问题。</p>
+<p>如果获得了最后一个非通配符段的 jar URL，解析者必须能够从中获得 java.net.JarURLConnection 或手动解析 jar URL，才能走到 jar 的内容并解析通配符。这在大多数环境中确实可行，但在其他环境中却会失败，我们强烈建议在依赖来自jar的资源的通配符解析之前，先在特定环境中进行彻底测试。</p>
+<h3 id="classpath"><code>classpath*:</code> 前缀<a class="headerlink" href="#classpath" title="Permanent link">&para;</a></h3>
+<p>当通过基于XML构造一个应用程序时</p>
+<div class="highlight"><pre><span></span><code><span class="n">ApplicationContext</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">ClassPathXmlApplicationContext</span><span class="p">(</span><span class="s">&quot;classpath*:conf/appContext.xml&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>这个特殊的前缀指定必须获得所有与给定名称相匹配的classpath资源（在内部，这基本上是通过调用ClassLoader.getResources(...)来实现的），然后合并成最终的应用上下文定义。</p>
+<blockquote>
+<p>The wildcard classpath relies on the <code>getResources()</code> method of the underlying classloader. As most application servers nowadays supply their own classloader implementation, the behavior might differ, especially when dealing with jar files. A simple test to check if <code>classpath*</code> works is to use the classloader to load a file from within a jar on the classpath: <code>getClass().getClassLoader().getResources("&lt;someFileInsideTheJar&gt;")</code>. Try this test with files that have the same name but are placed inside two different locations. In case an inappropriate result is returned, check the application server documentation for settings that might affect the classloader behavior.</p>
+</blockquote>
+<p>通配符classpath依赖于底层classloader的getResources()方法。由于现在大多数应用服务器都提供了自己的classloader实现，因此行为可能会有所不同，特别是在处理jar文件时。检查classpath*是否工作的一个简单测试是使用classloader从classpath上的jar中加载一个文件：<code>getClass().getClassLoader().getResources("&lt;someFileInsideTheJar&gt;")</code>。用名称相同但放在两个不同位置内的文件来尝试这个测试。如果返回的结果不合适，请检查应用服务器文档中可能影响classloader行为的设置。</p>
+<blockquote>
+<p>You can also combine the <code>classpath*:</code> prefix with a <code>PathMatcher</code> pattern in the rest of the location path (for example, <code>classpath*:META-INF/*-beans.xml</code>). In this case, the resolution strategy is fairly simple: A <code>ClassLoader.getResources()</code> call is used on the last non-wildcard path segment to get all the matching resources in the class loader hierarchy and then, off each resource, the same <code>PathMatcher</code> resolution strategy described earlier is used for the wildcard subpath.</p>
+</blockquote>
+<p>你也可以将<code>classpath*:</code>前缀与位置路径其余部分的PathMatcher模式结合起来（例如，<code>classpath*:META-INF/*-beans.xml</code>）。在这种情况下，解析策略相当简单。在最后一个非通配符路径段上使用ClassLoader.getResources()调用，以获取类加载器层次结构中所有匹配的资源，然后，在每个资源之外，对通配符子路径使用前面描述的相同PathMatcher解析策略。</p>
+<blockquote>
+<p>也就是说Spring 将会搜索类加载路径下所有满足该规则的配置文件。如果不是采用 classpath*: 前缀，而是改为使用 classpath: 前缀，Spring 只加载第一份符合条件的 XML 文件，例如如下代码：</p>
+</blockquote>
+<h3 id="_2">关于通配符其他注意点<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>请注意，classpath<em>:与Ant-style模式结合使用时，只有在模式启动前至少有一个根目录时才会可靠地工作，除非实际的目标文件位于文件系统中。这意味着，classpath</em>:*.xml这样的模式可能不会从jar文件的根目录中检索文件，而只能从扩展目录的根目录中检索。</p>
+<p>Spring检索classpath条目的能力源于JDK的ClassLoader.getResources()方法，该方法只返回空字符串的文件系统位置（表示要搜索的潜在根）。Spring也会评估URLClassLoader运行时配置和jar文件中的java.class.path清单，但这并不能保证导致可移植行为。</p>
+<p>对classpath包的扫描需要在classpath中存在相应的目录项。当你使用Ant构建JAR时，不要激活JAR任务的仅文件开关。另外，根据某些环境中的安全策略，classpath目录可能不会被暴露--例如，JDK 1.7.0_45及更高版本上的独立应用程序（需要在您的清单中设置'Trusted-Library'。参见https://stackoverflow.com/questions/19394570/java-jre-7u45-breaks-classloader-getresources）。)</p>
+<p>在JDK 9的模块路径(Jigsaw)上，Spring的classpath扫描一般都能正常工作。这里也强烈建议把资源放到一个专门的目录中，避免了前面提到的搜索jar文件根级的可移植性问题。</p>
+<p>Ant模式与classpath：如果要搜索的根包在多个类路径位置都有，则不能保证找到匹配的资源。考虑以下资源位置的例子。</p>
+<div class="highlight"><pre><span></span><code>com/mycompany/package1/service-context.xml
+</code></pre></div>
+<p>现在考虑一个Ant的路径，有人可能会用它来寻找这个文件。</p>
+<div class="highlight"><pre><span></span><code>classpath:com/mycompany/**/service-context.xml
+</code></pre></div>
+<p>这样的资源可能只存在于一个位置，但当使用前面的例子这样的路径试图解析它时，解析器会根据<code>getResource("com/mycompany");</code>返回的（第一个）URL工作。如果该基础包节点存在于多个 classloader 位置，则实际的终端资源可能不在那里。因此，在这种情况下，你应该更倾向于使用classpath*:，用同样的Ant风格模式，它搜索所有包含根包的类路径位置。</p>
+<h2 id="283-filesystemresource">2.8.3 <code>FileSystemResource</code> 注意事项<a class="headerlink" href="#283-filesystemresource" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>A <code>FileSystemResource</code> that is not attached to a <code>FileSystemApplicationContext</code> (that is, when a <code>FileSystemApplicationContext</code> is not the actual <code>ResourceLoader</code>) treats absolute and relative paths as you would expect. Relative paths are relative to the current working directory, while absolute paths are relative to the root of the filesystem.</p>
+</blockquote>
+<p>未附加到FileSystemApplicationContext的FileSystemResource（也就是说，当FileSystemApplicationContext不是实际的ResourceLoader时）会像你期望的那样处理绝对路径和相对路径。<strong>相对路径是相对于当前工作目录的，而绝对路径是相对于文件系统的根。</strong></p>
+<blockquote>
+<p>For backwards compatibility (historical) reasons however, this changes when the <code>FileSystemApplicationContext</code> is the <code>ResourceLoader</code>. The <code>FileSystemApplicationContext</code> forces all attached <code>FileSystemResource</code> instances to treat all location paths as relative, whether they start with a leading slash or not. In practice, this means the following examples are equivalent:</p>
+</blockquote>
+<p>然而，出于向后兼容性（历史）的原因，当FileSystemApplicationContext是ResourceLoader时，这种情况会改变。FileSystemApplicationContext强制所有附加的FileSystemResource实例将所有位置路径视为相对路径，无论它们是否以前导斜线开始。在实践中，这意味着下面的例子是等价的:</p>
+<div class="highlight"><pre><span></span><code><span class="n">ApplicationContext</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">FileSystemXmlApplicationContext</span><span class="p">(</span><span class="s">&quot;conf/context.xml&quot;</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">ApplicationContext</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">FileSystemXmlApplicationContext</span><span class="p">(</span><span class="s">&quot;/conf/context.xml&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>下面的例子也是等价的（尽管它们是不同的，因为一种情况是相对路径，另一种情况是绝对路径）。</p>
+<div class="highlight"><pre><span></span><code><span class="n">FileSystemXmlApplicationContext</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span>
+<span class="n">ctx</span><span class="p">.</span><span class="na">getResource</span><span class="p">(</span><span class="s">&quot;some/resource/path/myTemplate.txt&quot;</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">FileSystemXmlApplicationContext</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span>
+<span class="n">ctx</span><span class="p">.</span><span class="na">getResource</span><span class="p">(</span><span class="s">&quot;/some/resource/path/myTemplate.txt&quot;</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>In practice, if you need true absolute filesystem paths, you should avoid using absolute paths with <code>FileSystemResource</code> or <code>FileSystemXmlApplicationContext</code> and force the use of a <code>UrlResource</code> by using the <code>file:</code> URL prefix. The following examples show how to do so:</p>
+</blockquote>
+<p>在实践中，如果需要真正的绝对文件系统路径，应该避免使用FileSystemResource或FileSystemXmlApplicationContext的绝对路径，而应该通过使用<code>file:</code>的URL前缀强制使用<code>UrlResource</code>。下面的例子展示了如何做到这一点：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 不管ApplicationContext的实际类型, the Resource will always be UrlResource</span>
+<span class="n">ctx</span><span class="p">.</span><span class="na">getResource</span><span class="p">(</span><span class="s">&quot;file:///some/resource/path/myTemplate.txt&quot;</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// force this FileSystemXmlApplicationContext to load its definition via a UrlResource</span>
+<span class="n">ApplicationContext</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">FileSystemXmlApplicationContext</span><span class="p">(</span><span class="s">&quot;file:///conf/context.xml&quot;</span><span class="p">);</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["search.highlight", "navigation.instant", "navigation.tracking", "navigation.expand", "toc.integrate", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

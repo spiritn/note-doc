@@ -1,0 +1,976 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://spiritn.github.io/note-doc/note/zm/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Zm - 我的技术文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#solarv231" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="我的技术文档" class="md-header__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的技术文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Zm
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="我的技术文档" class="md-nav__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    我的技术文档
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database/02-mysql%E6%9E%B6%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mySQL架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database/01-基础.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database/03-InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    InnoDB存储引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database/04-%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database/05-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日志系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JAVA8
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/spring/spring/IocContainer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p>系统架构图如下：</p>
+<p><img alt="系统架构" src="../images/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.png" /></p>
+<h1 id="solar">基础架构Solar<a class="headerlink" href="#solar" title="Permanent link">&para;</a></h1>
+<p>Solar作为下一代基础微服务体系，2019年11月开始筹划，2020年1月4日推出第一版，2020年4月15日发布1.2.0 &amp; 2.2.0里程碑稳定版，兼容Spring Cloud Edgware版、Finchley版、Greenwich版、Hoxton版本。</p>
+<p>基于三层体系而构建</p>
+<ul>
+<li>基础公共组件。Solar的基础组件，基础公共组件一般呈原子层面的独立存在，组件间也可适当耦合，基本上可达到一个组件被移除，不影响另外一个组件的运行的特征</li>
+<li>基础公共框架。Solar的基础框架，依托Spring     Cloud服务体系，以框架形式对外暴露。它的另外一个重要特征，是对基础公共组件的聚合，一种“搭积木”的方式进行构建</li>
+<li>基础公共服务。Solar的基础服务，以公共服务形式对外暴露。它的另外一个重要特征，是对基础公共组件的使用，它是Solar框架卫星环绕式的组成部分</li>
+</ul>
+<p>Solar基于Spring Cloud技术栈，支持Eureka注册中心、Apollo配置中心、Zuul网关、2个限流熔断降级组件（Sentinel、Hystrix）等，Skywalking + Opentracing和CAT的APM调用链监控，Prometheus + Grafana指标监控，Kibana日志监控等，具有企业级的插件引入、开箱即用特征。它包含几大核心模块：</p>
+<ul>
+<li>全链路灰度蓝绿发布智能化&amp;DevOps发布平台集成</li>
+<li>Zuul网关动态过滤转发灰度蓝绿&amp; Furion 统一控制台</li>
+<li>Sentinel全链路熔断限流降级权限和自研功能</li>
+<li>Apollo &amp; Eureka &amp; VI &amp; Sensitive &amp; EventBus &amp; Agent &amp;XXL-Job等中间件和组件</li>
+<li>Docker CI &amp; 自动化测试</li>
+<li>服务和网关一键脚手架</li>
+<li>监控三要素，Tracer（Skywalking     &amp; CAT），Metrics （多维度的业务指标监控），Logger（MDC，Kibana &amp; ES &amp; GOHANGOUT等的ELK日志集群）</li>
+<li>打通基础数据中间件，MySQL（ShardingSphere）&amp;     RocketMQ &amp; MongoDB &amp; Redis</li>
+<li>支持大数据平台，Kafka&amp; Elastic Search &amp; InfluxDB</li>
+<li>接入GPM监控平台，Prometheus     &amp; Grafana &amp; InfluxDB &amp; AlarmCenter （运维、邮件、钉钉机器人和掌控APP告警）</li>
+<li>接入阿里云，OSS支撑</li>
+</ul>
+<h2 id="solarv231">SolarV2.3.1<a class="headerlink" href="#solarv231" title="Permanent link">&para;</a></h2>
+<p>Solar Foundation基于Spring Cloud Edgware和Greenwich版而打造的微服务体系，它集成Nacos/Eureka双注册中心、Apollo配置中心、Sentinel/Hystrix双限流熔断、SkyWalking + OpenTracing/CAT双埋点监控、Prometheus + Grafana指标监控、Kibana日志监控、Metrics业务监控等组件，整合DevOps发布平台，基于Zuul网关实施蓝绿灰度发布、子环境隔离、动态过滤转发路由等功能，基于掌控和钉钉机器人实施告警功能，提供Dev CI自动化一键部署和测试工具，提供网关和微服务脚手架一键生成工具</p>
+<p>平滑改造和迁移微服务到Nacos注册中心，截止2020-07-23，在生产环境中接入Solar微服务体系（Nacos SDK + Eureka SDK），业务服务数达到达到131个，实例数287个（其中Nacos SDK到达183个）</p>
+<p><img alt="SpringClound微服务架构拓扑图.jpg" src="../images/%E9%83%A8%E7%BD%B2.png" /></p>
+<h2 id="_1">监控体系<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p><img alt="监控体系" src="../images/%E7%9B%91%E6%8E%A7%E4%BD%93%E7%B3%BB.png" /></p>
+<p><img alt="监控体系层级" src="../images/%E7%9B%91%E6%8E%A7%E4%BD%93%E7%B3%BB%E5%B1%82%E7%BA%A7.png" /></p>
+<p>SaaS（软件即服务），PaaS（平台即服务）和IaaS（基础架构即服务）</p>
+<p><img alt="SaaS" src="../images/SaaS.jpg" /></p>
+<h2 id="chaos">Chaos网关<a class="headerlink" href="#chaos" title="Permanent link">&para;</a></h2>
+<p>Chaos网关，混沌测试1.0版本，实现了网关和服务接口层面故障注入，可以有效验证1v1核心和非核心依赖服务的容错能力，测试核心业务是否健壮，能有效验证核心和非核心业务兜底策略是否生效，能大幅度提升了系统的稳定性。</p>
+<p>2.0将会和chaosblade结合进一步扩展故障注入的类型，覆盖例如CPU满载，磁盘IO高，网络延迟超时等线上重要节点Paas层的容错能力，并且能够进行线上全节点的故障演练，对监控告警的及时性，对员工重大线上故障的处理能力进行锻炼，从而进一步减少线上重大故障的发生。</p>
+<p><img alt="image2020-7-27_20-0-50.png" src="../images/chaos.png" /></p>
+<h1 id="_2">发布系统<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
+<p>公司分为容器和虚拟机发布。</p>
+<p>容器发布的运行环境包括jar包版本，外网权限，实例规格，JVM启动参数，每次重启，扩容，这些都不会改变，但不包括Apollo配置。</p>
+<p>容器可以方便的扩缩容，申请外网权限，修改实例配置。特殊情况可以申请域名给其他服务调用（通常走nacos）；也提供了web terminal方便进入容器，用来导出文件等；还可以使用Bistoury进行线上问题诊断。</p>
+<p>容器运行时不能绑定固定IP，但是通常可以绑定域名来解决。</p>
+<h2 id="_3">发布过程<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>在 TARS 的生产发布模式采用金丝雀的滚动发布，所有在应用发布前我们会从待发布的一组机器中选出一台或多台作为金丝雀(canary)，即堡垒机。</p>
+<p>只有堡垒机发布成功后，才会允许进行后续的滚动发布。堡垒机发布作为应用生产灰度的一部分，分为 somking 阶段和 baking 阶段，且两个阶段是严格受控的，结合这两个阶段，我们进一步降低新版本上线的生产风险，让后续的滚动发布更安全。</p>
+<p>smoking 的验证是在隔绝生产流量的环境下进行的，而 baking 时堡垒机已经接入生产流量了，也就是说如果此时有请求失败，是会造成生产损失的。在 baking 阶段，生产发布人员应该通过其他辅助工具，如日志，监控等来监督堡垒机的运行情况，如果发现异常，可以直接回滚版本，此时方能最小化控制住故障规模。</p>
+<p><strong>我点击发布为什么会出现两个实例？</strong></p>
+<p>容器的发布方式是滚动发布(rolling update)不同于虚机，通过先启动新的实例，再销毁老版本的实例（虚机是在一台机器上先把老版本的进行中止，再启动新版本的进程）。这种启动方式充分利用了容器的优点， 可以更好地实现无损发布。</p>
+<p>所以在新版本的实例启动成功之前，会同时存在两个实例，一个是旧版本的实例，为 running 状态，一个是当前新的发布版本的实例，状态为 pending, 当发布成功后，旧版本的实例才会销毁。若发布失败，并不会销毁旧版本的实例。</p>
+<p><strong>JDK版本问题</strong></p>
+<p>现在z m使用的 JDK 版本统一为 java8u131， 该版本在容器场景下有部分功能缺失，比如：</p>
+<ol>
+<li>无法正确识别容器的内存限制。JVM 在容器里面识别到的是宿主机的内存，默认会使用 1/4 的宿主机内存。这样会远远大于容器规格限制的内存，导致宿主机内存爆了，最终导致容器自动重启。这个问题在可以通过在 JVM 中加入 -XX:+UnlockExperimentalVMOptions     -XX:+UseCGroupMemoryLimitForHeap 得到解决，通过 CD 平台打的容器镜像我们会统一加上以上两个 JVM 参数。</li>
+<li>无法正确识别容器的 CPU 核数。JVM 在容器里面识别到 CPU 核数也是宿主机的，导致代码 Runtime.getRuntime().availableProcessors() 获取 JVM 虚拟机可用核数不是期望的值。 如果程序按宿主机核数进行工作，除了影响自身服务以外，还有可能因为资源占用过多导致容器宿主机故障。</li>
+</ol>
+<p>在 JDK8u212 之后的 Java 对容器的支持就比较好了，可以正确识别到容器里面的内存和CPU数量。但是升级 JDK 对服务来说属于重大变更，因此我们建议有以上问题的服务升级到最低可用版本 JDK8u191，保证 jdk 的改动尽可能小。</p>
+<h2 id="_4">子环境<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>因为测试环境只有一套，如果有多个需求要测，就会产生冲突。所以提供了子环境的功能，子环境可以有多套，相对的主环境就是FAT环境。</p>
+<p>子环境链路隔离原理是通过在 http 请求头里加塞头环境标签，不同与 Java 应用通过 Solar 框架塞头，H5 是基于 Nginx 实现的。网关来识别请求头进行转发到相应的子环境</p>
+<p><img alt="子环境" src="../images/%E5%AD%90%E7%8E%AF%E5%A2%83.png" /></p>
+<h1 id="zm-jar">zm jar包规范<a class="headerlink" href="#zm-jar" title="Permanent link">&para;</a></h1>
+<ul>
+<li><code>SNAPSHOT</code> 版本包建议命名风格: 1.0.0-SNAPSHOT</li>
+<li><code>RELEASE</code> 版本建议命名风格: 1.0.0 或 1.0.0.RELEASE</li>
+<li><code>RELEASE</code> 版本<strong>不能 Redeploy</strong>，即一个版本只能 deploy 一次。如有修改必须升级版本号</li>
+<li><code>RELEASE</code> 版本和 <code>SNAPSHOT</code> 版本都不允许deploy后删除, 现已回收dev2删除权限</li>
+<li><code>SNAPSHOT</code> 版本不允许上生产环境</li>
+</ul>
+<h1 id="_5">布隆过滤器<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h1>
+<p>学生每天要完成任务，每个任务完成可以领取能量果，但是这个toast提示一天只提示一次。多端要保持统一，前端是没法控制的，所以后端根据userId，taskId进行过滤，当天过期。使用redission的布隆过滤器来实现</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nd">@Resource</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">RedissonClient</span><span class="w"> </span><span class="n">redissonClient</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">         * 查询当天是否已经查询过，如果查过就不再提示用户任务toast</span>
+<span class="cm">         *</span>
+<span class="cm">         * @param userId</span>
+<span class="cm">         * @param taskId</span>
+<span class="cm">         * @return true-已经查询过，false-没有查询过</span>
+<span class="cm">         */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">checkCurrentDateIsQueried</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">userId</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">taskId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">userId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">taskId</span><span class="p">;</span>
+<span class="w">        </span><span class="n">RBloomFilter</span><span class="w"> </span><span class="n">bloomFilter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getLocalDateBloomFilter</span><span class="p">();</span>
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">contains</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bloomFilter</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">contains</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">bloomFilter</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">contains</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 获取当天的布隆过滤器</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">RBloomFilter</span><span class="w"> </span><span class="nf">getLocalDateBloomFilter</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">bloomFilterName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;taskEnergy&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">now</span><span class="p">().</span><span class="na">toString</span><span class="p">();</span>
+<span class="w">        </span><span class="n">RBloomFilter</span><span class="w"> </span><span class="n">bloomFilter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">redissonClient</span><span class="p">.</span><span class="na">getBloomFilter</span><span class="p">(</span><span class="n">bloomFilterName</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bloomFilter</span><span class="p">.</span><span class="na">isExists</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">bloomFilter</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">bloomFilter</span><span class="p">.</span><span class="na">tryInit</span><span class="p">(</span><span class="n">Long</span><span class="p">.</span><span class="na">parseLong</span><span class="p">(</span><span class="n">taskEnergyBloomFilterExpectedInsertions</span><span class="p">),</span><span class="w"> </span><span class="mf">0.01</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// 当天零点过期</span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">epochMilli</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">LocalDate</span><span class="p">.</span><span class="na">now</span><span class="p">(),</span><span class="w"> </span><span class="n">LocalTime</span><span class="p">.</span><span class="na">MAX</span><span class="p">).</span><span class="na">toInstant</span><span class="p">(</span><span class="n">ZoneOffset</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;+8&quot;</span><span class="p">)).</span><span class="na">toEpochMilli</span><span class="p">();</span>
+<span class="w">        </span><span class="n">bloomFilter</span><span class="p">.</span><span class="na">expireAt</span><span class="p">(</span><span class="n">epochMilli</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">bloomFilter</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<h1 id="_6">数据库<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h1>
+<h1 id="_7">日志<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;?xmlversion=&quot;1.0&quot;encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;configurationdebug</span><span class="err">=&quot;false&quot;</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;definename</span><span class="err">=&quot;appId&quot;</span><span class="na">class=</span><span class="s">&quot;com.zm.arch.logger.component.common.AppIdDefiner&quot;</span><span class="nt">/&gt;</span>
+
+<span class="nt">&lt;springPropertyscope</span><span class="err">=&quot;context&quot;</span><span class="na">name=</span><span class="s">&quot;springAppName&quot;</span><span class="na">source=</span><span class="s">&quot;spring.application.name&quot;</span><span class="nt">/&gt;</span>
+
+<span class="nt">&lt;springPropertyscope</span><span class="err">=&quot;context&quot;</span><span class="na">name=</span><span class="s">&quot;logSwitch&quot;</span><span class="na">source=</span><span class="s">&quot;port.http.server&quot;</span><span class="nt">/&gt;</span>
+
+<span class="cm">&lt;!--logmaxFileSize--&gt;</span>
+<span class="nt">&lt;springPropertyscope</span><span class="err">=&quot;context&quot;</span><span class="na">name=</span><span class="s">&quot;MAX_FILE_SIZE&quot;</span><span class="na">source=</span><span class="s">&quot;spring.logback.max-file-size&quot;</span><span class="na">defaultValue=</span><span class="s">&quot;100MB&quot;</span><span class="nt">/&gt;</span>
+
+<span class="cm">&lt;!--logmaxIndex--&gt;</span>
+<span class="nt">&lt;springPropertyscope</span><span class="err">=&quot;context&quot;</span><span class="na">name=</span><span class="s">&quot;MAX_INDEX&quot;</span><span class="na">source=</span><span class="s">&quot;spring.logback.max-index&quot;</span><span class="na">defaultValue=</span><span class="s">&quot;5&quot;</span><span class="nt">/&gt;</span>
+
+<span class="nt">&lt;springPropertyscope</span><span class="err">=&quot;context&quot;</span><span class="na">name=</span><span class="s">&quot;MASK_FIELDS&quot;</span><span class="na">source=</span><span class="s">&quot;log.mask.fields&quot;</span><span class="na">defaultValue=</span><span class="s">&quot;message,input_param,output_param,header_param&quot;</span><span class="nt">/&gt;</span>
+
+<span class="nt">&lt;springPropertyscope</span><span class="err">=&quot;context&quot;</span><span class="na">name=</span><span class="s">&quot;MASK_REGEX_TYPES&quot;</span><span class="na">source=</span><span class="s">&quot;log.mask.regex.types&quot;</span><span class="na">defaultValue=</span><span class="s">&quot;mobile&quot;</span><span class="nt">/&gt;</span>
+
+<span class="nt">&lt;springPropertyscope</span><span class="err">=&quot;context&quot;</span><span class="na">name=</span><span class="s">&quot;MASK_REGEX_MATCH_MAX_DEPTH&quot;</span><span class="na">source=</span><span class="s">&quot;log.mask.regex.match.max.depth&quot;</span><span class="na">defaultValue=</span><span class="s">&quot;12&quot;</span><span class="nt">/&gt;</span>
+
+<span class="nt">&lt;springPropertyscope</span><span class="err">=&quot;context&quot;</span><span class="na">name=</span><span class="s">&quot;MASK_REGEX_MATCH_MAX_LENGTH&quot;</span><span class="na">source=</span><span class="s">&quot;log.mask.regex.match.max.length&quot;</span><span class="na">defaultValue=</span><span class="s">&quot;2048&quot;</span><span class="nt">/&gt;</span>
+
+<span class="nt">&lt;conversionRuleconversionWord</span><span class="err">=&quot;hostAddress&quot;</span>
+<span class="na">converterClass=</span><span class="s">&quot;com.zm.arch.logger.component.common.HostAddressConvert&quot;</span><span class="nt">/&gt;</span>
+
+<span class="cm">&lt;!--logbasepath--&gt;</span>
+<span class="nt">&lt;propertyname</span><span class="err">=&quot;LOG_HOME&quot;</span><span class="na">value=</span><span class="s">&quot;/opt/logs/${appId}/applog&quot;</span><span class="nt">/&gt;</span>
+
+<span class="cm">&lt;!--STDOUT输出格式--&gt;</span>
+<span class="nt">&lt;propertyname</span><span class="err">=&quot;MAX_FILE_SIZE&quot;</span>
+<span class="na">value=</span><span class="s">&#39;%d{yyyy-MM-ddHH:mm:ss.SSS}|%X{X-CAT-ROOT-ID:-}|%X{X-CAT-PARENT-ID:-}|%X{X-CAT-ID:-}|${springAppName:-}|[%thread]|%-5level|%logger{50}-%msg%n&#39;</span><span class="nt">/&gt;</span>
+
+<span class="cm">&lt;!--INFO输出格式--&gt;</span>
+<span class="nt">&lt;propertyname</span><span class="err">=&quot;INFO_PATTERN&quot;</span><span class="na">value=</span><span class="s">&#39;{</span>
+<span class="s">&quot;host&quot;:&quot;%hostAddress&quot;,</span>
+<span class="s">&quot;time&quot;:&quot;%d{yyyy-MM-ddHH:mm:ss.SSSZ}&quot;,</span>
+<span class="s">&quot;catRootId&quot;:&quot;%X{X-CAT-ROOT-ID:-}&quot;,</span>
+<span class="s">&quot;catParentId&quot;:&quot;%X{X-CAT-PARENT-ID:-}&quot;,</span>
+<span class="s">&quot;catId&quot;:&quot;%X{X-CAT-ID:-}&quot;,</span>
+<span class="s">&quot;service&quot;:&quot;${springAppName:-}&quot;,</span>
+<span class="s">&quot;appId&quot;:&quot;%X{n-d-service-app-id}&quot;,</span>
+<span class="s">&quot;serviceId&quot;:&quot;%X{n-d-service-id}&quot;,</span>
+<span class="s">&quot;serviceVersion&quot;:&quot;%X{n-d-service-version}&quot;,</span>
+<span class="s">&quot;serviceRegion&quot;:&quot;%X{n-d-service-region}&quot;,</span>
+<span class="s">&quot;serviceEnv&quot;:&quot;%X{n-d-service-env}&quot;,</span>
+<span class="s">&quot;swTraceId&quot;:&quot;%X{trace-id}&quot;,</span>
+<span class="s">&quot;level&quot;:&quot;%level&quot;,</span>
+<span class="s">&quot;class&quot;:&quot;%logger&quot;,</span>
+<span class="s">&quot;message&quot;:&quot;%message%n%exception{10}&quot;</span>
+<span class="s">}&#39;</span><span class="nt">/&gt;</span>
+
+<span class="cm">&lt;!--WARN输出格式--&gt;</span>
+<span class="nt">&lt;propertyname</span><span class="err">=&quot;WARN_PATTERN&quot;</span><span class="na">value=</span><span class="s">&#39;{</span>
+<span class="s">&quot;host&quot;:&quot;%hostAddress&quot;,</span>
+<span class="s">&quot;time&quot;:&quot;%d{yyyy-MM-ddHH:mm:ss.SSSZ}&quot;,</span>
+<span class="s">&quot;catRootId&quot;:&quot;%X{X-CAT-ROOT-ID:-}&quot;,</span>
+<span class="s">&quot;catParentId&quot;:&quot;%X{X-CAT-PARENT-ID:-}&quot;,</span>
+<span class="s">&quot;catId&quot;:&quot;%X{X-CAT-ID:-}&quot;,</span>
+<span class="s">&quot;service&quot;:&quot;${springAppName:-}&quot;,</span>
+<span class="s">&quot;appId&quot;:&quot;%X{n-d-service-app-id}&quot;,</span>
+<span class="s">&quot;serviceId&quot;:&quot;%X{n-d-service-id}&quot;,</span>
+<span class="s">&quot;serviceVersion&quot;:&quot;%X{n-d-service-version}&quot;,</span>
+<span class="s">&quot;serviceRegion&quot;:&quot;%X{n-d-service-region}&quot;,</span>
+<span class="s">&quot;serviceEnv&quot;:&quot;%X{n-d-service-env}&quot;,</span>
+<span class="s">&quot;swTraceId&quot;:&quot;%X{trace-id}&quot;,</span>
+<span class="s">&quot;level&quot;:&quot;%level&quot;,</span>
+<span class="s">&quot;class&quot;:&quot;%logger&quot;,</span>
+<span class="s">&quot;message&quot;:&quot;%message%n%exception{10}&quot;</span>
+<span class="s">}&#39;</span><span class="nt">/&gt;</span>
+
+<span class="cm">&lt;!--ERROR输出格式--&gt;</span>
+<span class="nt">&lt;propertyname</span><span class="err">=&quot;ERROR_PATTERN&quot;</span><span class="na">value=</span><span class="s">&#39;{</span>
+<span class="s">&quot;host&quot;:&quot;%hostAddress&quot;,</span>
+<span class="s">&quot;time&quot;:&quot;%d{yyyy-MM-ddHH:mm:ss.SSSZ}&quot;,</span>
+<span class="s">&quot;catRootId&quot;:&quot;%X{X-CAT-ROOT-ID:-}&quot;,</span>
+<span class="s">&quot;catParentId&quot;:&quot;%X{X-CAT-PARENT-ID:-}&quot;,</span>
+<span class="s">&quot;catId&quot;:&quot;%X{X-CAT-ID:-}&quot;,</span>
+<span class="s">&quot;service&quot;:&quot;${springAppName:-}&quot;,</span>
+<span class="s">&quot;appId&quot;:&quot;%X{n-d-service-app-id}&quot;,</span>
+<span class="s">&quot;serviceId&quot;:&quot;%X{n-d-service-id}&quot;,</span>
+<span class="s">&quot;serviceVersion&quot;:&quot;%X{n-d-service-version}&quot;,</span>
+<span class="s">&quot;serviceRegion&quot;:&quot;%X{n-d-service-region}&quot;,</span>
+<span class="s">&quot;serviceEnv&quot;:&quot;%X{n-d-service-env}&quot;,</span>
+<span class="s">&quot;swTraceId&quot;:&quot;%X{trace-id}&quot;,</span>
+<span class="s">&quot;level&quot;:&quot;%level&quot;,</span>
+<span class="s">&quot;class&quot;:&quot;%logger&quot;,</span>
+<span class="s">&quot;message&quot;:&quot;%message%n%exception{10}&quot;</span>
+<span class="s">}&#39;</span><span class="nt">/&gt;</span>
+
+<span class="nt">&lt;includeresource</span><span class="err">=&quot;logback/error-appender.xml&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;includeresource</span><span class="err">=&quot;logback/info-appender.xml&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;includeresource</span><span class="err">=&quot;logback/warn-appender.xml&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;includeresource</span><span class="err">=&quot;logback/stdout-appender.xml&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;includeresource</span><span class="err">=&quot;logback/api-appender.xml&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;includeresource</span><span class="err">=&quot;logback/client-appender.xml&quot;</span><span class="nt">/&gt;</span>
+
+
+<span class="cm">&lt;!--日志输出级别--&gt;</span>
+<span class="nt">&lt;rootlevel</span><span class="err">=&quot;INFO&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;appender-refref</span><span class="err">=&quot;BASE-FILE-INFO&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;appender-refref</span><span class="err">=&quot;BASE-FILE-WARN&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;appender-refref</span><span class="err">=&quot;BASE-FILE-ERROR&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;ifcondition</span><span class="err">=&#39;isNull(&quot;logSwitch&quot;)&#39;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;then&gt;</span>
+<span class="nt">&lt;appender-refref</span><span class="err">=&quot;STDOUT&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/then&gt;</span>
+<span class="nt">&lt;/if&gt;</span>
+<span class="nt">&lt;/root&gt;</span>
+
+<span class="nt">&lt;/configuration&gt;</span>
+</code></pre></div>
+<p>Jar包里:</p>
+<p>INFO别配置：</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;included&gt;</span>
+
+<span class="cm">&lt;!--rootfile--&gt;</span>
+<span class="nt">&lt;appendername</span><span class="err">=&quot;BASE-FILE-INFO-SYNC&quot;</span><span class="na">class=</span><span class="s">&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;file&gt;</span>${LOG_HOME}/info.log<span class="nt">&lt;/file&gt;</span>
+<span class="nt">&lt;rollingPolicyclass</span><span class="err">=&quot;ch.qos.logback.core.rolling.FixedWindowRollingPolicy&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;fileNamePattern&gt;</span>${LOG_HOME}/info.%i.log<span class="nt">&lt;/fileNamePattern&gt;</span>
+<span class="nt">&lt;minIndex&gt;</span>1<span class="nt">&lt;/minIndex&gt;</span>
+<span class="nt">&lt;maxIndex&gt;</span>${MAX_INDEX}<span class="nt">&lt;/maxIndex&gt;</span>
+<span class="nt">&lt;/rollingPolicy&gt;</span>
+<span class="nt">&lt;triggeringPolicyclass</span><span class="err">=&quot;ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;maxFileSize&gt;</span>${MAX_FILE_SIZE}<span class="nt">&lt;/maxFileSize&gt;</span>
+<span class="nt">&lt;/triggeringPolicy&gt;</span>
+<span class="nt">&lt;encoderclass</span><span class="err">=&quot;net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;jsonGeneratorDecoratorclass</span><span class="err">=&quot;com.zm.arch.logger.component.desensitization.RegexMaskingJsonGeneratorDecorator&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;valueMask&gt;</span>
+<span class="nt">&lt;paths&gt;</span>${MASK_FIELDS}<span class="nt">&lt;/paths&gt;</span>
+<span class="nt">&lt;values&gt;</span>${MASK_REGEX_TYPES}<span class="nt">&lt;/values&gt;</span>
+<span class="nt">&lt;maxDepth&gt;</span>${MASK_REGEX_MATCH_MAX_DEPTH}<span class="nt">&lt;/maxDepth&gt;</span>
+<span class="nt">&lt;maxLength&gt;</span>${MASK_REGEX_MATCH_MAX_LENGTH}<span class="nt">&lt;/maxLength&gt;</span>
+<span class="nt">&lt;/valueMask&gt;</span>
+<span class="nt">&lt;/jsonGeneratorDecorator&gt;</span>
+<span class="nt">&lt;providers&gt;</span>
+<span class="nt">&lt;pattern&gt;</span>
+<span class="nt">&lt;pattern&gt;</span>${INFO_PATTERN}<span class="nt">&lt;/pattern&gt;</span>
+<span class="nt">&lt;/pattern&gt;</span>
+<span class="nt">&lt;/providers&gt;</span>
+<span class="nt">&lt;/encoder&gt;</span>
+<span class="nt">&lt;filterclass</span><span class="err">=&quot;ch.qos.logback.classic.filter.LevelFilter&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;level&gt;</span>INFO<span class="nt">&lt;/level&gt;</span>
+<span class="nt">&lt;onMatch&gt;</span>ACCEPT<span class="nt">&lt;/onMatch&gt;</span>
+<span class="nt">&lt;onMismatch&gt;</span>DENY<span class="nt">&lt;/onMismatch&gt;</span>
+<span class="nt">&lt;/filter&gt;</span>
+<span class="nt">&lt;/appender&gt;</span>
+
+<span class="cm">&lt;!--异步输出--&gt;</span>
+<span class="nt">&lt;appendername</span><span class="err">=&quot;BASE-FILE-INFO&quot;</span><span class="na">class=</span><span class="s">&quot;ch.qos.logback.classic.AsyncAppender&quot;</span><span class="nt">&gt;</span>
+<span class="cm">&lt;!--不丢失日志--&gt;</span>
+<span class="nt">&lt;discardingThreshold&gt;</span>0<span class="nt">&lt;/discardingThreshold&gt;</span>
+<span class="cm">&lt;!--更改默认的队列的深度,该值会影响性能.默认值为256--&gt;</span>
+<span class="nt">&lt;queueSize&gt;</span>256<span class="nt">&lt;/queueSize&gt;</span>
+<span class="cm">&lt;!--添加附加的appender,最多只能添加一个--&gt;</span>
+<span class="nt">&lt;appender-refref</span><span class="err">=&quot;BASE-FILE-INFO-SYNC&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/appender&gt;</span>
+
+<span class="nt">&lt;/included&gt;</span>
+</code></pre></div>
+<p>error级别配置：</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;included&gt;</span>
+
+<span class="nt">&lt;appendername</span><span class="err">=&quot;BASE-FILE-ERROR-SYNC&quot;</span><span class="na">class=</span><span class="s">&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;file&gt;</span>${LOG_HOME}/error.log<span class="nt">&lt;/file&gt;</span>
+<span class="nt">&lt;rollingPolicyclass</span><span class="err">=&quot;ch.qos.logback.core.rolling.FixedWindowRollingPolicy&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;fileNamePattern&gt;</span>${LOG_HOME}/error.%i.log<span class="nt">&lt;/fileNamePattern&gt;</span>
+<span class="nt">&lt;minIndex&gt;</span>1<span class="nt">&lt;/minIndex&gt;</span>
+<span class="nt">&lt;maxIndex&gt;</span>${MAX_INDEX}<span class="nt">&lt;/maxIndex&gt;</span>
+<span class="nt">&lt;/rollingPolicy&gt;</span>
+<span class="nt">&lt;triggeringPolicyclass</span><span class="err">=&quot;ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;maxFileSize&gt;</span>${MAX_FILE_SIZE}<span class="nt">&lt;/maxFileSize&gt;</span>
+<span class="nt">&lt;/triggeringPolicy&gt;</span>
+<span class="nt">&lt;encoderclass</span><span class="err">=&quot;net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;jsonGeneratorDecoratorclass</span><span class="err">=&quot;com.zm.arch.logger.component.desensitization.RegexMaskingJsonGeneratorDecorator&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;valueMask&gt;</span>
+<span class="nt">&lt;paths&gt;</span>${MASK_FIELDS}<span class="nt">&lt;/paths&gt;</span>
+<span class="nt">&lt;values&gt;</span>${MASK_REGEX_TYPES}<span class="nt">&lt;/values&gt;</span>
+<span class="nt">&lt;maxDepth&gt;</span>${MASK_REGEX_MATCH_MAX_DEPTH}<span class="nt">&lt;/maxDepth&gt;</span>
+<span class="nt">&lt;maxLength&gt;</span>${MASK_REGEX_MATCH_MAX_LENGTH}<span class="nt">&lt;/maxLength&gt;</span>
+<span class="nt">&lt;/valueMask&gt;</span>
+<span class="nt">&lt;/jsonGeneratorDecorator&gt;</span>
+<span class="nt">&lt;providers&gt;</span>
+<span class="nt">&lt;pattern&gt;</span>
+<span class="nt">&lt;pattern&gt;</span>${ERROR_PATTERN}<span class="nt">&lt;/pattern&gt;</span>
+<span class="nt">&lt;/pattern&gt;</span>
+<span class="nt">&lt;/providers&gt;</span>
+<span class="nt">&lt;/encoder&gt;</span>
+<span class="nt">&lt;filterclass</span><span class="err">=&quot;ch.qos.logback.classic.filter.LevelFilter&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;level&gt;</span>ERROR<span class="nt">&lt;/level&gt;</span>
+<span class="nt">&lt;onMatch&gt;</span>ACCEPT<span class="nt">&lt;/onMatch&gt;</span>
+<span class="nt">&lt;onMismatch&gt;</span>DENY<span class="nt">&lt;/onMismatch&gt;</span>
+<span class="nt">&lt;/filter&gt;</span>
+<span class="nt">&lt;/appender&gt;</span>
+
+<span class="cm">&lt;!--异步输出--&gt;</span>
+<span class="nt">&lt;appendername</span><span class="err">=&quot;BASE-FILE-ERROR&quot;</span><span class="na">class=</span><span class="s">&quot;ch.qos.logback.classic.AsyncAppender&quot;</span><span class="nt">&gt;</span>
+<span class="cm">&lt;!--不丢失日志--&gt;</span>
+<span class="nt">&lt;discardingThreshold&gt;</span>0<span class="nt">&lt;/discardingThreshold&gt;</span>
+<span class="cm">&lt;!--更改默认的队列的深度,该值会影响性能.默认值为256--&gt;</span>
+<span class="nt">&lt;queueSize&gt;</span>256<span class="nt">&lt;/queueSize&gt;</span>
+<span class="cm">&lt;!--添加附加的appender,最多只能添加一个--&gt;</span>
+<span class="nt">&lt;appender-refref</span><span class="err">=&quot;BASE-FILE-ERROR-SYNC&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/appender&gt;</span>
+
+<span class="nt">&lt;/included&gt;</span>
+</code></pre></div>
+<h1 id="jvm">JVM参数<a class="headerlink" href="#jvm" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="nt">&quot;Xms&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-Xms5734m&quot;</span><span class="p">,</span>
+<span class="nt">&quot;Xmx&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-Xmx5734m&quot;</span><span class="p">,</span>
+<span class="nt">&quot;XX:PermSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-XX:PermSize=256M&quot;</span><span class="p">,</span>
+<span class="nt">&quot;XX:MaxNewSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-XX:MaxNewSize=1536m&quot;</span><span class="p">,</span>
+<span class="nt">&quot;XX:MaxPermSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-XX:MaxPermSize=256m&quot;</span><span class="p">,</span>
+<span class="nt">&quot;Djava.awt.headless&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-Djava.awt.headless=true&quot;</span><span class="p">,</span>
+<span class="nt">&quot;prometheus&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-javaagent:/usr/jmx_prometheus/jmx_prometheus_javaagent-0.11.1.jar=9150:/usr/jmx_prometheus/config.yaml&quot;</span><span class="p">,</span>
+<span class="nt">&quot;skywalking&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-javaagent:/usr/skywalking-apm/skywalking-agent-2.5.0-RELEASE/skywalking-agent.jar&quot;</span><span class="p">,</span>
+<span class="nt">&quot;Dskywalking.agent.service_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-Dskywalking.agent.service_name=client-hub-chat@10118&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/gc01/index.html</p>
+<p>堆参数：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><strong>参数</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">-Xms</td>
+<td>设置JVM启动时堆的初始化大小。</td>
+</tr>
+<tr>
+<td style="text-align: left;">-Xmx</td>
+<td>设置堆最大值。</td>
+</tr>
+<tr>
+<td style="text-align: left;">-Xmn</td>
+<td>设置年轻代的空间大小，剩下的为老年代的空间大小。</td>
+</tr>
+<tr>
+<td style="text-align: left;">-XX:PermGen</td>
+<td>设置永久代内存的初始化大小。</td>
+</tr>
+<tr>
+<td style="text-align: left;">-XX:SurvivorRatio</td>
+<td>提供Eden区和survivor区的空间比例。比如，如果年轻代的大小为10m并且VM开关是-XX:SurvivorRatio=2，那么将会保留5m内存给Eden区和每个Survivor区分配2.5m内存。默认比例是8。</td>
+</tr>
+<tr>
+<td style="text-align: left;">-XX:NewRatio</td>
+<td>提供年老代和年轻代的比例大小。默认值是2。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="_8">前端灰度发布<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h1>
+<p>之前通过灰度机器的方式，需要申请新域名。</p>
+<p>目前网关机器去年9台今年15台，既负责网关转发，也部署前端。所以nginx 要转发本地的前端代码，还要负责转发后端接口。 </p>
+<p>要把前端项目拆出去，不要和网关放在一起，两台就足够了。再加上前端文件CDN 处理。</p>
+<p>原理：</p>
+<p>前端一台机器部署了两套不同版本前端代码，接口请求过来后，去利用apollo的配置，拉到对应应用的配置，lua 脚本，然后根据nginx 规则去找到对应的location 目录。秒级生效</p>
+<p>根据手机系统版本配置</p>
+<p>根据参数如cookie ，query 参数来配置</p>
+<p>根据ip 去匹配，性能会降低，把前端从网关机器拆出去会好点。有的甚至把私域ip 暴露出去</p>
+<p>前后端一起灰度的情况很少，所以只考虑各自单独灰度的</p>
+<h1 id="_9">其他<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h1>
+<p>nacos上服务960多个，实例3000多个。</p>
+<p>Apollo应该是注册在nacos上了，部署了5个实例</p>
+<p><img alt="redis" src="../images/redis.png" /></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["search.highlight", "navigation.instant", "navigation.tracking", "navigation.expand", "toc.integrate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1204 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://spiritn.github.io/note-doc/java/concurrent/%E7%BA%BF%E7%A8%8B/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>java thread - 我的技术文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-parkunpark" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="我的技术文档" class="md-header__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的技术文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              java thread
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的技术文档" class="md-nav__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    我的技术文档
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database/02-mysql%E6%9E%B6%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mySQL架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database/01-基础.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database/03-InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    InnoDB存储引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database/04-%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database/05-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日志系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JAVA8
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring/IocContainer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="java-thread">java thread<a class="headerlink" href="#java-thread" title="Permanent link">&para;</a></h1>
+<p>线程是程序中的执行线程。 Java 虚拟机允许应用程序同时运行多个执行线程。</p>
+<ul>
+<li>
+<p>每个线程都有一个优先级1-10,默认是5，创建一个新线程时默认继承父线程的优先级。</p>
+</li>
+<li>
+<p>守护进程一般用于定时器或清除过时的缓存等任务。注意守护进程不要去访问任何文件，数据库，因为可能在任意时刻中断。 </p>
+</li>
+<li>
+<p>线程在抛出不被检测到的异常时会导致线程终止，可以重写uncaughtException方法来处理没有被捕获的异常，生产中一般只是打印日志：</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Thread</span><span class="w"> </span><span class="nf">newThread</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">Runnable</span><span class="w"> </span><span class="n">runnable</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">daemon</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Thread</span><span class="w"> </span><span class="n">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(</span><span class="n">runnable</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
+<span class="w">    </span><span class="n">thread</span><span class="p">.</span><span class="na">setDaemon</span><span class="p">(</span><span class="n">daemon</span><span class="p">);</span>
+<span class="w">    </span><span class="n">thread</span><span class="p">.</span><span class="na">setUncaughtExceptionHandler</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">UncaughtExceptionHandler</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">uncaughtException</span><span class="p">(</span><span class="n">Thread</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">Throwable</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;Uncaught exception in thread &#39;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="na">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;&#39;:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">thread</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 如果没有重写，会调用的默认的ThreadGroup implements Thread.UncaughtExceptionHandler</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">uncaughtException</span><span class="p">(</span><span class="n">Thread</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">Throwable</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 先调用父类的如果不为空</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">parent</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">parent</span><span class="p">.</span><span class="na">uncaughtException</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Thread</span><span class="p">.</span><span class="na">UncaughtExceptionHandler</span><span class="w"> </span><span class="n">ueh</span><span class="w"> </span><span class="o">=</span>
+<span class="w">            </span><span class="n">Thread</span><span class="p">.</span><span class="na">getDefaultUncaughtExceptionHandler</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ueh</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">ueh</span><span class="p">.</span><span class="na">uncaughtException</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
+<span class="w">         </span><span class="c1">// System.err输出，这个应该经常遇到</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">e</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">ThreadDeath</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;Exception in thread \&quot;&quot;</span>
+<span class="w">                             </span><span class="o">+</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="na">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;\&quot; &quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>有两种方法可以创建线程，extends Thread 和implements Runnable。</p>
+<p>每个线程都有一个用于识别的名称。 多个线程可能具有相同的名称。 如果在创建线程时未指定名称，则会为其生成一个新名称。</p>
+<p><strong>如何终止一个线程？</strong></p>
+<ul>
+<li>正常逻辑执行完了，线程也就结束了</li>
+<li>通过volitail变量作为标志位，外面设置位false，线程会立即结束</li>
+<li>通过interrupt来结束线程。如果线程在休眠状态，会抛出InterruptedException异常，catch里可以结束线程。如果线程正常执行，通过判断interrupted标志位</li>
+</ul>
+<h1 id="_1">线程的阻塞和唤醒<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p><strong>阻塞的本质就是将进程挂起，不再参与CPU调度</strong>，也就是修改进程的状态为非Runnable，这样CPU下次进行调度的时候就不会把它作为可选项了。</p>
+<p>至于操作系统层面的阻塞和挂起，对上层应用来说其实是一样的，都对应着阻塞。</p>
+<h2 id="1-parkunpark">1. park()和unpark()<a class="headerlink" href="#1-parkunpark" title="Permanent link">&para;</a></h2>
+<p>属于java.util.concurrent.locks.LockSupport提供的方法，为lock和其他同步类提供线程阻塞的基础语义，是一个基础方法！！</p>
+<ul>
+<li>调用park()方法，会检查是否有调用者线程是否拥有一个许可permit，如果有消耗掉并立即返回，否则就会阻塞，直到有针对这个线程的<strong>unpark</strong>或者<strong>中断</strong>（这也是和wait方法的不同，不会抛出InterruptedException！），或者虚假调用。</li>
+<li>调用unpark(thread)使给定线程的permit可用（如果它尚不可用）， 如果线程在park上被阻塞，那么它将解除阻塞，另外如果先调用unpark也能保证下一次park调用不会阻塞。和Semaphores不同的是，park的permit最多有一个。</li>
+</ul>
+<p>park和unpark是高效的实现阻塞和唤醒指定线程的方式，替代废弃的Thread.suspend和Thread.resume。park也支持timeout的参数，非常适合忙等待模型，</p>
+<p>park支持参数，while (!canProceed()) { ... LockSupport.park(this); }}</p>
+<p><strong>底层原理</strong>：</p>
+<p>park底层是基于本地方法UNSAFE.park(false, 0L);</p>
+<p>在Linux系统下，park和unpark是用的Posix线程库pthread中的mutex（互斥量），condition（条件变量）来实现的。简单来说，mutex和condition保护了一个叫_counter的信号量。</p>
+<p>_当park时，检查_counter是不是大于0，如果是，则把_counter设置为0，返回。如果等于零，继续执行，阻塞等待；</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">Parker::park</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">isAbsolute</span><span class="p">,</span><span class="w"> </span><span class="n">jlong</span><span class="w"> </span><span class="n">time</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">//判断信号量counter是否大于0，如果大于设为0返回</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Atomic</span><span class="o">::</span><span class="n">xchg</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">_counter</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">//获取当前线程</span>
+<span class="w">  </span><span class="n">Thread</span><span class="o">*</span><span class="w"> </span><span class="kr">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Thread</span><span class="o">::</span><span class="n">current</span><span class="p">();</span>
+<span class="w">  </span><span class="n">assert</span><span class="p">(</span><span class="kr">thread</span><span class="o">-&gt;</span><span class="n">is_Java_thread</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Must be JavaThread&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">JavaThread</span><span class="w"> </span><span class="o">*</span><span class="n">jt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">JavaThread</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="kr">thread</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">//如果中途已经是interrupt了，那么立刻返回，不阻塞</span>
+<span class="w">  </span><span class="c1">// Check interrupt before trying to wait</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Thread</span><span class="o">::</span><span class="n">is_interrupted</span><span class="p">(</span><span class="kr">thread</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">//记录当前绝对时间戳</span>
+<span class="w">  </span><span class="c1">// Next, demultiplex/decode time arguments</span>
+<span class="w">  </span><span class="n">timespec</span><span class="w"> </span><span class="n">absTime</span><span class="p">;</span>
+<span class="w">  </span><span class="c1">//如果park的超时时间已到，则返回</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">time</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">isAbsolute</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// don&#39;t wait at all</span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="c1">//更换时间戳</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">time</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">unpackTime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">absTime</span><span class="p">,</span><span class="w"> </span><span class="n">isAbsolute</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Enter safepoint region</span>
+<span class="w">  </span><span class="c1">// Beware of deadlocks such as 6317397.</span>
+<span class="w">  </span><span class="c1">// The per-thread Parker:: mutex is a classic leaf-lock.</span>
+<span class="w">  </span><span class="c1">// In particular a thread must never block on the Threads_lock while</span>
+<span class="w">  </span><span class="c1">// holding the Parker:: mutex.  If safepoints are pending both the</span>
+<span class="w">  </span><span class="c1">// the ThreadBlockInVM() CTOR and DTOR may grab Threads_lock.</span>
+<span class="w">  </span><span class="c1">//进入安全点，利用该thread构造一个ThreadBlockInVM</span>
+<span class="w">  </span><span class="n">ThreadBlockInVM</span><span class="w"> </span><span class="n">tbivm</span><span class="p">(</span><span class="n">jt</span><span class="p">);</span><span class="w"> </span>
+
+<span class="w">  </span><span class="c1">// Don&#39;t wait if cannot get lock since interference arises from</span>
+<span class="w">  </span><span class="c1">// unblocking.  Also. check interrupt before trying wait</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Thread</span><span class="o">::</span><span class="n">is_interrupted</span><span class="p">(</span><span class="kr">thread</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">pthread_mutex_trylock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span>
+
+<span class="w">  </span><span class="c1">//记录等待状态</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="c1">//中途再次检查许可，有则直接返回不等带。</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_counter</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="c1">// no wait needed</span>
+<span class="w">    </span><span class="n">_counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
+<span class="w">    </span><span class="n">assert</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;invariant&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Paranoia to ensure our locked and lock-free paths interact</span>
+<span class="w">    </span><span class="c1">// correctly with each other and Java-level accesses.</span>
+<span class="w">    </span><span class="n">OrderAccess</span><span class="o">::</span><span class="n">fence</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="n">OSThreadWaitState</span><span class="w"> </span><span class="n">osts</span><span class="p">(</span><span class="kr">thread</span><span class="o">-&gt;</span><span class="n">osthread</span><span class="p">(),</span><span class="w"> </span><span class="nb">false</span><span class="w"> </span><span class="cm">/* not Object.wait() */</span><span class="p">);</span>
+<span class="w">  </span><span class="n">jt</span><span class="o">-&gt;</span><span class="n">set_suspend_equivalent</span><span class="p">();</span>
+<span class="w">  </span><span class="c1">// cleared by handle_special_suspend_equivalent_condition() or java_suspend_self()</span>
+
+
+<span class="w">  </span><span class="n">assert</span><span class="p">(</span><span class="n">_cur_index</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;invariant&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">time</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">_cur_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">REL_INDEX</span><span class="p">;</span><span class="w"> </span><span class="c1">// arbitrary choice when not timed</span>
+<span class="w">    </span><span class="c1">//线程条件等待 线程等待信号触发，如果没有信号触发，无限期等待下去。</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pthread_cond_wait</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">_cond</span><span class="p">[</span><span class="n">_cur_index</span><span class="p">],</span><span class="w"> </span><span class="n">_mutex</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">_cur_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isAbsolute</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">ABS_INDEX</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">REL_INDEX</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//线程等待一定的时间，如果超时或有信号触发，线程唤醒</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">os</span><span class="o">::</span><span class="n">Linux</span><span class="o">::</span><span class="n">safe_cond_timedwait</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">_cond</span><span class="p">[</span><span class="n">_cur_index</span><span class="p">],</span><span class="w"> </span><span class="n">_mutex</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">absTime</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">WorkAroundNPTLTimedWaitHang</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">pthread_cond_destroy</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">_cond</span><span class="p">[</span><span class="n">_cur_index</span><span class="p">])</span><span class="w"> </span><span class="p">;</span>
+<span class="w">      </span><span class="n">pthread_cond_init</span><span class="w">    </span><span class="p">(</span><span class="o">&amp;</span><span class="n">_cond</span><span class="p">[</span><span class="n">_cur_index</span><span class="p">],</span><span class="w"> </span><span class="n">isAbsolute</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">os</span><span class="o">::</span><span class="n">Linux</span><span class="o">::</span><span class="n">condAttr</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">_cur_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">  </span><span class="n">assert_status</span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">EINTR</span><span class="w"> </span><span class="o">||</span>
+<span class="w">                </span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ETIME</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ETIMEDOUT</span><span class="p">,</span>
+<span class="w">                </span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cond_timedwait&quot;</span><span class="p">);</span>
+
+
+<span class="w">  </span><span class="n">_counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">assert_status</span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;invariant&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="c1">// Paranoia to ensure our locked and lock-free paths interact</span>
+<span class="w">  </span><span class="c1">// correctly with each other and Java-level accesses.</span>
+<span class="w">  </span><span class="n">OrderAccess</span><span class="o">::</span><span class="n">fence</span><span class="p">();</span>
+
+
+<span class="w">  </span><span class="c1">// If externally suspended while waiting, re-suspend</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">jt</span><span class="o">-&gt;</span><span class="n">handle_special_suspend_equivalent_condition</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">jt</span><span class="o">-&gt;</span><span class="n">java_suspend_self</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>当unpark时，unpark设置_counter为1，然后解锁 mutex返回。如果counter之前的值是0，则还要调用pthread_cond_signal唤醒在park中等待的线程。</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">Parker::unpark</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">//定义两个变量，staus用于判断是否获取锁</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="c1">//获取锁</span>
+<span class="w">  </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pthread_mutex_lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">//判断是否成功</span>
+<span class="w">  </span><span class="n">assert</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;invariant&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="c1">//存储原先变量_counter</span>
+<span class="w">  </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_counter</span><span class="p">;</span>
+<span class="w">  </span><span class="c1">//把_counter设为1</span>
+<span class="w">  </span><span class="n">_counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// thread might be parked</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_cur_index</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">-1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// thread is definitely parked</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">WorkAroundNPTLTimedWaitHang</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pthread_cond_signal</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">_cond</span><span class="p">[</span><span class="n">_cur_index</span><span class="p">]);</span>
+<span class="w">        </span><span class="n">assert</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;invariant&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
+<span class="w">        </span><span class="n">assert</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;invariant&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
+<span class="w">        </span><span class="n">assert</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;invariant&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pthread_cond_signal</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">_cond</span><span class="p">[</span><span class="n">_cur_index</span><span class="p">]);</span>
+<span class="w">        </span><span class="n">assert</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;invariant&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//释放锁</span>
+<span class="w">      </span><span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
+<span class="w">      </span><span class="n">assert</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;invariant&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">//释放锁</span>
+<span class="w">    </span><span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
+<span class="w">    </span><span class="n">assert</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;invariant&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p>感觉park和unpark是基于操作系统已有函数提供的基础语义，本身和锁没有啥关系，只是用于阻塞和唤醒指定线程，像ReentranLock的底层AQS里面会使用<code>LockSupport.park(this);</code>，lock和wait是更高层次的方法，提供同步代码块级别的阻塞唤醒，保证线程安全。</p>
+</blockquote>
+<h2 id="2-waitnotify">2. wait()和notify()<a class="headerlink" href="#2-waitnotify" title="Permanent link">&para;</a></h2>
+<p>wait()是属于Object里的方法，调用wait方法，会释放此对象上的锁，使的当前线程处于对象的wait_set中。</p>
+<p>线程处于线程调度的目的处于休眠状态，直到它被唤醒：notify恰好是当前线程；notifyAll()；中断；或者经过一定的时间；虚假调用。</p>
+<p>当前线程必须拥有此对象的监视器锁object's monitor，否则会抛出IllegalMonitorStateException，也就是<strong>一定要在synchronized同步代码块内调用wait()</strong>。因为底层是基于锁对象的monitor实现的。</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">native</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">wait</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">timeout</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">wait</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">timeout</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nanos</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nanos</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">nanos</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">999999</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span>
+<span class="w">            </span><span class="s">&quot;nanosecond timeout value out of range&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nanos</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">500000</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">nanos</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">timeout</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">timeout</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">wait</span><span class="p">(</span><span class="n">timeout</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">wait</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">wait</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>wait方法对应的native是JVM_MonitorWait：里面通过ObjectMonitor的<code>void wait(jlong millis, bool interruptable, TRAPS);</code>实现，将当前线程封装成node，放入ObjectWaiter 的_WaitSet 中，并退出monitor<strong>释放锁</strong>，然后调用park()挂起自身。</p>
+<p>notify()方法最终通过ObjectMonitor的notify(TRAPS)实现：如果当前<code>_WaitSet</code>为空，即没有正在等待的线程，直接返回；否则获取<code>_WaitSet</code>列表的第一个ObjectWaitor节点，然后根据不同的调度策略，选择头插入法或者尾插入法放到entryList或者cxq;最后调用unpark()方法唤醒阻塞在条件变量上的线程。</p>
+<p>被唤醒的线程会重新竞争该锁对象，如果调用notify的线程退出同步代码块，wait的线程有可能获取到锁对象。</p>
+<h2 id="3-sleeptimeout">3. sleep(timeout)<a class="headerlink" href="#3-sleeptimeout" title="Permanent link">&para;</a></h2>
+<p>sleep函数让执行线程休眠指定时间，不释放锁资源（直接走的系统库函数，不涉及什么锁），睡眠期间中断会抛出InterruptedException。</p>
+<div class="highlight"><pre><span></span><code><span class="n">JVM_ENTRY</span><span class="p">(</span><span class="kt">void</span><span class="p">,</span><span class="w"> </span><span class="n">JVM_Sleep</span><span class="p">(</span><span class="n">JNIEnv</span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="w"> </span><span class="n">jclass</span><span class="w"> </span><span class="n">threadClass</span><span class="p">,</span><span class="w"> </span><span class="n">jlong</span><span class="w"> </span><span class="n">millis</span><span class="p">))</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">millis</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">THROW_MSG</span><span class="p">(</span><span class="n">vmSymbols</span><span class="o">::</span><span class="n">java_lang_IllegalArgumentException</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;timeout value is negative&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// 如果线程被中断，抛出中断异常</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kr">thread</span><span class="o">-&gt;</span><span class="n">is_interrupted</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">HAS_PENDING_EXCEPTION</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">THROW_MSG</span><span class="p">(</span><span class="n">vmSymbols</span><span class="o">::</span><span class="n">java_lang_InterruptedException</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;sleep interrupted&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Save current thread state and restore it at the end of this block.</span>
+<span class="w">  </span><span class="c1">// And set new thread state to SLEEPING.</span>
+<span class="w">  </span><span class="n">JavaThreadSleepState</span><span class="w"> </span><span class="n">jtss</span><span class="p">(</span><span class="kr">thread</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">HOTSPOT_THREAD_SLEEP_BEGIN</span><span class="p">(</span><span class="n">millis</span><span class="p">);</span>
+<span class="w">  </span><span class="n">EventThreadSleep</span><span class="w"> </span><span class="n">event</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">millis</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 如果sleep(0),效果等同于yield</span>
+<span class="w">    </span><span class="n">os</span><span class="o">::</span><span class="n">naked_yield</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ThreadState</span><span class="w"> </span><span class="n">old_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kr">thread</span><span class="o">-&gt;</span><span class="n">osthread</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_state</span><span class="p">();</span>
+<span class="w">    </span><span class="kr">thread</span><span class="o">-&gt;</span><span class="n">osthread</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set_state</span><span class="p">(</span><span class="n">SLEEPING</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// 如果睡眠期间被中断,抛出异常</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="kr">thread</span><span class="o">-&gt;</span><span class="n">sleep</span><span class="p">(</span><span class="n">millis</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// interrupted</span>
+<span class="w">      </span><span class="c1">// An asynchronous exception (e.g., ThreadDeathException) could have been thrown on</span>
+<span class="w">      </span><span class="c1">// us while we were sleeping. We do not overwrite those.</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">HAS_PENDING_EXCEPTION</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="n">should_commit</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="n">post_thread_sleep_event</span><span class="p">(</span><span class="o">&amp;</span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="n">millis</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// 设置异常结束，正常结束见末尾为0</span>
+<span class="w">        </span><span class="n">HOTSPOT_THREAD_SLEEP_END</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// TODO-FIXME: THROW_MSG returns which means we will not call set_state()</span>
+<span class="w">        </span><span class="c1">// to properly restore the thread state.  That&#39;s likely wrong.</span>
+<span class="w">        </span><span class="n">THROW_MSG</span><span class="p">(</span><span class="n">vmSymbols</span><span class="o">::</span><span class="n">java_lang_InterruptedException</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;sleep interrupted&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// sleep结束，重新设置为旧状态</span>
+<span class="w">    </span><span class="kr">thread</span><span class="o">-&gt;</span><span class="n">osthread</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set_state</span><span class="p">(</span><span class="n">old_state</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="n">should_commit</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">post_thread_sleep_event</span><span class="p">(</span><span class="o">&amp;</span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="n">millis</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">HOTSPOT_THREAD_SLEEP_END</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="n">JVM_END</span>
+</code></pre></div>
+<p>操作系统的sleep(millis)函数是在挂起原语的基础上利用定时器实现的。</p>
+<ul>
+<li>挂起进程（或线程）并修改其运行状态</li>
+<li>用sleep()提供的参数来设置一个定时器。</li>
+<li>当时间结束，定时器会触发，内核收到中断后修改进程（或线程）的运行状态。例如线程会被标志为就绪而进入就绪队列等待调度。</li>
+</ul>
+<h2 id="4-yield">4. Yield()<a class="headerlink" href="#4-yield" title="Permanent link">&para;</a></h2>
+<p>向调度程序提示当前线程愿意放弃其当前对处理器的使用。 调度程序可以随意忽略此提示。</p>
+<div class="highlight"><pre><span></span><code><span class="n">JVM_ENTRY</span><span class="p">(</span><span class="kt">void</span><span class="p">,</span><span class="w"> </span><span class="n">JVM_Yield</span><span class="p">(</span><span class="n">JNIEnv</span><span class="w"> </span><span class="o">*</span><span class="n">env</span><span class="p">,</span><span class="w"> </span><span class="n">jclass</span><span class="w"> </span><span class="n">threadClass</span><span class="p">))</span>
+<span class="w">  </span><span class="c1">// 是否设置了DontYieldALot参数,默认为fasle。为true则直接返回</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">os</span><span class="o">::</span><span class="n">dont_yield</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">  </span><span class="n">HOTSPOT_THREAD_YIELD</span><span class="p">();</span>
+<span class="w">  </span><span class="c1">// 调用系统的naked_yield，它会使调用线程放弃CPU使用权，加入到同等优先级队列的末尾</span>
+<span class="w">  </span><span class="n">os</span><span class="o">::</span><span class="n">naked_yield</span><span class="p">();</span>
+<span class="n">JVM_END</span>
+</code></pre></div>
+<h1 id="_2">线程的中断<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
+<p>要理解，线程任何时候都可能收到中断信号，下面分两个情况来讨论：</p>
+<h2 id="1">1. 线程运行期间收到中断<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>线程在运行期间RUNNABLE,收到中断信号，是可处理可不处理的！如果想处理，有两个方法可以检测到中断信号:</p>
+<ul>
+<li>Thread.interrupted() 静态方法</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">// 测试当前线程是否被中断。 通过该方法清除线程的中断状态</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">interrupted</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">currentThread</span><span class="p">().</span><span class="na">isInterrupted</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>检测是否中断</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">// 实例方法，测试此线程是否已被中断。 线程的中断状态不受此方法的影响</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isInterrupted</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">isInterrupted</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>注意如果线程没有处于运行状态，将不会收到中断信号，上面两个方法返回false。</p>
+<p>两个方法调用的都是系统提供的<code>private native boolean isInterrupted(boolean ClearInterrupted);</code>，区别是一个会清除中断状态，一个不会清除中断状态。</p>
+<p>apollo里有很多这样的例子：while循环的判断条件里，如果收到中断信号，就停止循环执行：</p>
+<div class="highlight"><pre><span></span><code><span class="n">executorService</span><span class="p">.</span><span class="na">submit</span><span class="p">((</span><span class="n">Runnable</span><span class="p">)</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//wait for the request connected to server</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">stop</span><span class="p">.</span><span class="na">get</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">isInterrupted</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">MILLISECONDS</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">//double check</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">stop</span><span class="p">.</span><span class="na">get</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">sendReleaseMessage</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<h2 id="2-interruptedexception">2. 线程休眠或阻塞状态 抛出InterruptedException<a class="headerlink" href="#2-interruptedexception" title="Permanent link">&para;</a></h2>
+<p>当线程处于waiting, sleeping或者其他被占用如等待IO时，如果收到中断信号，会抛出InterruptedException。（可以这样理解，处理中断程序是需要线程处于运行状态获取CPU执行权的，但是现在时休眠或者阻塞状态没有CPU执行权，所以是不可中断的，会抛出异常）</p>
+<p>像wait()，wait(long)，sleep(long)方法，也就是线程在WAITING, TIMED_WAITING,期间都会抛出InterruptedException</p>
+<h1 id="future">Future异步执行结果<a class="headerlink" href="#future" title="Permanent link">&para;</a></h1>
+<h2 id="1-futuretask">1. FutureTask获取异步的执行结果<a class="headerlink" href="#1-futuretask" title="Permanent link">&para;</a></h2>
+<p>Future可以获取异步计算的结果，并提供超时功能。 提供了</p>
+<ul>
+<li>检查计算是否完成isDone()方法：如果任务正常执行结束，抛出异常或者被取消，都会返回true</li>
+<li>等待计算完成get(timeout)：阻塞的进行等待，直到计算完成或者超时。计算完成后可以检索结果</li>
+</ul>
+<p>FutureTask是Future的基本实现，并且实现了Runnable接口，可以直接提交到线程池执行。</p>
+<p><img alt="FutureTask" src="../images/FutureTask.png" /></p>
+<p>我们要知道FutureTask的底层原理，怎么获取异步的执行结果？</p>
+<p>任务的状态有：</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">NEW</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">COMPLETING</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">NORMAL</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">EXCEPTIONAL</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">CANCELLED</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">INTERRUPTING</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">INTERRUPTED</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span>
+</code></pre></div>
+<p>可能的状态转换： CAS进行状态转换</p>
+<ul>
+<li>NEW -&gt; COMPLETING -&gt; NORMAL 正常执行得到结果</li>
+<li>NEW -&gt; COMPLETING -&gt; EXCEPTIONAL  执行过程中发生异常</li>
+<li>NEW -&gt; CANCELED </li>
+<li>NEW -&gt; INTERRUPTING -&gt; INTERRUPTED</li>
+</ul>
+<p>构造函数有：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 通过Callable来创建</span>
+<span class="kd">public</span><span class="w"> </span><span class="nf">FutureTask</span><span class="p">(</span><span class="n">Callable</span><span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callable</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">callable</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NullPointerException</span><span class="p">();</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">callable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">callable</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NEW</span><span class="p">;</span><span class="w">       </span><span class="c1">// ensure visibility of callable</span>
+<span class="p">}</span>
+
+<span class="c1">// 通过Runnable来创建，内部会将Runnable转换为callable。result负责执行过程中接受结果引用</span>
+<span class="kd">public</span><span class="w"> </span><span class="nf">FutureTask</span><span class="p">(</span><span class="n">Runnable</span><span class="w"> </span><span class="n">runnable</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="n">result</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">callable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Executors</span><span class="p">.</span><span class="na">callable</span><span class="p">(</span><span class="n">runnable</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NEW</span><span class="p">;</span><span class="w">       </span><span class="c1">// ensure visibility of callable</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>FutureTask本身是实现了Runnable接口的，先看其run方法</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 任务状态不是new，或者CAS设置为当前线程，因为可能有多个线程竞争</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">state</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">NEW</span><span class="w"> </span><span class="o">||</span>
+<span class="w">        </span><span class="o">!</span><span class="n">RUNNER</span><span class="p">.</span><span class="na">compareAndSet</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">()))</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Callable</span><span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">callable</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">c</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">NEW</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">V</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="w">            </span><span class="kt">boolean</span><span class="w"> </span><span class="n">ran</span><span class="p">;</span>
+<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// 执行callable,</span>
+<span class="w">                </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="na">call</span><span class="p">();</span>
+<span class="w">                </span><span class="c1">// ran是run的过去式，表示是否执行过</span>
+<span class="w">                </span><span class="n">ran</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Throwable</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">                </span><span class="n">ran</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">                </span><span class="c1">// 设置状态为异常，里面也会执行finishCompletion()</span>
+<span class="w">                </span><span class="n">setException</span><span class="p">(</span><span class="n">ex</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="c1">// 如果执行成功，设置结果，里面也会执行finishCompletion()</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ran</span><span class="p">)</span>
+<span class="w">                </span><span class="n">set</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// runner must be non-null until state is settled to</span>
+<span class="w">        </span><span class="c1">// prevent concurrent calls to run()</span>
+<span class="w">        </span><span class="n">runner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// state must be re-read after nulling runner to prevent</span>
+<span class="w">        </span><span class="c1">// leaked interrupts</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">INTERRUPTING</span><span class="p">)</span>
+<span class="w">            </span><span class="n">handlePossibleCancellationInterrupt</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>看一下内部的方法</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 正常线程执行完成会调用这个方法，把执行结果赋值给outcome</span>
+<span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="n">V</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 注意这里是没有锁的，而是采用了cas的方式，只有在更新成功的情况下会进入逻辑</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">UNSAFE</span><span class="p">.</span><span class="na">compareAndSwapInt</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">stateOffset</span><span class="p">,</span><span class="w"> </span><span class="n">NEW</span><span class="p">,</span><span class="w"> </span><span class="n">COMPLETING</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">outcome</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// 赋值完成更新最后的线程状态</span>
+<span class="w">        </span><span class="n">UNSAFE</span><span class="p">.</span><span class="na">putOrderedInt</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">stateOffset</span><span class="p">,</span><span class="w"> </span><span class="n">NORMAL</span><span class="p">);</span><span class="w"> </span><span class="c1">// final state</span>
+<span class="w">        </span><span class="n">finishCompletion</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 等待线程的唤醒以及线程执行完成的收尾工作，如辅助gc的措施</span>
+<span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">finishCompletion</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 假设 state &gt; COMPLETING;</span>
+<span class="w">    </span><span class="c1">// 这里它没有直接获取所有waiter对象的方法，像是list那种，只能循环获取next</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">WaitNode</span><span class="w"> </span><span class="n">q</span><span class="p">;</span><span class="w"> </span><span class="p">(</span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">waiters</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">;)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 尝试将所有waiters全部置为null</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">UNSAFE</span><span class="p">.</span><span class="na">compareAndSwapObject</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">waitersOffset</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">Thread</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="na">thread</span><span class="p">;</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="c1">// 辅助gc将指针对象置空，这样它就没有引用路径了</span>
+<span class="w">                    </span><span class="n">q</span><span class="p">.</span><span class="na">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">                    </span><span class="c1">// 唤醒那些调用get方法 而park阻塞等待的线程</span>
+<span class="w">                    </span><span class="n">LockSupport</span><span class="p">.</span><span class="na">unpark</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="c1">// 查看下个节点是不是还是空的，如果不是空的就继续，为空就退出循环</span>
+<span class="w">                </span><span class="n">WaitNode</span><span class="w"> </span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">next</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span>
+<span class="w">                    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                </span><span class="c1">// 这里同样需要将指针对象置空</span>
+<span class="w">                </span><span class="n">q</span><span class="p">.</span><span class="na">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">                </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">next</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// 这个方法默认是空的，可以在继承类中实现它，然后在线程执行完成之后附加一些方法</span>
+<span class="w">    </span><span class="n">done</span><span class="p">();</span>
+<span class="w">    </span><span class="n">callable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w">        </span><span class="c1">// to reduce footprint</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>我们肯定是要获取异步执行结果的，所以看下get()方法：</p>
+<p>简单总结就是：<strong>如果任务状态没有结束，get线程就通过park()阻塞，并会形成一个简单的waiters等待链表。当任务结束时不管任务状态是异常还是正常结束，都会挨个唤醒等待的线程</strong>。</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="nf">get</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="p">,</span><span class="w"> </span><span class="n">ExecutionException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// 小于COMPLETING只有new状态，进行等待</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">COMPLETING</span><span class="p">)</span>
+<span class="w">        </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">awaitDone</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="n">L</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// 任务结束，会唤醒当前线程，执行下面代码返回结果</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">report</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">//含超时时间的取值过程</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">timeout</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="w"> </span><span class="n">unit</span><span class="p">)</span><span class="w"> </span>
+<span class="w">    </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="p">,</span><span class="w"> </span><span class="n">ExecutionException</span><span class="p">,</span><span class="w"> </span><span class="n">TimeoutException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">unit</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NullPointerException</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//如果是中间状态，就等待task完成，如果超过了指定时间，task仍未完成，则抛出超时异常</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">COMPLETING</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">awaitDone</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="p">.</span><span class="na">toNanos</span><span class="p">(</span><span class="n">timeout</span><span class="p">)))</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">COMPLETING</span><span class="p">)</span><span class="w"> </span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TimeoutException</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">report</span><span class="p">(</span><span class="n">s</span><span class="p">);</span><span class="w"> </span><span class="c1">//返回对应的结果</span>
+<span class="p">}</span>
+
+<span class="c1">// 等待方法有两个入参，一个是否允许等待，一个是等待时间</span>
+<span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">awaitDone</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">timed</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nanos</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">deadline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timed</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">nanoTime</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nanos</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="n">L</span><span class="p">;</span>
+<span class="w">    </span><span class="n">WaitNode</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// 是否入队</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">queued</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// 这里的无限循环是为了啥呢？尽可能的更早获取最新任务状态？</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 0.如果线程被中断，移除当前结点，并抛出异常</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Thread</span><span class="p">.</span><span class="na">interrupted</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">removeWaiter</span><span class="p">(</span><span class="n">q</span><span class="p">);</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">InterruptedException</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// 这里根据任务的状态分几种情况处理</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// 1.如果任务已经结束，把等待的线程置空，然后返回</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">COMPLETING</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">q</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span>
+<span class="w">                </span><span class="n">q</span><span class="p">.</span><span class="na">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// 2.如果任务正在执行中，那很快应该执行完，yield()让出CPU执行权即可</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">COMPLETING</span><span class="p">)</span><span class="w"> </span><span class="c1">// cannot time out yet</span>
+<span class="w">            </span><span class="n">Thread</span><span class="p">.</span><span class="na">yield</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">// 3.代码到这里任务状态应该是NEW吧？初始化一个等待节点，对象中包含下个节点的指针以及当前线程</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">q</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span>
+<span class="w">            </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">WaitNode</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">// 4.第一次肯定queued=false</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">queued</span><span class="p">)</span>
+<span class="w">            </span><span class="c1">// 这把新的WaitNode放在waiters的最前面</span>
+<span class="w">            </span><span class="n">queued</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UNSAFE</span><span class="p">.</span><span class="na">compareAndSwapObject</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">waitersOffset</span><span class="p">,</span>
+<span class="w">                                                 </span><span class="n">q</span><span class="p">.</span><span class="na">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">waiters</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// 5.这里按照入参要求执行park阻塞当前线程</span>
+<span class="w">        </span><span class="c1">// 后续任务结束会在finishCompletion里面调用unpark完成线程的唤醒</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">timed</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">nanos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deadline</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">nanoTime</span><span class="p">();</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nanos</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="n">L</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">removeWaiter</span><span class="p">(</span><span class="n">q</span><span class="p">);</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">state</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">LockSupport</span><span class="p">.</span><span class="na">parkNanos</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">nanos</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// 6. 代码到这里说明，已经添加到waiter里，且还是NEW状态。那么线程阻塞，直到被唤醒</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="n">LockSupport</span><span class="p">.</span><span class="na">park</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="2completablefuture">2.CompletableFuture<a class="headerlink" href="#2completablefuture" title="Permanent link">&para;</a></h2>
+<p>上面的Future虽然可以获取异步执行的结果，但是获取是阻塞式的，又变成了同步，很不方便。</p>
+<p>Java8新增的CompletableFuture类借鉴了Google Guava的ListenableFuture，它包含50多个方法，提供了非常强大的Future扩展功能，可以帮助我们简化异步编程的复杂性，结合函数式编程，通过回调的方式处理计算结果，并且提供了转换和组合CompletableFuture的多种方法，可以满足大部分异步回调场景。</p>
+<p>CompletableFuture默认使用的线程池是forkJoinPool，<code>execAsync(ForkJoinPool.commonPool(), new AsyncSupply&lt;U&gt;(supplier, f));</code></p>
+<p>常见API</p>
+<ul>
+<li>转换 thenApplyAsync</li>
+</ul>
+<p>异步任务f2需要异步任务f1的结果才能执行，但对于我们的主线程来说，无须等到f1返回结果后再调用函数f2，即不会阻塞主流程，而是告诉CompletableFuture当执行完了f1的方法再去执行f2，只有当需要最后的结果时再获取。</p>
+<div class="highlight"><pre><span></span><code><span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">f1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CompletableFuture</span><span class="p">.</span><span class="na">supplyAsync</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">    </span><span class="s">&quot;hello&quot;</span>
+<span class="p">);</span>
+<span class="c1">// f2依赖f1的结果做转换</span>
+<span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">f2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f1</span><span class="p">.</span><span class="na">thenApplyAsync</span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">    </span><span class="n">t</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; world&quot;</span>
+<span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;异步结果:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">f2</span><span class="p">.</span><span class="na">get</span><span class="p">());</span>
+
+<span class="c1">// 输出结果：</span>
+<span class="nl">异步结果</span><span class="p">:</span><span class="n">hello</span><span class="w"> </span><span class="n">world</span>
+</code></pre></div>
+<ul>
+<li>组合：thenComposeAsync</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">f1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CompletableFuture</span><span class="p">.</span><span class="na">supplyAsync</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">    </span><span class="s">&quot;hello&quot;</span>
+<span class="p">);</span>
+<span class="c1">// f2虽然依赖f1的结果，但不会等待f1结果返回，而是再包装成一个future返回</span>
+<span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">f2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f1</span><span class="p">.</span><span class="na">thenComposeAsync</span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">    </span><span class="n">CompletableFuture</span><span class="p">.</span><span class="na">supplyAsync</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">            </span><span class="n">t</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; world&quot;</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">);</span>
+<span class="c1">// 等到真正调用的时候再执行f2里的逻辑</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;异步结果:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">f2</span><span class="p">.</span><span class="na">get</span><span class="p">());</span>
+
+<span class="c1">// 输出结果：</span>
+<span class="nl">异步结果</span><span class="p">:</span><span class="n">hello</span><span class="w"> </span><span class="n">world</span>
+</code></pre></div>
+<ul>
+<li>合并：thenCombineAsync</li>
+</ul>
+<p>两个异步任务f1、f2是并行执行，彼此无先后依赖顺序，thenCombineAsync适合将两个并行执行的异步任务的结果合并返回成一个新的future。</p>
+<div class="highlight"><pre><span></span><code><span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">f1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CompletableFuture</span><span class="p">.</span><span class="na">supplyAsync</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span><span class="w"> </span><span class="c1">// 模拟接口调用耗时1秒</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;hello&quot;</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">f2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CompletableFuture</span><span class="p">.</span><span class="na">supplyAsync</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span><span class="w"> </span><span class="c1">// 模拟接口调用耗时1秒</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot; world&quot;</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">f3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f1</span><span class="p">.</span><span class="na">thenCombineAsync</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="w"> </span><span class="n">t2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">    </span><span class="n">t1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">t2</span>
+<span class="p">);</span>
+<span class="kt">long</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">();</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;异步结果:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">f3</span><span class="p">.</span><span class="na">get</span><span class="p">());</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;耗时:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">time</span><span class="p">));</span>
+
+<span class="c1">// 输出结果：</span>
+<span class="nl">异步结果</span><span class="p">:</span><span class="n">hello</span><span class="w"> </span><span class="n">world</span>
+<span class="nl">耗时</span><span class="p">:</span><span class="mi">1002</span>
+</code></pre></div>
+<p>applyToEitherAsync是哪个future先执行完就返回哪个，另外acceptEither方法和这个类似，但是没有返回值。</p>
+<p>前面讲的compose,combine,either都是处理两个future的方法，如果是超过2个的可以使用allOf或anyOf。allOf方法是当所有的CompletableFuture都执行完后执行计算，无返回值。anyOf方法当任意一个CompletableFuture执行完后就会执行计算。</p>
+<h2 id="cas-compare-and-swapset">CAS （compare and swap/set）<a class="headerlink" href="#cas-compare-and-swapset" title="Permanent link">&para;</a></h2>
+<p>是操作系统提供的功能，比较并交换，它包含三个参数CAS（V，E，N），V表示要修改的变量，E表示预期值（旧的），N表示新值，当且仅当，V变量的值等于E时，才会将V变量的值设置为N，如果不同则什么都不做。</p>
+<p>这是一种乐观锁的实现。</p>
+<p>Atomic是JDK里原子包下的，</p>
+<p>CAS会导致ABA问题，可以通过添加版本号解决，因为每次操作version都只会增加</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["search.highlight", "navigation.instant", "navigation.tracking", "navigation.expand", "toc.integrate", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

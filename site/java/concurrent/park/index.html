@@ -1,0 +1,866 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://spiritn.github.io/note-doc/java/concurrent/park/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Park - 我的技术文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="我的技术文档" class="md-header__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的技术文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Park
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的技术文档" class="md-nav__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    我的技术文档
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database/02-mysql%E6%9E%B6%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mySQL架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database/01-基础.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database/03-InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    InnoDB存储引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database/04-%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database/05-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日志系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JAVA8
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring/IocContainer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Park</h1>
+
+<p>好的，这是一个非常经典的Java并发面试题。我们来详细解析 <code>LockSupport.park()</code> 和 <code>Thread.sleep()</code> 的区别。</p>
+<h2 id="_1">一、核心区别对比<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th><code>LockSupport.park()</code></th>
+<th><code>Thread.sleep()</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>所属包</strong></td>
+<td><code>java.util.concurrent.locks.LockSupport</code></td>
+<td><code>java.lang.Thread</code></td>
+</tr>
+<tr>
+<td><strong>唤醒机制</strong></td>
+<td>需要显式调用 <code>unpark(thread)</code></td>
+<td>超时自动唤醒，可被 <code>interrupt()</code> 中断</td>
+</tr>
+<tr>
+<td><strong>中断响应</strong></td>
+<td>被中断时<strong>立即返回</strong>，不会抛异常</td>
+<td>被中断时<strong>抛出InterruptedException</strong></td>
+</tr>
+<tr>
+<td><strong>锁的状态</strong></td>
+<td><strong>不会释放</strong>已持有的锁</td>
+<td><strong>不会释放</strong>已持有的锁</td>
+</tr>
+<tr>
+<td><strong>时间精度</strong></td>
+<td>无限期或纳秒级超时</td>
+<td>毫秒级（或毫秒+纳秒）</td>
+</tr>
+<tr>
+<td><strong>许可证机制</strong></td>
+<td>有（核心特性）</td>
+<td>无</td>
+</tr>
+<tr>
+<td><strong>面向对象</strong></td>
+<td>以<strong>线程对象</strong>为参数操作其他线程</td>
+<td>静态方法，操作当前线程</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="parkunpark">二、深入理解 park/unpark 机制<a class="headerlink" href="#parkunpark" title="Permanent link">&para;</a></h2>
+<h3 id="permit">许可证（Permit）概念<a class="headerlink" href="#permit" title="Permanent link">&para;</a></h3>
+<p><code>LockSupport</code> 使用了一个隐式的"许可证"机制：
+- 每个线程有一个许可证（最多为1）
+- <code>unpark(thread)</code>：给指定线程发放一个许可证
+- <code>park()</code>：消耗一个许可证，如果已有许可证则立即返回</p>
+<h3 id="_2">代码示例<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.locks.LockSupport</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ParkExample</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;子线程开始执行&quot;</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">// 情况1：先unpark后park - 立即继续执行</span>
+<span class="w">            </span><span class="c1">// LockSupport.unpark(Thread.currentThread());</span>
+
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;子线程即将park&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">LockSupport</span><span class="p">.</span><span class="na">park</span><span class="p">();</span><span class="w"> </span><span class="c1">// 等待许可证</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;子线程被唤醒&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">});</span>
+
+<span class="w">        </span><span class="n">thread</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span><span class="w"> </span><span class="c1">// 主线程等待1秒</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;主线程unpark子线程&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">LockSupport</span><span class="p">.</span><span class="na">unpark</span><span class="p">(</span><span class="n">thread</span><span class="p">);</span><span class="w"> </span><span class="c1">// 发放许可证</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="_3">三、使用场景和优势<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="parkunpark_1">什么时候使用 park/unpark？<a class="headerlink" href="#parkunpark_1" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>构建高级同步工具</strong>
+   <div class="highlight"><pre><span></span><code><span class="c1">// 实现一个简单的锁</span>
+<span class="kd">class</span> <span class="nc">SimpleLock</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">volatile</span><span class="w"> </span><span class="n">Thread</span><span class="w"> </span><span class="n">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">lock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">();</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">compareAndSetOwner</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="n">current</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">LockSupport</span><span class="p">.</span><span class="na">park</span><span class="p">();</span><span class="w"> </span><span class="c1">// 等待锁释放</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">unlock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="n">LockSupport</span><span class="p">.</span><span class="na">unpark</span><span class="p">(</span><span class="n">waitingThread</span><span class="p">);</span><span class="w"> </span><span class="c1">// 唤醒等待线程</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>精确的线程控制</strong>
+   <div class="highlight"><pre><span></span><code><span class="c1">// 线程间精确协调，避免sleep的不确定性</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ThreadCoordination</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Thread</span><span class="w"> </span><span class="n">workerThread</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">startWorker</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">workerThread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">isInterrupted</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// 执行任务...</span>
+<span class="w">                </span><span class="n">LockSupport</span><span class="p">.</span><span class="na">park</span><span class="p">();</span><span class="w"> </span><span class="c1">// 等待下一轮调度</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">        </span><span class="n">workerThread</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">wakeupWorker</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LockSupport</span><span class="p">.</span><span class="na">unpark</span><span class="p">(</span><span class="n">workerThread</span><span class="p">);</span><span class="w"> </span><span class="c1">// 精确唤醒</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>性能敏感的等待</strong>
+   <div class="highlight"><pre><span></span><code><span class="c1">// 在自旋锁中减少空转</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">canProceed</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">spinCount</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">MAX_SPINS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LockSupport</span><span class="p">.</span><span class="na">parkNanos</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span><span class="w"> </span><span class="c1">// 短暂park而不是忙等待</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">spinCount</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+</ol>
+<h3 id="park">park 的优势<a class="headerlink" href="#park" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>更精确的线程控制</strong>：可以精确唤醒特定线程</li>
+<li><strong>不会抛中断异常</strong>：代码更简洁，不需要处理受检异常</li>
+<li><strong>先唤醒后等待仍有效</strong>：<code>unpark</code> 发生在 <code>park</code> 之前时，<code>park</code> 不会阻塞</li>
+<li><strong>高性能</strong>：底层使用操作系统原语，比 <code>Object.wait()</code> 更高效</li>
+</ol>
+<hr />
+<h2 id="_4">四、面试常见问题<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="_5">基础问题<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>park/sleep 的主要区别是什么？</strong></p>
+<ul>
+<li>唤醒机制、中断响应、许可证概念</li>
+</ul>
+</li>
+<li>
+<p><strong>为什么 park 不会释放锁？</strong></p>
+<ul>
+<li>因为 park 是底层的线程阻塞原语，不涉及监视器锁</li>
+</ul>
+</li>
+<li>
+<p><strong>park 和 wait 的区别？</strong></p>
+<ul>
+<li><code>wait()</code> 必须在 synchronized 块中使用，会释放锁</li>
+<li><code>park()</code> 可以在任何地方使用，不会释放锁</li>
+</ul>
+</li>
+</ol>
+<h3 id="_6">进阶问题<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>如果先调用 unpark 再调用 park，会发生什么？</strong></p>
+<ul>
+<li>线程不会阻塞，因为许可证已经被消费</li>
+</ul>
+</li>
+<li>
+<p><strong>park 被中断时会怎样？</strong></p>
+<ul>
+<li>立即返回，但不会抛异常，可以通过 <code>Thread.interrupted()</code> 检查中断状态</li>
+</ul>
+</li>
+<li>
+<p><strong>如何在 park 时设置超时？</strong></p>
+<ul>
+<li>使用 <code>parkNanos(long nanos)</code> 或 <code>parkUntil(long deadline)</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="_7">实战问题<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>下面代码的输出顺序是什么？</strong>
+   <div class="highlight"><pre><span></span><code><span class="n">Thread</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">LockSupport</span><span class="p">.</span><span class="na">unpark</span><span class="p">(</span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">());</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">LockSupport</span><span class="p">.</span><span class="na">park</span><span class="p">();</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;B&quot;</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="n">t</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+</code></pre></div>
+   <strong>答案</strong>：A 和 B 都会输出，因为先 unpark 后 park 不会阻塞</p>
+</li>
+<li>
+<p><strong>设计题：用 park/unpark 实现生产者消费者</strong>
+   <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">ParkBlockingQueue</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Queue</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Thread</span><span class="w"> </span><span class="n">consumerThread</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ParkBlockingQueue</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">consumerThread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">Thread</span><span class="p">.</span><span class="na">interrupted</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">queue</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">LockSupport</span><span class="p">.</span><span class="na">park</span><span class="p">();</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="n">T</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">queue</span><span class="p">.</span><span class="na">poll</span><span class="p">();</span>
+<span class="w">                </span><span class="c1">// 处理item...</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">put</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">item</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">queue</span><span class="p">.</span><span class="na">offer</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+<span class="w">        </span><span class="n">LockSupport</span><span class="p">.</span><span class="na">unpark</span><span class="p">(</span><span class="n">consumerThread</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+</ol>
+<hr />
+<h2 id="_8">五、最佳实践和注意事项<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>总是检查中断状态</strong>
+   <div class="highlight"><pre><span></span><code><span class="n">LockSupport</span><span class="p">.</span><span class="na">park</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Thread</span><span class="p">.</span><span class="na">interrupted</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 处理中断逻辑</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>避免长时间 park</strong>
+   <div class="highlight"><pre><span></span><code><span class="c1">// 使用带超时的版本</span>
+<span class="n">LockSupport</span><span class="p">.</span><span class="na">parkNanos</span><span class="p">(</span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">SECONDS</span><span class="p">.</span><span class="na">toNanos</span><span class="p">(</span><span class="mi">5</span><span class="p">));</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>结合 volatile 变量使用</strong>
+   <div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kd">volatile</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">condition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">waitForCondition</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">condition</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LockSupport</span><span class="p">.</span><span class="na">park</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+</ol>
+<h2 id="_9">总结<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><code>park/unpark</code></strong> 是更底层的线程阻塞机制，用于构建高级同步工具</li>
+<li><strong><code>sleep</code></strong> 是简单的延时工具，适合简单的等待场景</li>
+<li>在需要精确线程控制、构建锁、性能优化时选择 <code>park/unpark</code></li>
+<li>在简单延时场景使用 <code>sleep</code> 更直观</li>
+</ul>
+<p>掌握这些区别对于深入理解Java并发编程和应对技术面试都非常重要！</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["search.highlight", "navigation.instant", "navigation.tracking", "navigation.expand", "toc.integrate", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1396 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://spiritn.github.io/note-doc/java/java8/">
+      
+      
+        <link rel="prev" href="../../database/05-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/">
+      
+      
+        <link rel="next" href="../spring/spring/IocContainer/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>JAVA8 - 我的技术文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lamdba" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="我的技术文档" class="md-header__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的技术文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              JAVA8
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="我的技术文档" class="md-nav__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    我的技术文档
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database/02-mysql%E6%9E%B6%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mySQL架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database/01-基础.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database/03-InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    InnoDB存储引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database/04-%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database/05-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日志系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JAVA8
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JAVA8
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lamdba" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        lamdba表达式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="lamdba表达式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        函数式接口
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方法引用
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        流支持的操作
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        原始类型特化
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        构建流
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        用流收集操作
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="用流收集操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        将流元素归约和汇总为一个值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        分组
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        分区
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        利用Java8新特性重构
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        默认方法
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        optional
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#completablefuture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CompletableFuture：组合式异步编程
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CompletableFuture：组合式异步编程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        提供异步的API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#completablefuture_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CompletableFuture类提供的工厂方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        等待所有异步操作的结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        组合多个异步任务
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#thencombine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        thenCombine方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#localdatetime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        全新的日期时间类 LocalDateTime
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="全新的日期时间类 LocalDateTime">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#localdatelocaltime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LocalDate和LocalTime
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        机器的时间格式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#durationperiod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义Duration或Period
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        操纵日期
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        解析和格式化日期
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        处理不同的时区
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spring/spring/IocContainer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="-">函数式编程-行为参数化<a class="headerlink" href="#-" title="Permanent link">&para;</a></h1>
+<p>Java8新增了将方法和函数，即代码传递给其他方法的能力。从Java8开始，方法和函数也是一等公民了，也可以作为参数传递。Lambda匿名函数，同样体现了更广义的将函数作为值的思想，(int x)-&gt; x+1，表示“调用时给定参数x，就返回x+1值的函数”。</p>
+<div class="highlight"><pre><span></span><code><span class="w">        </span><span class="n">filter</span><span class="p">(</span><span class="n">inventory</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">Apple</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="na">getWeight</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">150</span><span class="w"> </span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>Java 8中加入默认方法主要是为了支持库设计师，让他们能够写出更容易改进的接口。</p>
+</blockquote>
+<p>行为参数化就是可以帮助你处理频繁变更的需求的一种软件开发模式。一言以蔽之，它意味着拿出一个代码块，把它准备好却不去执行它。这个代码块以后可以被你程序的其他部分调用，这意味着你可以推迟这块代码的执行。例如，你可以将代码块作为参数传递给另一个方法，稍后再去执行它。这样，这个方法的行为就基于那块代码被参数化了。</p>
+<p>将方法参数化很啰嗦，可以利用匿名方法，但还是很麻烦。所以引入lambda表达式！</p>
+<div class="highlight"><pre><span></span><code><span class="w">          </span><span class="n">Thread</span><span class="w"> </span><span class="n">t</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Runnable</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">(){</span>
+<span class="w">                  </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Hello world&quot;</span><span class="p">);</span>
+<span class="w">              </span><span class="p">}</span>
+<span class="w">          </span><span class="p">});</span>
+</code></pre></div>
+<p>​        如果用lambda表达式</p>
+<div class="highlight"><pre><span></span><code><span class="w">          </span><span class="n">Thread</span><span class="w"> </span><span class="n">t</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(()</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Hello world&quot;</span><span class="p">));</span>
+</code></pre></div>
+<p>行为参数化，就是一个方法接受多个不同的行为作为参数，并在内部使用它们，完成不同行为的能力。行为参数化可让代码更好地适应不断变化的要求，减轻未来的工作量。 传递代码，就是将新行为作为参数传递给方法。但在Java 8之前这实现起来很啰嗦。为接口声明许多只用一次的实体类而造成的啰嗦代码，在Java 8之前可以用匿名类来减少。</p>
+<h2 id="lamdba">lamdba表达式<a class="headerlink" href="#lamdba" title="Permanent link">&para;</a></h2>
+<p>可以把Lambda表达式理解为简洁地表示<strong>可传递的匿名函数</strong>的一种方式：它没有名称，但它有参数列表、函数主体、返回类型，可能还有一个可以抛出的异常列表。我们说它是函数，是因为Lambda函数不像方法那样属于某个特定的类。但和方法一样，Lambda有参数列表、函数主体、返回类型，还可能有可以抛出的异常列表。❑ 传递——Lambda表达式可以作为参数传递给方法或存储在变量中。</p>
+<p><img alt="image-20230502210421764" src="../images/image-20230502210421764.png" /></p>
+<p>lambda的有效表达式是  <code>(parameters)-&gt; expression</code>或者  <code>(parameters)-&gt; { statements; }</code></p>
+<p><img alt="image-20230502210600919" src="../images/image-20230502210600919.png" /></p>
+<p>在哪些地方可以使用lambda表达式呢？你只可以<strong>在函数式接口上使用lambda表达式</strong>！</p>
+<h3 id="_1">函数式接口<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>函数式接口就是<strong>只定义一个抽象方法的接口</strong>，比如Predicate，Callable，Comparator和Runnable。</p>
+<p>Lambda表达式允许你直接以内联的形式为函数式接口的抽象方法提供实现，并把整个表达式作为函数式接口的实例（具体说来，是函数式接口一个具体实现的实例）。你用匿名内部类也可以完成同样的事情，只不过比较笨拙：需要提供一个实现，然后再直接内联将它实例化。</p>
+<p>@FunctionalInterface表示该接口会设计成一个函数式接口。Java8中常用的函数式接口：</p>
+<p><img alt="image-20230502212916285" src="../images/image-20230502212916285.png" /></p>
+<p>函数式接口的抽象方法的签名可以描述Lambda表达式的签名。函数式接口的抽象方法的签名称为函数描述符。</p>
+<p>有时候显式写出类型更易读，有时候去掉它们更易读。没有什么法则说哪种更好；对于如何让代码更易读，程序员必须做出自己的选择。</p>
+<p><img alt="image-20230503081128772" src="../images/image-20230503081128772.png" /></p>
+<p>Lambda可以没有限制地捕获（也就是在其主体中引用）实例变量和静态变量。但局部变量必须显式声明为final，或事实上是final。换句话说，Lambda表达式只能捕获指派给它们的局部变量一次。为什么局部变量有这些限制？第一，实例变量和局部变量背后的实现有一个关键不同。实例变量都存储在堆中，而局部变量则保存在栈上。如果Lambda可以直接访问局部变量，而且Lambda是在一个线程中使用的，则使用Lambda的线程，可能会在分配该变量的线程将这个变量收回之后，去访问该变量。因此，Java在访问自由局部变量时，实际上是在访问它的副本，而不是访问原始变量。如果局部变量仅仅赋值一次那就没有什么区别了——因此就有了这个限制。</p>
+<h3 id="_2">方法引用<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>如果你希望将一个既有的方法作为参数传递给另一个方法，那么方法引用无疑是我们推荐的方法，利用这种方式我们能写出非常简洁的代码。</p>
+<p>方法引用可以被看作仅仅调用特定方法的Lambda的一种快捷写法。它的基本思想是，如果一个Lambda代表的只是“直接调用这个方法”，那最好还是用名称来调用它，而不是去描述如何调用它。</p>
+<p><img alt="image-20230502213421168" src="../images/image-20230502213421168.png" /></p>
+<h1 id="stream">stream流<a class="headerlink" href="#stream" title="Permanent link">&para;</a></h1>
+<p>Java 8也用Stream API（java.util.stream）解决了这两个问题：集合处理时的套路和晦涩，以及难以利用多核。stream使用声明式的方式，这样更简洁更易读，而且更灵活，也能并行。</p>
+<p>集合讲的是数据，流讲的是计算！集合是外部迭代，流是内部迭代，替你把迭代做了。</p>
+<h2 id="_3">流支持的操作<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>可以连接起来的流操作称为中间操作，关闭流的操作称为终端操作。filter、map和limit可以连成一条流水线，collect触发流水线执行并关闭它。</p>
+<p>流都利用了短路：找到结果就立即停止计算；没有必要处理整个流</p>
+<p>流支持的筛选操作：filter，distinct，limit，skip。</p>
+<p>流支持的映射操作：map，flatmap，</p>
+<p>流支持的查找和匹配：allMatch、anyMatch、noneMatch、findFirst，findAny</p>
+<p>流支持的归约操作：reduce</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numbers</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">reduce</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="p">::</span><span class="n">sum</span><span class="p">);</span>
+<span class="n">Optional</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numbers</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">reduce</span><span class="p">(</span><span class="n">Integer</span><span class="p">::</span><span class="n">max</span><span class="p">);</span>
+<span class="c1">// 集合中的个数</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">d</span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">reduce</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">);</span>
+</code></pre></div>
+<p><img alt="image-20230503220153476" src="../images/image-20230503220153476.png" /></p>
+<h2 id="_4">原始类型特化<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>Java 8引入了三个原始类型特化流接口：IntStream、DoubleStream和LongStream，分别将流中的元素特化为int、long和double，从而避免了暗含的装箱成本。每个接口都带来了进行常用数值归约的新方法，比如对数值流求和的sum，找到最大元素的max。此外还有在必要时再把它们转换回对象流的方法。要记住的是，这些特化的原因并不在于流的复杂性，而是装箱造成的复杂性——即类似int和Integer之间的效率差异。</p>
+<h2 id="_5">构建流<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<ul>
+<li>由值创建流</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="w">        </span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stream</span><span class="o">=</span><span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;Java 8 &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Lambdas &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;In &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Action&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">stream</span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">String</span><span class="p">::</span><span class="n">toUpperCase</span><span class="p">).</span><span class="na">forEach</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">::</span><span class="n">println</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li>由数组创建流</li>
+</ul>
+<p>Arrays.stream()</p>
+<ul>
+<li>
+<p>由文件生成流</p>
+</li>
+<li>
+<p>由函数生成流</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">Stream</span><span class="p">.</span><span class="na">iterate</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">::</span><span class="n">println</span><span class="p">);</span>
+</code></pre></div>
+<p>iterate方法接受一个初始值（在这里是0），还有一个依次应用在每个产生的新值上的Lambda（UnaryOperator<t>类型）。这里，我们使用Lambda n-&gt; n+2，返回的是前一个元素加上2。因此，iterate方法生成了一个所有正偶数的流：流的第一个元素是初始值0。然后加上2来生成新的值2，再加上2来得到新的值4，以此类推。这种iterate操作基本上是顺序的，因为结果取决于前一次应用。请注意，此操作将生成一个无限流——这个流没有结尾，因为值是按需计算的，可以永远计算下去。我们说这个流是无界的</p>
+<div class="highlight"><pre><span></span><code><span class="n">Stream</span><span class="p">.</span><span class="na">generate</span><span class="p">(</span><span class="n">Math</span><span class="p">::</span><span class="n">random</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">limit</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">::</span><span class="n">println</span><span class="p">);</span>
+</code></pre></div>
+<p>generate方法也可让你按需生成一个无限流。但generate不是依次对每个新生成的值应用函数的。它接受一个Supplier<T>类型的Lambda提供新的值。</p>
+<h2 id="_6">用流收集操作<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>collect是一个归约操作，就像reduce一样可以接受各种做法作为参数，将流中的元素累积成一个汇总结果。具体的做法是通过定义新的Collector接口来定义的，因此区分Collection、Collector和collect是很重要的。</p>
+<blockquote>
+<p>收集器可以高效地复合起来，进行多级分组、分区和归约。</p>
+<p>你可以实现Collector接口中定义的方法来开发你自己的收集器。</p>
+</blockquote>
+<p>collect是一个终端操作，它接受的参数是将流中元素累积到汇总结果的各种方式（称为收集器）。Collectors类提供的预定义的收集器主要由三大功能，1. 将流元素归约和汇总为一个值， 2. 元素分组， 3.元素分区</p>
+<h3 id="_7">将流元素归约和汇总为一个值<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>计算最大值和最小值：   </p>
+<div class="highlight"><pre><span></span><code><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Dish</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dishCaloriesComparator</span><span class="o">=</span>
+<span class="w">    </span><span class="n">Comparator</span><span class="p">.</span><span class="na">comparingInt</span><span class="p">(</span><span class="n">Dish</span><span class="p">::</span><span class="n">getCalories</span><span class="p">);</span>
+
+<span class="n">Optional</span><span class="o">&lt;</span><span class="n">Dish</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mostCalorieDish</span><span class="o">=</span>
+<span class="w">    </span><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">maxBy</span><span class="p">(</span><span class="n">dishCaloriesComparator</span><span class="p">));</span>
+</code></pre></div>
+<p>汇总：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 求出每个菜单的总热量</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">totalCalories</span><span class="o">=</span><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">collect</span><span class="p">(</span><span class="n">summingInt</span><span class="p">(</span><span class="n">Dish</span><span class="p">::</span><span class="n">getCalories</span><span class="p">));</span>
+</code></pre></div>
+<p>Collectors.summingLong和Collectors.summingDouble方法的作用完全一样，可以用于求和字段为long或double的情况。但汇总不仅仅是求和；还有Collectors.averagingInt，连同对应的averagingLong和averagingDouble可以计算数值的平均数。</p>
+<p>你已经看到了如何使用收集器来给流中的元素计数，找到这些元素数值属性的最大值和最小值，以及计算其总和和平均值。不过很多时候，你可能想要得到两个或更多这样的结果，而且你希望只需一次操作就可以完成。在这种情况下，你可以使用summarizingInt工厂方法返回的收集器。例如，通过一次summarizing操作你可以就数出菜单中元素的个数，并得到菜肴热量总和、平均值、最大值和最小值：</p>
+<div class="highlight"><pre><span></span><code><span class="n">IntSummaryStatistics</span><span class="w"> </span><span class="n">menuStatistics</span><span class="o">=</span>
+<span class="w">                </span><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">collect</span><span class="p">(</span><span class="n">summarizingInt</span><span class="p">(</span><span class="n">Dish</span><span class="p">::</span><span class="n">getCalories</span><span class="p">));</span>
+<span class="c1">// 会把所有这些信息收集到一个叫作IntSummaryStatistics的类里，它提供了方便的取值（getter）方法来访问结果</span>
+<span class="n">IntSummaryStatistics</span><span class="p">{</span><span class="n">count</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="n">sum</span><span class="o">=</span><span class="mi">4300</span><span class="p">,</span><span class="w"> </span><span class="n">min</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span>
+<span class="w">                              </span><span class="n">average</span><span class="o">=</span><span class="mf">477.777778</span><span class="p">,</span><span class="w"> </span><span class="n">max</span><span class="o">=</span><span class="mi">800</span><span class="p">}</span>
+</code></pre></div>
+<p>连接字符串：</p>
+<p>joining工厂方法返回的收集器会把对流中每一个对象应用toString方法得到的所有字符串连接成一个字符串。</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">shortMenu</span><span class="o">=</span><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">collect</span><span class="p">(</span><span class="n">joining</span><span class="p">());</span>
+<span class="c1">// 用逗号连接</span>
+<span class="n">String</span><span class="w"> </span><span class="n">shortMenu</span><span class="o">=</span><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">map</span><span class="p">(</span><span class="n">Dish</span><span class="p">::</span><span class="n">getName</span><span class="p">).</span><span class="na">collect</span><span class="p">(</span><span class="n">joining</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">));</span>
+</code></pre></div>
+<p>更一般化的归约操作：</p>
+<p>前面讨论的所有收集器，都是一个可以用reducing工厂方法定义的归约过程的特殊情况而已。Collectors.reducing工厂方法是所有这些特殊情况的一般化。</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">totalCalories</span><span class="o">=</span><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">collect</span><span class="p">(</span><span class="n">reducing</span><span class="p">(</span>
+<span class="w">                                            </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">Dish</span><span class="p">::</span><span class="n">getCalories</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">));</span>
+</code></pre></div>
+<ul>
+<li>第一个参数是归约操作的起始值，也是流中没有元素时的返回值，所以很显然对于数值和而言0是一个合适的值。</li>
+<li>
+<p>第二个参数就是一个函数，将菜肴转换成一个表示其所含热量的int。</p>
+</li>
+<li>
+<p>第三个参数是一个BinaryOperator，将两个项目累积成一个同类型的值。这里它就是对两个int求和。</p>
+</li>
+</ul>
+<p>还有一个单参数的reducing：</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">shortMenu</span><span class="o">=</span><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">map</span><span class="p">(</span><span class="n">Dish</span><span class="p">::</span><span class="n">getName</span><span class="p">)</span>
+<span class="w">                              </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="w"> </span><span class="n">reducing</span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="w"> </span><span class="n">s2</span><span class="p">)</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">s1</span><span class="o">+</span><span class="n">s2</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">).</span><span class="na">get</span><span class="p">();</span>
+</code></pre></div>
+<p>函数式编程（特别是Java 8的Collections框架中加入的基于函数式风格原理设计的新API）通常提供了多种方法来执行同一个操作。这个例子还说明，收集器在某种程度上比Stream接口上直接提供的方法用起来更复杂，但好处在于它们能提供更高水平的抽象和概括，也更容易重用和自定义。我们的建议是，尽可能为手头的问题探索不同的解决方案，但在通用的方案里面，始终选择最专门化的一个。无论是从可读性还是性能上看，这一般都是最好的决定</p>
+<p>你可能想知道，Stream接口的collect和reduce方法有何不同？因为两种方法通常会获得相同的结果。</p>
+<p>一个语义问题和一个实际问题。语义问题在于，reduce方法旨在把两个值结合起来生成一个新值，它是一个不可变的归约。与此相反，collect方法的设计就是要改变容器，从而累积要输出的结果。以错误的语义使用reduce方法还会造成一个实际问题：这个归约过程不能并行工作，因为由多个线程并发修改同一个数据结构可能会破坏List本身。在这种情况下，如果你想要线程安全，就需要每次分配一个新的List，而对象分配又会影响性能。这就是collect方法特别适合表达可变容器上的归约的原因，更关键的是它适合并行操作</p>
+<h3 id="_8">分组<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Dish</span><span class="p">.</span><span class="na">Type</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Dish</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">dishesByType</span><span class="o">=</span>
+<span class="w">                                </span><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">collect</span><span class="p">(</span><span class="n">groupingBy</span><span class="p">(</span><span class="n">Dish</span><span class="p">::</span><span class="n">getType</span><span class="p">));</span>
+<span class="c1">// 更复杂的自定义分组</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">CaloricLevel</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">DIET</span><span class="p">,</span><span class="w"> </span><span class="n">NORMAL</span><span class="p">,</span><span class="w"> </span><span class="n">FAT</span><span class="w"> </span><span class="p">}</span>
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">CaloricLevel</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Dish</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">dishesByCaloricLevel</span><span class="o">=</span><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">collect</span><span class="p">(</span>
+<span class="w">    </span><span class="n">groupingBy</span><span class="p">(</span><span class="n">dish</span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dish</span><span class="p">.</span><span class="na">getCalories</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;=</span><span class="mi">400</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">CaloricLevel</span><span class="p">.</span><span class="na">DIET</span><span class="p">;</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dish</span><span class="p">.</span><span class="na">getCalories</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;=</span><span class="mi">700</span><span class="p">)</span><span class="w"> </span><span class="k">return</span>
+<span class="w">            </span><span class="n">CaloricLevel</span><span class="p">.</span><span class="na">NORMAL</span><span class="p">;</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">CaloricLevel</span><span class="p">.</span><span class="na">FAT</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="p">));</span>
+</code></pre></div>
+<p>多级分组：还可以接受collector类型的第二个参数。那么要进行二级分组的话，我们可以把一个内层groupingBy传递给外层groupingBy，并定义一个为流中项目分类的二级标准</p>
+<p><img alt="image-20230503153602619" src="../images/image-20230503153602619.png" /></p>
+<p>进一步说，传递给第一个groupingBy的第二个收集器可以是任何类型，而不一定是另一个groupingBy。例如，要数一数菜单中每类菜有多少个，可以传递counting收集器作为groupingBy收集器的第二个参数：</p>
+<div class="highlight"><pre><span></span><code><span class="n">Map</span><span class="o">&lt;</span><span class="n">Dish</span><span class="p">.</span><span class="na">Type</span><span class="p">,</span><span class="w"> </span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">typesCount</span><span class="o">=</span><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">collect</span><span class="p">(</span>
+<span class="w">                      </span><span class="n">groupingBy</span><span class="p">(</span><span class="n">Dish</span><span class="p">::</span><span class="n">getType</span><span class="p">,</span><span class="w"> </span><span class="n">counting</span><span class="p">()));</span>
+<span class="c1">// 按照类型，每种最大热量的菜肴</span>
+<span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Dish</span><span class="p">.</span><span class="na">Type</span><span class="p">,</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Dish</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">mostCaloricByType</span><span class="o">=</span>
+<span class="w">            </span><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">groupingBy</span><span class="p">(</span><span class="n">Dish</span><span class="p">::</span><span class="n">getType</span><span class="p">,</span>
+<span class="w">                                      </span><span class="n">maxBy</span><span class="p">(</span><span class="n">comparingInt</span><span class="p">(</span><span class="n">Dish</span><span class="p">::</span><span class="n">getCalories</span><span class="p">))));</span>
+
+<span class="w">  </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Dish</span><span class="p">.</span><span class="na">Type</span><span class="p">,</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Dish</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">mostCaloricByType</span><span class="o">=</span>
+<span class="w">                </span><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">groupingBy</span><span class="p">(</span><span class="n">Dish</span><span class="p">::</span><span class="n">getType</span><span class="p">,</span><span class="n">CollectingAndThen</span><span class="p">(</span>
+<span class="w">                                </span><span class="n">maxBy</span><span class="p">(</span><span class="n">comparingInt</span><span class="p">(</span><span class="n">Dish</span><span class="p">::</span><span class="n">getCalories</span><span class="p">)),</span><span class="w"> </span><span class="n">Optional</span><span class="p">::</span><span class="n">get</span><span class="p">)));</span>
+</code></pre></div>
+<p>groupingBy和mapping结合起来：</p>
+<div class="highlight"><pre><span></span><code><span class="n">Map</span><span class="o">&lt;</span><span class="n">Dish</span><span class="p">.</span><span class="na">Type</span><span class="p">,</span><span class="w"> </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">CaloricLevel</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">caloricLevelsByType</span><span class="o">=</span>
+<span class="w">    </span><span class="n">menu</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">collect</span><span class="p">(</span>
+<span class="w">    </span><span class="n">groupingBy</span><span class="p">(</span><span class="n">Dish</span><span class="p">::</span><span class="n">getType</span><span class="p">,</span><span class="w"> </span><span class="n">mapping</span><span class="p">(</span>
+<span class="w">        </span><span class="n">dish</span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dish</span><span class="p">.</span><span class="na">getCalories</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;=</span><span class="mi">400</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">CaloricLevel</span><span class="p">.</span><span class="na">DIET</span><span class="p">;</span>
+<span class="w">                </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dish</span><span class="p">.</span><span class="na">getCalories</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;=</span><span class="mi">700</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">CaloricLevel</span><span class="p">.</span><span class="na">NORMAL</span><span class="p">;</span>
+<span class="w">                </span><span class="k">else</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">CaloricLevel</span><span class="p">.</span><span class="na">FAT</span><span class="p">;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="n">toSet</span><span class="p">()</span><span class="w"> </span><span class="p">)));</span>
+</code></pre></div>
+<h3 id="_9">分区<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>分区是分组的特殊情况：由一个谓词（返回一个布尔值的函数）作为分类函数，它称分区函数。分区函数返回一个布尔值，这意味着得到的分组Map的键类型是Boolean，于是它最多可以分为两组——true是一组，false是一组。</p>
+<p><img alt="image-20230503155012150" src="../images/image-20230503155012150.png" /></p>
+<p>Collectors类的静态工厂方法能够创建的所有收集器，所有这些收集器都是对Collector接口的实现，</p>
+<p><img alt="image-20230503155957717" src="../images/image-20230503155957717.png" /></p>
+<p><img alt="image-20230503160028642" src="../images/image-20230503160028642.png" /></p>
+<h2 id="java8">利用Java8新特性重构<a class="headerlink" href="#java8" title="Permanent link">&para;</a></h2>
+<p>重构代码</p>
+<ul>
+<li>用Lambda表达式取代匿名类，但是要注意二者间语义的微妙差别，比如关键字this，以及变量隐藏。</li>
+<li>用方法引用重构Lambda表达式，方法引用的可读性更好。</li>
+<li>用Stream API重构命令式的数据处理</li>
+</ul>
+<p>优化已有的设计的模式：利用lambda表达式可以简化策略模式，模板模式，观察者模式，工厂模式中一些僵化的代码。</p>
+<p>使用peek可以帮助我们调试stream流代码，能将中间变量的值输出到日志中，是非常有用的工具。</p>
+<p><img alt="image-20230503191938473" src="../images/image-20230503191938473.png" /></p>
+<h1 id="java8_1">Java8其他特性<a class="headerlink" href="#java8_1" title="Permanent link">&para;</a></h1>
+<h2 id="_10">默认方法<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<p>Java8中的接口可以通过添加默认方法和静态方法提供方法的代码实现！默认方法开头是default。</p>
+<p>默认方法的出现是为了方便类库的设计者以向后兼容的方式添加接口定义。具体来说，向接口添加方法是万恶之源，一旦接口发生变化，实现这些接口的类往往也需要更新，提供新添方法的实现才能适配接口的变化。如果你对接口以及它所有相关的实现有完全的控制，这可能不是个大问题。但是这种情况是极少的。这就是引入默认方法的目的：它让类可以自动地继承接口的一个默认实现。</p>
+<p>默认方法还使得你现在可以实现行为的多继承！这是一种让类从多个来源重用代码的能力</p>
+<blockquote>
+<p>静态方法及接口同时定义接口以及工具辅助类（companion class）是Java语言常用的一种模式，工具类定义了与接口实例协作的很多静态方法。比如，Collections就是处理Collection对象的辅助类。由于静态方法可以存在于接口内部，你代码中的这些辅助类就没有了存在的必要，你可以把这些静态方法转移到接口内部。为了保持后向的兼容性，这些类依然会存在于Java应用程序的接口之中。</p>
+</blockquote>
+<p>Java 8中的抽象类和抽象接口那么抽象类和抽象接口之间的区别是什么呢？它们不都能包含抽象方法和包含方法体的实现吗？首先，一个类只能继承一个抽象类，但是一个类可以实现多个接口。其次，一个抽象类可以通过实例变量（字段）保存一个通用状态，而接口是不能有实例变量的。</p>
+<p>如果一个类的默认方法使用相同的函数签名继承自多个接口，解决冲突的机制其实相当简单。你只需要遵守下面这三条准则就能解决所有可能的冲突：</p>
+<ul>
+<li>首先，类或父类中显式声明的方法，其优先级高于所有的默认方法。</li>
+<li>如果用第一条无法判断，方法签名又没有区别，那么选择提供最具体实现的默认方法的接口。</li>
+<li>最后，如果冲突依旧无法解决，你就只能在你的类中覆盖该默认方法，显式地指定在你的类中使用哪一个接口中的方法。</li>
+</ul>
+<h2 id="optional">optional<a class="headerlink" href="#optional" title="Permanent link">&para;</a></h2>
+<p>将类属性或方法参数声明称Optional<T></p>
+<p>Optional是如何丰富你模型的语义？使用Optional而不是null的一个非常重要而又实际的语义区别是，这句声明非常清楚地表明了这里发生变量缺失是允许的。引入Optional类的意图并非要消除每一个null引用。与此相反，它的目标是帮助你更好地设计出普适的API，让程序员看到方法签名，就能了解它是否接受一个Optional的值。这种强制会让你更积极地将变量从Optional中解包出来，直面缺失的变量值。</p>
+<p>使用<strong>map</strong>提取和转换值</p>
+<p>map的作用是，如果Optional包含一个值，那函数就将该值作为参数传递给map，对该值进行转换。如果Optional为空，就什么也不做。</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 提取值</span>
+<span class="n">boardSiteReqOptional</span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">req</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">queryWrapper</span><span class="p">.</span><span class="na">eq</span><span class="p">(</span><span class="n">SiteInfo</span><span class="p">::</span><span class="n">getManagementType</span><span class="p">,</span><span class="w"> </span><span class="n">req</span><span class="p">.</span><span class="na">getManagementType</span><span class="p">()));</span>
+<span class="c1">// 转换值</span>
+<span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="n">optInsurance</span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">Insurance</span><span class="p">::</span><span class="n">getName</span><span class="p">);</span>
+
+<span class="c1">// 组合使用。如果是多层的Optional对象，需要用flatMap链接</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Insurance</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">nullSafeFindCheapestInsurance</span><span class="p">(</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="w"> </span><span class="n">person</span><span class="p">,</span><span class="w">                                                                  </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span><span class="w"> </span><span class="n">car</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">person</span><span class="p">.</span><span class="na">flatMap</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">car</span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">c</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">findCheapestInsurance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">)));</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>定义默认值</p>
+<ul>
+<li>
+<p>get()是这些方法中最简单但又最不安全的方法。如果变量存在，它直接返回封装的变量值，否则就抛出一个NoSuchElementException异常。所以，除非你非常确定Optional变量一定包含值，否则使用这个方法是个相当糟糕的主意</p>
+</li>
+<li>
+<p>orElse(T other)允许你在Optional对象不包含值时提供一个默认值。</p>
+</li>
+<li>
+<p>orElseGet(Supplier&lt;? extends T&gt; other)是orElse方法的延迟调用版，Supplier方法只有在Optional对象不含值时才执行调用</p>
+</li>
+<li>
+<p>orElseThrow(Supplier&lt;? extends X&gt; exceptionSupplier)和get方法非常类似，它们遭遇Optional对象为空时都会抛出一个异常，但是使用orElseThrow你可以定制希望抛出的异常类型。ifPresent(Consumer&lt;? super T&gt;)让你能在变量值存在时执行一个作为参数传入的方法，否则就不进行任何操作</p>
+</li>
+</ul>
+<p>使用filter剔除特定的值</p>
+<p>你经常需要调用某个对象的方法，查看它的某些属性。比如，你可能需要检查保险公司的名称是否为“Cambridge-Insurance”。为了以一种安全的方式进行这些操作，你首先需要确定引用指向的Insurance对象是否为null，之后再调用它的getName方法，如下所示：</p>
+<div class="highlight"><pre><span></span><code><span class="n">Insurance</span><span class="w"> </span><span class="n">insurance</span><span class="o">=</span><span class="p">...;</span>
+<span class="k">if</span><span class="p">(</span><span class="n">insurance</span><span class="w"> </span><span class="o">!=</span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s">&quot;CambridgeInsurance&quot;</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">insurance</span><span class="p">.</span><span class="na">getName</span><span class="p">())){</span>
+<span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;ok&quot;</span><span class="p">);</span>
+<span class="w"> </span><span class="p">}</span>
+
+<span class="c1">// 可以改成</span>
+<span class="n">Optional</span><span class="o">&lt;</span><span class="n">Insurance</span><span class="o">&gt;</span><span class="w"> </span><span class="n">optInsurance</span><span class="o">=</span><span class="p">...;</span>
+<span class="n">optInsurance</span><span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">insurance</span><span class="o">-&gt;</span>
+<span class="w">                </span><span class="s">&quot;CambridgeInsurance&quot;</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">insurance</span><span class="p">.</span><span class="na">getName</span><span class="p">()))</span>
+<span class="w">          </span><span class="p">.</span><span class="na">ifPresent</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;ok&quot;</span><span class="p">));</span>
+</code></pre></div>
+<p>filter方法接受一个谓词作为参数。如果Optional对象的值存在，并且它符合谓词的条件，filter方法就返回其值；否则它就返回一个空的Optional对象。如果你还记得我们可以将Optional看成最多包含一个元素的Stream对象，这个方法的行为就非常清晰了。如果Optional对象为空，它不做任何操作，反之，它就对Optional对象中包含的值施加谓词操作。如果该操作的结果为true，它不做任何改变，直接返回该Optional对象，否则就将该值过滤掉，将Optional的值置空</p>
+<p><img alt="optional" src="../images/optional.png" /></p>
+<p><strong>重构实战</strong></p>
+<p>用Optional封装可能为null的值，如 <code>Optional&lt;Object&gt; value = Optional.ofNullable(map.get("key"));</code></p>
+<p>与Stream对象一样，Optional也提供了类似的基础类型——OptionalInt、OptionalLong以及OptionalDouble,但我们不推荐大家使用基础类型的Optional，因为基础类型的Optional不支持map、flatMap以及filter方法，而这些却是Optional类最有用的方法</p>
+<p>基于旧写法的改造</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">readDuration</span><span class="p">(</span><span class="n">Properties</span><span class="w"> </span><span class="n">props</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">ofNullable</span><span class="p">(</span><span class="n">props</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+<span class="w">              </span><span class="p">.</span><span class="na">flatMap</span><span class="p">(</span><span class="n">OptionalUtility</span><span class="p">::</span><span class="n">stringToInt</span><span class="p">)</span>
+<span class="w">               </span><span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">i</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">              </span><span class="p">.</span><span class="na">orElse</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="completablefuture">CompletableFuture：组合式异步编程<a class="headerlink" href="#completablefuture" title="Permanent link">&para;</a></h2>
+<p>Future接口在Java 5中被引入，设计初衷是对将来某个时刻会发生的结果进行建模。它建模了一种异步计算，返回一个执行运算结果的引用，当运算结束后，这个引用被返回给调用方。在Future中触发那些潜在耗时的操作把调用线程解放出来，让它能继续执行其他有价值的工作，不再需要呆呆等待耗时的操作完成。打个比方，你可以把它想象成这样的场景：你拿了一袋子衣服到你中意的干洗店去洗。干洗店的员工会给你张发票，告诉你什么时候你的衣服会洗好（这就是一个Future事件）。衣服干洗的同时，你可以去做其他的事情。</p>
+<p>但是future接口有很多局限性，比如将两个异步计算合并为一个——这两个异步计算之间相互独立，同时第二个又依赖于第一个的结果。❑ 等待Future集合中的所有任务都完成。❑ 仅等待Future集合中最快结束的任务完成（有可能因为它们试图通过不同的方式计算同一个值），并返回它的结果。 应对Future的完成事件（即当Future的完成事件发生时会收到通知，并能使用Future计算的结果进行下一步的操作，不只是简单地阻塞等待操作的结果）</p>
+<h3 id="api">提供异步的API<a class="headerlink" href="#api" title="Permanent link">&para;</a></h3>
+<p>我们可以创建一个代表异步计算的CompletableFuture对象实例，它在计算完成时会包含计算的结果。接着，你调用fork创建了另一个线程去执行实际的价格计算工作，不等该耗时计算任务结束，直接返回一个Future实例。</p>
+<p><img alt="image-20230507174953827" src="../images/image-20230507174953827.png" /></p>
+<p>如果没有意外，我们目前开发的代码工作得很正常。但是，如果价格计算过程中产生了错误会怎样呢？非常不幸，这种情况下你会得到一个相当糟糕的结果：用于提示错误的异常会被限制在试图计算商品价格的当前线程的范围内，最终会杀死该线程，而这会导致等待get方法返回结果的客户端永久地被阻塞！</p>
+<p>客户端可以使用重载版本的get方法，它使用一个超时参数来避免发生这样的情况。这是一种值得推荐的做法，你应该尽量在你的代码中添加超时判断的逻辑，避免发生类似的问题。使用这种方法至少能防止程序永久地等待下去。不过，也因为如此，你不会有机会发现计算商品价格的线程内到底发生了什么问题才引发了这样的失效。为了让客户端能了解商店无法提供请求商品价格的原因，你需要使用CompletableFuture的completeExceptionally方法将导致CompletableFuture内发生问题的异常抛出</p>
+<p><img alt="image-20230507175426550" src="../images/image-20230507175426550.png" /></p>
+<p>客户端现在会收到一个ExecutionException异常，该异常接收了一个包含失败原因的Exception参数，即价格计算方法最初抛出的异常</p>
+<h3 id="completablefuture_1">CompletableFuture类提供的工厂方法<a class="headerlink" href="#completablefuture_1" title="Permanent link">&para;</a></h3>
+<p>CompletableFuture类自身提供了大量精巧的工厂方法，使用这些方法能更容易地完成整个流程，还不用担心实现的细节。</p>
+<p>比如采用<strong>supplyAsync方法</strong>重写上面的异步方法，supplyAsync方法接受一个生产者（Supplier）作为参数，返回一个CompletableFuture对象，该对象完成异步执行后会读取调用生产者方法的返回值</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="n">Future</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getPriceAsync</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">product</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">CompletableFuture</span><span class="p">.</span><span class="na">supplyAsync</span><span class="p">(()</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">calculatePrice</span><span class="p">(</span><span class="n">product</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>当然我们可以指定自定义配置的线程池</p>
+<h3 id="_11">等待所有异步操作的结果<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>现在假设你分别请求不同的商店获取产品的价格，推荐的做法</p>
+<p><img alt="image-20230507180622683" src="../images/image-20230507180622683.png" /></p>
+<p>注意：这里必须使用两个不同的流，不然因为流的延迟特性，单一流智能以同步顺序的方式执行。</p>
+<p>CompletableFuture类中的join方法和Future接口中的get有相同的含义，并且也声明在Future接口中，它们唯一的不同是join不会抛出任何检测到的异常</p>
+<h3 id="_12">组合多个异步任务<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>thenCompose方法允许你对两个异步操作进行流水线，第一个操作完成时，将其结果作为参数传递给第二个操作。换句话说，你可以创建两个CompletableFutures对象，对第一个CompletableFuture对象调用thenCompose，并向其传递一个函数。当第一个CompletableFuture执行完毕后，它的结果将作为该函数的参数，这个函数的返回值是以第一个CompletableFuture的返回做输入计算出的第二个CompletableFuture对象</p>
+<p><img alt="image-20230507183345777" src="../images/image-20230507183345777.png" /></p>
+<h3 id="thencombine">thenCombine方法<a class="headerlink" href="#thencombine" title="Permanent link">&para;</a></h3>
+<p>如果你需要将两个完全不相干的CompletableFuture对象的结果整合起来，而且你也不希望等到第一个任务完全结束才开始第二项任务。这种情况，你应该使用thenCombine方法，它接收名为BiFunction的第二参数，这个参数定义了当两个CompletableFuture对象完成计算后，结果如何合并。</p>
+<p>比如有一家商店提供的价格是以欧元（EUR）计价的，但是你希望以美元的方式提供给你的客户。你可以用异步的方式向商店查询指定商品的价格，同时从远程的汇率服务那里查到欧元和美元之间的汇率。当二者都结束时，再将这两个结果结合起来，用返回的商品价格乘以当时的汇率，得到以美元计价的商品价格</p>
+<p><img alt="image-20230507183710831" src="../images/image-20230507183710831.png" /></p>
+<p><img alt="image-20230507183842847" src="../images/image-20230507183842847.png" /></p>
+<p>thenAccep接收CompletableFuture执行完毕后的返回值做参数，<code>findPricesStream("myPhone").map(f-&gt; f.thenAccept(System.out::println));</code></p>
+<p>allOf工厂方法接收一个由CompletableFuture构成的数组，对allOf方法返回的CompletableFuture执行join操作是个不错的主意。anyOf可以在由第一个future执行完毕立即返回</p>
+<div class="highlight"><pre><span></span><code><span class="kt">long</span><span class="w"> </span><span class="n">start</span><span class="o">=</span><span class="n">System</span><span class="p">.</span><span class="na">nanoTime</span><span class="p">();</span>
+<span class="n">CompletableFuture</span><span class="o">[]</span><span class="w"> </span><span class="n">futures</span><span class="o">=</span><span class="n">findPricesStream</span><span class="p">(</span><span class="s">&quot;myPhone27S&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// thenAccept 消费</span>
+<span class="w">    </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">f</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="na">thenAccept</span><span class="p">(</span>
+<span class="w">        </span><span class="n">s</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="s">&quot; (done in &quot;</span><span class="o">+</span>
+<span class="w">                               </span><span class="p">((</span><span class="n">System</span><span class="p">.</span><span class="na">nanoTime</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1_000_000</span><span class="p">)</span><span class="o">+</span><span class="s">&quot; msecs)&quot;</span><span class="p">)))</span>
+<span class="w">    </span><span class="p">.</span><span class="na">toArray</span><span class="p">(</span><span class="n">size</span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CompletableFuture</span><span class="o">[</span><span class="n">size</span><span class="o">]</span><span class="p">);</span>
+<span class="n">CompletableFuture</span><span class="p">.</span><span class="na">allOf</span><span class="p">(</span><span class="n">futures</span><span class="p">).</span><span class="na">join</span><span class="p">();</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;All shops have now responded in &quot;</span>
+<span class="w">                   </span><span class="o">+</span><span class="p">((</span><span class="n">System</span><span class="p">.</span><span class="na">nanoTime</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1_000_000</span><span class="p">)</span><span class="o">+</span><span class="s">&quot; msecs&quot;</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="localdatetime">全新的日期时间类 LocalDateTime<a class="headerlink" href="#localdatetime" title="Permanent link">&para;</a></h2>
+<p>旧的Date和Calendar都很难用，而且也是可以变的。DateFormat不是线程安全的。这意味着两个线程如果尝试使用同一个formatter解析日期，你可能会得到无法预期的结果</p>
+<h3 id="localdatelocaltime">LocalDate和LocalTime<a class="headerlink" href="#localdatelocaltime" title="Permanent link">&para;</a></h3>
+<p>LocalDate类的实例是一个不可变对象，它只提供了简单的日期，并不含当天的时间信息。另外，它也不附带任何与时区相关的信息。</p>
+<div class="highlight"><pre><span></span><code><span class="n">LocalDate</span><span class="p">.</span><span class="na">now</span><span class="p">();</span>
+<span class="n">LocalDate</span><span class="w"> </span><span class="n">date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2022</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">23</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">date</span><span class="p">.</span><span class="na">getYear</span><span class="p">();</span>
+<span class="n">DayOfWeek</span><span class="w"> </span><span class="n">dow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">date</span><span class="p">.</span><span class="na">getDayOfWeek</span><span class="p">();</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">date</span><span class="p">.</span><span class="na">lengthOfMonth</span><span class="p">();</span><span class="w"> </span><span class="c1">// 返回31</span>
+</code></pre></div>
+<p>你还可以通过传递一个TemporalField参数给get方法拿到同样的信息。TemporalField是一个接口，它定义了如何访问temporal对象某个字段的值。ChronoField枚举实现了这一接口，所以你可以很方便地使用get方法得到枚举元素的值，如下所示</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">year</span><span class="o">=</span><span class="n">date</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">ChronoField</span><span class="p">.</span><span class="na">YEAR</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">month</span><span class="o">=</span><span class="n">date</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">ChronoField</span><span class="p">.</span><span class="na">MONTH_OF_YEAR</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">day</span><span class="o">=</span><span class="n">date</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">ChronoField</span><span class="p">.</span><span class="na">DAY_OF_MONTH</span><span class="p">);</span>
+</code></pre></div>
+<p>你可以向parse方法传递一个DateTimeFormatter。该类的实例定义了如何格式化一个日期或者时间对象。正如我们之前所介绍的，它是替换老版java.util.DateFormat的推荐替代品</p>
+<div class="highlight"><pre><span></span><code><span class="n">LocalDate</span><span class="w"> </span><span class="n">date</span><span class="o">=</span><span class="n">LocalDate</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="s">&quot;2014-03-18&quot;</span><span class="p">);</span>
+<span class="n">LocalTime</span><span class="w"> </span><span class="n">time</span><span class="o">=</span><span class="n">LocalTime</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="s">&quot;13:45:20&quot;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="_13">机器的时间格式<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>从计算机的角度来看，建模时间最自然的格式是表示一个持续时间段上某个点的单一大整型数。这也是新的java.time.Instant类对时间建模的方式，基本上它是以Unix元年时间（传统的设定为UTC时区1970年1月1日午夜时分）开始所经历的秒数进行计算。</p>
+<p>可以通过向静态工厂方法ofEpochSecond传递一个代表秒数的值创建一个该类的实例。静态工厂方法ofEpochSecond还有一个增强的重载版本，它接收第二个以纳秒为单位的参数值，对传入作为秒数的参数进行调整。重载的版本会调整纳秒参数，确保保存的纳秒分片在0到999999999之间。这意味着下面这些对ofEpochSecond工厂方法的调用会返回几乎同样的Instant对象：</p>
+<p><img alt="image-20230505081023124" src="../images/image-20230505081023124.png" /></p>
+<p>正如你已经在LocalDate及其他为便于阅读而设计的日期-时间类中所看到的那样，Instant类也支持静态工厂方法now，它能够帮你获取当前时刻的时间戳。我们想要特别强调一点，Instant的设计初衷是为了便于机器使用。它包含的是由秒及纳秒所构成的数字。所以，它无法处理那些我们非常容易理解的时间单位</p>
+<h3 id="durationperiod">定义Duration或Period<a class="headerlink" href="#durationperiod" title="Permanent link">&para;</a></h3>
+<p>目前为止，你看到的所有类都实现了Temporal接口，Temporal接口定义了如何读取和操纵为时间建模的对象的值。</p>
+<p>Duration类是表示两个Temporal对象之间的间隔。</p>
+<div class="highlight"><pre><span></span><code><span class="n">Duration</span><span class="w"> </span><span class="n">d1</span><span class="o">=</span><span class="n">Duration</span><span class="p">.</span><span class="na">between</span><span class="p">(</span><span class="n">time1</span><span class="p">,</span><span class="w"> </span><span class="n">time2</span><span class="p">);</span>
+<span class="n">Duration</span><span class="w"> </span><span class="n">d1</span><span class="o">=</span><span class="n">Duration</span><span class="p">.</span><span class="na">between</span><span class="p">(</span><span class="n">dateTime1</span><span class="p">,</span><span class="w"> </span><span class="n">dateTime2</span><span class="p">);</span>
+<span class="n">Duration</span><span class="w"> </span><span class="n">d2</span><span class="o">=</span><span class="n">Duration</span><span class="p">.</span><span class="na">between</span><span class="p">(</span><span class="n">instant1</span><span class="p">,</span><span class="w"> </span><span class="n">instant2</span><span class="p">);</span>
+</code></pre></div>
+<p>如果你需要以年、月或者日的方式对多个时间单位建模，可以使用Period类。使用该类的工厂方法between，你可以使用得到两个LocalDate之间的时长</p>
+<div class="highlight"><pre><span></span><code><span class="n">Period</span><span class="w"> </span><span class="n">tenDays</span><span class="o">=</span><span class="n">Period</span><span class="p">.</span><span class="na">between</span><span class="p">(</span><span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">),</span>
+<span class="w">                              </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">));</span>
+
+<span class="c1">// 不仅可以以两个temporal对象的差值的方式来定义，还能直接创建对应的实例</span>
+<span class="n">Duration</span><span class="w"> </span><span class="n">threeMinutes</span><span class="o">=</span><span class="n">Duration</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">ChronoUnit</span><span class="p">.</span><span class="na">MINUTES</span><span class="p">);</span>
+
+<span class="n">Period</span><span class="w"> </span><span class="n">tenDays</span><span class="o">=</span><span class="n">Period</span><span class="p">.</span><span class="na">ofDays</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="n">Period</span><span class="w"> </span><span class="n">threeWeeks</span><span class="o">=</span><span class="n">Period</span><span class="p">.</span><span class="na">ofWeeks</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="n">Period</span><span class="w"> </span><span class="n">twoYearsSixMonthsOneDay</span><span class="o">=</span><span class="n">Period</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+</code></pre></div>
+<p>Duration类和Period类共享了很多相似的方法</p>
+<p><img alt="image-20230505081727776" src="../images/image-20230505081727776.png" /></p>
+<h3 id="_14">操纵日期<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p>如果你已经有一个LocalDate对象，想要创建它的一个修改版，最直接也最简单的方法是使用withAttribute方法。withAttribute方法会创建对象的一个副本，并按照需要修改它的属性。注意，下面的这段代码中所有的方法都返回一个修改了属性的对象。<strong>它们都不会修改原来的对象！</strong>更确切地说，使用get和with方法，我们可以将Temporal对象值的读取和修改区分开</p>
+<div class="highlight"><pre><span></span><code><span class="n">LocalDate</span><span class="w"> </span><span class="n">date</span><span class="o">=</span><span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">);</span>
+<span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">.</span><span class="na">with</span><span class="p">(</span><span class="n">ChronoField</span><span class="p">.</span><span class="na">MONTH_OF_YEAR</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">);</span>
+<span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">.</span><span class="na">plusYears</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="na">minusDays</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="n">date</span><span class="p">.</span><span class="na">withYear</span><span class="p">(</span><span class="mi">2011</span><span class="p">);</span>
+</code></pre></div>
+<p>像LocalDate、LocalTime、LocalDateTime以及Instant这样表示时间点的日期-时间类提供了大量通用的方法：</p>
+<p><img alt="image-20230505081928011" src="../images/image-20230505081928011.png" /></p>
+<p>使用TemporalAdjuster</p>
+<p>有的时候，你需要进行一些更加复杂的操作，比如，将日期调整到下个周日、下个工作日，或者是本月的最后一天。这时，你可以使用重载版本的with方法，向其传递一个提供了更多定制化选择的TemporalAdjuster对象，更加灵活地处理日期。对于最常见的用例，日期和时间API已经提供了大量预定义的TemporalAdjuster。你可以通过TemporalAdjuster类的静态工厂方法访问它们</p>
+<p><img alt="image-20230505082050838" src="../images/image-20230505082050838.png" /></p>
+<p><img alt="image-20230505082106743" src="../images/image-20230505082106743.png" /></p>
+<p>正如我们看到的，使用TemporalAdjuster我们可以进行更加复杂的日期操作，而且这些方法的名称也非常直观，方法名基本就是问题陈述。此外，即使你没有找到符合你要求的预定义的TemporalAdjuster，创建你自己的TemporalAdjuster也并非难事。实际上，Temporal-Adjuster接口只声明了单一的一个方法（这使得它成为了一个函数式接口</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@FunctionalInterface</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">TemporalAdjuster</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Temporal</span><span class="w"> </span><span class="nf">adjustInto</span><span class="p">(</span><span class="n">Temporal</span><span class="w"> </span><span class="n">temporal</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>自定义一个，返回在一个工作日，如果是周五或周六就延长至下周一。很好用！</p>
+<p><img alt="image-20230505082445398" src="../images/image-20230505082445398.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">TemporalAdjuster</span><span class="w"> </span><span class="n">nextWorkingDay</span><span class="o">=</span><span class="n">TemporalAdjusters</span><span class="p">.</span><span class="na">ofDateAdjuster</span><span class="p">(</span>
+<span class="w">    </span><span class="n">temporal</span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">DayOfWeek</span><span class="w"> </span><span class="n">dow</span><span class="o">=</span>
+<span class="w">            </span><span class="n">DayOfWeek</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">temporal</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">ChronoField</span><span class="p">.</span><span class="na">DAY_OF_WEEK</span><span class="p">));</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">dayToAdd</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dow</span><span class="o">==</span><span class="n">DayOfWeek</span><span class="p">.</span><span class="na">FRIDAY</span><span class="p">)</span><span class="w"> </span><span class="n">dayToAdd</span><span class="o">=</span><span class="mi">3</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dow</span><span class="o">==</span><span class="n">DayOfWeek</span><span class="p">.</span><span class="na">SATURDAY</span><span class="p">)</span><span class="w"> </span><span class="n">dayToAdd</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">temporal</span><span class="p">.</span><span class="na">plus</span><span class="p">(</span><span class="n">dayToAdd</span><span class="p">,</span><span class="w"> </span><span class="n">ChronoUnit</span><span class="p">.</span><span class="na">DAYS</span><span class="p">);</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">.</span><span class="na">with</span><span class="p">(</span><span class="n">nextWorkingDay</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="_15">解析和格式化日期<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<p>新的java.time.format包中，最重要的类是DateTime-Formatter，用来解析和格式化日期。和老的java.util.DateFormat相比较，所有的DateTimeFormatter实例都是线程安全的。所以，你能够以单例模式创建格式器实例，就像DateTimeFormatter所定义的那些常量，并能在多个线程间共享这些实例。</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 解析字符串</span>
+<span class="n">LocalDate</span><span class="w"> </span><span class="n">date1</span><span class="o">=</span><span class="n">LocalDate</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="s">&quot;20140318&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="n">DateTimeFormatter</span><span class="p">.</span><span class="na">BASIC_ISO_DATE</span><span class="p">);</span>
+<span class="n">LocalDate</span><span class="w"> </span><span class="n">date2</span><span class="o">=</span><span class="n">LocalDate</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="s">&quot;2014-03-18&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="n">DateTimeFormatter</span><span class="p">.</span><span class="na">ISO_LOCAL_DATE</span><span class="p">);</span>
+<span class="c1">// 自定义DateTimeFormatter</span>
+<span class="n">DateTimeFormatter</span><span class="w"> </span><span class="n">formatter</span><span class="o">=</span><span class="n">DateTimeFormatter</span><span class="p">.</span><span class="na">ofPattern</span><span class="p">(</span><span class="s">&quot;dd/MM/yyyy&quot;</span><span class="p">);</span>
+<span class="n">LocalDate</span><span class="w"> </span><span class="n">date1</span><span class="o">=</span><span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">);</span>
+<span class="n">String</span><span class="w"> </span><span class="n">formattedDate</span><span class="o">=</span><span class="n">date1</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="n">formatter</span><span class="p">);</span>
+<span class="n">LocalDate</span><span class="w"> </span><span class="n">date2</span><span class="o">=</span><span class="n">LocalDate</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="n">formattedDate</span><span class="p">,</span><span class="w"> </span><span class="n">formatter</span><span class="p">);</span>
+</code></pre></div>
+<p>如果你还需要更加细粒度的控制，DateTimeFormatterBuilder类还提供了更复杂的格式器，你可以选择恰当的方法，一步一步地构造自己的格式器。另外，它还提供了非常强大的解析功能，比如区分大小写的解析、柔性解析（允许解析器使用启发式的机制去解析输入，不精确地匹配指定的模式）、填充，以及在格式器中指定可选节</p>
+<div class="highlight"><pre><span></span><code><span class="n">DateTimeFormatter</span><span class="w"> </span><span class="n">italianFormatter</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">DateTimeFormatterBuilder</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="na">appendText</span><span class="p">(</span><span class="n">ChronoField</span><span class="p">.</span><span class="na">DAY_OF_MONTH</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">appendLiteral</span><span class="p">(</span><span class="s">&quot;. &quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">appendText</span><span class="p">(</span><span class="n">ChronoField</span><span class="p">.</span><span class="na">MONTH_OF_YEAR</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">appendLiteral</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">appendText</span><span class="p">(</span><span class="n">ChronoField</span><span class="p">.</span><span class="na">YEAR</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="na">parseCaseInsensitive</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="na">toFormatter</span><span class="p">(</span><span class="n">Locale</span><span class="p">.</span><span class="na">ITALIAN</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="_16">处理不同的时区<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<p>新的java.time.ZoneId类是老版java.util.TimeZone的替代品。</p>
+<p>每个特定的ZoneId对象都由一个地区ID标识，比如：地区ID都为“{区域}/{城市}”的格式，这些地区集合的设定都由英特网编号分配机构（IANA）的时区数据库提供</p>
+<div class="highlight"><pre><span></span><code><span class="n">ZoneId</span><span class="w"> </span><span class="n">romeZone</span><span class="o">=</span><span class="n">ZoneId</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;Europe/Rome&quot;</span><span class="p">);</span>
+
+<span class="c1">// 将一个老的时区对象转换为ZoneId</span>
+<span class="w"> </span><span class="n">ZoneId</span><span class="w"> </span><span class="n">zoneId</span><span class="o">=</span><span class="n">TimeZone</span><span class="p">.</span><span class="na">getDefault</span><span class="p">().</span><span class="na">toZoneId</span><span class="p">();</span>
+</code></pre></div>
+<p>一旦得到一个ZoneId对象，你就可以将它与LocalDate、LocalDateTime或者是Instant对象整合起来，构造为一个ZonedDateTime实例，它代表了相对于指定时区的时间点</p>
+<div class="highlight"><pre><span></span><code><span class="n">LocalDate</span><span class="w"> </span><span class="n">date</span><span class="o">=</span><span class="n">LocalDate</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span><span class="w"> </span><span class="n">Month</span><span class="p">.</span><span class="na">MARCH</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">);</span>
+<span class="n">ZonedDateTime</span><span class="w"> </span><span class="n">zdt1</span><span class="o">=</span><span class="n">date</span><span class="p">.</span><span class="na">atStartOfDay</span><span class="p">(</span><span class="n">romeZone</span><span class="p">);</span>
+
+<span class="n">LocalDateTime</span><span class="w"> </span><span class="n">dateTime</span><span class="o">=</span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span><span class="w"> </span><span class="n">Month</span><span class="p">.</span><span class="na">MARCH</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">45</span><span class="p">);</span>
+<span class="n">ZonedDateTime</span><span class="w"> </span><span class="n">zdt2</span><span class="o">=</span><span class="n">dateTime</span><span class="p">.</span><span class="na">atZone</span><span class="p">(</span><span class="n">romeZone</span><span class="p">);</span>
+
+<span class="n">Instant</span><span class="w"> </span><span class="n">instant</span><span class="o">=</span><span class="n">Instant</span><span class="p">.</span><span class="na">now</span><span class="p">();</span>
+<span class="n">ZonedDateTime</span><span class="w"> </span><span class="n">zdt3</span><span class="o">=</span><span class="n">instant</span><span class="p">.</span><span class="na">atZone</span><span class="p">(</span><span class="n">romeZone</span><span class="p">);</span>
+
+<span class="c1">// LocalDateTime和Instant相互转换</span>
+<span class="n">LocalDateTime</span><span class="w"> </span><span class="n">dateTime</span><span class="o">=</span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span><span class="w"> </span><span class="n">Month</span><span class="p">.</span><span class="na">MARCH</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">45</span><span class="p">);</span>
+<span class="n">Instant</span><span class="w"> </span><span class="n">instantFromDateTime</span><span class="o">=</span><span class="n">dateTime</span><span class="p">.</span><span class="na">toInstant</span><span class="p">(</span><span class="n">romeZone</span><span class="p">);</span>
+<span class="n">Instant</span><span class="w"> </span><span class="n">instant</span><span class="o">=</span><span class="n">Instant</span><span class="p">.</span><span class="na">now</span><span class="p">();</span>
+<span class="n">LocalDateTime</span><span class="w"> </span><span class="n">timeFromInstant</span><span class="o">=</span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">ofInstant</span><span class="p">(</span><span class="n">instant</span><span class="p">,</span><span class="w"> </span><span class="n">romeZone</span><span class="p">);</span>
+</code></pre></div>
+<p><img alt="image-20230505213838725" src="../images/image-20230505213838725.png" /></p>
+<p>另一种比较通用的表达时区的方式是利用当前时区和UTC/格林尼治的固定偏差。比如，基于这个理论，你可以说“纽约落后于伦敦5小时”。这种情况下，你可以使用ZoneOffset类，它是ZoneId的一个子类，表示的是当前时间和伦敦格林尼治子午线时间的差异：</p>
+<div class="highlight"><pre><span></span><code><span class="n">ZoneOffset</span><span class="w"> </span><span class="n">newYorkOffset</span><span class="o">=</span><span class="n">ZoneOffset</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;-05:00&quot;</span><span class="p">);</span>
+<span class="c1">// ZoneOffset是ZoneId的一个子类</span>
+<span class="n">LocalDateTime</span><span class="w"> </span><span class="n">dateTime</span><span class="o">=</span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span><span class="w"> </span><span class="n">Month</span><span class="p">.</span><span class="na">MARCH</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">45</span><span class="p">);</span>
+<span class="n">OffsetDateTime</span><span class="w"> </span><span class="n">dateTimeInNewYork</span><span class="o">=</span><span class="n">OffsetDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">date</span><span class="p">,</span><span class="w"> </span><span class="n">newYorkOffset</span><span class="p">);</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["search.highlight", "navigation.instant", "navigation.tracking", "navigation.expand", "toc.integrate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

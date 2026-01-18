@@ -1,0 +1,906 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://spiritn.github.io/note-doc/java/spring/spring-boot/UsingSpringBoot/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>UsingSpringBoot - 我的技术文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#11" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="我的技术文档" class="md-header__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的技术文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              UsingSpringBoot
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="我的技术文档" class="md-nav__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    我的技术文档
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/02-mysql%E6%9E%B6%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mySQL架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/01-基础.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/03-InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    InnoDB存储引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/04-%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/05-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日志系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JAVA8
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/IocContainer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p>本节将更详细地介绍如何使用Spring Boot。它涵盖了诸如构建系统、自动配置以及如何运行您的应用程序等主题。我们还介绍了一些Spring Boot的最佳实践。虽然Spring Boot没有什么特别的地方（它只是另一个您可以依赖的库），但有一些建议，如果遵循会让您的开发过程变得更容易。</p>
+<h1 id="1-build-systems">1. Build Systems<a class="headerlink" href="#1-build-systems" title="Permanent link">&para;</a></h1>
+<h2 id="11">1.1 依赖管理<a class="headerlink" href="#11" title="Permanent link">&para;</a></h2>
+<p>Spring Boot 的每个版本都提供了它所支持的依赖项的精选列表。实际上，您不需要在构建配置中为这些依赖项提供版本，因为Spring Boot为您管理这些依赖项。当您升级Spring Boot本身时，这些依赖项也会以一致的方式升级。</p>
+<p>如果您需要的话，您仍然可以指定一个版本并覆盖Spring Boot的建议。</p>
+<p>Spring Boot的每个版本都与Spring框架的基础版本相关联。我们强烈建议您不要指定其版本。</p>
+<p>策划列表包含您可以与Spring Boot一起使用的所有Spring模块，以及第三方库的精简列表。该列表以标准物料清单（spring-boot-dependencies）的形式提供，可用于 Maven 和 Gradle。</p>
+<h2 id="12-maven">1.2 Maven<a class="headerlink" href="#12-maven" title="Permanent link">&para;</a></h2>
+<p>下面的文档详细介绍了如何在Spring Boot中使用Maven </p>
+<p><a href="https://docs.spring.io/spring-boot/docs/2.4.1/maven-plugin/reference/htmlsingle/">https://docs.spring.io/spring-boot/docs/2.4.1/maven-plugin/reference/htmlsingle/</a></p>
+<h2 id="15-starters">1.5 Starters<a class="headerlink" href="#15-starters" title="Permanent link">&para;</a></h2>
+<p>Starters是一组方便的依赖关系描述，您可以将其包含在您的应用程序中。您可以获得一站式服务，以获得您所需要的所有Spring和相关技术，而无需在示例代码中寻找和复制粘贴大量的依赖关系描述符。例如如果您想开始使用Spring和JPA进行数据库访问，请在您的项目中包含spring-boot-starter-data-jpa依赖关系。</p>
+<p>启动程序包含了很多你需要的依赖关系，这些依赖关系可以让项目快速启动和运行，并且有一套一致的、受支持的管理的转义依赖关系。</p>
+<blockquote>
+<p>关于自定义starter的命名</p>
+<p>所有官方启动程序都遵循类似的命名模式；<code>spring-boot-starter-*</code>，其中*是一种特定的应用程序类型。这种命名结构是为了在你需要寻找启动程序时提供帮助。许多IDE中的Maven集成可以让你通过名称搜索依赖关系。</p>
+<p>正如在 "创建您自己的启动器 "一节中所解释的那样，第三方启动器不应该以spring-boot开头，因为它是为官方的Spring Boot构件保留的。相反，第三方启动程序通常以项目名称开头。例如，一个名为<code>thirdpartyproject</code>的第三方启动项目通常会被命名为<code>thirdpartyproject-spring-boot-starter</code>。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter</code></td>
+<td style="text-align: left;">Core starter, including auto-configuration support, logging and YAML</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-activemq</code></td>
+<td style="text-align: left;">Starter for JMS messaging using Apache ActiveMQ</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-amqp</code></td>
+<td style="text-align: left;">Starter for using Spring AMQP and Rabbit MQ</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-aop</code></td>
+<td style="text-align: left;">Starter for aspect-oriented programming with Spring AOP and AspectJ</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-cache</code></td>
+<td style="text-align: left;">Starter for using Spring Framework’s caching support</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-data-cassandra</code></td>
+<td style="text-align: left;">Starter for using Cassandra distributed database and Spring Data Cassandra</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-data-cassandra-reactive</code></td>
+<td style="text-align: left;">Starter for using Cassandra distributed database and Spring Data Cassandra Reactive</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-data-couchbase</code></td>
+<td style="text-align: left;">Starter for using Couchbase document-oriented database and Spring Data Couchbase</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-data-elasticsearch</code></td>
+<td style="text-align: left;">Starter for using Elasticsearch search and analytics engine and Spring Data Elasticsearch</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-data-jdbc</code></td>
+<td style="text-align: left;">Starter for using Spring Data JDBC</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-data-jpa</code></td>
+<td style="text-align: left;">Starter for using Spring Data JPA with Hibernate</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-data-mongodb</code></td>
+<td style="text-align: left;">Starter for using MongoDB document-oriented database and Spring Data MongoDB</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-data-r2dbc</code></td>
+<td style="text-align: left;">Starter for using Spring Data R2DBC</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-data-redis</code></td>
+<td style="text-align: left;">Starter for using Redis key-value data store with Spring Data Redis and the Lettuce client</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-data-redis-reactive</code></td>
+<td style="text-align: left;">Starter for using Redis key-value data store with Spring Data Redis reactive and the Lettuce client</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-data-rest</code></td>
+<td style="text-align: left;">Starter for exposing Spring Data repositories over REST using Spring Data REST</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-data-solr</code></td>
+<td style="text-align: left;">Starter for using the Apache Solr search platform with Spring Data Solr</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-freemarker</code></td>
+<td style="text-align: left;">Starter for building MVC web applications using FreeMarker views</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-jdbc</code></td>
+<td style="text-align: left;">Starter for using JDBC with the HikariCP connection pool</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-json</code></td>
+<td style="text-align: left;">Starter for reading and writing json</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-jta-bitronix</code></td>
+<td style="text-align: left;">Starter for JTA transactions using Bitronix. Deprecated since 2.3.0</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-mail</code></td>
+<td style="text-align: left;">Starter for using Java Mail and Spring Framework’s email sending support</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-mustache</code></td>
+<td style="text-align: left;">Starter for building web applications using Mustache views</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-oauth2-client</code></td>
+<td style="text-align: left;">Starter for using Spring Security’s OAuth2/OpenID Connect client features</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-oauth2-resource-server</code></td>
+<td style="text-align: left;">Starter for using Spring Security’s OAuth2 resource server features</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-quartz</code></td>
+<td style="text-align: left;">Starter for using the Quartz scheduler</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-security</code></td>
+<td style="text-align: left;">Starter for using Spring Security</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-test</code></td>
+<td style="text-align: left;">Starter for testing Spring Boot applications with libraries including JUnit Jupiter, Hamcrest and Mockito</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-thymeleaf</code></td>
+<td style="text-align: left;">Starter for building MVC web applications using Thymeleaf views</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-validation</code></td>
+<td style="text-align: left;">Starter for using Java Bean Validation with Hibernate Validator</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-web</code></td>
+<td style="text-align: left;">Starter for building web, including RESTful, applications using Spring MVC. Uses Tomcat as the default embedded container</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-webflux</code></td>
+<td style="text-align: left;">Starter for building WebFlux applications using Spring Framework’s Reactive Web support</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-websocket</code></td>
+<td style="text-align: left;">Starter for building WebSocket applications using Spring Framework’s WebSocket support</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-jetty</code></td>
+<td style="text-align: left;">Starter for using Jetty as the embedded servlet container. An alternative to <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#spring-boot-starter-tomcat"><code>spring-boot-starter-tomcat</code></a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-log4j2</code></td>
+<td style="text-align: left;">Starter for using Log4j2 for logging. An alternative to <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#spring-boot-starter-logging"><code>spring-boot-starter-logging</code></a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-logging</code></td>
+<td style="text-align: left;">Starter for logging using Logback. Default logging starter</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-reactor-netty</code></td>
+<td style="text-align: left;">Starter for using Reactor Netty as the embedded reactive HTTP server.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-tomcat</code></td>
+<td style="text-align: left;">Starter for using Tomcat as the embedded servlet container. Default servlet container starter used by <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#spring-boot-starter-web"><code>spring-boot-starter-web</code></a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>spring-boot-starter-undertow</code></td>
+<td style="text-align: left;">Starter for using Undertow as the embedded servlet container. An alternative to <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#spring-boot-starter-tomcat"><code>spring-boot-starter-tomcat</code></a></td>
+</tr>
+</tbody>
+</table>
+<h1 id="2">2. 组织你的代码<a class="headerlink" href="#2" title="Permanent link">&para;</a></h1>
+<p>spring不要求任何特殊的代码目录结构，但是有一些最佳实践。</p>
+<h2 id="21-default-package">2.1 default package<a class="headerlink" href="#21-default-package" title="Permanent link">&para;</a></h2>
+<p>当一个类没有包含包声明时，它被认为是在 "默认包 "中。一般不鼓励使用 "默认包"，应该避免使用。对于使用@ComponentScan、@ConfigurationPropertiesScan、@EntityScan或@SpringBootApplication注解的Spring Boot应用程序来说，它可能会引起特别的问题，因为每个jar中的每个类都会被读取。</p>
+<h2 id="22-main">2.2 定位应用main主类<a class="headerlink" href="#22-main" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>We generally recommend that you locate your main application class in a root package above other classes. The <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-using-springbootapplication-annotation"><code>@SpringBootApplication</code> annotation</a> is often placed on your main class, and it implicitly defines a base “search package” for certain items. For example, if you are writing a JPA application, the package of the <code>@SpringBootApplication</code> annotated class is used to search for <code>@Entity</code> items. Using a root package also allows component scan to apply only on your project.</p>
+<p>If you don’t want to use <code>@SpringBootApplication</code>, the <code>@EnableAutoConfiguration</code> and <code>@ComponentScan</code> annotations that it imports defines that behaviour so you can also use those instead.</p>
+</blockquote>
+<p>我们一般建议你将主应用类放在一个高于其他类的root包中。@SpringBootApplication注解通常放在你的主类上，它隐含地定义了某些项的基础 "搜索包"。例如，如果你正在编写一个JPA应用程序，@SpringBootApplication注解类的包就会被用来搜索@Entity项。使用根包还可以让组件扫描只应用在你的项目上。</p>
+<p>如果你不想使用<code>@SpringBootApplication</code>，它导入的<code>@EnableAutoConfiguration</code>和<code>@ComponentScan</code>注解定义了这种行为，<strong>所以你也可以使用这些来代替</strong>。</p>
+<p>下面是一个典型的代码布局：</p>
+<div class="highlight"><pre><span></span><code>com
+ +- example
+     +- myapplication
+         +- Application.java
+         |
+         +- customer
+         |   +- Customer.java
+         |   +- CustomerController.java
+         |   +- CustomerService.java
+         |   +- CustomerRepository.java
+         |
+         +- order
+             +- Order.java
+             +- OrderController.java
+             +- OrderService.java
+             +- OrderRepository.java
+</code></pre></div>
+<h1 id="3">3. 配置类<a class="headerlink" href="#3" title="Permanent link">&para;</a></h1>
+<p>Spring Boot倾向于使用基于Java的配置。尽管可以使用SpringApplication与XML源，但我们通常建议你的主要源是一个@Configuration类。通常，定义主方法的类是一个很好的候选人，作为主要的@Configuration。</p>
+<p>互联网上已经发布了许多使用XML配置的Spring配置示例。如果可能的话，总是尽量使用等价的基于Java的配置。搜索Enable*注解可以是一个很好的起点。</p>
+<h2 id="31">3.1 导入额外配置类<a class="headerlink" href="#31" title="Permanent link">&para;</a></h2>
+<p>你不需要把所有的@Configuration放到一个类中。可以使用@Import注解来导入额外的配置类。另外，您也可以使用@ComponentScan来自动拾取所有Spring组件，包括@Configuration类。</p>
+<h1 id="32-xml">3.2 导入XML配置<a class="headerlink" href="#32-xml" title="Permanent link">&para;</a></h1>
+<p>如果你必须使用基于XML的配置，我们建议你还是从一个@Configuration类开始。然后你可以使用@ImportResource注解来加载XML配置文件。</p>
+<h1 id="4">4. 自动配置<a class="headerlink" href="#4" title="Permanent link">&para;</a></h1>
+<p>Spring Boot 自动配置试图根据您添加的 jar 依赖关系自动配置您的 Spring 应用程序。例如，如果HSQLDB在您的classpath上，并且您没有手动配置任何数据库连接Bean，那么Spring Boot会自动配置内存数据库。</p>
+<p>您需要通过向您的一个@Configuration类添加@EnableAutoConfiguration或@SpringBootApplication注解来选择加入自动配置。</p>
+<p>您应该只添加一个@SpringBootApplication或@EnableAutoConfiguration注解。我们通常建议您只将其中一个或另一个添加到您的主 @Configuration 类中。</p>
+<h2 id="41">4.1 替换自动配置<a class="headerlink" href="#41" title="Permanent link">&para;</a></h2>
+<p>自动配置是非侵入性的。在任何时候，你都可以开始定义自己的配置来替换自动配置的特定部分。例如，如果你添加了自己的DataSource bean，默认的嵌入式数据库支持就会退缩。</p>
+<p>如果你需要找出当前正在应用的自动配置，以及为什么，请使用<code>--debug</code>开关启动你的应用程序。这样做可以为选定的核心记录器启用调试日志，并将条件报告记录到控制台。</p>
+<h2 id="42">4.2 禁用自动配置<a class="headerlink" href="#42" title="Permanent link">&para;</a></h2>
+<p>如果你发现你不想要的特定自动配置类被应用，你可以使用@SpringBootApplication的exclude属性来禁用它们，如下例所示:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.autoconfigure.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.autoconfigure.jdbc.*</span><span class="p">;</span>
+
+<span class="nd">@SpringBootApplication</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">{</span><span class="n">DataSourceAutoConfiguration</span><span class="p">.</span><span class="na">class</span><span class="p">})</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyApplication</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>如果该类不在classpath上，您可以使用注解的<code>excludeName</code>属性并指定完全限定的名称。如果您喜欢使用 <code>@EnableAutoConfiguration</code> 而不是 <code>@SpringBootApplication</code>，也可以使用 <code>exclude</code> 和 <code>excludeName</code>。最后，您还可以通过使用<code>spring.autoconfigure.exclude</code>属性来控制要排除的自动配置类的列表。</p>
+<h1 id="5-spring-bean">5. spring Bean和依赖注入<a class="headerlink" href="#5-spring-bean" title="Permanent link">&para;</a></h1>
+<p>您可以自由使用任何标准的Spring框架技术来定义您的Bean及其注入的依赖关系。我们经常发现，使用@ComponentScan（查找您的bean）和使用@Autowired（进行构造函数注入）效果不错。</p>
+<p>如果您按照上面的建议来组织您的代码（将您的应用程序类定位在一个 root package中），您可以使用没有任何参数的<code>@ComponentScan</code>。您的所有应用组件（@Component、@Service、@Repository、@Controller等）都会自动注册为Spring Beans。</p>
+<p>下面的例子展示了一个@Service Bean，它使用构造函数注入来获取一个所需的RiskAssessor Bean。</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Service</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DatabaseAccountService</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">AccountService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">RiskAssessor</span><span class="w"> </span><span class="n">riskAssessor</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">DatabaseAccountService</span><span class="p">(</span><span class="n">RiskAssessor</span><span class="w"> </span><span class="n">riskAssessor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">riskAssessor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">riskAssessor</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// ...</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>如果Bean只有一个构造器，可以省略<code>@Autowired</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Service</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DatabaseAccountService</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">AccountService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">RiskAssessor</span><span class="w"> </span><span class="n">riskAssessor</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">DatabaseAccountService</span><span class="p">(</span><span class="n">RiskAssessor</span><span class="w"> </span><span class="n">riskAssessor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">riskAssessor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">riskAssessor</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>请注意，使用构造函数注入时让 riskAssessor 字段被标记为 <code>final</code>，表明它不能被随后更改。</p>
+<h1 id="6-springbootapplication">6. 使用@SpringBootApplication<a class="headerlink" href="#6-springbootapplication" title="Permanent link">&para;</a></h1>
+<p>@SpringBootApplication有三个特性：</p>
+<ul>
+<li><code>@EnableAutoConfiguration</code>: 开启自动配置 <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-auto-configuration">Spring Boot’s auto-configuration mechanism</a></li>
+<li><code>@ComponentScan</code>: enable <code>@Component</code> scan on the package where the application is located </li>
+<li><code>@Configuration</code>: 允许注册其他的Bean</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nd">@SpringBootApplication</span><span class="w"> </span><span class="c1">// same as @Configuration @EnableAutoConfiguration @ComponentScan</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Application</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">SpringApplication</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="n">Application</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="8-developer-tools">8. Developer Tools<a class="headerlink" href="#8-developer-tools" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;dependencies&gt;</span>
+<span class="w">    </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">        </span><span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">        </span><span class="nt">&lt;artifactId&gt;</span>spring-boot-devtools<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">        </span><span class="nt">&lt;optional&gt;</span>true<span class="nt">&lt;/optional&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;/dependencies&gt;</span>
+</code></pre></div>
+<p>当运行一个完全打包的应用程序时，开发者工具会被自动禁用。如果你的应用程序是从java -jar启动的，或者是从一个特殊的classloader启动的，那么它被认为是一个 "生产应用程序"。你可以通过使用spring.devtools.restart.enabled系统属性来控制这种行为。要启用devtools，无论你的应用程序是由哪个classloader启动的，都要设置-Dspring.devtools.restart.enabled=true系统属性。在生产环境中，如果运行 devtools 有安全风险，则不能这样做。要禁用 devtools，请排除该依赖关系或设置 -Dspring.devtools.restart.enabled=false 系统属性</p>
+<p>在 Maven 中将依赖标记为可选，可以防止 devtools 被顺便应用到使用你的项目的其他模块中。</p>
+<p>Spring Boot提供的重启技术通过使用两个classloader工作。不改变的类（例如，来自第三方 jars 的类）被加载到基础类加载器中。您正在开发的类被加载到重启类加载器中。当应用程序重启时，重启类加载器会被扔掉，然后创建一个新的类加载器。这种方法意味着应用程序的重启通常比 "冷启动 "快得多，因为基础类加载器已经可用并被填充。</p>
+<h1 id="10-what-to-read-next">10. What to Read Next<a class="headerlink" href="#10-what-to-read-next" title="Permanent link">&para;</a></h1>
+<p>您现在应该了解如何使用Spring Boot和一些您应该遵循的最佳实践。现在您可以继续深入了解Spring Boot的具体功能，或者您可以跳到前面，阅读Spring Boot的 "生产准备 "方面。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["search.highlight", "navigation.instant", "navigation.tracking", "navigation.expand", "toc.integrate", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

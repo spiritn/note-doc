@@ -1,0 +1,969 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://spiritn.github.io/note-doc/database/04-%E7%B4%A2%E5%BC%95/">
+      
+      
+        <link rel="prev" href="../03-InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/">
+      
+      
+        <link rel="next" href="../05-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>索引 - 我的技术文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="我的技术文档" class="md-header__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的技术文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              索引
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="我的技术文档" class="md-nav__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    我的技术文档
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-mysql%E6%9E%B6%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mySQL架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-基础.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    InnoDB存储引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    索引
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        索引类型
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        索引种类
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        索引条件下推
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mrr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MRR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        索引合并
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        索引长度
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        索引页能存储的条目数量
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        索引设计原则
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        索引失效的情况（有坑！！）
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日志系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JAVA8
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/spring/spring/IocContainer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="mysql">MySQL索引<a class="headerlink" href="#mysql" title="Permanent link">&para;</a></h1>
+<p>索引可以帮助我们更快的查找和获取指定行的数据，是增强数据库性能的常用手段。但是如果数据库索引使用不合理反而会降低数据库性能，所以我们需要了解索引的相关原理和使用规范。</p>
+<p>创建索引语句为：CREATE INDEX idx_name ON test1 (name);</p>
+<p>删除索引语句为：DROP INDEX idx_name;</p>
+<h2 id="_1">索引类型<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>按照存储结构分为：</p>
+<ul>
+<li>HASH索引</li>
+</ul>
+<p>几乎唯一对应，在“=”和“in”条件下高效，但是对于范围查询、排序及组合索引就不太适合了。索引本身哈希函数的计算和碰撞问题也是需要解决的。</p>
+<ul>
+<li>B+树索引</li>
+</ul>
+<p>最常用也是默认的索引</p>
+<p><img alt="B+树" src="../images/B%2B%E6%A0%91.jpeg" /></p>
+<ul>
+<li>Rtree索引</li>
+</ul>
+<p>在MySQL很少使用，仅支持geometry数据类型，相对于BTREE，RTREE的优势在于范围查找。</p>
+<ul>
+<li>FullText全文索引</li>
+</ul>
+<p>目前只有MyISAM引擎支持，不过目前只有 CHAR、VARCHAR ，TEXT 列上可以创建全文索引。全文索引并不是和MyISAM一起诞生的，它的出现是为了解决<code>WHERE name LIKE “%word%"</code>这类针对文本的模糊查询效率较低的问题。</p>
+<ul>
+<li>有序数组</li>
+</ul>
+<p>搜索算法里提到的有序数组，即可以按照二分法快速查找某个值，也支持范围查询，但是动态插入不方便，只适合静态不变的历史数据。</p>
+<h2 id="_2">索引种类<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>聚集索引
+  聚簇索引指叶子结点存储实际表数据，或者说磁盘上数据文件就是聚集索引的顺序存放的，如innodb的主键索引 <code>*.ibd</code>文件。走聚集索引的话不必再根据地址去磁盘查。</p>
+</li>
+<li>
+<p>二级索引/次级索引：</p>
+</li>
+</ul>
+<p>对于二级索引，叶子结点存着主键的id，需要再次回表到聚簇索引那里查询其他字段数据。<strong>一张表只能有唯一的聚簇索引</strong>，但是可以有多个次级索引。</p>
+<hr />
+<p>按照索引的特性又可以分为：</p>
+<ul>
+<li>
+<p>普通索引：加速查询</p>
+</li>
+<li>
+<p>主键索引：列值唯一（不可以有null）+ 表中只有一个</p>
+</li>
+<li>
+<p>唯一索引： 列值唯一（可以有多个null）</p>
+</li>
+</ul>
+<p><strong>唯一索引和主键索引的区别</strong>：主键索引也属于唯一索引，表中只有一个，不允许有null，Innodb引擎下主键索引是聚集索引；唯一索引可以存在多个，允许有null；</p>
+<ul>
+<li>联合索引：多列值组成一个索引，专门用于组合搜索，其效率大于索引合并</li>
+</ul>
+<p><img alt="联合索引" src="../images/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95.png" /></p>
+<ul>
+<li>覆盖索引</li>
+</ul>
+<p>如果查询的列通过索引可直接返回，就称该索引<strong>为查询sql的覆盖索引</strong>(Covering Index)，也就是平时所说的不需要<strong>回表操作</strong>。<a href="https://www.cnblogs.com/happyflyingpig/p/7662881.html">覆盖索引讲解</a></p>
+<p>执行计划的extra列的using index 表明查询走的索引覆盖</p>
+<ul>
+<li>前缀索引</li>
+</ul>
+<p>简单来说就是对字符列的前几个字符建立索引如<code>ADD KEY(email(6))</code>，这样的好处是降低索引文件的大小；但是不能精确匹配，导致回表的次数增加，也不能用作覆盖索引了。</p>
+<p>一般没必要为了优化索引的大小建立前缀索引。如果字符长度过长，mysql会自动建立前缀索引，降低查询效率。</p>
+<p>如果字段前几个字符区分度不高，可以建立倒序存储，或增加hash存储字段。但是注意此时不支持范围扫描了就，可以用于身份证，有一定规则的学号等字段</p>
+<p>首先，你可以使用下面这个语句，算出这个列上有多少个不同的值：</p>
+<div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="k">distinct</span><span class="w"> </span><span class="n">email</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">L</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">SUser</span><span class="p">;</span>
+</code></pre></div>
+<p>然后，依次选取不同长度的前缀来看这个值，比如我们要看一下4~7个字节的前缀索引，可以用这个语句：</p>
+<div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">select</span><span class="w"> </span>
+
+<span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="k">distinct</span><span class="w"> </span><span class="k">left</span><span class="p">(</span><span class="n">email</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span><span class="n">）as</span><span class="w"> </span><span class="n">L4</span><span class="p">,</span>
+
+<span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="k">distinct</span><span class="w"> </span><span class="k">left</span><span class="p">(</span><span class="n">email</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span><span class="n">）as</span><span class="w"> </span><span class="n">L5</span><span class="p">,</span>
+
+<span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="k">distinct</span><span class="w"> </span><span class="k">left</span><span class="p">(</span><span class="n">email</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span><span class="n">）as</span><span class="w"> </span><span class="n">L6</span><span class="p">,</span>
+
+<span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="k">distinct</span><span class="w"> </span><span class="k">left</span><span class="p">(</span><span class="n">email</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span><span class="n">）as</span><span class="w"> </span><span class="n">L7</span><span class="p">,</span>
+
+<span class="k">from</span><span class="w"> </span><span class="n">SUser</span><span class="p">;</span>
+</code></pre></div>
+<p>当然，使用前缀索引很可能会损失区分度，所以你需要预先设定一个可以接受的损失比例，比如5%。然后，在返回的L4~L7中，找出不小于 L * 95%的值，假设这里L6、L7都满足，你就可以选择前缀长度为6。</p>
+<h2 id="_3">索引条件下推<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>索引条件下推（index condition pushdown ）简称ICP，在Mysql5.6的版本上推出，用于优化查询。它的核心思想是：<strong>将WHERE条件中可以在索引中判断的部分"下推"到存储引擎层执行，从而减少不必要的数据读取和传输</strong></p>
+<p>在不使用ICP的情况下，在使用二级索引进行查询时，存储引擎通过索引检索到数据，然后返回给MySQL服务器，服务器然后判断数据是否符合条件 。</p>
+<p>在使用ICP的情况下，如果存在某些被索引的列的判断条件时，MySQL服务器将这一部分判断条件传递给存储引擎，然后由存储引擎通过判断索引是否符合MySQL服务器传递的条件，只有当索引符合条件时才会将数据检索出来返回给MySQL服务器 。这样就减少存储引擎查询基础表的次数，也可以减少MySQL服务器从存储引擎接收数据的次数。</p>
+<p>如建立联合索引（name，age），查询<code>where  name like '陈%' and age=20</code>，没有开启ICP时会直接通过name进行查询，查询出来行记录较多。而开启ICP，在索引内部就判断了age是不是等于20，匹配到的次数就较少。存储引擎传递给mysql服务器的数据就少了许多</p>
+<p>在EXPLAIN执行计划的 Extra 列中，如果看到<strong>Using index condition</strong>，表示使用了索引下推。<a href="https://blog.csdn.net/sinat_29774479/article/details/103470244">https://blog.csdn.net/sinat_29774479/article/details/103470244</a></p>
+<h2 id="mrr">MRR<a class="headerlink" href="#mrr" title="Permanent link">&para;</a></h2>
+<p>除了ICP，MySQL还有哪些索引优化技术？</p>
+<p>MRR工作原理：
+二级索引查询得到一批主键ID
+不是立即回表，而是先将主键ID排序
+按照主键顺序批量回表查询</p>
+<p>优势：
+减少磁盘随机I/O，转为顺序I/O
+充分利用磁盘预读能力</p>
+<h2 id="_4">索引合并<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>在 MySQL 5.0 之前，一个表最多只能使用一个索引。从MySQL 5.1 开始引入索引合并（index_merge）技术优化，对同一个表可以使用多个索引分别进行条件扫描，然后将各自的结果进行合并（intersect/union）。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">tbl_name</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">key1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="n">key2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">tbl_name</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="p">(</span><span class="n">key1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="n">key2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">non_key</span><span class="o">=</span><span class="mi">30</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t1</span><span class="p">,</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="p">(</span><span class="n">t1</span><span class="p">.</span><span class="n">key1</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="n">t1</span><span class="p">.</span><span class="n">key2</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;value%&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">t2</span><span class="p">.</span><span class="n">key1</span><span class="o">=</span><span class="n">t1</span><span class="p">.</span><span class="n">some_col</span><span class="p">;</span>
+</code></pre></div>
+<p>下面看一个例子：</p>
+<div class="highlight"><pre><span></span><code><span class="n">index_merge之using</span><span class="w"> </span><span class="k">union</span><span class="p">:</span>
+<span class="w"> </span><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">explain</span><span class="w"> </span>
+<span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">lessons</span>
+<span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">stu_id</span><span class="o">=</span><span class="mi">116401</span>
+<span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n">sel_id</span><span class="o">=</span><span class="mi">1113</span><span class="p">;</span>
+
+<span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">select_type</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="k">type</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">possible_keys</span><span class="w">                                                                          </span><span class="o">|</span><span class="w"> </span><span class="k">key</span><span class="w">                               </span><span class="o">|</span><span class="w"> </span><span class="n">key_len</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">ref</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">rows</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Extra</span><span class="w">                                                       </span><span class="o">|</span>
+<span class="o">|</span><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">SIMPLE</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">lessons</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">index_merge</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">lessons_stu_id</span><span class="p">,</span><span class="n">idx_stuid_lessub</span><span class="p">,</span><span class="n">IDX_LES_TYPE_STU_ID</span><span class="p">,</span><span class="n">stu_id_pay_type</span><span class="p">,</span><span class="n">idx_lessons_sel_id</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">lessons_stu_id</span><span class="p">,</span><span class="n">idx_lessons_sel_id</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1467</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">Using</span><span class="w"> </span><span class="k">union</span><span class="p">(</span><span class="n">lessons_stu_id</span><span class="p">,</span><span class="n">idx_lessons_sel_id</span><span class="p">);</span><span class="w"> </span><span class="k">Using</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="o">|</span>
+<span class="o">+</span><span class="c1">----+-------------+---------+-------------+----------------------------------------------------------------------------------------+-----------------------------------+---------+------+------+-------------------------------------------------------------+</span>
+<span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">09</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span>
+<span class="err">查询使用</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="err">连接多个条件，查询分别使用</span><span class="w"> </span><span class="n">stu_id</span><span class="w"> </span><span class="err">和</span><span class="w"> </span><span class="n">sel_id</span><span class="w"> </span><span class="err">列索引进行扫描，并将扫描结果进行取并集</span><span class="p">(</span><span class="k">union</span><span class="p">)</span>
+
+<span class="n">index_merge之using</span><span class="w"> </span><span class="k">intersect</span><span class="p">:</span>
+<span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">explain</span><span class="w"> </span>
+<span class="k">select</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">from</span><span class="w"> </span><span class="n">lessons</span>
+<span class="k">where</span><span class="w"> </span><span class="n">stu_id</span><span class="o">=</span><span class="mi">116401</span>
+<span class="k">and</span><span class="w"> </span><span class="n">sel_id</span><span class="o">=</span><span class="mi">1113</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">----+-------------+---------+-------------+----------------------------------------------------------------------------------------+-----------------------------------+---------+------+------+------------------------------------------------------------------------------+</span>
+<span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">select_type</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="k">type</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">possible_keys</span><span class="w">                                                                          </span><span class="o">|</span><span class="w"> </span><span class="k">key</span><span class="w">                               </span><span class="o">|</span><span class="w"> </span><span class="n">key_len</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">ref</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">rows</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Extra</span><span class="w">                                                                        </span><span class="o">|</span>
+<span class="o">+</span><span class="c1">----+-------------+---------+-------------+----------------------------------------------------------------------------------------+-----------------------------------+---------+------+------+------------------------------------------------------------------------------+</span>
+<span class="o">|</span><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">SIMPLE</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">lessons</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">index_merge</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">lessons_stu_id</span><span class="p">,</span><span class="n">idx_stuid_lessub</span><span class="p">,</span><span class="n">IDX_LES_TYPE_STU_ID</span><span class="p">,</span><span class="n">stu_id_pay_type</span><span class="p">,</span><span class="n">idx_lessons_sel_id</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">lessons_stu_id</span><span class="p">,</span><span class="n">idx_lessons_sel_id</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="o">|</span><span class="w">    </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">Using</span><span class="w"> </span><span class="k">intersect</span><span class="p">(</span><span class="n">lessons_stu_id</span><span class="p">,</span><span class="n">idx_lessons_sel_id</span><span class="p">);</span><span class="w"> </span><span class="k">Using</span><span class="w"> </span><span class="k">where</span><span class="p">;</span><span class="w"> </span><span class="k">Using</span><span class="w"> </span><span class="k">index</span><span class="w"> </span><span class="o">|</span>
+<span class="o">+</span><span class="c1">----+-------------+---------+-------------+----------------------------------------------------------------------------------------+-----------------------------------+---------+------+------+------------------------------------------------------------------------------+</span>
+<span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">07</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span>
+<span class="err">查询使用</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="err">连接多个条件，查询分别使用</span><span class="w"> </span><span class="n">stu_id</span><span class="w"> </span><span class="err">和</span><span class="w"> </span><span class="n">sel_id</span><span class="w"> </span><span class="err">列索引进行扫描，并将扫描结果进行取交集</span><span class="p">(</span><span class="k">intersect</span><span class="p">)</span>
+</code></pre></div>
+<p>但是注意，如果where条件中有 &gt;, &lt;, &gt;=, &lt;=等条件，那么优化器不会使用 index merge，而且还会忽略其他的索引。</p>
+<h2 id="_5">索引长度<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>索引的长度不仅决定了索引占用的数据空间大小，也会影响查找数据的 IO 次数。在同等数据量下，索引长度过长会导致单个数据页存放的索引条目数减少，索引高度增加，磁盘 IO 查询次数增加，并且索引占用空间增大。所以应该在满足要求的前提下，尽量减少索引长度。</p>
+<p>索引的长度限制及计算方式如下：</p>
+<ol>
+<li>
+<p>索引最大长度为 767 字节，若索引长度超过 767 字节将无法创建（可考虑创建前缀索引）</p>
+</li>
+<li>
+<p>索引长度与字段定义长度基本相同，前缀索引长度与定义的前缀长度有关</p>
+</li>
+<li>
+<p>变长类型如 varchar，额外需要 2 个字节存放索引长度</p>
+</li>
+<li>
+<p>如果字段可以为空，额外需要 1 个字节存放为空标识</p>
+</li>
+</ol>
+<p><strong>索引长度 = 字段长度 + 是否为空(+1) + 是否变长(+2)</strong></p>
+<p>如name 字段 varchar(10) 可以为空，字符集为 utf8mb4 ，则索引长度为： <strong>10*4B+1B+2B=43B</strong></p>
+<p>而 a2 字段 int 可以为空，索引长度为：<strong>4B+1B=5B</strong></p>
+<h2 id="_6">索引页能存储的条目数量<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>我们知道，MySQL数据库page 大小默认为 16k ，即一次 IO 预读 16k 的数据到数据库的 buffer pool 中。每个索引除了索引长度外，还会用4B存储页号，6B存储其他数据。</p>
+<p>假设表平均行长度为300B，主键索引列 ID 为 int 类型，普通索引列 name 为 varchar(20) 类型非空 (utf8mb4)，普通索引列 info 为 varchar(150) 类型可以为空 (utf8mb4)</p>
+<ul>
+<li>主键索引</li>
+</ul>
+<p>每个非叶子节点可存放 key 个数为 <code>M1=16KB/(4B+4B+6B)≈1170</code>
+  每个叶子节点可存放 key 个数为 <code>M2=16KB/(300B+4B+6B) ≈52</code>
+  则 3 层索引最终能存放最大条目数为：<code>L=1170*1170*52 ≈7118W</code>，4 层索引最终能存放最大条目数为：<code>L=1170*1170*1170*52 ≈832亿</code></p>
+<ul>
+<li>二级索引name 索引字段本身长度为<code>20*4B+2B</code></li>
+</ul>
+<p>每个非叶子节点可存放 key 个数为 <code>M1=16KB/(20*4B+2B+4B+6B)≈178</code>
+  每个叶子节点可存放 key 个数为 <code>M2=16KB/(4B+20*4B+2B+4B+6B) ≈170</code>
+  则 3 层索引最终能存放最大条目数为：<code>L= 178*178*170 ≈538W</code>， 4 层索引最终能存放最大条目数为：<code>L= 178*178*178*170 ≈9.58亿</code> </p>
+<ul>
+<li>二级索引info （varchar(150)），可为空， 索引字段本身长度为<code>150*4B+2B+1B</code></li>
+</ul>
+<p>每个非叶子节点可存放 key 个数为 <code>M1=16KB/(150*4B+2B+1B+4B+6B)≈26</code>
+  每个叶子节点可存放 key 个数为 <code>M2=16KB/(150*4B+2B+1B+4B+6B+4B) ≈26</code>
+  则 3 层索引最终能存放最大条目数为：<code>L= 26*26*26 ≈17576</code>
+  4 层索引最终能存放最大条目数为：<code>L= 26*26*26*26 ≈456976</code>
+  5 层索引最终能存放最大条目数为：<code>L= 26*26*26*26*26 ≈1188W</code></p>
+<p>可以发现当索引长度增加时，会导致每个 page 页存放的索引数减少，索引高度增加。</p>
+<p>特别是 char/varchar 类型，索引长度会因为 utf8mb4 字符集原因导致索引长度急剧增长，因此需要严格控制字段和索引长度。</p>
+<h2 id="_7">索引设计原则<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>索引并不是越多越好，因为他会占用大量的磁盘，还会降低数据表的 DML 速度，因为数据增删改都会额外维护索引信息</p>
+</li>
+<li>
+<p>合理使用联合索引和覆盖索引可以大大提高查询速度</p>
+</li>
+<li>
+<p>不要在经常更新，区分度不高，字段太长的字段上添加索引；要在经常查询、排序的列上建立索引。字段过长可以考虑建立前缀索引。</p>
+</li>
+<li>
+<p>重复索引可以删除。不合理的索引也可能导致优化器错误判断，有时反而选择性能低的索引</p>
+</li>
+</ul>
+<p>如索引 index(A) 和 index(A,B) 是重复的，重复的索引需要更多的存储空间和维护代价，可考虑删除 index(A)。</p>
+<p>如何给字符串字段建立索引</p>
+<h2 id="_8">索引失效的情况（有坑！！）<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<ul>
+<li>优化器认为全表扫描更高效时，会不走索引。</li>
+</ul>
+<p>如当时一个名片申请列表的表，time列建立索引，根据time条件范围查询最近几个月的数据，MySQL优化器反而不走索引，直接全表扫描。查询一年前的数据或者时间范围足够大时，才走time的索引。</p>
+<ul>
+<li>
+<p>在索引上做任何操作（计算、函数、显式或隐式类型转换）会导致索引失效</p>
+</li>
+<li>
+<p><code>!= is null，is not null</code>根据列中null值的多少有不同的情况。如果索引列的null值占多数，is not null 和!=走索引 ,is null不走索引了；如果null值很少时，is null就走索引，is not null 和!=不走索引。</p>
+</li>
+</ul>
+<blockquote>
+<p>原因：走不走索引，是看mysql怎么估算成本的，二级索引的成本主要是二级索引本身的读取成本，和回表的成本。如当null值很多时，is not null 和!= 需要回表的行数就比较少，所以走索引，但是is null需要回表查很多记录那还不如直接取主键索引扫描全表。</p>
+<p>null值是存在对应索引的B+树的最左边的。<a href="https://www.cnblogs.com/niuben/p/11197945.html">https://www.cnblogs.com/niuben/p/11197945.html</a></p>
+</blockquote>
+<ul>
+<li>like '%abc' '%abc%'一定不走索引吗？</li>
+</ul>
+<p>一般来说，模糊查询，前置百分号%abc不走索引；后置百分号abc%才会走索引。</p>
+<p>但是要注意一种情况，如果该查询SQL属于覆盖索引，也就是select的字段只包含索引字段的话，也是走索引的。</p>
+<p><a href="https://www.cnblogs.com/bigsaltfish/p/10067179.html">https://www.cnblogs.com/bigsaltfish/p/10067179.html</a></p>
+<blockquote>
+<p>可以这样理解：模糊查询%abc时，B+树是从左到右来比较字段是否相等的，而%abc此时前面的内容是不确定的，所以就要扫描全部索引（且sleet * 后续要继续回查主表），那还不如直接扫描全表。但是如果select 里只查询索引字段或者主键的话，那扫描整个索引就行，不需要回查主表，所以结果就走了索引！</p>
+</blockquote>
+<ul>
+<li><strong>or 一定不走索引吗</strong>？一次查询只能使用一个索引吗？</li>
+</ul>
+<p>某些条件时，如上面的索引合并，可以同时使用两个索引，然后对结果取交集。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["search.highlight", "navigation.instant", "navigation.tracking", "navigation.expand", "toc.integrate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

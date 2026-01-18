@@ -1,0 +1,691 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://spiritn.github.io/note-doc/java/concurrent/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>并发编程 - 我的技术文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="我的技术文档" class="md-header__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的技术文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              并发编程
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的技术文档" class="md-nav__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    我的技术文档
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database/02-mysql%E6%9E%B6%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mySQL架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database/01-基础.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database/03-InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    InnoDB存储引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database/04-%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../database/05-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日志系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JAVA8
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring/IocContainer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h3 id="_1">基本概念<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>并发编程的三个核心问题：
+- 互斥：保证原子性，临界区代码同一时刻只有一个线程执行
+- 同步：线程执行顺序
+- 通信问题：线程间传递信息，分工</p>
+<h3 id="_2">管程<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>管程对应的英文是monitor，指的是管理共享变量以及对共享变量的操作过程，让他们支持并发。 操作系统原理书上介绍，管程是解决并发问题的核心技术，它和信号量是等价的，即用管程能实现信号量，也能用信号量实现管程。 那为啥java不用信号量呢？因为管程更易使用,编程不容易出错，所以Java选择了管程，C#/C++等高级语言也是支持管程的，但C是不支持管程的。
+并发编程里的两个核心问题：互斥和同步都可以由管程来解决。管程是解决并发问题的通用模型，学好管程，理论上所有的并发问题都可以解决，很多并发工具也都是利用管程实现的。
+在管程的发展史上，有三个模型，Hasen模型，Hoare模型和MESA模型，其中广泛应用的是MESA模型，Java采用的也是MESA模型。MESA模型的特点是1. 被唤醒的线程不会立即执行，要重新竞争锁  2. 需要在循环中检查条件，因为条件可能在被唤醒后再次变化</p>
+<p>管程是如何解决互斥的问题呢？
+管程有一个很重要的特性是任一时刻管程中只能有一个活跃线程（Java是通过synchronized），这一特性使得管程能有效完成互斥。就是将共享变量和对共享变量的操作封装起来，多个线程想要访问和操作共享变量，只能通过管程提供的方法，管程内部保证方法的互斥性。</p>
+<p><img src="images/管程解决同步问题.jpeg" alt="管程解决同步问题" style="zoom:67%;" /></p>
+<p>管程如何解决同步问题呢？
+管程引入了条件变量和其对应的等待队列，且每个条件变量都有一个等待队列。类似于Java中阻塞队列的实现，内部是生产者-消费者模型，可以实现如果队列满了，生产者必须阻塞等待。Java内置的synchronized方案，使用简单，但是只支持一个条件变量，Java提供的Lock锁，await()，signal()可以有多个条件变量Condition。</p>
+<p><img src="images/管程解决同步.jpeg" alt="管程解决同步" style="zoom:67%;" /></p>
+<p>高级工具都是管程的"语法糖"，所有同步工具都是管程的不同表现形式。
+- synchronized关键字和wait(),notify(),notifyAll()方法其实就是管程的具体实现
+- ReentrantLock
+- BlockingQueue = 管程 + 队列状态条件
+- CyclicBarrier = 管程 + 线程到达条件
+- CountDownLatch = 管程 + 计数器条件</p>
+<h1 id="_3">线程安全<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h1>
+<h2 id="_4">并发线程的安全问题源头<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>缓存一致性导致的可见性问题。
+CPU在执行指令时，会将运算需要的数据从主存复制一份到CPU的高速缓存当中，那么CPU进行计算时就可以直接从它的高速缓存读取数据和向其中写入数据，当运算结束之后，再将高速缓存中的数据刷新到主存当中。</p>
+</li>
+<li>
+<p>编译优化带来的有序性和线程切换原子性问题</p>
+</li>
+</ol>
+<p>一般来说，处理器为了提高程序运行效率，可能会对输入代码进行优化，它不保证程序中各个语句的执行先后顺序同代码中的顺序一致，但是它会保证程序最终执行结果和代码顺序执行的结果是一致的。<strong>指令重排序不会影响单个线程的执行，但是会影响到多个线程并发执行的正确性</strong>。</p>
+<p>CPU每个指令的操作是原子性的，但是对于高级语言的如count++却并不能保证原子性，因为它对应着三个CPU指令。</p>
+<h2 id="javajmm">Java内存模型JMM<a class="headerlink" href="#javajmm" title="Permanent link">&para;</a></h2>
+<p>在Java虚拟机规范中试图定义一种Java内存模型（Java Memory Model，JMM）来屏蔽各个硬件平台和操作系统的内存访问差异，以实现让Java程序在各种平台下都能达到一致的内存访问效果。那么Java内存模型规定了哪些东西？它定义了程序中变量的访问规则，往大一点说是定义了程序执行的次序。注意，为了获得较好的执行性能，Java内存模型并没有限制执行引擎使用处理器的寄存器或者高速缓存来提升指令执行速度，也没有限制编译器对指令进行重排序。也就是说在java内存模型中，也会存在缓存一致性问题和指令重排序的问题。</p>
+<p><strong>可见性</strong>： Java内存模型规定所有的变量都是存在主存当中，每个线程都有自己的工作内存。线程对变量的所有操作都必须在工作内存中进行，而不能直接对主存进行操作，并且每个线程不能访问其他线程的工作内存。</p>
+<p><strong>有序性</strong>： Java内存模型具备一些先天的有序性，即不需要通过任何手段就能够得到保证的有序性，这个通常也称为 <strong>happens-before 原则</strong>。如果两个操作的执行次序无法从<a href="https://blog.csdn.net/java_collect/article/details/103953265">happens-before</a>原则推导出来，那么它们就不能保证它们的有序性，虚拟机可以随意地对它们进行重排序。 <strong>happens-before 原则</strong>的核心是前一个操作的结果对后一个操作是可见的，它约束了编译器的优化行为，虽然允许编辑器优化，但是优化后要遵守happens-before 原则。</p>
+<blockquote>
+<ul>
+<li>单个线程里，按照程序的顺序，前面的操作happens-before后面的操作</li>
+<li>对于volatile变量的写操作happens-before于后续对这个变量的读操作</li>
+<li>传递性</li>
+<li>对于一个锁的解锁happens-before后续对这个锁的加锁</li>
+<li>线程Start原则，即如果在线程A中调用线程B的start()方法，则线程B的start()操作happens-before于线程B的任何操作。</li>
+<li>主线程A等待线程B完成，则主线程A能看到线程B的所有操作，即线程Bhappens-before主线程A</li>
+</ul>
+</blockquote>
+<p><strong>原子性</strong>：只有简单的读取、赋值（而且必须是将数字赋值给某个变量，变量之间的相互赋值不是原子操作）才是原子操作。Java中的原子操作包括：</p>
+<ul>
+<li>除long和double之外的基本类型的赋值操作</li>
+<li>所有引用reference的赋值操作</li>
+<li>java.concurrent.Atomic.* 包中所有类的一切操作。</li>
+</ul>
+<p><strong>volatile关键字的两层语义</strong></p>
+<p>一旦一个共享变量（类的成员变量、类的静态成员变量）被volatile修饰之后，那么就具备了两层语义：</p>
+<p>1）保证了不同线程对这个变量进行操作时的可见性，即一个线程修改了某个变量的值，这新值对其他线程来说是立即可见的。当一个共享变量被volatile修饰时，它会保证修改的值会立即更新到主存，当有其他线程需要读取时，它会去内存中读取新值。而普通的共享变量不能保证可见性，因为普通共享变量被修改之后，什么时候被写入主存是不确定的，当其他线程去读取时，此时内存中可能还是原来的旧值，因此无法保证可见性。</p>
+<p>2）禁止进行指令重排序。</p>
+<h2 id="_5">锁<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>synchronized是Java里提供的锁，其实对应着管程的原语。锁要注意保护是什么资源，锁的是什么。</p>
+<h1 id="_6">线程的生命周期<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h1>
+<p><a href="http://concurrent.redspider.group/article/01/4.html">并发编程学习网站</a></p>
+<p>通用的线程生命周期分别是：初始状态、可运行状态、运行状态、休眠状态和终止状态。但是在不同的编程语言里，这5种状态会有简化合并。Java语言中线程共有六种状态，分别是：</p>
+<p><img src="images/Java线程生命周期转化.png" alt="Java线程生命周期转化" style="zoom:50%;" /></p>
+<h2 id="new">NEW:<a class="headerlink" href="#new" title="Permanent link">&para;</a></h2>
+<p>A thread that has not yet started is in this state</p>
+<h2 id="runnable">RUNNABLE:<a class="headerlink" href="#runnable" title="Permanent link">&para;</a></h2>
+<p>Thread state for a runnable thread.  A thread in the runnable state is executing in the Java virtual machine but it may be waiting for other resources from the operating system such as processor.</p>
+<p>java线程根据导致线程休眠的原因不同，分为BLOCKED（阻塞状态），WATING（无时限等待），TIMED_WAITING（有时限等待）</p>
+<h2 id="blocked">BLOCKED:<a class="headerlink" href="#blocked" title="Permanent link">&para;</a></h2>
+<p>Thread state for a thread blocked waiting for a monitor lock. A thread in the blocked state is waiting for a monitor lock to enter a synchronized block/method or reenter a synchronized block/method after calling</p>
+<p>线程由runnable转为Blocked状态是由于等待synchronized的隐式锁。如果你熟悉操作系统线程的生命周期的话，可能会有个疑问：线程调用阻塞式API时，是否会转换到BLOCKED状态呢？在操作系统层面，线程是会转换到休眠状态的，但是在JVM层面，Java线程的状态不会发生变化，也就是说Java线程的状态会依然保持RUNNABLE状态。JVM层面并不关心操作系统调度相关的状态，因为在JVM看来，等待CPU使用权（操作系统层面此时处于可执行状态）与等待I/O（操作系统层面此时处于休眠状态）没有区别，都是在等待某个资源，所以都归入了RUNNABLE状态。而我们平时所谓的Java在调用阻塞式API时，线程会阻塞，指的是操作系统线程的状态，并不是Java线程的状态</p>
+<h2 id="waiting">WAITING:<a class="headerlink" href="#waiting" title="Permanent link">&para;</a></h2>
+<p>A thread that is waiting indefinitely for another thread to perform a particular action is in this state。调用以下三种方法之一会触发这种转换。</p>
+<ol>
+<li>获得synchronized隐式锁的线程，调用无参数的Object.wait()方法，会等待另一个线程调用notify()或者notifyAll()方法。</li>
+<li>调用无参数的Thread.join()方法。其中的join()是一种线程同步方法，例如有一个线程对象thread A，当调用A.join()的时候，执行这条语句的线程会等待thread A执行完。而等待中的这个线程，其状态会从RUNNABLE转换到WAITING，当线程thread A执行完，原来等待它的线程又会从WAITING状态转换到RUNNABLE。</li>
+<li>调用LockSupport.park()方法。其中的LockSupport对象，也许你有点陌生，其实Java并发包中的锁，都是基于它实现的。调用LockSupport.park()方法，当前线程会阻塞，线程的状态会从RUNNABLE转换到WAITING。调用LockSupport.unpark(Thread thread)可唤醒目标线程，目标线程的状态又会从WAITING状态转换到RUNNABLE。</li>
+</ol>
+<h2 id="timed_waiting">TIMED_WAITING:<a class="headerlink" href="#timed_waiting" title="Permanent link">&para;</a></h2>
+<p>A thread that is waiting for another thread to perform an action for up to a specified waiting time is in this state。调用以下五种方法之一会进入TIMED_WAITING状态：</p>
+<p>​   1.  调用Thread.sleep(long millis)方法；</p>
+<p>​   2.  获得synchronized隐式锁的线程，调用带超时参数的Object.wait(long timeout)方法；</p>
+<p>​   3.  调用带超时参数的Thread.join(long millis)方法；</p>
+<p>​   4.  调用带超时参数的LockSupport.parkNanos(Object blocker, long deadline)方法；</p>
+<p>​   5.  调用带超时参数的LockSupport.parkUntil(long deadline)方法。</p>
+<p>这里你会发现TIMED_WAITING和WAITING状态的区别，仅仅是触发条件多了超时参数</p>
+<h2 id="terminated">TERMINATED:<a class="headerlink" href="#terminated" title="Permanent link">&para;</a></h2>
+<p>A thread that has exited is in this state</p>
+<p>interrupt()方法仅仅是通知线程，线程有机会执行一些后续操作，同时也可以无视这个通知。被interrupt的线程，是怎么收到通知的呢？一种是异常，另一种是主动检测。</p>
+<p>当线程A处于WAITING、TIMED_WAITING状态时，如果其他线程调用线程A的interrupt()方法，会使线程A返回到RUNNABLE状态，同时线程A的代码会触发InterruptedException异常。上面我们提到转换到WAITING、TIMED_WAITING状态的触发条件，都是调用了类似wait()、join()、sleep()这样的方法，我们看这些方法的签名，发现都会throws InterruptedException这个异常。这个异常的触发条件就是：其他线程调用了该线程的interrupt()方法。</p>
+<p>当线程A处于RUNNABLE状态时，并且阻塞在java.nio.channels.InterruptibleChannel上时，如果其他线程调用线程A的interrupt()方法，线程A会触发java.nio.channels.ClosedByInterruptException这个异常；而阻塞在java.nio.channels.Selector上时，如果其他线程调用线程A的interrupt()方法，线程A的java.nio.channels.Selector会立即返回。</p>
+<p>上面这两种情况属于被中断的线程通过异常的方式获得了通知。还有一种是主动检测，如果线程处于RUNNABLE状态，并且没有阻塞在某个I/O操作上，例如中断计算圆周率的线程A，这时就得依赖线程A主动检测中断状态了。如果其他线程调用线程A的interrupt()方法，那么线程A可以通过isInterrupted()方法，检测是不是自己被中断了。</p>
+<p>注意：处于阻塞状态的线程被打断时会清除中断标记位并抛出中断异常</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["search.highlight", "navigation.instant", "navigation.tracking", "navigation.expand", "toc.integrate", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

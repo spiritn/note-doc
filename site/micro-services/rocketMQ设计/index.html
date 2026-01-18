@@ -1,0 +1,1578 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://spiritn.github.io/note-doc/micro-services/rocketMQ%E8%AE%BE%E8%AE%A1/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>消息过滤 - 我的技术文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-offsetmsgid" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="我的技术文档" class="md-header__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的技术文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              消息过滤
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="我的技术文档" class="md-nav__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    我的技术文档
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database/02-mysql%E6%9E%B6%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mySQL架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database/01-基础.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database/03-InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    InnoDB存储引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database/04-%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database/05-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日志系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/java8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JAVA8
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/spring/spring/IocContainer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">消息过滤<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>RocketMQ分布式消息队列的消息过滤方式有别于其它MQ中间件，是在Consumer端订阅消息时再做消息过滤的。RocketMQ这么做是在于其Producer端写入消息和Consumer端订阅消息采用分离存储的机制来实现的，Consumer端订阅消息是需要通过ConsumeQueue这个消息消费的逻辑队列拿到一个索引，然后再从CommitLog里面读取真正的消息实体内容，所以说到底也是还绕不开其存储结构。其ConsumeQueue的存储结构如下，可以看到其中有8个字节存储的Message Tag的哈希值，基于Tag的消息过滤正式基于这个字段值的。</p>
+<p>主要支持如下2种的过滤方式：</p>
+<p>(1) Tag过滤方式：Consumer端在订阅消息时除了指定Topic还可以指定TAG，如果一个消息有多个TAG，可以用||分隔。其中，Consumer端会将这个订阅请求构建成一个 SubscriptionData，发送一个Pull消息的请求给Broker端。Broker端从RocketMQ的文件存储层—Store读取数据之前，会用这些数据先构建一个MessageFilter，然后传给Store。Store从 ConsumeQueue读取到一条记录后，会用它记录的消息tag hash值去做过滤，由于在服务端只是根据hashcode进行判断，无法精确对tag原始字符串进行过滤，故在消息消费端拉取到消息后，还需要对消息的原始tag字符串进行比对，如果不同，则丢弃该消息，不进行消息消费。</p>
+<p>(2) SQL92的过滤方式：这种方式的大致做法和上面的Tag过滤方式一样，只是在Store层的具体过滤过程不太一样，真正的 SQL expression 的构建和执行由rocketmq-filter模块负责的。每次过滤都去执行SQL表达式会影响效率，所以RocketMQ使用了BloomFilter避免了每次都去执行。SQL92的表达式上下文为消息的属性。</p>
+<h1 id="_2">消息查询<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
+<p>RocketMQ支持按照下面两种维度（“按照Message Id查询消息”、“按照Message Key查询消息”）进行消息查询。</p>
+<h2 id="1-offsetmsgid">1. 按照offsetMsgId查询消息<a class="headerlink" href="#1-offsetmsgid" title="Permanent link">&para;</a></h2>
+<p>RocketMQ中的offsetMsgId的长度总共有16字节，是由Broker服务端在写入消息时生成的（采用”IP地址+Port端口”与“CommitLog的物理偏移量地址”做了一个字符串拼接）。</p>
+<p>“按照MessageId查询消息”具体做法是：Client端从MessageId中解析出Broker的地址（IP地址和端口）和Commit Log的偏移地址后封装成一个RPC请求后通过Remoting通信层发送（业务请求码：VIEW_MESSAGE_BY_ID）。Broker端走的是QueryMessageProcessor，读取消息的过程用其中的 commitLog offset 和 size 去 commitLog 中找到真正的记录并解析成一个完整的消息返回。</p>
+<h2 id="2-message-key">2. 按照Message Key查询消息<a class="headerlink" href="#2-message-key" title="Permanent link">&para;</a></h2>
+<p>“按照Message Key查询消息”，主要是基于RocketMQ的IndexFile索引文件来实现的。</p>
+<p>IndexFile文件名是以创建时的时间戳命名的，文件大小是固定的，等于$40+500W<em>4+2000W</em>20= 420000040$字节,大约400M。整个Index File的结构如图，40 Byte 的Header用于保存一些总的统计信息， Slot Table并不保存真正的索引数据，而是保存每个槽位对应的单向链表的头。$20*2000W$是真正的索引数据，即一个 Index File 可以保存 2000W个索引。</p>
+<p>IndexFile文件逻辑结构类似JDK中HashMap的实现，如果消息设置了UNIQ_KEY这个属性，就用 <code>topic + “#” + UNIQ_KEY</code>作为key来做写入操作，如果消息设置了KEYS属性（多个KEY以空格分隔），也会用 topic + “#” + KEY 来做索引。</p>
+<p>其中索引结点包含了Key Hash/CommitLog Offset/Timestamp/NextIndex offset 这四个字段，一共20 Byte。NextIndex offset 即前面读出来的 slotValue，如果有 hash冲突，就可以用这个字段将所有冲突的索引用链表的方式串起来了。Timestamp记录的是消息storeTimestamp之间的差，并不是一个绝对的时间。</p>
+<p><img alt="rocketmq_indexFile" src="../images/rocketmq_indexFile.png" /></p>
+<p>“按照Message Key查询消息”的方式，RocketMQ的具体做法是，主要通过Broker端的QueryMessageProcessor业务处理器来查询，读取消息的过程就是用topic和key找到IndexFile索引文件中的一条记录，根据其中的commitLog offset从CommitLog文件中读取消息的实体内容。</p>
+<h1 id="_3">源码结构<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h1>
+<p><img alt="rocketmq_模块结构" src="../images/rocketmq_%E6%A8%A1%E5%9D%97%E7%BB%93%E6%9E%84.png" /></p>
+<h1 id="namesrv">namesrv服务<a class="headerlink" href="#namesrv" title="Permanent link">&para;</a></h1>
+<p>把distribution/conf下的 logback_namesrv.xml拷贝新创建的conf文件夹下；在idea中配置环境变量<code>ROCKETMQ_HOME=/Users/jun/work/code/github/rocketmq</code>然后启动即可。</p>
+<p>启动流程：</p>
+<ol>
+<li>
+<p>创建NamesrvController：解析-c指定的配置文件（非必要），-p指定的单个属性配置（--属性名 属性值），填充到NamesrvConfig和NettyServerConfig，然后创建<code>new NamesrvController(namesrvConfig, nettyServerConfig)</code></p>
+</li>
+<li>
+<p>初始化：创建netty服务端remotingServer处理请求，创建心跳检测定时任务每10秒去检测2分钟不活动的broke；定时任务每10分钟打印一次KV。</p>
+</li>
+<li>
+<p>start：启动netty服务remotingServer</p>
+</li>
+</ol>
+<p><strong>路由管理</strong></p>
+<p>namesrv的主要作用就是注册和删除broke，并为生产者和消费者提供topic的路由信息查询。</p>
+<p>RouteInfoManager保存着所有的路由信息，使用ReadWriteLock保证并发安全，主要包括：</p>
+<p>一个集群是可以包含多个master broke</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 主要存储topic和brokerName</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="cm">/* topic */</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">QueueData</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">topicQueueTable</span><span class="p">;</span>
+<span class="c1">// 主要存储brokerName和（cluster，多个brokerId/brokerAddr）</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="cm">/* brokerName */</span><span class="p">,</span><span class="w"> </span><span class="n">BrokerData</span><span class="o">&gt;</span><span class="w"> </span><span class="n">brokerAddrTable</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="cm">/* clusterName */</span><span class="p">,</span><span class="w"> </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="cm">/* brokerName */</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">clusterAddrTable</span><span class="p">;</span>
+<span class="c1">// 主要存储brokerAddr和lastUpdateTimestamp</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="cm">/* brokerAddr */</span><span class="p">,</span><span class="w"> </span><span class="n">BrokerLiveInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">brokerLiveTable</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="cm">/* brokerAddr */</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="cm">/* Filter Server */</span><span class="o">&gt;</span><span class="w"> </span><span class="n">filterServerTable</span><span class="p">;</span>
+</code></pre></div>
+<p><img alt="rocketmq_路由" src="../images/rocketmq_%E8%B7%AF%E7%94%B1.png" /></p>
+<p><strong>心跳注册</strong></p>
+<p>broke端在启动BrokerController.start()时，先会发出一个注册broke请求，然后启动定时任务以后每30秒（可以配置10秒～60秒）发出注册请求到所有的namesrv。namesrv的DefaultRequestProcessor负责处理所有的请求，如果请求指令是REGISTER_BROKER，就调用RouteInfoManager.registerBroker()更新broke心跳信息，需要获取写锁才能修改。</p>
+<p><strong>路由删除</strong></p>
+<p>NamesrvController启动了一个每10秒执行的任务，遍历brokerLiveTable，检测每个broke的上次lastUpdateTimestamp心跳时间，如果已经超过2分钟未更新，就关闭连接，onChannelDestroy()更新各个table。注意同样要先获取写锁。</p>
+<p>broke在正常关闭时会触发BrokerController.shutdown()，会发出unregisterBrokerAll()请求，namesrv的DefaultRequestProcessor收到UNREGISTER_BROKER的请求指令后，会调用RouteInfoManager.unregisterBroker()更新各个table。</p>
+<p><strong>路由发现</strong></p>
+<p>DefaultRequestProcessor收到producer的GET_ROUTEINFO_BY_TOPIC请求指令后，会在RouteInfoManager.pickupTopicRouteData()查找topic对应的broke信息。要获取读锁</p>
+<h1 id="producer">producer服务<a class="headerlink" href="#producer" title="Permanent link">&para;</a></h1>
+<h2 id="producer_1">producer的启动<a class="headerlink" href="#producer_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>开发者设置DefaultMQProducer的NamesrvAddr地址后，调用start()。</p>
+</li>
+<li>
+<p><code>this.setProducerGroup(withNamespace(this.producerGroup));</code>，producerGroup是将相同角色的生产者归为一组，在发送事务消息时，可以在一个生产者实例挂掉后，相同producerGroup下的其他生产者实例继续同一个事务的commit或rollback，但是一般没必要。</p>
+</li>
+<li>
+<p><code>this.defaultMQProducerImpl.start();</code> DefaultMQProducer的功能是委托给DefaultMQProducerImpl类:</p>
+</li>
+</ul>
+<p>主要是启动MQClientInstance，同一个进程只有一个MQClientInstance，消费者和生产者共享之</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">startFactory</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">MQClientException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">serviceState</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">CREATE_JUST</span><span class="p">:</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">serviceState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ServiceState</span><span class="p">.</span><span class="na">START_FAILED</span><span class="p">;</span>
+
+<span class="w">            </span><span class="c1">// 先校验producerGroup不能为空，长度不能超过255个字符，不能有特殊字符等。</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">checkConfig</span><span class="p">();</span>
+
+<span class="w">            </span><span class="c1">// 设置instanceName为进程PID</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="na">defaultMQProducer</span><span class="p">.</span><span class="na">getProducerGroup</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">MixAll</span><span class="p">.</span><span class="na">CLIENT_INNER_PRODUCER_GROUP</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="na">defaultMQProducer</span><span class="p">.</span><span class="na">changeInstanceNameToPID</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="c1">// 创建MQClientInstance，clientId=IP@PID，MQClientInstance负责broke，namesrv通信</span>
+<span class="w">            </span><span class="c1">// 同一个进程只有一个MQClientInstance，消费者和生产者共享之</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">mQClientFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MQClientManager</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getOrCreateMQClientInstance</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">defaultMQProducer</span><span class="p">,</span><span class="w"> </span><span class="n">rpcHook</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">// 注册当前生产者到MQClientInstance，可能有多个group的producer</span>
+<span class="w">            </span><span class="kt">boolean</span><span class="w"> </span><span class="n">registerOK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mQClientFactory</span><span class="p">.</span><span class="na">registerProducer</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">defaultMQProducer</span><span class="p">.</span><span class="na">getProducerGroup</span><span class="p">(),</span><span class="w"> </span><span class="k">this</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">registerOK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="na">serviceState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ServiceState</span><span class="p">.</span><span class="na">CREATE_JUST</span><span class="p">;</span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MQClientException</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="c1">// 向topic路由缓存表里添加一个默认topic，这个在发送里会提到</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">topicPublishInfoTable</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">defaultMQProducer</span><span class="p">.</span><span class="na">getCreateTopicKey</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TopicPublishInfo</span><span class="p">());</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">startFactory</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// 启动MQClientInstance,很多重要逻辑在里面，如开启每30秒更新路由信息表的定时任务，等等等等。。。</span>
+<span class="w">                </span><span class="n">mQClientFactory</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;the producer [{}] start OK&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">// 标记为运行中，防止重复启动</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">serviceState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ServiceState</span><span class="p">.</span><span class="na">RUNNING</span><span class="p">;</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="c1">// 这里应该是用来判断重复启动</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">RUNNING</span><span class="p">:</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">START_FAILED</span><span class="p">:</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">SHUTDOWN_ALREADY</span><span class="p">:</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MQClientException</span><span class="p">(</span><span class="s">&quot;The producer service state not OK, maybe started once&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">default</span><span class="p">:</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="c1">// 发送心跳信息到所有的broke，为什么？</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">mQClientFactory</span><span class="p">.</span><span class="na">sendHeartbeatToAllBrokerWithLock</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">timer</span><span class="p">.</span><span class="na">scheduleAtFixedRate</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">TimerTask</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">RequestFutureTable</span><span class="p">.</span><span class="na">scanExpiredRequest</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Throwable</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;scan RequestFutureTable exception&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_4">消息的发送<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>producer提供了同步发送，异步发送，sendOneWay三种方式，另外可以指定MessageQueue和选择策略，timeout，批量发送消息。</p>
+<p><img alt="rocketmq_producer类" src="../images/rocketmq_producer%E7%B1%BB.png" /></p>
+<p>消息的三种发送方式最终都是委托给了<code>DefaultMQProducerImpl.private SendResult sendDefaultImpl(Message msg,final CommunicationMode communicationMode, final SendCallback sendCallback,final long timeout)</code>，timeout默认3秒</p>
+<p>其中message的结构和属性如下：</p>
+<p><img alt="Message" src="../images/Message.jpg" /></p>
+<div class="highlight"><pre><span></span><code><span class="err">Message</span><span class="p">{</span><span class="kc">t</span><span class="err">opic=&#39;juTopic&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">fla</span><span class="err">g=</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="err">proper</span><span class="kc">t</span><span class="err">ies=</span><span class="p">{</span><span class="err">UNIQ_KEY=</span><span class="mi">7</span><span class="err">F</span><span class="mi">0000010</span><span class="err">DA</span><span class="mi">418</span><span class="err">B</span><span class="mi">4</span><span class="err">AAC</span><span class="mi">2992744</span><span class="err">CA</span><span class="mi">0000</span><span class="p">,</span><span class="w"> </span><span class="err">WAIT=</span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="err">TAGS=TagA</span><span class="p">},</span><span class="w"> </span><span class="err">body=</span><span class="p">[</span><span class="mi">72</span><span class="p">,</span><span class="w"> </span><span class="mi">101</span><span class="p">,</span><span class="w"> </span><span class="mi">108</span><span class="p">,</span><span class="w"> </span><span class="mi">108</span><span class="p">,</span><span class="w"> </span><span class="mi">97</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">52</span><span class="p">],</span><span class="w"> </span><span class="kc">transa</span><span class="err">c</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">Id=&#39;</span><span class="kc">null</span><span class="err">&#39;</span><span class="p">}</span>
+</code></pre></div>
+<h3 id="1">1. 消息校验<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>如topicName不能包含特殊字符，不能是系统使用的SCHEDULE_TOPIC_XXXX，长度不能超过127个字符；消息内容不能为空，不能大于4M</p>
+<h3 id="2-topic">2. 查找topic路由<a class="headerlink" href="#2-topic" title="Permanent link">&para;</a></h3>
+<p>DefaultMQProducerImpl.topicPublishInfoTable缓存了所有topic的路由信息：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 每个topic对应的路由信息</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TopicPublishInfo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">orderTopic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">haveTopicRouterInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// MessageQueue，发送时其实就指定了哪个MessageQueue</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">MessageQueue</span><span class="o">&gt;</span><span class="w"> </span><span class="n">messageQueueList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">MessageQueue</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">volatile</span><span class="w"> </span><span class="n">ThreadLocalIndex</span><span class="w"> </span><span class="n">sendWhichQueue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ThreadLocalIndex</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// namesrv返回的原始路由信息，</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">TopicRouteData</span><span class="w"> </span><span class="n">topicRouteData</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>发送消息时先去查缓存Table，有则返回，查询不到就委托MQClientInstance去namesrv去获取topic对应的路由信息，更新本地缓存路由表。</p>
+<p>另外<code>MQClientInstance.startScheduledTask()</code>还会每30秒从namesrv更新当前生产者和消费者关心的topic路由信息</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">topic</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">topicList</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 循环更新每个topic信息</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">updateTopicRouteInfoFromNameServer</span><span class="p">(</span><span class="n">topic</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="3-messagequeue">3. 选择要发送的MessageQueue<a class="headerlink" href="#3-messagequeue" title="Permanent link">&para;</a></h3>
+<p>默认的逻辑，其实就是ThreadLocal保存一个Integer，每次发送递增1，取模topic路由里的MessageQueue，即每次发送时遍历MessageQueue选择一个。如果属于重试，不使用上次失败的lastBrokerName，这是默认情况。</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="n">MessageQueue</span><span class="w"> </span><span class="nf">selectOneMessageQueue</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">sendWhichQueue</span><span class="p">.</span><span class="na">getAndIncrement</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">// 搞一个index，每次递增，取模messageQueue长度，其实就是遍历messageQueue了</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">abs</span><span class="p">(</span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">messageQueueList</span><span class="p">.</span><span class="na">size</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pos</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">            </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">messageQueueList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">pos</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>如果开启sendLatencyFaultEnable，则根据维护了发送brakeName失败过的latencyFaultTolerance选择一个没有发送失败过或者相对较好的MessageQueue。</p>
+<h3 id="4">4. 发送消息<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>sendKernelImpl()是发送消息的内核实现，准备一些消息发送的准备工作：如createUniqID()生成消息唯一uni_key；压缩超过4K的消息；执行消息发送禁止的钩子<code>this.executeCheckForbiddenHook()</code>；发送消息时的钩子<code>this.executeSendMessageHookBefore(context);</code>;</p>
+<p>MQClientAPIImpl()最终负责发送消息</p>
+<p>批量发送消息是将属于同一个topic的消息一起打包发送，减少网络传输次数，这要依据单条消息的长度，总长度不能超过4M。批量发送消息也就是先将消息进行打包,然后调用的方法和普通的消息是一样的this.defaultMQProducerImpl.send(batch(msgs), timeout)。</p>
+<h1 id="broke">broke服务<a class="headerlink" href="#broke" title="Permanent link">&para;</a></h1>
+<p>把distribution/conf下的broke.conf, logback_broke.xml拷贝新创建的conf文件夹下；在idea中配置环境变量<code>ROCKETMQ_HOME=/Users/wangjun/work/code/github/rocketmq</code>和指定配置文件地址<code>-c /Users/wangjun/work/code/github/rocketmq/conf/broker.conf</code>然后启动即可。</p>
+<p>Broker主要负责消息的存储、投递和查询以及服务高可用保证，为了实现这些功能，Broker包含了以下几个重要子模块。</p>
+<ol>
+<li>Remoting Module：整个Broker的实体，负责处理来自clients端的请求。</li>
+<li>Client Manager：负责管理客户端(Producer/Consumer)和维护Consumer的Topic订阅信息</li>
+<li>Store Service：提供方便简单的API接口处理消息存储到物理硬盘和查询功能。</li>
+<li>HA Service：高可用服务，提供Master Broker 和 Slave Broker之间的数据同步功能。</li>
+<li>Index Service：根据特定的Message key对投递到Broker的消息进行索引服务，以提供消息的快速查询。</li>
+</ol>
+<p><img alt="rocketmq_源码模块" src="../images/rocketmq_%E6%BA%90%E7%A0%81%E6%A8%A1%E5%9D%97.png" /></p>
+<h2 id="_5">启动流程<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>类似于namesrv的启动</p>
+<ol>
+<li>加载配置文件，创建BrokerController：配置类有brokerConfig，nettyServerConfig，nettyClientConfig，messageStoreConfig，加载命令行指定的配置文件或属性</li>
+<li>初始化：</li>
+<li>启动：</li>
+<li>启动定时任务线程池，每30秒（默认）去注册broke到所有的namesrv</li>
+</ol>
+<h2 id="_6">消息存储流程<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p><img alt="rocketMQ存储文件" src="../images/rocketMQ%E5%AD%98%E5%82%A8%E6%96%87%E4%BB%B6.png" /></p>
+<p>主要逻辑在rocket-store里的DefaultMessageStore类里。</p>
+<blockquote>
+<p>查看DefaultMessageStore实现的MessageStore接口可以看出提供了哪些功能，需要仔细看看，以理解DefaultMessageStore。</p>
+<ul>
+<li>putMessages(), </li>
+<li>asyncPutMessage(),</li>
+<li>getMaxOffsetInQueue(), </li>
+<li>getMinOffsetInQueue(),</li>
+<li>long getCommitLogOffsetInQueue(final String topic, final int queueId, final long consumeQueueOffset);</li>
+<li>long getOffsetInQueueByTime(final String topic, final int queueId, final long timestamp);</li>
+<li>MessageExt lookMessageByOffset(final long commitLogOffset);
+</li>
+</ul>
+</blockquote>
+<p>消息存储的最终入口方法是DefaultMessageStore的 <code>Result putMessage(MessageExtBrokerInner msg)</code> 方法。入参接受的消息类MessageExtBrokerInner相比MessageExt多了propertiesString，tagsCode两个属性</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm">* 消息处理的重要方法</span>
+<span class="cm">*/</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">PutMessageResult</span><span class="w"> </span><span class="nf">putMessage</span><span class="p">(</span><span class="n">MessageExtBrokerInner</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// check 不能是slave结点，磁盘是否可写，pageCache是否busy</span>
+<span class="w">    </span><span class="n">PutMessageStatus</span><span class="w"> </span><span class="n">checkStoreStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">checkStoreStatus</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">checkStoreStatus</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">PutMessageStatus</span><span class="p">.</span><span class="na">PUT_OK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PutMessageResult</span><span class="p">(</span><span class="n">checkStoreStatus</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// check topic不能超过127个字符, message.PropertiesString不能大于32767个字符</span>
+<span class="w">    </span><span class="n">PutMessageStatus</span><span class="w"> </span><span class="n">msgCheckStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">checkMessage</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">msgCheckStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">PutMessageStatus</span><span class="p">.</span><span class="na">MESSAGE_ILLEGAL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PutMessageResult</span><span class="p">(</span><span class="n">msgCheckStatus</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 交给commitLog！！！！</span>
+<span class="w">    </span><span class="n">PutMessageResult</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">commitLog</span><span class="p">.</span><span class="na">putMessage</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// 记录下putMessage耗时和失败次数 ，省略。。。</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>commitLog负责消息的磁盘写入，HA同步等，上面调用commitLog.putMessage(msg)如下：</p>
+<ul>
+<li>
+<p>如果是延时消息，复写topic为SCHEDULE_TOPIC_XXXX，queueId对应其延时等级；</p>
+</li>
+<li>
+<p>然后获取putMessageLock的锁，这里的锁有两种实现，ReentrantLock或者自旋锁（基于CAS），自旋锁可以在竞争少的情况下使用。也就是说下面的写入缓冲区操作是一个同步操作</p>
+</li>
+<li>
+<p>获取或新建mappedFile，MappedFileQueue对应commitLog文件，持有mappedFile</p>
+</li>
+</ul>
+<p>利用的是ByteBuffer堆外缓冲区，doAppend追加消息比较复杂：</p>
+<p>找到byteBuffer的写入位置，</p>
+<p>生成msgId, </p>
+<p>获取消息其topic-queueId找到其对应的queueOffset。如果是事务消息且状态是Prepared或Rollback，就不存入consumer queue，</p>
+<p>然后拼接消息，如TOTALSIZE，BODYCRC，QUEUEID，QUEUEOFFSET，BORNHOST，STORETIMESTAMP，RECONSUMETIMES，当然有消息内容BODY，TOPIC，propertiesData等等，最后调用<code>byteBuffer.put(this.msgStoreItemMemory.array(), 0, msgLen);</code>写入到内存缓冲区中</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm">* ==========================================================</span>
+<span class="cm">* 存储消息的重要流程方法</span>
+<span class="cm">*/</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">PutMessageResult</span><span class="w"> </span><span class="nf">putMessage</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">MessageExtBrokerInner</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 设置StoreTimestamp和BodyCRC属性</span>
+<span class="w">    </span><span class="n">msg</span><span class="p">.</span><span class="na">setStoreTimestamp</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">());</span>
+<span class="w">    </span><span class="n">msg</span><span class="p">.</span><span class="na">setBodyCRC</span><span class="p">(</span><span class="n">UtilAll</span><span class="p">.</span><span class="na">crc32</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="na">getBody</span><span class="p">()));</span>
+
+<span class="w">    </span><span class="n">AppendMessageResult</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="n">StoreStatsService</span><span class="w"> </span><span class="n">storeStatsService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">defaultMessageStore</span><span class="p">.</span><span class="na">getStoreStatsService</span><span class="p">();</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">topic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="na">getTopic</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">queueId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="na">getQueueId</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">tranType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MessageSysFlag</span><span class="p">.</span><span class="na">getTransactionValue</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="na">getSysFlag</span><span class="p">());</span>
+
+<span class="w">    </span><span class="c1">// 如果是延迟消息 先判断如果不是事务消息或者是commit消息类型</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">tranType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">MessageSysFlag</span><span class="p">.</span><span class="na">TRANSACTION_NOT_TYPE</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">tranType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">MessageSysFlag</span><span class="p">.</span><span class="na">TRANSACTION_COMMIT_TYPE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Delay Delivery</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="na">getDelayTimeLevel</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 容错处理，不能超过最大延迟等级</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="na">getDelayTimeLevel</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">defaultMessageStore</span><span class="p">.</span><span class="na">getScheduleMessageService</span><span class="p">().</span><span class="na">getMaxDelayLevel</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">msg</span><span class="p">.</span><span class="na">setDelayTimeLevel</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">defaultMessageStore</span><span class="p">.</span><span class="na">getScheduleMessageService</span><span class="p">().</span><span class="na">getMaxDelayLevel</span><span class="p">());</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="c1">// ！！！这里可以看到，如果是延迟消息，更改topic为SCHEDULE_TOPIC_XXXX</span>
+<span class="w">            </span><span class="n">topic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TopicValidator</span><span class="p">.</span><span class="na">RMQ_SYS_SCHEDULE_TOPIC</span><span class="p">;</span>
+<span class="w">            </span><span class="c1">// 每个delayLevel对应一个queue</span>
+<span class="w">            </span><span class="n">queueId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ScheduleMessageService</span><span class="p">.</span><span class="na">delayLevel2QueueId</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="na">getDelayTimeLevel</span><span class="p">());</span>
+
+<span class="w">            </span><span class="c1">// Backup real topic, queueId 记录下原始的topic和queueID，以便在到期投递时使用</span>
+<span class="w">            </span><span class="n">MessageAccessor</span><span class="p">.</span><span class="na">putProperty</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="n">MessageConst</span><span class="p">.</span><span class="na">PROPERTY_REAL_TOPIC</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">.</span><span class="na">getTopic</span><span class="p">());</span>
+<span class="w">            </span><span class="n">MessageAccessor</span><span class="p">.</span><span class="na">putProperty</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="n">MessageConst</span><span class="p">.</span><span class="na">PROPERTY_REAL_QUEUE_ID</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="na">getQueueId</span><span class="p">()));</span>
+<span class="w">            </span><span class="n">msg</span><span class="p">.</span><span class="na">setPropertiesString</span><span class="p">(</span><span class="n">MessageDecoder</span><span class="p">.</span><span class="na">messageProperties2String</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="na">getProperties</span><span class="p">()));</span>
+<span class="w">            </span><span class="n">msg</span><span class="p">.</span><span class="na">setTopic</span><span class="p">(</span><span class="n">topic</span><span class="p">);</span>
+<span class="w">            </span><span class="n">msg</span><span class="p">.</span><span class="na">setQueueId</span><span class="p">(</span><span class="n">queueId</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">MappedFile</span><span class="w"> </span><span class="n">unlockMappedFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="n">MappedFile</span><span class="w"> </span><span class="n">mappedFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">mappedFileQueue</span><span class="p">.</span><span class="na">getLastMappedFile</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// !!! 这里存储消息前要先加锁，这里的锁有两种实现ReentrantLock或者自旋锁（基于CAS），自旋锁可以在竞争少的情况下使用</span>
+<span class="w">    </span><span class="n">putMessageLock</span><span class="p">.</span><span class="na">lock</span><span class="p">();</span><span class="w"> </span><span class="c1">//spin or ReentrantLock ,depending on store config</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">beginLockTimestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">defaultMessageStore</span><span class="p">.</span><span class="na">getSystemClock</span><span class="p">().</span><span class="na">now</span><span class="p">();</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">beginTimeInLock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">beginLockTimestamp</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Here settings are stored timestamp, in order to ensure an orderly global</span>
+<span class="w">        </span><span class="c1">// 上面已经设置了一次StoreTimestamp，这里是拿到锁以后又设置一次，可以保证全局有序</span>
+<span class="w">        </span><span class="n">msg</span><span class="p">.</span><span class="na">setStoreTimestamp</span><span class="p">(</span><span class="n">beginLockTimestamp</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">mappedFile</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">mappedFile</span><span class="p">.</span><span class="na">isFull</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 如果mappedFile为空或者满了，就新创建一个</span>
+<span class="w">            </span><span class="n">mappedFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">mappedFileQueue</span><span class="p">.</span><span class="na">getLastMappedFile</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// Mark: NewFile may be cause noise</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">mappedFile</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;create mapped file1 error&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">beginTimeInLock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PutMessageResult</span><span class="p">(</span><span class="n">PutMessageStatus</span><span class="p">.</span><span class="na">CREATE_MAPEDFILE_FAILED</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// 利用appendMessageCallback去追加消息到commitLog</span>
+<span class="w">        </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mappedFile</span><span class="p">.</span><span class="na">appendMessage</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">appendMessageCallback</span><span class="p">);</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">getStatus</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">PUT_OK</span><span class="p">:</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">END_OF_FILE</span><span class="p">:</span>
+<span class="w">                </span><span class="n">unlockMappedFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mappedFile</span><span class="p">;</span>
+<span class="w">                </span><span class="c1">// Create a new file, re-write the message</span>
+<span class="w">                </span><span class="n">mappedFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">mappedFileQueue</span><span class="p">.</span><span class="na">getLastMappedFile</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">mappedFile</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="c1">// XXX: warn and notify me</span>
+<span class="w">                    </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;create mapped file2 error&quot;</span><span class="p">);</span>
+<span class="w">                    </span><span class="n">beginTimeInLock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PutMessageResult</span><span class="p">(</span><span class="n">PutMessageStatus</span><span class="p">.</span><span class="na">CREATE_MAPEDFILE_FAILED</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mappedFile</span><span class="p">.</span><span class="na">appendMessage</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">appendMessageCallback</span><span class="p">);</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">MESSAGE_SIZE_EXCEEDED</span><span class="p">:</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">PROPERTIES_SIZE_EXCEEDED</span><span class="p">:</span>
+<span class="w">                </span><span class="n">beginTimeInLock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PutMessageResult</span><span class="p">(</span><span class="n">PutMessageStatus</span><span class="p">.</span><span class="na">MESSAGE_ILLEGAL</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">UNKNOWN_ERROR</span><span class="p">:</span>
+<span class="w">                </span><span class="n">beginTimeInLock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PutMessageResult</span><span class="p">(</span><span class="n">PutMessageStatus</span><span class="p">.</span><span class="na">UNKNOWN_ERROR</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+<span class="w">            </span><span class="k">default</span><span class="p">:</span>
+<span class="w">                </span><span class="n">beginTimeInLock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PutMessageResult</span><span class="p">(</span><span class="n">PutMessageStatus</span><span class="p">.</span><span class="na">UNKNOWN_ERROR</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">putMessageLock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">elapsedTimeInLock</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">500</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 如果保存消息超过500ms，提醒一下</span>
+<span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;[NOTIFYME]putMessage in lock cost time(ms)={});</span>
+<span class="s">    }</span>
+
+<span class="s">    if (null != unlockMappedFile &amp;&amp; this.defaultMessageStore.getMessageStoreConfig().isWarmMapedFileEnable()) {</span>
+<span class="s">        this.defaultMessageStore.unlockMappedFile(unlockMappedFile);</span>
+<span class="s">    }</span>
+
+<span class="s">    PutMessageResult putMessageResult = new PutMessageResult(PutMessageStatus.PUT_OK, result);</span>
+
+<span class="s">    // Statistics统计数据，每个topic发了多少条消息，消息总共有有多大了</span>
+<span class="s">    storeStatsService.getSinglePutMessageTopicTimesTotal(msg.getTopic()).incrementAndGet();</span>
+<span class="s">    storeStatsService.getSinglePutMessageTopicSizeTotal(topic).addAndGet(result.getWroteBytes());</span>
+
+<span class="s">    // 处理同步刷盘还是异步刷盘</span>
+<span class="s">    handleDiskFlush(result, putMessageResult, msg);</span>
+<span class="s">    // 处理同步主从复制还是异步</span>
+<span class="s">    handleHA(result, putMessageResult, msg);</span>
+
+<span class="s">    return putMessageResult;</span>
+<span class="s">}</span>
+</code></pre></div>
+<h3 id="consumequeueindexfile">分发消息到consumequeue文件和IndexFile文件<a class="headerlink" href="#consumequeueindexfile" title="Permanent link">&para;</a></h3>
+<p>文件放入到commitLog后，要实时更新通知consumequeue文件和IndexFile文件，这是如何实现的呢？</p>
+<p>DefaultMessageStore启动时开启了一个ReputMessageService线程任务，它不停的每隔1ms循环的doReput()，利用reputFromOffset记录上次在commitLog消费的位置，不停的从commitLog读取消息进行分发。dispatcherList里分发的对象即为ConsumeQueue和Index，依次将每个消息转发给ConsumeQueueService和IndexService。</p>
+<p>IndexService为消息创建UniqKey，并为每个key都创建索引，格式如topic + "#" + key，也就是一个消息会创建多个索引</p>
+<h3 id="_7">消息刷盘<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>rocketMQ的消息存储到磁盘是基于Java NIO的内存映射机制MappedByteBuffer，存储时是先将消息追加到内存，然后同步或异步的刷写到磁盘</p>
+<p><img alt="rocketmq消息刷盘" src="../images/rocketmq%E6%B6%88%E6%81%AF%E5%88%B7%E7%9B%98.png" /></p>
+<p>(1) 同步刷盘：如上图所示，只有在消息真正持久化至磁盘后RocketMQ的Broker端才会真正返回给Producer端一个成功的ACK响应。同步刷盘对MQ消息可靠性来说是一种不错的保障，但是性能上会有较大影响，一般适用于金融业务应用该模式较多。</p>
+<p>(2) 异步刷盘：能够充分利用OS的PageCache的优势，只要消息写入PageCache即可将成功的ACK返回给Producer端。消息刷盘采用后台异步线程提交的方式进行，降低了读写延迟，提高了MQ的性能和吞吐量。</p>
+<p>一般broke采用多Master多Slave模式-异步复制，即每个Master配置一个Slave，有多对Master-Slave，HA采用异步复制方式，主备有短暂消息延迟（毫秒级）。如果master磁盘损坏会丢失少量消息。如果master宕机，仍然可从slave消费。</p>
+<p>根据消息的topic和queueId找到对应的ConsumeQueue，组装那20个字节，写入ByteBuffer。只追加到物理文件的内存映射中，ConsumeQueue固定为异步刷盘。</p>
+<p>index File的刷盘是每当更新索引时将上一次的改动刷写到磁盘。ConsummerQueue是固定的异步刷盘。</p>
+<p>追加消息到commitLog后，处理消息刷盘和HA同步，如下：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 处理刷盘</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">handleDiskFlush</span><span class="p">(</span><span class="n">AppendMessageResult</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">PutMessageResult</span><span class="w"> </span><span class="n">putMessageResult</span><span class="p">,</span><span class="w"> </span><span class="n">MessageExt</span><span class="w"> </span><span class="n">messageExt</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Synchronization flush 如果是同步刷盘</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">FlushDiskType</span><span class="p">.</span><span class="na">SYNC_FLUSH</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">defaultMessageStore</span><span class="p">.</span><span class="na">getMessageStoreConfig</span><span class="p">().</span><span class="na">getFlushDiskType</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// GroupCommitService负责进行刷盘</span>
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">GroupCommitService</span><span class="w"> </span><span class="n">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">GroupCommitService</span><span class="p">)</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">flushCommitLogService</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// 如果producer设置消息WaitStoreMsgOK，还要等待刷盘OK成功才返回给producer端，这样最安全但是也更慢</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">messageExt</span><span class="p">.</span><span class="na">isWaitStoreMsgOK</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">GroupCommitRequest</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GroupCommitRequest</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">getWroteOffset</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">getWroteBytes</span><span class="p">());</span>
+<span class="w">            </span><span class="c1">// 添加刷盘请求（后台循环每隔10毫秒批量刷盘。10毫秒中如果有多个请求，则多个请求一块刷盘）</span>
+<span class="w">            </span><span class="n">service</span><span class="p">.</span><span class="na">putRequest</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+<span class="w">            </span><span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">PutMessageStatus</span><span class="o">&gt;</span><span class="w"> </span><span class="n">flushOkFuture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">future</span><span class="p">();</span>
+<span class="w">            </span><span class="n">PutMessageStatus</span><span class="w"> </span><span class="n">flushStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// 5秒超时</span>
+<span class="w">                </span><span class="n">flushStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">flushOkFuture</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">defaultMessageStore</span><span class="p">.</span><span class="na">getMessageStoreConfig</span><span class="p">().</span><span class="na">getSyncFlushTimeout</span><span class="p">(),</span>
+<span class="w">                                                </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">MILLISECONDS</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ExecutionException</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">TimeoutException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//flushOK=false;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">flushStatus</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">PutMessageStatus</span><span class="p">.</span><span class="na">PUT_OK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;do groupcommit, wait for flush failed, topic: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">messageExt</span><span class="p">.</span><span class="na">getTopic</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; tags: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">messageExt</span><span class="p">.</span><span class="na">getTags</span><span class="p">()</span>
+<span class="w">                          </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; client address: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">messageExt</span><span class="p">.</span><span class="na">getBornHostString</span><span class="p">());</span>
+<span class="w">                </span><span class="n">putMessageResult</span><span class="p">.</span><span class="na">setPutMessageStatus</span><span class="p">(</span><span class="n">PutMessageStatus</span><span class="p">.</span><span class="na">FLUSH_DISK_TIMEOUT</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 如果没有设置WaitStoreMsgOK，那就是只要同步刷盘就好了？也就是万一同步刷盘失败了，producer也不知道。</span>
+<span class="w">            </span><span class="n">service</span><span class="p">.</span><span class="na">wakeup</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// Asynchronous flush</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="na">defaultMessageStore</span><span class="p">.</span><span class="na">getMessageStoreConfig</span><span class="p">().</span><span class="na">isTransientStorePoolEnable</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">flushCommitLogService</span><span class="p">.</span><span class="na">wakeup</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">commitLogService</span><span class="p">.</span><span class="na">wakeup</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>异步刷盘时，先将消息写入到堆外内存，然后由CommitRealTimeService每200毫秒写入到commitLog对应的ByteBuffer中，然后FlushRealTimeService每500毫秒刷入磁盘。</p>
+<p><strong>HA同步</strong></p>
+<p>broke_role有三种，ASYNC_MASTER，SYNC_MASTER，SLAVE</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">handleHA</span><span class="p">(</span><span class="n">AppendMessageResult</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">PutMessageResult</span><span class="w"> </span><span class="n">putMessageResult</span><span class="p">,</span><span class="w"> </span><span class="n">MessageExt</span><span class="w"> </span><span class="n">messageExt</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">BrokerRole</span><span class="p">.</span><span class="na">SYNC_MASTER</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">defaultMessageStore</span><span class="p">.</span><span class="na">getMessageStoreConfig</span><span class="p">().</span><span class="na">getBrokerRole</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">HAService</span><span class="w"> </span><span class="n">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">defaultMessageStore</span><span class="p">.</span><span class="na">getHaService</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">// 如果开始WaitStoreMsgOK，才同步？？</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">messageExt</span><span class="p">.</span><span class="na">isWaitStoreMsgOK</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Determine whether to wait</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">service</span><span class="p">.</span><span class="na">isSlaveOK</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">getWroteOffset</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">getWroteBytes</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">GroupCommitRequest</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GroupCommitRequest</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">getWroteOffset</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">getWroteBytes</span><span class="p">());</span>
+<span class="w">                </span><span class="n">service</span><span class="p">.</span><span class="na">putRequest</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+<span class="w">                </span><span class="n">service</span><span class="p">.</span><span class="na">getWaitNotifyObject</span><span class="p">().</span><span class="na">wakeupAll</span><span class="p">();</span>
+<span class="w">                </span><span class="n">PutMessageStatus</span><span class="w"> </span><span class="n">replicaStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">                </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="c1">// 同步复制的超时时候为5秒</span>
+<span class="w">                    </span><span class="n">replicaStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">future</span><span class="p">().</span><span class="na">get</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">defaultMessageStore</span><span class="p">.</span><span class="na">getMessageStoreConfig</span><span class="p">().</span><span class="na">getSyncFlushTimeout</span><span class="p">(),</span>
+<span class="w">                                                         </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">MILLISECONDS</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ExecutionException</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">TimeoutException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">replicaStatus</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">PutMessageStatus</span><span class="p">.</span><span class="na">PUT_OK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;do sync transfer other node, wait return, but failed, topic: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">messageExt</span><span class="p">.</span><span class="na">getTopic</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; tags: &quot;</span>
+<span class="w">                              </span><span class="o">+</span><span class="w"> </span><span class="n">messageExt</span><span class="p">.</span><span class="na">getTags</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; client address: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">messageExt</span><span class="p">.</span><span class="na">getBornHostNameString</span><span class="p">());</span>
+<span class="w">                    </span><span class="n">putMessageResult</span><span class="p">.</span><span class="na">setPutMessageStatus</span><span class="p">(</span><span class="n">PutMessageStatus</span><span class="p">.</span><span class="na">FLUSH_SLAVE_TIMEOUT</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="c1">// Slave problem</span>
+<span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// Tell the producer, slave not available</span>
+<span class="w">                </span><span class="n">putMessageResult</span><span class="p">.</span><span class="na">setPutMessageStatus</span><span class="p">(</span><span class="n">PutMessageStatus</span><span class="p">.</span><span class="na">SLAVE_NOT_AVAILABLE</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_8">消息存储文件<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<p>消息存储是RocketMQ中最为复杂和最为重要的一部分，下面将分别从RocketMQ的消息存储整体架构、PageCache与Mmap内存映射以及RocketMQ中两种不同的刷盘方式三方面来分别展开叙述</p>
+<h3 id="1_1">1.消息存储的整体架构<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<p>主要有三个和消息存储有关的文件</p>
+<p><img alt="rocketmq_file" src="../images/rocketmq_file.png" /></p>
+<p>(1) CommitLog：消息主体以及元数据的存储主体，单个文件大小默认1G 。文件名长度为20位，用其文件中第一个消息的偏移量来表示文件名，比如00000000000000000000代表了第一个文件，起始偏移量为0；消息主要是顺序写入日志文件，当第一个文件写满了，第二个文件名为00000000001073741824，起始偏移量为1073741824，以此类推。注意写入的消息内容是不定长的</p>
+<p>(2) ConsumeQueue：逻辑消费队列，引入的目的主要是提高消息消费的性能，消息消费是针对topic进行的，如果要遍历commitlog文件中根据topic检索消息是非常低效的。Consumer即可根据ConsumeQueue来查找待消费的消息。</p>
+<p>consumequeue文件可以看成是基于topic的commitlog索引文件，故consumequeue文件的组织方式如下：topic/queue/file三层组织结构，具体存储路径为：<code>$HOME/store/consumequeue/{topic}/{queueId}/{fileName}</code>。</p>
+<p>consumequeue文件采取定长设计，每一个条目共20个字节，分别为8字节的commitlog物理偏移量、4字节的消息长度、8字节tag hashcode，单个文件由30W个条目组成（指向30万条消息），可以像数组一样随机访问每一个条目，每个ConsumeQueue文件大小约5.72M = （8 + 8 + 4）* 300000 ；</p>
+<p>(3) IndexFile：IndexFile（索引文件）提供了一种可以通过key或时间区间来查询消息的方法。Index文件的存储位置是：<code>$HOME \store\index${fileName}</code>，fileName是以创建时的时间戳命名的，固定的单个IndexFile文件大小约为400M，一个IndexFile可以保存 2000W个索引，IndexFile的底层存储设计为在文件系统中实现HashMap结构，故rocketmq的索引文件其底层实现为hash索引。</p>
+<p>(4) abort文件表示broke是否正常关闭，broke正常关闭时会删除掉abort文件。也就是说broke关闭后如果存在abort文件，说明非正常关闭。</p>
+<p>(5) checkpoint文件存储的是CommitLog文件最后一次刷盘的时间戳，ConsumeQueue文件和indexFile文件的最后一次刷盘时间，用于程序崩溃恢复时使用</p>
+<h3 id="2">2. 页缓存与内存映射<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>ConsumeQueue文件存储的数据较少，并且可以顺序读取，在page cache机制的预读取作用下，ConsumeQueue文件的读性能几乎接近读内存，即使在有消息堆积情况下也不会影响性能。</p>
+<blockquote>
+<p>页缓存（PageCache)是OS对文件的缓存，用于加速对文件的读写。一般来说，程序对文件进行顺序读写的速度几乎接近于内存的读写速度，主要原因就是由于OS使用PageCache机制对读写访问操作进行了性能优化，将一部分的内存用作PageCache。对于数据的写入，OS会先写入至Cache内，随后通过异步的方式由pdflush内核线程将Cache内的数据刷盘至物理磁盘上。对于数据的读取，如果一次读取文件时出现未命中PageCache的情况，OS从物理磁盘上访问读取文件的同时，会顺序对其他相邻块的数据文件进行预读取。</p>
+<p><img alt="pageCache" src="../images/pageCache.jpeg" /></p>
+</blockquote>
+<p>对于CommitLog文件来说，会产生较多的随机访问读取，严重影响性能。如果选择合适的系统IO调度算法，比如设置调度算法为“Deadline”（此时块存储采用SSD的话），随机读的性能也会有所提升。</p>
+<h3 id="_9">内存映射<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>rocketmq使用内存映射来提高IO访问性能，CommitLog文件，ConsumeQueue文件，IndexFile文件都设计成了固定长度大小。</p>
+<blockquote>
+<p>FileChannel表示连接到文件的管道，是使用标准Java IO读取文件的一种替代方案；ByteBuffer是字节缓冲区，MappedByteBuffer是其子类。缓冲区与通道一起工作，将磁盘上的物理文件直接映射到用户态的内存地址中，减少了传统IO将磁盘文件数据在操作系统内核缓冲区和用户缓冲区之间拷贝的性能开销。也称零拷贝技术或直接内存技术</p>
+</blockquote>
+<p>使用MappedFileQueue和MappedFile封装文件，MappedFile可以看作是文件在内存的映射，MappedFileQueue是文件夹。</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MappedFileQueue</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 文件的存储目录，包括CommitLog文件，ConsumeQueue文件，IndexFile文件</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">storePath</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 单个文件的存储大小，CommitLog文件默认是1G，</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mappedFileSize</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 持有多个MappedFile文件</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">CopyOnWriteArrayList</span><span class="o">&lt;</span><span class="n">MappedFile</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mappedFiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CopyOnWriteArrayList</span><span class="o">&lt;</span><span class="n">MappedFile</span><span class="o">&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// 用于当前MappedFile写满后，创建新的</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">AllocateMappedFileService</span><span class="w"> </span><span class="n">allocateMappedFileService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 当前刷盘指针，表示该指针之前的数据都全部持久化到磁盘了</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">flushedWhere</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 当前数据提交指针，内存中ByteBuffer当前写指针。显然该值会大于等于flushedWhere</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">committedWhere</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 根据时间戳来查找MappedFile</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">MappedFile</span><span class="w"> </span><span class="nf">getMappedFileByTime</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">timestamp</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="c1">// 根据消息偏移量来查找MappedFile</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">MappedFile</span><span class="w"> </span><span class="nf">findMappedFileByOffset</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">offset</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">returnFirstOnNotFound</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="c1">// 获取当前文件的写指针</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="nf">getMaxWrotePosition</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MappedFile</span><span class="w"> </span><span class="n">mappedFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getLastMappedFile</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mappedFile</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">mappedFile</span><span class="p">.</span><span class="na">getFileFromOffset</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">mappedFile</span><span class="p">.</span><span class="na">getWrotePosition</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>MappedFile是物理文件的内存映射管理类，</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MappedFile</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ReferenceResource</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 系统的页大小 4K</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">OS_PAGE_SIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 当前虚拟机中MappedFile内存的大小</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">AtomicLong</span><span class="w"> </span><span class="n">TOTAL_MAPPED_VIRTUAL_MEMORY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AtomicLong</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// 当前JVM中MappedFile的个数</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">AtomicInteger</span><span class="w"> </span><span class="n">TOTAL_MAPPED_FILES</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AtomicInteger</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// 该文件当前的写指针，从0开始</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">AtomicInteger</span><span class="w"> </span><span class="n">wrotePosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AtomicInteger</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// 该文件当前的提交指针。如果开启TransientStorePool，则数据会先存储在TransientStorePool或者说ByteBuffer中</span>
+<span class="w">    </span><span class="c1">// 然后再提交到内存映射ByteBuffer中，再刷写到磁盘</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">AtomicInteger</span><span class="w"> </span><span class="n">committedPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AtomicInteger</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// 该指针之前的数据都已经持久化到硬盘</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">AtomicInteger</span><span class="w"> </span><span class="n">flushedPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AtomicInteger</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// 文件大小</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">fileSize</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">fileName</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">fileFromOffset</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">File</span><span class="w"> </span><span class="n">file</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 堆内存ByteBuffer，如果不为空，数据会先存储到在该ByteBuffer中，然后再提交到内存映射文件mappedByteBuffer中</span>
+<span class="w">    </span><span class="c1">// Message will put to here first, and then reput to FileChannel if writeBuffer is not null.</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="n">ByteBuffer</span><span class="w"> </span><span class="n">writeBuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// 堆暂存池，开启TransientStorePoolEnable时不为空</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="n">TransientStorePool</span><span class="w"> </span><span class="n">transientStorePool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+
+<span class="w">    </span><span class="o">/</span><span class="w"> </span><span class="n">文件通道</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="n">FileChannel</span><span class="w"> </span><span class="n">fileChannel</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// 物理文件的内存映射区域</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MappedByteBuffer</span><span class="w"> </span><span class="n">mappedByteBuffer</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 文件最后一次写入的时间戳</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">volatile</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">storeTimestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// 是否是MappedFileQueue的第一个文件</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">firstCreateInQueue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">    * 初始化逻辑</span>
+<span class="cm">    */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">fileName</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">fileSize</span><span class="p">,</span>
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">TransientStorePool</span><span class="w"> </span><span class="n">transientStorePool</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="n">init</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="w"> </span><span class="n">fileSize</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// 创建transientStorePool</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">writeBuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transientStorePool</span><span class="p">.</span><span class="na">borrowBuffer</span><span class="p">();</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">transientStorePool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transientStorePool</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">fileName</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">fileSize</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">fileName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fileName</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">fileSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fileSize</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">fileName</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// fileName即是初始偏移量</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">fileFromOffset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Long</span><span class="p">.</span><span class="na">parseLong</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">file</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+
+<span class="w">        </span><span class="n">ensureDirOK</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">file</span><span class="p">.</span><span class="na">getParent</span><span class="p">());</span>
+
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 创建物理文件file的fileChannel，然后创建对应的mappedByteBuffer</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">fileChannel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RandomAccessFile</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">file</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;rw&quot;</span><span class="p">).</span><span class="na">getChannel</span><span class="p">();</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">mappedByteBuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">fileChannel</span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">MapMode</span><span class="p">.</span><span class="na">READ_WRITE</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">fileSize</span><span class="p">);</span>
+
+<span class="w">            </span><span class="n">TOTAL_MAPPED_VIRTUAL_MEMORY</span><span class="p">.</span><span class="na">addAndGet</span><span class="p">(</span><span class="n">fileSize</span><span class="p">);</span>
+<span class="w">            </span><span class="n">TOTAL_MAPPED_FILES</span><span class="p">.</span><span class="na">incrementAndGet</span><span class="p">();</span>
+<span class="w">            </span><span class="n">ok</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">FileNotFoundException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="n">e</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>可以看到rocketMq创建了一个单独的TransientStorePool（TransientStorePool默认创建5个大小1G的ByteBuffer，并锁定避免被内存交换）用来临时存储数据，如果开启后，数据会先写入该内存中，然后由commit线程定时将数据从该内存复制到物理文件映射的mappedByteBuffer中，引入该机制的原因是提供内存锁定，将当前堆外内存一直锁定在内存中，避免被进程将内存交换到磁盘。</p>
+<h3 id="_10">过期文件删除机制<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>rocketmq是基于内存映射机制的，启动时会加载目录下所有的CommitLog和ConsumeQueue文件，因此为了避免内存和磁盘的浪费，需要定期进行删除。rocketmq是顺序写入，在下一个文件创建后，上一个文件不会再被更新。机制是，如果一个文件在一定时间（默认72小时）内没有被消费，就认为是过期文件要被删除，不会关心上面消息是否被全部消费。</p>
+<p>DefaultMessageStore添加了定时任务，每10秒去检查清除 DefaultMessageStore.this.cleanFilesPeriodically()</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">cleanFilesPeriodically</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">cleanCommitLogService</span><span class="p">.</span><span class="na">run</span><span class="p">();</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">cleanConsumeQueueService</span><span class="p">.</span><span class="na">run</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>具体删除文件，会在每天凌晨4点，或者磁盘空间不够用，或者预留的手动删除接口</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteExpiredFiles</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">deleteCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// 文件保留的时间</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">fileReservedTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DefaultMessageStore</span><span class="p">.</span><span class="na">this</span><span class="p">.</span><span class="na">getMessageStoreConfig</span><span class="p">().</span><span class="na">getFileReservedTime</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// 删除物理文件的间隔</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">deletePhysicFilesInterval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DefaultMessageStore</span><span class="p">.</span><span class="na">this</span><span class="p">.</span><span class="na">getMessageStoreConfig</span><span class="p">().</span><span class="na">getDeleteCommitLogFilesInterval</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">destroyMapedFileIntervalForcibly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DefaultMessageStore</span><span class="p">.</span><span class="na">this</span><span class="p">.</span><span class="na">getMessageStoreConfig</span><span class="p">().</span><span class="na">getDestroyMapedFileIntervalForcibly</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// 是否4点了</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">timeup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">isTimeToDelete</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// 是否磁盘空间快满了</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">spacefull</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">isSpaceToDelete</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">manualDelete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">manualDeleteFileSeveralTimes</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 只要满足1个，就执行删除文件</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">timeup</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">spacefull</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">manualDelete</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">manualDelete</span><span class="p">)</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">manualDeleteFileSeveralTimes</span><span class="o">--</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">cleanAtOnce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DefaultMessageStore</span><span class="p">.</span><span class="na">this</span><span class="p">.</span><span class="na">getMessageStoreConfig</span><span class="p">().</span><span class="na">isCleanFileForciblyEnable</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">cleanImmediately</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;begin to delete before {} hours file. timeup:&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">fileReservedTime</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">deleteCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DefaultMessageStore</span><span class="p">.</span><span class="na">this</span><span class="p">.</span><span class="na">commitLog</span><span class="p">.</span><span class="na">deleteExpiredFile</span><span class="p">(</span><span class="n">fileReservedTime</span><span class="p">,</span><span class="w"> </span><span class="n">deletePhysicFilesInterval</span><span class="p">,</span><span class="w"> </span><span class="n">destroyMapedFileIntervalForcibly</span><span class="p">,</span><span class="w"> </span><span class="n">cleanAtOnce</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_11">事务消息<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<p>producer发送事务消息，如果发送成功就执行本地事务<code>localTransactionState = transactionListener.executeLocalTransaction(msg, arg);</code>，然后将本地事务的执行状态告知broker。</p>
+<p>broker服务端：如果是半事务消息就委托给TransactionalMessageBridge，它会修改半事务消息的Topic，禁止其被消费。这里看到所有半事务消息都被放到"RMQ_SYS_TRANS_HALF_TOPIC"同一个queue里</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="n">MessageExtBrokerInner</span><span class="w"> </span><span class="nf">parseHalfMessageInner</span><span class="p">(</span><span class="n">MessageExtBrokerInner</span><span class="w"> </span><span class="n">msgInner</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="n">MessageAccessor</span><span class="p">.</span><span class="na">putProperty</span><span class="p">(</span><span class="n">msgInner</span><span class="p">,</span><span class="w"> </span><span class="n">MessageConst</span><span class="p">.</span><span class="na">PROPERTY_REAL_TOPIC</span><span class="p">,</span><span class="w"> </span><span class="n">msgInner</span><span class="p">.</span><span class="na">getTopic</span><span class="p">());</span>
+<span class="w">     </span><span class="n">MessageAccessor</span><span class="p">.</span><span class="na">putProperty</span><span class="p">(</span><span class="n">msgInner</span><span class="p">,</span><span class="w"> </span><span class="n">MessageConst</span><span class="p">.</span><span class="na">PROPERTY_REAL_QUEUE_ID</span><span class="p">,</span>
+<span class="w">                                 </span><span class="n">String</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">msgInner</span><span class="p">.</span><span class="na">getQueueId</span><span class="p">()));</span>
+<span class="w">     </span><span class="n">msgInner</span><span class="p">.</span><span class="na">setSysFlag</span><span class="p">(</span>
+<span class="w">         </span><span class="n">MessageSysFlag</span><span class="p">.</span><span class="na">resetTransactionValue</span><span class="p">(</span><span class="n">msgInner</span><span class="p">.</span><span class="na">getSysFlag</span><span class="p">(),</span><span class="w"> </span><span class="n">MessageSysFlag</span><span class="p">.</span><span class="na">TRANSACTION_NOT_TYPE</span><span class="p">));</span>
+<span class="w">     </span><span class="c1">// 修改Topic，不投递到queue</span>
+<span class="w">     </span><span class="n">msgInner</span><span class="p">.</span><span class="na">setTopic</span><span class="p">(</span><span class="n">TransactionalMessageUtil</span><span class="p">.</span><span class="na">buildHalfTopic</span><span class="p">());</span>
+<span class="w">     </span><span class="n">msgInner</span><span class="p">.</span><span class="na">setQueueId</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">     </span><span class="n">msgInner</span><span class="p">.</span><span class="na">setPropertiesString</span><span class="p">(</span><span class="n">MessageDecoder</span><span class="p">.</span><span class="na">messageProperties2String</span><span class="p">(</span><span class="n">msgInner</span><span class="p">.</span><span class="na">getProperties</span><span class="p">()));</span>
+<span class="w">     </span><span class="k">return</span><span class="w"> </span><span class="n">msgInner</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>之后在追加到commitLog中时，如果是半事务PREPARED_TYPE消息或者ROLLBACK_TYPE回滚消息，就把对应队列的queueOffset设置为0，禁止进行消费。</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Transaction messages that require special handling</span>
+<span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">tranType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MessageSysFlag</span><span class="p">.</span><span class="na">getTransactionValue</span><span class="p">(</span><span class="n">msgInner</span><span class="p">.</span><span class="na">getSysFlag</span><span class="p">());</span>
+<span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">tranType</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Prepared and Rollback message is not consumed, will not enter the consumer queue</span>
+<span class="w">        </span><span class="c1">// 事务状态如果是Prepared或Rollback，就不进入consumer queue</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">MessageSysFlag</span><span class="p">.</span><span class="na">TRANSACTION_PREPARED_TYPE</span><span class="p">:</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">MessageSysFlag</span><span class="p">.</span><span class="na">TRANSACTION_ROLLBACK_TYPE</span><span class="p">:</span>
+<span class="w">        </span><span class="n">queueOffset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="n">L</span><span class="p">;</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">MessageSysFlag</span><span class="p">.</span><span class="na">TRANSACTION_NOT_TYPE</span><span class="p">:</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">MessageSysFlag</span><span class="p">.</span><span class="na">TRANSACTION_COMMIT_TYPE</span><span class="p">:</span>
+<span class="w">    </span><span class="k">default</span><span class="p">:</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>之后在分发消息给CommitLogDispatcherBuildConsumeQueue时，如果是半事务消息或者回滚状态也不进行处理：</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">CommitLogDispatcherBuildConsumeQueue</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">CommitLogDispatcher</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">dispatch</span><span class="p">(</span><span class="n">DispatchRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">tranType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MessageSysFlag</span><span class="p">.</span><span class="na">getTransactionValue</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">getSysFlag</span><span class="p">());</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">tranType</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">MessageSysFlag</span><span class="p">.</span><span class="na">TRANSACTION_NOT_TYPE</span><span class="p">:</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">MessageSysFlag</span><span class="p">.</span><span class="na">TRANSACTION_COMMIT_TYPE</span><span class="p">:</span>
+<span class="w">                </span><span class="n">DefaultMessageStore</span><span class="p">.</span><span class="na">this</span><span class="p">.</span><span class="na">putMessagePositionInfo</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">MessageSysFlag</span><span class="p">.</span><span class="na">TRANSACTION_PREPARED_TYPE</span><span class="p">:</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">MessageSysFlag</span><span class="p">.</span><span class="na">TRANSACTION_ROLLBACK_TYPE</span><span class="p">:</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>另外有线程任务TransactionalMessageCheckService，把"RMQ_SYS_TRANS_HALF_TOPIC"里所有消息拿出来回查，每60秒check一次，拿到"RMQ_SYS_TRANS_HALF_TOPIC"下所有的MessageQueue，依次check，开启线程调用client回查消息状态，AbstractTransactionalMessageCheckListener负责接受</p>
+<blockquote>
+<p>XA协议是一种分布式事务解决方案，是典型的两阶段提交方案。作为一种通用的接口标准</p>
+<p>TC：事务协调者，驱动全局事务的提交或回滚</p>
+<p>TM：事务管理器，是全局事务的发起者，并负责全局事务的提交或回滚</p>
+<p>RM：资源管理器，管理分支事务的资源，负责分支事务的提交回滚</p>
+</blockquote>
+<h2 id="_12">定时消息<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<p>ScheduleMessageService负责定时消息的处理，通过创建一个timer线程，首次延迟1秒，把所有延迟级别队列的消息放入。</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 定时消息启动</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">start</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">started</span><span class="p">.</span><span class="na">compareAndSet</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 创建timer定时器</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Timer</span><span class="p">(</span><span class="s">&quot;ScheduleMessageTimerThread&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">delayLevelTable</span><span class="p">.</span><span class="na">entrySet</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Integer</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">entry</span><span class="p">.</span><span class="na">getKey</span><span class="p">();</span>
+<span class="w">            </span><span class="n">Long</span><span class="w"> </span><span class="n">timeDelay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">entry</span><span class="p">.</span><span class="na">getValue</span><span class="p">();</span>
+<span class="w">            </span><span class="n">Long</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">offsetTable</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">level</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">offset</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="n">L</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">timeDelay</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// FIRST_DELAY_TIME首次1秒</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="na">timer</span><span class="p">.</span><span class="na">schedule</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">DeliverDelayedMessageTimerTask</span><span class="p">(</span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="p">),</span><span class="w"> </span><span class="n">FIRST_DELAY_TIME</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// 每10秒进行持久化</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">timer</span><span class="p">.</span><span class="na">scheduleAtFixedRate</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">TimerTask</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">            </span><span class="nd">@Override</span>
+<span class="w">            </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">started</span><span class="p">.</span><span class="na">get</span><span class="p">())</span><span class="w"> </span><span class="n">ScheduleMessageService</span><span class="p">.</span><span class="na">this</span><span class="p">.</span><span class="na">persist</span><span class="p">();</span>
+<span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Throwable</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;scheduleAtFixedRate flush exception&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">defaultMessageStore</span><span class="p">.</span><span class="na">getMessageStoreConfig</span><span class="p">().</span><span class="na">getFlushDelayOffsetInterval</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>定时到了之后，就会再次放入MessageStore。</p>
+<h1 id="consumer">consumer服务<a class="headerlink" href="#consumer" title="Permanent link">&para;</a></h1>
+<h2 id="consumer_1">consumer启动流程<a class="headerlink" href="#consumer_1" title="Permanent link">&para;</a></h2>
+<p>this.consumerGroup是否需要添加namespace。实际的启动逻辑也在<code>this.defaultMQPushConsumerImpl.start();</code>里</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">synchronized</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">start</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">MQClientException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">serviceState</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 检查各种属性是否为空，是否满足规则</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">checkConfig</span><span class="p">();</span>
+
+<span class="w">            </span><span class="c1">// 复制订阅信息给rebalanceImpl，其中集群模式的消费组还要订阅一个重试主题`%RETRY% + topic`</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">copySubscription</span><span class="p">();</span>
+
+<span class="w">            </span><span class="c1">// 获取同一进程中共用的mQClientFactory</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">mQClientFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MQClientManager</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getOrCreateMQClientInstance</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">defaultMQPushConsumer</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">rpcHook</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">// rebalanceImpl</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">rebalanceImpl</span><span class="p">.</span><span class="na">setConsumerGroup</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">defaultMQPushConsumer</span><span class="p">.</span><span class="na">getConsumerGroup</span><span class="p">());</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">rebalanceImpl</span><span class="p">.</span><span class="na">setMessageModel</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">defaultMQPushConsumer</span><span class="p">.</span><span class="na">getMessageModel</span><span class="p">());</span>
+<span class="k">this</span><span class="p">.</span><span class="na">rebalanceImpl</span><span class="p">.</span><span class="na">setAllocateMessageQueueStrategy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">defaultMQPushConsumer</span><span class="p">.</span><span class="na">getAllocateMessageQueueStrategy</span><span class="p">());</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">rebalanceImpl</span><span class="p">.</span><span class="na">setmQClientFactory</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">mQClientFactory</span><span class="p">);</span>
+
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">pullAPIWrapper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PullAPIWrapper</span><span class="p">(</span>
+<span class="w">                </span><span class="n">mQClientFactory</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="na">defaultMQPushConsumer</span><span class="p">.</span><span class="na">getConsumerGroup</span><span class="p">(),</span><span class="w"> </span><span class="n">isUnitMode</span><span class="p">());</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">pullAPIWrapper</span><span class="p">.</span><span class="na">registerFilterMessageHook</span><span class="p">(</span><span class="n">filterMessageHookList</span><span class="p">);</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">defaultMQPushConsumer</span><span class="p">.</span><span class="na">getOffsetStore</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="na">offsetStore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">defaultMQPushConsumer</span><span class="p">.</span><span class="na">getOffsetStore</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">defaultMQPushConsumer</span><span class="p">.</span><span class="na">getMessageModel</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">case</span><span class="w"> </span><span class="n">BROADCASTING</span><span class="p">:</span>
+<span class="w">                        </span><span class="c1">// 广播模式，消费进度存储在本地</span>
+<span class="w">                        </span><span class="k">this</span><span class="p">.</span><span class="na">offsetStore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LocalFileOffsetStore</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">mQClientFactory</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">defaultMQPushConsumer</span><span class="p">.</span><span class="na">getConsumerGroup</span><span class="p">());</span>
+<span class="w">                        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                    </span><span class="k">case</span><span class="w"> </span><span class="n">CLUSTERING</span><span class="p">:</span>
+<span class="w">                        </span><span class="c1">// 集群模式，消费进度存储在broke</span>
+<span class="w">                        </span><span class="k">this</span><span class="p">.</span><span class="na">offsetStore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RemoteBrokerOffsetStore</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">mQClientFactory</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">defaultMQPushConsumer</span><span class="p">.</span><span class="na">getConsumerGroup</span><span class="p">());</span>
+<span class="w">                        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                    </span><span class="k">default</span><span class="p">:</span>
+<span class="w">                        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="na">defaultMQPushConsumer</span><span class="p">.</span><span class="na">setOffsetStore</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">offsetStore</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">offsetStore</span><span class="p">.</span><span class="na">load</span><span class="p">();</span>
+
+<span class="w">            </span><span class="c1">// 顺序消息还是</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">getMessageListenerInner</span><span class="p">()</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">MessageListenerOrderly</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="na">consumeOrderly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="na">consumeMessageService</span><span class="w"> </span><span class="o">=</span>
+<span class="w">                    </span><span class="k">new</span><span class="w"> </span><span class="n">ConsumeMessageOrderlyService</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">MessageListenerOrderly</span><span class="p">)</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getMessageListenerInner</span><span class="p">());</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">getMessageListenerInner</span><span class="p">()</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">MessageListenerConcurrently</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="na">consumeOrderly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="na">consumeMessageService</span><span class="w"> </span><span class="o">=</span>
+<span class="w">                    </span><span class="k">new</span><span class="w"> </span><span class="n">ConsumeMessageConcurrentlyService</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">MessageListenerConcurrently</span><span class="p">)</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getMessageListenerInner</span><span class="p">());</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">consumeMessageService</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+
+<span class="w">            </span><span class="c1">// 注册defaultMQPushConsumer到mQClientFactory</span>
+<span class="w">            </span><span class="kt">boolean</span><span class="w"> </span><span class="n">registerOK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mQClientFactory</span><span class="p">.</span><span class="na">registerConsumer</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">defaultMQPushConsumer</span><span class="p">.</span><span class="na">getConsumerGroup</span><span class="p">(),</span><span class="w"> </span><span class="k">this</span><span class="p">);</span>
+
+<span class="w">            </span><span class="n">mQClientFactory</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="w">            </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;the consumer [{}] start OK.&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">defaultMQPushConsumer</span><span class="p">.</span><span class="na">getConsumerGroup</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">updateTopicSubscribeInfoWhenSubscriptionChanged</span><span class="p">();</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">mQClientFactory</span><span class="p">.</span><span class="na">checkClientInBroker</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// 发送心跳给所有broker</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">mQClientFactory</span><span class="p">.</span><span class="na">sendHeartbeatToAllBrokerWithLock</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// 立即重新分配负载</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">mQClientFactory</span><span class="p">.</span><span class="na">rebalanceImmediately</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_13">拉取消息<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<p>消费消息有两种模式：</p>
+<p><img alt="mq_consumer" src="../images/mq_consumer.png" /></p>
+<p>一般默认使用push模式，其实底层也是基于长轮询的拉。实际的工作委托给DefaultMQPushConsumerImpl类实现。</p>
+<p><img alt="mq_消息拉取流程" src="../images/mq_%E6%B6%88%E6%81%AF%E6%8B%89%E5%8F%96%E6%B5%81%E7%A8%8B%20copy.PNG" /></p>
+<h3 id="pullmessageservice">PullMessageService循环触发消息拉取<a class="headerlink" href="#pullmessageservice" title="Permanent link">&para;</a></h3>
+<p>PullMessageService是消息拉取服务线程（只有一个，MQClientInstance启动时启动了它），会不断地从队列中获取PullRequest，然后调用对应DefaultMQPushConsumerImpl去拉取消息</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="na">isStopped</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 从LinkedBlockingQueue队列中取，take会阻塞等待</span>
+<span class="w">            </span><span class="n">PullRequest</span><span class="w"> </span><span class="n">pullRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">pullRequestQueue</span><span class="p">.</span><span class="na">take</span><span class="p">();</span>
+<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">MQConsumerInner</span><span class="w"> </span><span class="n">consumer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">mQClientFactory</span><span class="p">.</span><span class="na">selectConsumer</span><span class="p">(</span><span class="n">pullRequest</span><span class="p">.</span><span class="na">getConsumerGroup</span><span class="p">());</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">consumer</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 交给对应的DefaultMQPushConsumerImpl去拉取消息</span>
+<span class="w">            </span><span class="n">DefaultMQPushConsumerImpl</span><span class="w"> </span><span class="n">impl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">DefaultMQPushConsumerImpl</span><span class="p">)</span><span class="w"> </span><span class="n">consumer</span><span class="p">;</span>
+<span class="w">            </span><span class="n">impl</span><span class="p">.</span><span class="na">pullMessage</span><span class="p">(</span><span class="n">pullRequest</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">getServiceName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; service end&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>主要有两个地方添加PullRequest，首次是在rebalanceImpl中创建时添加；另外每次在执行PullRequest后会再次添加到pullRequestQueue中。</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PullRequest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">consumerGroup</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MessageQueue</span><span class="w"> </span><span class="n">messageQueue</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// 从broke拉到的消息先存入processQueue，然后再提交给消费线程处理</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ProcessQueue</span><span class="w"> </span><span class="n">processQueue</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// 待拉取的消息偏移量</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nextOffset</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">lockedFirst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>ProcessQueue是MessageQueue在消费端的快照。PullMessageService每次从broke默认拉取32条消息，然后顺序存放在ProcessQueue中，PullMessageService然后将消息提交给消费线程池，成功消费后从ProcessQueue中移除。</p>
+<p>DefaultMQPushConsumerImpl如何进行拉取消息呢？</p>
+<h3 id="defaultmqpushconsumerimpl">DefaultMQPushConsumerImpl负责拉取消息<a class="headerlink" href="#defaultmqpushconsumerimpl" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="err">#</span><span class="n">DefaultMQPushConsumerImpl</span>
+<span class="cm">/**</span>
+<span class="cm">* 从broke拉取消息</span>
+<span class="cm">* 拉取不管失败或成功，会再次把PullRequest放入队列</span>
+<span class="cm">*/</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">pullMessage</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">PullRequest</span><span class="w"> </span><span class="n">pullRequest</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">pullRequest</span><span class="p">.</span><span class="na">getProcessQueue</span><span class="p">().</span><span class="na">setLastPullTimestamp</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">());</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">isPause</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 延迟1秒后再次放入pullRequest</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">executePullRequestLater</span><span class="p">(</span><span class="n">pullRequest</span><span class="p">,</span><span class="w"> </span><span class="n">PULL_TIME_DELAY_MILLS_WHEN_SUSPEND</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">cachedMessageCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">processQueue</span><span class="p">.</span><span class="na">getMsgCount</span><span class="p">().</span><span class="na">get</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">cachedMessageSizeInMiB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">processQueue</span><span class="p">.</span><span class="na">getMsgSize</span><span class="p">().</span><span class="na">get</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// 消息流控。如果processQueue队列中的消息数目超过1000，就放弃本次拉取任务</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cachedMessageCount</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">defaultMQPushConsumer</span><span class="p">.</span><span class="na">getPullThresholdForQueue</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 下一个pullRequest 延迟50毫秒</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">executePullRequestLater</span><span class="p">(</span><span class="n">pullRequest</span><span class="p">,</span><span class="w"> </span><span class="n">PULL_TIME_DELAY_MILLS_WHEN_FLOW_CONTROL</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 如果队列中消息body大小超过100M，</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cachedMessageSizeInMiB</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">defaultMQPushConsumer</span><span class="p">.</span><span class="na">getPullThresholdSizeForQueue</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">executePullRequestLater</span><span class="p">(</span><span class="n">pullRequest</span><span class="p">,</span><span class="w"> </span><span class="n">PULL_TIME_DELAY_MILLS_WHEN_FLOW_CONTROL</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="na">consumeOrderly</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 不是顺序消息时，如果队列中消息的最大偏移量和最小偏移量超过2000，进行流控。主要担心如果一条消息消费阻塞，会有</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">processQueue</span><span class="p">.</span><span class="na">getMaxSpan</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">defaultMQPushConsumer</span><span class="p">.</span><span class="na">getConsumeConcurrentlyMaxSpan</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">executePullRequestLater</span><span class="p">(</span><span class="n">pullRequest</span><span class="p">,</span><span class="w"> </span><span class="n">PULL_TIME_DELAY_MILLS_WHEN_FLOW_CONTROL</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">processQueue</span><span class="p">.</span><span class="na">isLocked</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">pullRequest</span><span class="p">.</span><span class="na">isLockedFirst</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">rebalanceImpl</span><span class="p">.</span><span class="na">computePullFromWhere</span><span class="p">(</span><span class="n">pullRequest</span><span class="p">.</span><span class="na">getMessageQueue</span><span class="p">());</span>
+<span class="w">                </span><span class="kt">boolean</span><span class="w"> </span><span class="n">brokerBusy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">pullRequest</span><span class="p">.</span><span class="na">getNextOffset</span><span class="p">();</span>
+<span class="w">                </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;the first time to pull message, so fix offset from broker&quot;</span><span class="p">);</span>
+
+<span class="w">                </span><span class="n">pullRequest</span><span class="p">.</span><span class="na">setLockedFirst</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="w">                </span><span class="n">pullRequest</span><span class="p">.</span><span class="na">setNextOffset</span><span class="p">(</span><span class="n">offset</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">executePullRequestLater</span><span class="p">(</span><span class="n">pullRequest</span><span class="p">,</span><span class="w"> </span><span class="n">pullTimeDelayMillsWhenException</span><span class="p">);</span>
+<span class="w">            </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;pull message later because not locked in broker, {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">pullRequest</span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 具体的消息拉取流程较为复杂，看图吧</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">SubscriptionData</span><span class="w"> </span><span class="n">subscriptionData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">rebalanceImpl</span><span class="p">.</span><span class="na">getSubscriptionInner</span><span class="p">().</span><span class="na">get</span><span class="p">(</span><span class="n">pullRequest</span><span class="p">.</span><span class="na">getMessageQueue</span><span class="p">().</span><span class="na">getTopic</span><span class="p">());</span>
+
+
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p>broker服务端的PullMessageProcessor.processRequest()负责查询消息进行返回</p>
+<p><strong>拉取长轮询模式分析</strong></p>
+<p>rocketmq并没有真正实现push消息，而是消费者主动循环向broke拉取消息。</p>
+<p>broker端如果从messageStore发现没有新消息到达，就创建一个请求由PullRequestHoldService挂起，然后PullRequestHoldService每5秒检查一次消费是否到达（如果不开启长轮询就是1秒），如果有新消息到达就进行消息过滤判断，否则等待15秒后超时返回给消费者没有消息。另外ReputMessage.doReput()也会在消息达到时通知listener，</p>
+</blockquote>
+<p>获取到消息后放入到processQueue.putMessage(pullResult.getMsgFoundList());</p>
+<h2 id="client">定时重新分配消费client<a class="headerlink" href="#client" title="Permanent link">&para;</a></h2>
+<p>同一消费集群内的多个消费者如何负载topic下的多个consumerqueue呢，如果有新的消费者加入，如何重新分配呢？</p>
+<p>这是由RebalanceService线程类触发，每20秒进行一次重分配<code>this.mqClientFactory.doRebalance();</code>；然后遍历每个消费者，调用其内部RebalanceImpl的doRebalance方法；然后再针对每个订阅的topic，进行重分配<code>rebalanceByTopic(topic, isOrder);</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">rebalanceByTopic</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isOrder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">messageModel</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">BROADCASTING</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">MessageQueue</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mqSet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">topicSubscribeInfoTable</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">topic</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mqSet</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kt">boolean</span><span class="w"> </span><span class="n">changed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">updateProcessQueueTableInRebalance</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="n">mqSet</span><span class="p">,</span><span class="w"> </span><span class="n">isOrder</span><span class="p">);</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">changed</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">this</span><span class="p">.</span><span class="na">messageQueueChanged</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="n">mqSet</span><span class="p">,</span><span class="w"> </span><span class="n">mqSet</span><span class="p">);</span>
+<span class="w">                    </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;messageQueueChanged {} {} {} {}&quot;</span><span class="p">,</span>
+<span class="w">                             </span><span class="n">consumerGroup</span><span class="p">,</span>
+<span class="w">                             </span><span class="n">topic</span><span class="p">,</span>
+<span class="w">                             </span><span class="n">mqSet</span><span class="p">,</span>
+<span class="w">                             </span><span class="n">mqSet</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">log</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;doRebalance, {}, but the topic[{}] not exist.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">consumerGroup</span><span class="p">,</span><span class="w"> </span><span class="n">topic</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">CLUSTERING</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">MessageQueue</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mqSet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">topicSubscribeInfoTable</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">topic</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">// 从broke获取所有的消费者客户端ID</span>
+<span class="w">            </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cidAll</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">mQClientFactory</span><span class="p">.</span><span class="na">findConsumerIdList</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="n">consumerGroup</span><span class="p">);</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mqSet</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">cidAll</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">List</span><span class="o">&lt;</span><span class="n">MessageQueue</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mqAll</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">MessageQueue</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">                </span><span class="n">mqAll</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">mqSet</span><span class="p">);</span>
+
+<span class="w">                </span><span class="c1">// 排序，保证各个消费者处理的前提是一样的</span>
+<span class="w">                </span><span class="n">Collections</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">mqAll</span><span class="p">);</span>
+<span class="w">                </span><span class="n">Collections</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">cidAll</span><span class="p">);</span>
+
+<span class="w">                </span><span class="c1">// 调用分配策略进行分配，推荐使用AllocateMessageQueueAveragely和AllocateMessageQueueAveragelyByCircle</span>
+<span class="w">                </span><span class="n">AllocateMessageQueueStrategy</span><span class="w"> </span><span class="n">strategy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">allocateMessageQueueStrategy</span><span class="p">;</span>
+<span class="w">                </span><span class="n">List</span><span class="o">&lt;</span><span class="n">MessageQueue</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allocateResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">                </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">allocateResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strategy</span><span class="p">.</span><span class="na">allocate</span><span class="p">(</span>
+<span class="w">                        </span><span class="k">this</span><span class="p">.</span><span class="na">consumerGroup</span><span class="p">,</span>
+<span class="w">                        </span><span class="k">this</span><span class="p">.</span><span class="na">mQClientFactory</span><span class="p">.</span><span class="na">getClientId</span><span class="p">(),</span>
+<span class="w">                        </span><span class="n">mqAll</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">cidAll</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Throwable</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;AllocateMessageQueueStrategy.allocate Exception. allocateMessageQueueStrategyName={}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">strategy</span><span class="p">.</span><span class="na">getName</span><span class="p">(),</span>
+<span class="w">                              </span><span class="n">e</span><span class="p">);</span>
+<span class="w">                    </span><span class="k">return</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
+
+<span class="w">                </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">MessageQueue</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allocateResultSet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashSet</span><span class="o">&lt;</span><span class="n">MessageQueue</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">allocateResult</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">allocateResultSet</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">allocateResult</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+
+<span class="w">                </span><span class="c1">// 对比消息队列是否发生变化</span>
+<span class="w">                </span><span class="kt">boolean</span><span class="w"> </span><span class="n">changed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">updateProcessQueueTableInRebalance</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="n">allocateResultSet</span><span class="p">,</span><span class="w"> </span><span class="n">isOrder</span><span class="p">);</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">changed</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span>
+<span class="w">                        </span><span class="s">&quot;rebalanced result changed. allocateMessageQueueStrategyName={}, group={}, topic={}, clientId={}, mqAllSize={}, cidAllSize={}, rebalanceResultSize={}, rebalanceResultSet={}&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">strategy</span><span class="p">.</span><span class="na">getName</span><span class="p">(),</span><span class="w"> </span><span class="n">consumerGroup</span><span class="p">,</span><span class="w"> </span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">mQClientFactory</span><span class="p">.</span><span class="na">getClientId</span><span class="p">(),</span><span class="w"> </span><span class="n">mqSet</span><span class="p">.</span><span class="na">size</span><span class="p">(),</span><span class="w"> </span><span class="n">cidAll</span><span class="p">.</span><span class="na">size</span><span class="p">(),</span>
+<span class="w">                        </span><span class="n">allocateResultSet</span><span class="p">.</span><span class="na">size</span><span class="p">(),</span><span class="w"> </span><span class="n">allocateResultSet</span><span class="p">);</span>
+<span class="w">                    </span><span class="c1">// 如果改变了，重新创建队列 pullRequest等，逻辑复杂</span>
+<span class="w">                    </span><span class="k">this</span><span class="p">.</span><span class="na">messageQueueChanged</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="n">mqSet</span><span class="p">,</span><span class="w"> </span><span class="n">allocateResultSet</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">default</span><span class="p">:</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><img alt="mq_负载" src="../images/mq_%E8%B4%9F%E8%BD%BD.PNG" /></p>
+<h2 id="_14">消费消息<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
+<p>DefaultMQPushConsumerImpl在拉取到消息后放入processQueue，然后交给consumeMessageService处理：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 创建一个Runnable任务</span>
+<span class="n">ConsumeRequest</span><span class="w"> </span><span class="n">consumeRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ConsumeRequest</span><span class="p">(</span><span class="n">msgs</span><span class="p">,</span><span class="w"> </span><span class="n">processQueue</span><span class="p">,</span><span class="w"> </span><span class="n">messageQueue</span><span class="p">);</span>
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 然后提交到消费线程池</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">consumeExecutor</span><span class="p">.</span><span class="na">submit</span><span class="p">(</span><span class="n">consumeRequest</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">RejectedExecutionException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">submitConsumeRequestLater</span><span class="p">(</span><span class="n">consumeRequest</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>ConsumeRequest是一个Runnable任务，放入到线程池等待执行。是否有钩子，根据返回status决定returnType</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["search.highlight", "navigation.instant", "navigation.tracking", "navigation.expand", "toc.integrate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
