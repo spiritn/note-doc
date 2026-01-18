@@ -23,7 +23,7 @@ jobs:
         with:
           python-version: '3.x' # 使用最新稳定版Python 3
 
-      # 步骤3：安装MkDocs及其主题/插件
+      # 步骤3：安装MkDocs及其主题/插
       - name: Install dependencies
         run: |
           pip install mkdocs
