@@ -1,0 +1,48 @@
+name: Deploy MkDocs Site # 工作流名称，会在Actions页面显示
+
+# 触发条件：当代码推送到 main 分支时运行
+on:
+  push:
+    branches: [ main ]
+
+# 定义一个名为 “deploy” 的作业
+jobs:
+  deploy:
+    # 在最新的Ubuntu虚拟环境中运行
+    runs-on: ubuntu-latest
+    
+    # 定义作业的执行步骤
+    steps:
+      # 步骤1：将仓库代码检出到虚拟环境
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 步骤2：设置Python环境
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x' # 使用最新稳定版Python 3
+
+      # 步骤3：安装MkDocs及其主题/插件
+      - name: Install dependencies
+        run: |
+          pip install mkdocs
+          # 务必安装你正在使用的主题，例如material
+          pip install mkdocs-material
+          # 如果你使用了其他插件，请在这里补充安装，例如：
+          # pip install mkdocs-git-revision-date-localized-plugin
+
+      # 步骤4：构建静态网站（生成到 ‘site/‘ 目录）
+      - name: Build site
+        run: mkdocs build
+
+      # 步骤5：将构建产物部署到 gh-pages 分支
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          # 引用第一步设置的 GH_TOKEN 密钥
+          github_token: ${{ secrets.GH_TOKEN }}
+          # 指定要发布的目录（mkdocs build 生成的目录）
+          publish_dir: ./site
+          # 启用强制推送，确保每次都是全新部署
+          force_orphan: true
