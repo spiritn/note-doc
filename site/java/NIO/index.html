@@ -295,7 +295,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../database/01-基础.md" class="md-nav__link">
+      <a href="../../database/00-%E5%9F%BA%E7%A1%80/" class="md-nav__link">
         
   
   
@@ -1704,7 +1704,7 @@
 <p>出站是 <code>tail</code> 开始，入站从 <code>head</code> 开始。</p>
 <p>总结来说：</p>
 <p>入站事件，会借助channelHandlerContext的静态方法，传入head，静态方法里会调用context的invoker方法，invoker会调用handler的真正方法，之后会调用context的fireXXX继续传递给下一个handler，直到结束。</p>
-<p><img alt="fireHandler" src="/Users/wangjun/Documents/work/code/github/doc-for-java/pages/java/images/fireHandler.png" /></p>
+<p><img alt="fireHandler" src="../images/fireHandler.png" /></p>
 <h2 id="netty_8">netty的心跳检测<a class="headerlink" href="#netty_8" title="Permanent link">&para;</a></h2>
 <p>netty提供了下面三种handler来检测channel连接的有效性</p>
 <ul>

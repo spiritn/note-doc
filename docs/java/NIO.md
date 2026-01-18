@@ -1370,7 +1370,7 @@ public class DefaultChannelPipeline implements ChannelPipeline {
 
 入站事件，会借助channelHandlerContext的静态方法，传入head，静态方法里会调用context的invoker方法，invoker会调用handler的真正方法，之后会调用context的fireXXX继续传递给下一个handler，直到结束。
 
-![fireHandler](/Users/wangjun/Documents/work/code/github/doc-for-java/pages/java/images/fireHandler.png)
+![fireHandler](images/fireHandler.png)
 
 ## netty的心跳检测
 

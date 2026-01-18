@@ -299,7 +299,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../01-基础.md" class="md-nav__link">
+      <a href="../00-%E5%9F%BA%E7%A1%80/" class="md-nav__link">
         
   
   
@@ -783,7 +783,7 @@ mixed：mySQL会自己判断，如果SQL语句可能引起主备不一致就使�
 <h2 id="binlog_1">重要的日志模块：binlog<a class="headerlink" href="#binlog_1" title="Permanent link">&para;</a></h2>
 <p>非常重要，作用也很多。通过监听binLog文件，可以用于主从复制和发送数据的变更MQ消息等</p>
 <h2 id="_1">主从复制<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p><img alt="主从复制" src="/Users/wangjun/Documents/work/code/github/doc-for-java/pages/database/images/主从复制.jpg" /></p>
+<p><img alt="主从复制" src="../images/%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6.jpg" /></p>
 <p>master服务器会唤醒dump线程将binlog日志文件传输给slave服务器，slave服务器唤醒I/O线程将binlog日志文件写入到中继文件RelayLog中，最后SQL线程负责读取回放写入到磁盘里。这样就用以保证主从数据一致。</p>
 <p>前面我们讲过，MySQL整体来看，其实就有两块：一块是Server层，它主要做的是MySQL功能层面的事情；还有一块是引擎层，负责存储相关的具体事宜。上面我们聊到的粉板redo log是InnoDB引擎特有的日志，而Server层也有自己的日志，称为binlog（归档日志）。</p>
 <p>我想你肯定会问，为什么会有两份日志呢？</p>

@@ -295,7 +295,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../01-基础.md" class="md-nav__link">
+      <a href="../00-%E5%9F%BA%E7%A1%80/" class="md-nav__link">
         
   
   
@@ -633,7 +633,7 @@ setup_consumers保存的数据用来控制保存哪些事件的信息。我们�
 </table>
 <p>在不加上面3个hint的情况下，需要业务主动提交。如果加上COMMIT_ON_SUCCESS_H(1) TARGET_AFFECT_ROW_H(1)，表示当update成功更新一行时，则立即提交，否则等待业务主动发起commit或者rollback操作；如果加上ROLLBACK_ON_FAIL_H(1) TARGET_AFFECT_ROW_H(1)，则表示如果update更新的行数不为1，则立即回滚，否则等待业务主动发起commit或者rollback操作；如果三个hint一起加上，则表示假如update更新的行数为1，则立即提交，否则立即回滚。</p>
 <p>把持有关键锁的SQL作为最后一句，添加commit_on_success_rollback_on_fail_target_affect_row,意思就是只要这个SQL执行成功就提交事务，及时释放锁。1.避免了之前SQL执行成功返回，业务再发出commit的网络时间开销。2.也避免了客户端本身阻塞数据库</p>
-<p><img alt="SQL-hint" src="/Users/wangjun/Documents/work/code/github/doc-for-java/pages/java/database/images/SQL-hint.png" /></p>
+<p><img alt="SQL-hint" src="../images/SQL-hint.png" /></p>
 <h3 id="32-innodb">3.2 控制和限制进入InnoDB事务引擎层的热点数量<a class="headerlink" href="#32-innodb" title="Permanent link">&para;</a></h3>
 <p>这里主要涉及一个热点<strong>ID</strong>的标识，使用<strong>QUEUE_ON_PK_H</strong>标识</p>
 <div class="highlight"><pre><span></span><code><span class="k">update</span><span class="w"> </span><span class="cm">/*+ QUEUE_ON_PK_H(12345) */</span><span class="w"> </span><span class="n">tb1</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="mi">12345</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span>
@@ -644,7 +644,7 @@ setup_consumers保存的数据用来控制保存哪些事件的信息。我们�
 <li>不支持该hint的社区版本，也能正常执行该SQL，只是少了秒杀效果。</li>
 </ul>
 <p>实现上，值创建一个等待队列，然后直接执行，否则在该等待队列上休眠。在update执行完之后，唤醒相关等待线程继续执行</p>
-<p><img alt="热点会话" src="/Users/wangjun/Documents/work/code/github/doc-for-java/pages/java/database/images/热点会话.jpg" /></p>
+<p><img alt="热点会话" src="../images/%E7%83%AD%E7%82%B9%E4%BC%9A%E8%AF%9D.jpg" /></p>
 <p>这样有效的避免死锁检测和锁冲突</p>
 <hr />
 <p>业务上只需要再SQL中合理的加上前面的四个SQL hint，就可以开启秒杀，不限客户端，也不限框架。</p>
@@ -654,8 +654,8 @@ setup_consumers保存的数据用来控制保存哪些事件的信息。我们�
 <p>开启优化后，2048个线程时仍能保持6000-7000TPS。</p>
 <p>在少量线程时，和没有优化的差不多。</p>
 <p>而且这样的方案很方便复用。</p>
-<p><img alt="多商品高性能TPS" src="/Users/wangjun/Documents/work/code/github/doc-for-java/pages/java/database/images/多商品高性能TPS.png" /></p>
-<p><img alt="高性能TPS" src="/Users/wangjun/Documents/work/code/github/doc-for-java/pages/java/database/images/高性能TPS.png" /></p>
+<p><img alt="多商品高性能TPS" src="../images/%E5%A4%9A%E5%95%86%E5%93%81%E9%AB%98%E6%80%A7%E8%83%BDTPS.png" /></p>
+<p><img alt="高性能TPS" src="../images/%E9%AB%98%E6%80%A7%E8%83%BDTPS.png" /></p>
 
 
 
