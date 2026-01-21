@@ -4,62 +4,62 @@
 
 > This chapter covers the Spring Framework implementation of the Inversion of Control (IoC) principle. IoC is also known as dependency injection (DI). It is a process whereby objects define their dependencies (that is, the other objects they work with) only through constructor arguments, arguments to a factory method, or properties that are set on the object instance after it is constructed or returned from a factory method. The container then injects those dependencies when it creates the bean. This process is fundamentally the inverse (hence the name, Inversion of Control) of the bean itself controlling the instantiation or location of its dependencies by using direct construction of classes or a mechanism such as the Service Locator pattern.
 
-本章介绍了spring框架IOC容器实现的原理。IoC也被称为依赖注入DI。它是一个过程，对象仅通过构造函数、工厂方法或对象实例被构造或从工厂方法返回后在其上设置的属性来定义它们的依赖关系（即它们工作的其他对象），然后容器在创建bean时注入这些依赖。这个过程从根本上说是反过来的（故名Inversion of Control），即bean本身通过直接构造类或者服务Locator 模式机制来控制依赖的实例或位置。
 
+本章介绍了 Spring 框架中 IoC（控制反转）原理及其实现。IoC（也称为依赖注入，DI）指的是：对象仅通过构造函数参数、工厂方法参数或在对象构造/从工厂方法返回后设置的属性来声明其依赖关系，容器在创建该 bean 时负责注入这些依赖。该过程与传统由 bean 自行实例化或通过 Service Locator 查找依赖的方式相反，因此称为“控制反转”。
 
+`org.springframework.beans` 与 `org.springframework.context` 包是 Spring IoC 容器的核心组成。`BeanFactory` 接口提供了管理各类 bean 的基础配置和生命周期功能；`ApplicationContext` 是 `BeanFactory` 的子接口，在此基础上扩展了企业级功能，例如：
 
- `org.springframework.beans` 和`org.springframework.context` 包构成了spring框架IoC容器的基础。  [BeanFactory](https://docs.spring.io/spring-framework/docs/5.3.1/javadoc-api/org/springframework/beans/factory/BeanFactory.html) 接口提供了高级的配置机制来管理任何类型的bean. [`ApplicationContext`](https://docs.spring.io/spring-framework/docs/5.3.1/javadoc-api/org/springframework/context/ApplicationContext.html)是 BeanFactory的子类.，增加了:
+- 更便捷的 Spring AOP 集成
+- 消息资源处理（用于国际化，即 MessageSource）
+- 事件发布机制（ApplicationEvent 发布/监听）
+- 应用层特定的上下文支持，例如用于 Web 的 `WebApplicationContext`
 
-- 和Spring  AOP更简单的集成
-- Message resource handling (用于国际化)
-- 多种event发布
-- 应用层特定的上下文，如 `WebApplicationContext` 用于web应用.
+总体来说，`BeanFactory` 提供了基础的容器能力，而 `ApplicationContext` 则是包含更多框架与企业特性的完整超集。本章以 `ApplicationContext` 为主来说明 Spring IoC 容器的用法。若需仅使用 `BeanFactory`，请参阅[The `BeanFactory`](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-beanfactory)。
 
-总而言之,  `BeanFactory` 提供了框架配置和基本功能, 而 `ApplicationContext` 增加了更多的企业功能。 `ApplicationContext`  是`BeanFactory` 的完整超集，是本章专门描述的spring IoC容器。如果要使用 `BeanFactory` 代替 `ApplicationContext,` 查看[The `BeanFactory`](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-beanfactory)。
+ 
 
 > In Spring, the objects that form the backbone of your application and that are managed by the Spring IoC container are called beans. A bean is an object that is instantiated, assembled, and managed by a Spring IoC container. Otherwise, a bean is simply one of many objects in your application. Beans, and the dependencies among them, are reflected in the configuration metadata used by a container.
 
-在spring中，构成应用主干并由spring IoC容器管理的对象称为Bean。Bean是由Spring IoC容器负责实例化，组装和管理的对象，否则，Bean只是您应用中众多对象中的一个。Bean以及他们之间的依赖，都反映在容器使用的配置元数据中。
+在 Spring 中，由 IoC 容器管理并构成应用骨干的对象被称为 Bean。Bean 是由 Spring IoC 容器负责实例化、组装和管理的对象。Bean 以及它们之间的依赖通过容器所使用的配置元数据来描述和维护。
 
 # 1.2 容器
 
 > The `org.springframework.context.ApplicationContext` interface represents the Spring IoC container and is responsible for instantiating, configuring, and assembling the beans. The container gets its instructions on what objects to instantiate, configure, and assemble by reading configuration metadata. The configuration metadata is represented in XML, Java annotations, or Java code. It lets you express the objects that compose your application and the rich interdependencies between those objects
 >
 
- `org.springframework.context.ApplicationContext`接口代表了Spring IoC容器，并负责实例化，配置和组装Bean。容器通过读取配置元数据，来获取关于实例化，配置和组装哪些对象的指令。这里的配置元数据用XML，Java注解和Java代码表示。可以让你表达你应用中的对象和这些对象间的丰富依赖关系。
 
-Spring提供了ApplicationContext接口的几种实现。在独立的应用程序中，通常创建一个ClassPathXmlApplicationContext或FileSystemXmlApplicationContext的实例。虽然 XML 一直是定义配置元数据的传统格式，但您可以通过提供少量的 XML 配置来声明性地启用对这些附加元数据格式的支持，从而指示容器使用 Java 注解或代码作为元数据格式。
+`org.springframework.context.ApplicationContext` 接口表示 Spring 的 IoC 容器，负责实例化、配置并组装 bean。容器通过读取配置元数据来决定要实例化、配置和组装哪些对象。配置元数据可以用 XML、Java 注解或 Java 代码表示，从而描述应用中的对象及它们之间的依赖关系。
 
-在大多数应用场景中，不需要显式的通过用户代码来实例化Spring IoC容器的一个或多个实例。例如，在 Web 应用程序场景中，应用程序的 web.xml 文件中的简单八行（或左右）的模板 Web 描述符 XML 通常就足够了（请参阅 Web 应用程序的便捷 ApplicationContext 实例化）。如果您使用Spring Tools for Eclipse（一个Eclipse支持的开发环境），您可以通过点击几下鼠标或击键轻松创建这个模板配置。
+Spring 提供了多种 `ApplicationContext` 的实现。在独立应用中，常见的实现有 `ClassPathXmlApplicationContext` 和 `FileSystemXmlApplicationContext`。虽然 XML 是传统的配置格式，但可以通过少量 XML 来启用注解或 Java 配置的支持，从而让容器使用注解或代码作为元数据来源。
 
-> The following diagram shows a high-level view of how Spring works. Your application classes are combined with configuration metadata so that, after the `ApplicationContext` is created and initialized, you have a fully configured and executable system or application.
+在大多数场景下，无需在应用代码中显式创建 `ApplicationContext` 实例。例如在 Web 应用中，通常只需在 `web.xml` 中添加几行标准配置模板（参见“Web 应用的便捷 ApplicationContext 实例化”）。如果使用 Spring Tools for Eclipse 等 IDE，也可以通过图形化操作快速生成这些配置。
 
-下图显示了Spring工作方式的高级视图。你的应用类与配置元数据相结合，这样，在ApplicationContext被创建和初始化后，你就拥有了一个完全配置好的可执行系统或应用。
+下图展示了 Spring 的工作流程：应用类与配置元数据结合，在 `ApplicationContext` 创建并初始化后，你将得到一个已配置并可运行的系统或应用。
 
 ![container magic](https://docs.spring.io/spring-framework/docs/current/reference/html/images/container-magic.png)
 
 ## 1.2.1 配置元数据
 
-如上图所示，Spring IoC容器接受配置元数据。该配置元数据代表了您作为应用开发人员如何告诉Spring容器实例化，配置和组装应用中的对象。
 
-配置元数据传统上是以简单直观的XML格式提供的，本章的大部分内容就用它来传达Spring IoC容器的关键概念和特性。
+如上所示，Spring IoC 容器以配置元数据为输入，开发人员通过这些元数据告诉容器如何实例化、配置和组装应用对象。
 
-基于XML的元数据配置并不是唯一的形式，Spring IoC容器本身与这些配置元数据实际写入格式完全隔离。如今，许多开发者选择了基于Java的配置方式。
+配置元数据传统上以直观的 XML 提供，本章主要用 XML 来说明 Spring IoC 容器的关键概念与特性。但元数据的格式是与容器实现解耦的，现代项目中也常用基于注解或基于 Java 的配置。
 
-有关在spring中使用其他形式的元数据，请查看：
+有关在 Spring 中使用其他形式元数据的参考，请查看：
 
 - [1.9 Annotation-based configuration](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-annotation-config): Spring 2.5引入的，通过注解配置元数据
 - [1.12 Java-based configuration](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-java): 从Spring3.0开始，可以通过Java代码而不是xml文件来定义你应用的类。更多信息查看 [`@Configuration`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Configuration.html), [`@Bean`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Bean.html), [`@Import`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Import.html), and [`@DependsOn`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/DependsOn.html) 注解。
 
-spring 配置由容器必须管理的通常不止一个 bean 定义组成。基于 XML 的配置元数据将这些 bean 配置为顶层 `<beans/>` 元素中的 `<bean/>` 元素。Java 配置通常在 @Configuration 类中使用 @Bean 注释的方法。
 
-这些bean定义对应于构成你的应用程序的实际对象。通常情况下，你会定义服务层对象、数据访问对象（DAO）、表现对象（如Struts Action实例）、基础设施对象（如Hibernate SessionFactories、JMS队列等）等。通常情况下，人们不会在容器中配置细粒度的域对象，因为创建和加载域对象通常是DAO和业务逻辑的责任。然而，您可以使用Spring与AspectJ的集成来配置在IoC容器控制之外创建的对象。请参阅使用 AspectJ 与 Spring 进行依赖注入域对象。
+Spring 的配置通常由若干 bean 定义组成。基于 XML 的元数据将这些 bean 作为顶层 `<beans/>` 元素下的多个 `<bean/>` 定义；Java 配置则通常在 `@Configuration` 类中的 `@Bean` 方法里声明。
+
+这些 bean 定义对应于构成应用程序的实际对象，例如服务层对象、数据访问对象（DAO）、表示层对象（如控制器实例）、以及基础设施对象（如 Hibernate 的 SessionFactory、JMS 队列等）。通常不会将细粒度的领域对象放到容器中管理，因为这类对象通常由 DAO 或业务逻辑在运行时创建。然而，借助 Spring 与 AspectJ 的集成，也可以对在容器外部创建的对象应用依赖注入，详见“使用 AspectJ 与 Spring 进行依赖注入域对象”。
 
 ## 1.2.3 使用容器
 
-ApplicationContext是一个高级工厂的接口，它能够维护不同Bean及其依赖关系的注册表。通过使用T `getBean(String name, Class<T> requiredType)`方法，你可以检索你的bean的实例。
+`ApplicationContext` 是一个高级工厂接口，维护着容器中各个 bean 及其依赖关系的注册表。通常通过 `getBean(String name, Class<T> requiredType)` 或 `getBean(Class<T> requiredType)` 等方法检索 bean 实例。
 
-ApplicationContext允许你读取Bean定义和获取他们，如：
+例如，使用基于 XML 的配置可以这样创建并获取 bean：
 
 ```java
 // create and configure beans
@@ -72,7 +72,7 @@ PetStoreService service = context.getBean("petStore", PetStoreService.class);
 List<String> userList = service.getUsernameList();
 ```
 
-最灵活的变体是 `GenericApplicationContext`和读取代理相结合，例如与XML文件的XmlBeanDefinitionReader相结合，如：
+更灵活的做法是使用 `GenericApplicationContext` 结合不同的 `BeanDefinitionReader`（例如 `XmlBeanDefinitionReader`）来从多种配置源加载 bean 定义：
 
 ```java
 GenericApplicationContext context = new GenericApplicationContext();
@@ -80,13 +80,13 @@ new XmlBeanDefinitionReader(context).loadBeanDefinitions("services.xml", "daos.x
 context.refresh();
 ```
 
-你可以在同一个ApplicationContext上混合和匹配这样的读取代理，从不同的配置源读取Bean定义。
+你可以在同一 `ApplicationContext` 中混合不同的读取器，从不同配置源加载 bean 定义。
 
-然后你可以使用getBean()来检索Bean。ApplicationContext接口还有其他一些方法用于检索Bean，但是，理想情况下，你的应用程序代码不应该使用它们。事实上，你的应用程序代码根本不应该调用getBean()方法，这样对Spring API完全没有依赖性。例如，Spring与Web框架的集成为各种Web框架组件（如控制器和JSF管理的Bean）提供了依赖注入，让你通过元数据（如autowiring注解）声明对特定Bean的依赖。
+尽管可以在代码中直接调用 `getBean()`，但理想情况下应用逻辑不应依赖于该调用。更好的做法是使用依赖注入（例如通过注解或构造器注入），这样应用代码与 Spring API 解耦。在 Web 场景下，Spring 与各类 Web 框架集成后，会在控制器等组件上自动注入所需的依赖，无需显式调用 `getBean()`。
 
 # 1.3 Bean
 
-Spring容器管理一个或多个Bean。这些Bean通过配置元数据应用到容器中（例如XMl中的 `<bean/>` 定义）。
+Spring容器管理一个或多个Bean。这些Bean通过配置元数据应用到容器中（例如XML中的 `<bean/>` 定义）。
 
 > Within the container itself, these bean definitions are represented as `BeanDefinition` objects, which contain (among other information) the following metadata:
 >
@@ -100,7 +100,7 @@ Spring容器管理一个或多个Bean。这些Bean通过配置元数据应用到
 - 包限定的类名: 通常是被定义的Bean的实际实现类.
 - Bean的行为配置，它说明了Bean在容器中应该表现的状态(scope, lifecycle callbacks等)
 - 对其他Bean的引用，这些引用是Bean工作所需要的，也被成为依赖
-- 要在新创建的对象中设置的其他配置元素。例如，池的大小，Bean要管理的连接池的连接数等。也就是属性吧
+- 要在新创建的对象中设置的其他配置元素。例如，池的大小、连接池的连接数等（即对象的属性）。
 
 这些元数据组成一组属性，这些属性构成了每个Bean定义，如下表：
 
@@ -122,7 +122,7 @@ Spring容器管理一个或多个Bean。这些Bean通过配置元数据应用到
 
 除了包含如何创建特定Bean信息的Bean定义之外，ApplicationContext实现还允许注册在容器之外（由用户）创建的现有对象。这是通过getBeanFactory()方法访问ApplicationContext的BeanFactory来实现的，该方法返回BeanFactory的DefaultListableBeanFactory实现。DefaultListableBeanFactory通过registerSingleton(..)和registerBeanDefinition(..)方法支持这种注册。然而，典型的应用程序只使用通过常规bean定义元数据定义的bean。
 
-Bean元数据和手动提供的单例需要尽可能早地注册，以便容器可以在自动注入和其他set设置时可以正确的推理。虽然在一定程度上支持覆盖现有的元数据和单例，但是官方并不支持在运行时注册新的bean（和工厂的访问同时进行），并且可能导致并发访问异常，bean状态不一致等。
+Bean 元数据和手动注册的单例应尽早注册，以便容器在执行自动装配和其他推断操作时能够正确处理。虽然在一定程度上支持覆盖现有元数据和单例，但在运行时（尤其在有并发访问的情况下）注册新的 bean 并非官方支持，可能导致并发访问异常或容器状态不一致。
 
 ## 1.3.1 Bean的命名
 
@@ -282,7 +282,7 @@ Spring统一管理Bean的生命周期
 
 3. BeanPostprocessor的before和after方法,和中间的InitializingBean和init-method方法
 
-4. 检查Singleton的Bean实例，是否实现了DisposableBean接口，注册对象销毁时的回调。一般是在Spring容器关闭的时候调用Bean的销毁方法，但是好像要手动调用applicationcontext.destroySingleton()才行。
+4. 检查单例 Bean 是否实现了 `DisposableBean` 接口，并注册销毁时的回调。通常在 Spring 容器关闭时会调用这些销毁方法（例如通过调用 `ConfigurableApplicationContext.close()`）；不应依赖容器内部的手动方法来触发销毁。
 
 
 下面是按方法执行的前后顺序排列
@@ -1873,11 +1873,11 @@ public class BlockedListNotifier implements ApplicationListener<BlockedListEvent
 
 但注意，默认情况下，事件监听器同步接收事件。这意味着publishEvent()方法会阻塞，直到所有的监听器处理完事件。这种同步和单线程方法的一个优点是，当监听器接收到一个事件时，如果有事务上下文可用，它就会在发布者的事务上下文中操作。
 
-spring的事件机制是为同一应用上下文中Spring Bean之间的简单通信而设计的。然而，对于更复杂的企业集成需求，单独维护的Spring Integration项目为构建轻量级的、面向模式的、事件驱动的架构提供了完整的支持，这些架构建立在著名的Spring编程模型之上。
+Spring 的事件机制是为同一应用上下文中 Spring Bean 之间的简单通信而设计的。然而，对于更复杂的企业集成需求，单独维护的 Spring Integration 项目为构建轻量级的、面向模式的、事件驱动的架构提供了完整的支持，这些架构建立在著名的 Spring 编程模型之上。
 
 **基于注解的Event Listeners**
 
-在spring4.2中，可以通过`@EventListener`注解在Bean的任意public方法上来注册一个事件监听器。
+在 Spring 4.2 中，可以通过 `@EventListener` 注解在 Bean 的任意 public 方法上注册事件监听器。
 
 ```java
 public class BlockedListNotifier {
