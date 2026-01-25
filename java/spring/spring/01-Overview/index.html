@@ -1,0 +1,3342 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://spiritn.github.io/note-doc/java/spring/spring/01-Overview/">
+      
+      
+        <link rel="prev" href="../../../java8/">
+      
+      
+        <link rel="next" href="../02-IocContainer/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>概览 - 我的技术文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#spring-framework-documentation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="我的技术文档" class="md-header__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的技术文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              概览
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../database/02-mysql%E6%9E%B6%E6%9E%84/" class="md-tabs__link">
+          
+  
+  
+  数据库
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../java8/" class="md-tabs__link">
+          
+  
+  
+  Java
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  spring
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../spring-boot/GettingStarted/" class="md-tabs__link">
+          
+  
+  
+  springboot
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="我的技术文档" class="md-nav__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    我的技术文档
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/02-mysql%E6%9E%B6%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mySQL架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/00-%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/03-InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    InnoDB存储引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/04-%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/05-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日志系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JAVA8
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-IocContainer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IOC容器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-Ioc%E5%AE%B9%E5%99%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IOC容器2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-Resource/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resource
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Validation-DataBinding-Type-Conversion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spring-AOP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AOP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Null-safetyAndLogging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Null-safe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Spring%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    spring常见问题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    springboot
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    springboot
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring-boot/GettingStarted/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    简介
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring-boot/UsingSpringBoot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    如何使用
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring-boot/spring-boot-features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    功能特性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring-boot/spring-boot%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    核心概念
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/">https://docs.spring.io/spring-framework/docs/current/reference/html/</a></p>
+<h1 id="spring-framework-documentation">Spring Framework Documentation</h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/overview.html#overview"><strong>Overview</strong></a></td>
+<td>history, design philosophy, feedback, getting started.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#spring-core"><strong>Core</strong></a></td>
+<td>IoC Container, Events, Resources, i18n, Validation, Data Binding, Type Conversion, SpEL, AOP.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/testing.html#testing">Testing</a></td>
+<td>Mock Objects, TestContext Framework, Spring MVC Test, WebTestClient.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#spring-data-tier">Data Access</a></td>
+<td>Transactions, DAO Support, JDBC, R2DBC, O/R Mapping, XML Marshalling.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#spring-web">Web Servlet</a></td>
+<td><strong>Spring MVC</strong>, WebSocket, SockJS, STOMP Messaging.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#spring-webflux">Web Reactive</a></td>
+<td>Spring WebFlux, WebClient, WebSocket, RSocket.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#spring-integration">Integration</a></td>
+<td>Remoting, JMS, JCA, JMX, Email, Tasks, Scheduling, Caching.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/languages.html#languages">Languages</a></td>
+<td>Kotlin, Groovy, Dynamic Languages.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/appendix.html#appendix">Appendix</a></td>
+<td>Spring properties.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/spring-projects/spring-framework/wiki"><strong>Wiki</strong></a></td>
+<td>What’s New, Upgrade Notes, Supported Versions, and other cross-version information.</td>
+</tr>
+</tbody>
+</table>
+<p>Spring 能够轻松创建 Java 企业级应用程序。它提供了在企业环境中使用 Java 所需的一切，支持 Groovy 和 Kotlin 作为 JVM 平台上的替代语言，并能根据应用程序需求灵活构建多种架构。从 Spring Framework 6.0 开始，Spring 需要 Java 17 及以上版本。</p>
+<p>Spring 支持广泛的应用场景。在大型企业中，应用程序通常需要长期运行，且必须在开发者无法控制的 JDK 和应用服务器升级周期内正常工作。有些应用程序则以内嵌服务器的方式打包为单个 JAR 文件运行，常见于云环境。还有一些是无需服务器的独立应用程序（例如批处理或集成任务）。</p>
+<h1 id="1-what-we-mean-by-spring">1. What We Mean by "Spring"</h1>
+<p>"Spring" 在不同语境中有不同含义。它可以指 Spring Framework 项目本身（这是一切的起源），也可以指随着时间的推移构建在 Spring Framework 之上的其他 Spring 项目。大多数情况下，当人们提到 "Spring" 时，他们指的是整个 Spring 系列项目。本文档主要关注其基础部分：Spring Framework 本身。
+Spring Framework 采用模块化设计，应用程序可以按需选择模块。其核心是容器模块，包含配置模型和依赖注入机制。除此之外，Spring Framework 还为不同的应用架构提供基础支持，包括消息传递、事务数据与持久化以及 Web 开发。它包含基于 Servlet 的 Spring MVC Web 框架，同时也提供了并行的响应式 Web 框架 Spring WebFlux。</p>
+<h1 id="2-history-of-spring-and-the-spring-framework">2. History of Spring and the Spring Framework</h1>
+<p>Spring 诞生于 2003 年，旨在解决早期 J2EE 规范的复杂性。虽然有人认为 Java EE 及其现代继任者 Jakarta EE 与 Spring 存在竞争关系，但实际上它们是互补的。Spring 编程模型并未完全采用 Jakarta EE 平台规范，而是有选择地集成了传统 EE 体系中的部分规范：
+- Servlet API (<a href="https://jcp.org/en/jsr/detail?id=340">JSR 340</a>)
+- WebSocket API (<a href="https://www.jcp.org/en/jsr/detail?id=356">JSR 356</a>)
+- Concurrency Utilities (<a href="https://www.jcp.org/en/jsr/detail?id=236">JSR 236</a>)
+- JSON Binding API (<a href="https://jcp.org/en/jsr/detail?id=367">JSR 367</a>)
+- Bean Validation (<a href="https://jcp.org/en/jsr/detail?id=303">JSR 303</a>)
+- JPA (<a href="https://jcp.org/en/jsr/detail?id=338">JSR 338</a>)
+- JMS (<a href="https://jcp.org/en/jsr/detail?id=914">JSR 914</a>)
+- as well as JTA/JCA setups for transaction coordination, if necessary.
+- Spring Framework 还支持依赖注入（JSR 330）和通用注解（JSR 250）规范，开发者可以选择使用这些规范替代 Spring Framework 提供的专属机制。这些规范最初基于通用的 javax 包。</p>
+<p>从 Spring Framework 6.0 开始，Spring 已升级至 Jakarta EE 9 级别（例如 Servlet 5.0+、JPA 3.0+），基于 jakarta 命名空间而非传统的 javax 包。以 EE 9 为最低要求并已支持 EE 10，Spring 已准备好为 Jakarta EE API 的持续演进提供开箱即用的支持。Spring Framework 6.0 与 Tomcat 10.1、Jetty 11 等 Web 服务器以及 Hibernate ORM 6.1 完全兼容。
+随着时间的推移，Java/Jakarta EE 在应用程序开发中的角色也在演变。在 J2EE 和 Spring 的早期阶段，应用程序需要部署到应用服务器中。如今，借助 Spring Boot，应用程序能够以符合 DevOps 和云原生理念的方式创建，内嵌 Servlet 容器且易于更换。从 Spring Framework 5 开始，WebFlux 应用程序甚至不直接使用 Servlet API，可以在非 Servlet 容器服务器（如 Netty）上运行</p>
+<p>Spring 持续创新与发展。除了 Spring Framework，还有 Spring Boot、Spring Security、Spring Data、Spring Cloud、Spring Batch 等项目。需要注意的是，每个项目都有独立的源代码仓库、问题跟踪系统和发布节奏。完整的 Spring 项目列表可访问 spring.io/projects 查看。</p>
+<h1 id="3-design-philosophy">3. Design Philosophy 设计哲学</h1>
+<p>学习一个框架时，不仅要了解它能做什么，还要理解其遵循的原则。以下是 Spring Framework 的核心指导原则：</p>
+<ul>
+<li>提供多层次选择：Spring 让你尽可能推迟设计决策。例如，通过配置即可切换持久化提供者而无需修改代码，许多其他基础设施关注点与第三方 API 集成也是如此。</li>
+<li>兼容多元视角：Spring 拥抱灵活性，对实现方式不设限，以多元视角支持广泛的应用需求。</li>
+<li>保持强向后兼容性：Spring 的演进经过审慎管理，确保版本间破坏性变更最小。它精心选择支持的 JDK 版本和第三方库范围，以简化依赖 Spring 的应用程序和库的维护工作。</li>
+<li>重视 API 设计：Spring 团队投入大量精力设计直观且能经受多版本、多年考验的 API。</li>
+<li>坚持高标准代码质量：Spring Framework 高度重视编写有意义、与时俱进且准确的 javadoc，是少数能实现清晰代码结构且包间无循环依赖的项目之一。</li>
+</ul>
+<hr />
+<pre><code class="language-text">Spring &amp; Spring Boot 核心知识体系
+│
+├── **1. IoC容器 (控制反转与依赖注入) - Spring基石**
+│   ├── 核心概念：BeanDefinition, ApplicationContext, BeanFactory
+│   ├── Bean生命周期管理 BeanPostProcess
+│   ├── **★ 循环依赖及其解决机制（三级缓存）**
+│   ├── FactoryBean机制
+│   ├── 条件装配 (@Conditional 及其派生注解)
+│   ├── 环境与配置抽象：Environment, @Profile
+│   ├── 资源访问：Resource, ResourceLoader
+│
+├── **2. AOP面向切面编程**
+│   ├── 核心概念：切面(Aspect)、连接点(JoinPoint)、通知(Advice)、切点(Pointcut)
+│   ├── 代理机制：**JDK动态代理 vs CGLIB代理**
+│   ├── 通知类型：@Before, @After, @Around, @AfterReturning, @AfterThrowing
+│
+├── **3. 数据访问与事务管理**
+│   ├── **声明式事务管理**：
+│   │   ├── @Transactional的传播行为和隔离级别，失效场景！
+│   └── 数据校验：Spring Validation, JSR 303/349
+│
+├── **4. Spring MVC 与 Web开发**
+│   ├── 核心架构：DispatcherServlet, 处理器映射(HandlerMapping), 适配器(HandlerAdapter)
+│   ├── 常用注解：@Controller, @RestController, @RequestMapping, @GetMapping等
+│   ├── 参数绑定：@RequestParam, @PathVariable, @RequestBody, @ModelAttribute
+│   ├── **★ 统一异常处理 (@ControllerAdvice, @ExceptionHandler)**
+│   ├── **★ 跨域处理 (CORS)**
+│   ├── 拦截器 (HandlerInterceptor)和过滤器 (Filter)
+│
+├── **5. Spring Boot 核心特性与自动配置**
+│   ├── **核心理念**：约定优于配置、快速启动、独立运行
+│   ├── **启动类与注解**：@SpringBootApplication (三大注解合成)
+│   ├── **自动配置原理**：
+│   │   ├── @EnableAutoConfiguration
+│   │   ├── spring.factories 机制 (Spring Boot 2.x) / META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports (Spring Boot 3.x)
+│   │   └── **★ 条件装配的深度应用** (如 @ConditionalOnClass, @ConditionalOnMissingBean)
+│   ├── **★ 外部化配置与加载顺序**
+│   │   ├── 配置文件：application.properties/yml
+│   │   ├── 多环境配置：application-{profile}.yml
+│   │   └── 加载优先级：命令行参数 &gt; Java系统属性 &gt; 配置文件...
+│   ├── **Starter机制**：如何自定义Starter
+│   ├── **内嵌Web容器**：Tomcat, Jetty, Undertow 及其配置
+│
+├── **6. 高级特性与扩展**
+│   ├── **事件驱动模型**：ApplicationEvent, ApplicationListener, @EventListener
+│   ├── **异步与调度**：@Async (异步执行), @Scheduled (定时任务)
+│   ├── **扩展点**：
+│   │   ├── BeanFactoryPostProcessor (修改Bean定义)
+│   │   ├── BeanPostProcessor (修改Bean实例)
+│   │   ├── ApplicationContextInitializer (上下文初始化)
+│   │   └── **★ ImportSelector, ImportBeanDefinitionRegistrar**
+│   └── **★ 配置元信息 (@ConfigurationProperties绑定原理)**
+</code></pre>
+<h1 id="spring">Spring 体系知识图谱</h1>
+<h2 id="1-ioc">1. IoC 容器核心机制</h2>
+<h3 id="11-beandefinition">1.1 BeanDefinition 体系与解析机制</h3>
+<p>Spring IoC 容器的核心在于通过 BeanDefinition 管理 Bean 的元数据信息。BeanDefinition 是一个接口，位于 org.springframework.beans.factory.config 包中，它定义了 Bean 的完整配置信息，包括类名、作用域、构造函数参数、属性值、依赖关系等<a href="https://juejin.cn/post/7473299165290381350">(32)</a>。</p>
+<p>在 Spring 容器中，BeanDefinition 的解析是整个容器启动流程的关键环节。Spring 会根据配置文件（XML、注解、Java 配置）加载 Bean 的定义信息，将每个 Bean 的元数据存储在 BeanDefinition 中<a href="https://blog.csdn.net/weixin_66592566/article/details/144920994">(36)</a>。不同类型的配置源对应不同的解析器：对于 XML 配置，使用 XmlBeanDefinitionReader 配合 BeanDefinitionParser 解析标签；对于注解配置，使用 AnnotationConfigApplicationContext 进行类路径扫描和注解解析<a href="https://blog.csdn.net/qq_45000512/article/details/149825750">(33)</a>。</p>
+<p>BeanDefinition 的核心属性包括：class 属性指定 Bean 的实现类；scope 属性定义 Bean 的作用域（如 singleton、prototype 等）；constructorArgumentValues 存储构造函数参数；propertyValues 保存属性值；dependsOn 指定依赖的 Bean；autowireMode 定义自动装配模式；lazyInit 控制是否延迟初始化。这些属性共同构成了 Bean 的完整配置信息，容器基于这些信息创建和管理 Bean 实例。</p>
+<h3 id="12-applicationcontext-beanfactory">1.2 ApplicationContext 与 BeanFactory 关系</h3>
+<p>BeanFactory 是 Spring IoC 容器的最基础接口，它定义了容器的基本功能规范，提供了实例化对象和获取对象的基础能力<a href="https://blog.csdn.net/mrluo735/article/details/135665427">(2)</a>。BeanFactory 有三个重要的子接口：ListableBeanFactory 提供了按类型列举 Bean 的功能；HierarchicalBeanFactory 支持父子容器的层级结构；AutowireCapableBeanFactory 提供了更高级的自动装配功能<a href="https://blog.csdn.net/mrluo735/article/details/135665427">(2)</a>。</p>
+<p>ApplicationContext 是 BeanFactory 的子接口，它在 BeanFactory 基础上添加了更多企业级功能<a href="https://docs.spring.io/spring-framework/docs/5.3.18/reference/pdf/core.pdf">(1)</a>。ApplicationContext 提供的主要增强功能包括：与 Spring AOP 功能的无缝集成；支持国际化的消息资源处理；事件发布机制；Web 应用专用的 WebApplicationContext 等<a href="https://docs.spring.io/spring-framework/docs/5.3.18/reference/pdf/core.pdf">(1)</a>。可以说，ApplicationContext 是 BeanFactory 的超集，在大多数应用场景中，开发者都应该优先使用 ApplicationContext 而非原始的 BeanFactory<a href="https://docs.spring.io/spring-framework/docs/5.3.18/reference/pdf/core.pdf">(1)</a>。</p>
+<p>在实际应用中，BeanFactory 通常用于需要完全控制 Bean 处理过程的特殊场景，而 ApplicationContext 则提供了更便捷的开发体验和丰富的企业级功能。两者的主要区别在于功能丰富程度和应用场景：BeanFactory 更轻量级，启动速度快，适合资源受限的环境；ApplicationContext 功能更全面，支持更多企业级特性，是 Spring 应用的首选容器<a href="https://docs.spring.io/spring-framework/docs/5.3.18/reference/pdf/core.pdf">(1)</a>。</p>
+<h3 id="13-bean">1.3 Bean 生命周期管理与扩展点</h3>
+<p>Spring Bean 的生命周期是一个从创建到销毁的完整流程，涉及实例化、依赖注入、初始化、代理生成、销毁等多个阶段<a href="https://blog.csdn.net/m0_73077921/article/details/153744858">(79)</a>。理解 Bean 的生命周期对于正确使用 Spring 框架和实现自定义扩展至关重要。</p>
+<p>Bean 的完整生命周期可以分为以下几个关键阶段：首先是实例化阶段，Spring 根据配置找到 Bean 对应的 Class 对象，通过构造函数创建 Bean 的实例；然后是属性注入阶段，通过 postProcessProperties 方法处理 @Autowired、@Resource 等标注的依赖；接下来是初始化阶段，执行 Aware 接口方法、BeanPostProcessor 前置处理、@PostConstruct 标注的方法和 init-method 配置的初始化方法；最后是销毁阶段，执行 @PreDestroy 标注的方法和 dispose-method 配置的销毁方法<a href="https://blog.csdn.net/weixin_42148384/article/details/148770132">(11)</a>。</p>
+<p>BeanPostProcessor 是 Spring 提供的最重要的生命周期扩展点之一。容器中所有 BeanPostProcessor 会被优先初始化（比普通 Bean 早），当创建一个普通 Bean 时，容器会先执行所有 BeanPostProcessor 的 postProcessBeforeInitialization 方法，然后执行 Bean 的初始化方法，最后执行所有 BeanPostProcessor 的 postProcessAfterInitialization 方法<a href="http://m.toutiao.com/group/7592874726532383267/?upstream_biz=doubao">(78)</a>。这种机制允许开发者在 Bean 初始化前后插入自定义逻辑，是实现 AOP、依赖注入等核心功能的基础。</p>
+<h3 id="14">1.4 循环依赖解决方案（三级缓存机制）</h3>
+<p>循环依赖是指两个或多个 Bean 之间相互依赖，形成一个闭环的情况。Spring 通过三级缓存机制巧妙地解决了单例模式下的 Setter 循环依赖问题<a href="https://blog.csdn.net/2403_88625492/article/details/153690120">(18)</a>。</p>
+<p>三级缓存的核心设计包括：一级缓存 singletonObjects，存储完全初始化好的单例 Bean；二级缓存 earlySingletonObjects，存储提前暴露的原始 Bean（尚未完成初始化）；三级缓存 singletonFactories，存储 Bean 的 ObjectFactory，用于生成原始 Bean 的代理对象<a href="https://blog.csdn.net/weixin_43521001/article/details/148685461">(21)</a>。</p>
+<p>解决循环依赖的具体流程如下：当创建 BeanA 时，首先实例化 BeanA，然后将其 ObjectFactory 放入三级缓存 singletonFactories；在填充 BeanA 的属性时发现需要 BeanB，于是开始创建 BeanB；同样地，实例化 BeanB 后将其 ObjectFactory 放入三级缓存；在填充 BeanB 的属性时发现需要 BeanA，此时从三级缓存中获取 BeanA 的 ObjectFactory，调用 getObject () 方法获取 BeanA 的早期引用（可能是代理对象），并将其放入二级缓存 earlySingletonObjects；完成 BeanB 的创建并放入一级缓存后，继续完成 BeanA 的初始化过程，最终将 BeanA 从二级缓存移到一级缓存<a href="https://blog.csdn.net/weixin_43598533/article/details/147937146">(20)</a>。</p>
+<p>三级缓存机制的关键在于延迟代理对象的创建，确保在循环依赖场景下，Bean 能够获取到正确的代理对象引用。这种设计既保证了循环依赖的正确处理，又维护了 Spring 容器中 Bean 的单例特性<a href="https://www.iesdouyin.com/share/video/7590624683045719348/?region=\&amp;mid=7590624816974072618\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=EhXHQ71xHTfbhom9lBQaTXQImPAvVGDhGyNkYg9ybAg-\&amp;share_version=280700\&amp;ts=1769260986\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D">(19)</a>。</p>
+<h3 id="15-factorybean">1.5 FactoryBean 机制与应用场景</h3>
+<p>FactoryBean 是 Spring 框架提供的一种特殊 Bean 机制，它允许开发者自定义 Bean 的创建逻辑，而不是使用容器的默认反射机制<a href="https://blog.csdn.net/Like0703/article/details/145719948">(39)</a>。FactoryBean 接口定义了三个核心方法：getObject () 用于返回目标对象实例；getObjectType () 声明目标对象的类型；isSingleton () 控制目标对象是否为单例。</p>
+<p>FactoryBean 的核心价值在于将对象的创建逻辑从容器的默认机制中抽离出来，交给开发者通过编程方式灵活控制。普通 Bean 由容器直接通过构造器或工厂方法实例化，而 FactoryBean 则是先实例化 FactoryBean 本身，再通过调用其 getObject () 方法获取实际需要的 Bean，实现了 "工厂" 与 "产品" 的分离。</p>
+<p>FactoryBean 在实际应用中有广泛的使用场景。在第三方组件集成方面，如 MyBatis 的 SqlSessionFactoryBean 封装了数据源配置、Mapper 扫描、插件注册等复杂逻辑；RedisTemplate 的创建也使用了 FactoryBean 机制<a href="https://blog.csdn.net/ZuanShi1111/article/details/150416286">(53)</a>。在 AOP 代理生成方面，ProxyFactoryBean 通过 getObject () 方法动态生成代理对象，将切面逻辑织入目标 Bean<a href="https://blog.csdn.net/2501_92540271/article/details/149776079">(54)</a>。在复杂对象初始化方面，当对象创建需要读取配置、连接数据库或执行复杂计算时，FactoryBean 可以将这些逻辑封装在 getObject () 方法中，避免 @Bean 方法的臃肿<a href="https://blog.csdn.net/weixin_51786043/article/details/148202104">(56)</a>。</p>
+<h3 id="16-conditional">1.6 条件装配与 @Conditional 机制</h3>
+<p>@Conditional 是 Spring 4.0 引入的元注解，它是 Spring 框架中实现条件化配置的核心机制<a href="https://juejin.cn/post/7483704056648237068">(62)</a>。@Conditional 的设计体现了 "开闭原则" 与 "策略模式" 的思想，允许开发者根据特定条件决定是否注册 Bean<a href="https://juejin.cn/post/7483704056648237068">(62)</a>。</p>
+<p>@Conditional 注解可以应用于类（通常是 @Configuration 类）或方法（通常是 @Bean 方法）上，它接收一个或多个实现了 Condition 接口的类作为参数<a href="https://blog.csdn.net/qq_33181292/article/details/155532272">(63)</a>。Condition 接口只有一个 matches () 方法，Spring 在解析配置类时会调用这个方法，如果返回 true 则注册对应的 Bean，否则忽略<a href="https://www.iesdouyin.com/share/video/7596160606789438783/?region=\&amp;mid=7596160639836474122\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=zAnutlwYLj7WVc3EvV1ZMskZD4OoPtDV_Qqoa9SkbrQ-\&amp;share_version=280700\&amp;ts=1769261008\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D">(61)</a>。</p>
+<p>Spring 提供了丰富的 @Conditional 派生注解，简化了常见条件判断场景的使用。例如：@ConditionalOnClass 当指定类存在时生效；@ConditionalOnMissingClass 当指定类不存在时生效；@ConditionalOnBean 当容器中存在指定 Bean 时生效；@ConditionalOnMissingBean 当容器中不存在指定 Bean 时生效；@ConditionalOnProperty 当配置属性存在且匹配指定值时生效；@ConditionalOnResource 当指定资源存在时生效等<a href="https://blog.csdn.net/yezi1238/article/details/149164390">(59)</a>。</p>
+<p>条件装配的执行时机是在配置类解析阶段，由 Spring 的后置处理器 ConfigurationClassPostProcessor 触发。条件判断依赖 Spring 上下文的信息，包括环境变量、配置文件、类加载器等。这种机制使得 Spring 应用能够根据不同的运行环境和配置条件，灵活地注册不同的 Bean，极大地提升了应用的可配置性和可扩展性。</p>
+<h3 id="17">1.7 环境抽象与配置加载策略</h3>
+<p>Spring 的环境抽象机制通过 Environment 接口统一管理应用的配置信息，提供了强大而灵活的外部化配置能力。Environment 接口承载所有配置属性，是配置合并的统一入口<a href="https://guosy.blog.csdn.net/article/details/152333868">(65)</a>。</p>
+<p>在 Spring Boot 应用中，配置的加载遵循严格的优先级顺序，高优先级的配置会覆盖低优先级的配置。根据官方文档，配置源的加载顺序如下：通过 SpringApplication.setDefaultProperties (Map) 设置的默认属性；@PropertySource 注解指定的属性源；应用配置文件（application.properties 和 application.yaml）；RandomValuePropertySource；操作系统环境变量；Java 系统属性（System.getProperties ()）；JNDI 属性；ServletContext 初始化参数；ServletConfig 初始化参数；SPRING_APPLICATION_JSON 中的属性；命令行参数；测试相关的 properties 属性。</p>
+<p>对于应用配置文件，Spring Boot 会自动从以下位置加载 application.properties 和 application.yaml 文件：类路径根目录；类路径下的 /config 包；当前目录；当前目录下的 config 子目录；config 子目录的直接子目录<a href="https://docs.spring.io/spring-boot/3.4/reference/features/external-config.html">(167)</a>。这个列表按优先级排序，后面的位置会覆盖前面的配置。</p>
+<p>Spring Boot 还支持 Profile 特定的配置文件，使用命名约定 application-{profile}.properties。例如，如果激活了 prod profile，那么 application.yaml 和 application-prod.yaml 都会被加载，其中 profile 特定的配置会覆盖非特定的配置。</p>
+<h3 id="18">1.8 资源访问抽象与实现策略</h3>
+<p>Spring 的 Resource 接口提供了统一的资源访问抽象，它是一个功能强大的接口，用于抽象对底层资源的访问<a href="https://docs.spring.io/spring-framework/docs/4.0.4.RELEASE/spring-framework-reference/html/resources.html">(71)</a>。Resource 接口继承自 InputStreamSource，定义了资源访问的基本方法，包括 exists () 检查资源是否存在、isOpen () 判断资源是否已打开、getURL () 获取资源的 URL 等<a href="https://docs.spring.io/spring-framework/docs/4.0.4.RELEASE/spring-framework-reference/html/resources.html">(71)</a>。</p>
+<p>Resource 接口的设计目标是统一各种资源的访问方式。在传统的 Java 开发中，访问 classpath 资源需要使用 Class.getResourceAsStream ()，访问文件系统资源需要使用 new FileInputStream ()，访问网络资源需要使用 new URL ().openStream ()。Spring 的 Resource 接口将这些不同的资源访问方式统一起来，提供了一致的编程模型<a href="https://juejin.cn/post/7564235452455157801">(73)</a>。</p>
+<p>Spring 提供了多种 Resource 实现类，每种实现类代表一种特定的资源访问策略：ClassPathResource 用于访问类路径下的资源；FileSystemResource 用于访问文件系统资源；UrlResource 用于访问 URL 资源（如 HTTP、FTP 等）；ServletContextResource 用于访问 ServletContext 中的资源；InputStreamResource 用于包装输入流资源；ByteArrayResource 用于包装字节数组资源等<a href="https://github.com/crisxuan/bestJavaer/blob/master/spring/spring-resource.md">(76)</a>。</p>
+<p>ResourceLoader 接口是 Spring 资源加载的核心，ApplicationContext 实现了这个接口，提供了 getResource (String location) 方法用于获取 Resource 对象。ResourceLoader 使用特定的前缀来识别不同类型的资源，例如 classpath: 表示类路径资源，file: 表示文件系统资源，http: 表示网络资源等。如果没有指定前缀，ResourceLoader 会根据具体的 ApplicationContext 实现使用默认的资源类型。</p>
+<h2 id="2-aop">2. AOP 面向切面编程</h2>
+<h3 id="21-aop">2.1 AOP 核心概念与术语体系</h3>
+<p>AOP（面向切面编程）是 Spring 框架的核心特性之一，它通过将横切关注点与业务逻辑分离，实现了代码的高度模块化和可维护性。AOP 的核心思想是将应用中的通用功能（如日志记录、事务管理、权限控制等）从业务逻辑中分离出来，形成独立的切面，然后在运行时将这些切面织入到目标对象中<a href="https://juejin.cn/post/7590608345923272730">(99)</a>。</p>
+<p>AOP 的核心术语包括：切面（Aspect）是一组相关通知的集合，通常对应一个横切关注点的实现；连接点（Join Point）是程序执行过程中的特定点，如方法调用、异常抛出等，在 Spring AOP 中主要指方法调用；切点（Pointcut）定义了哪些连接点需要被通知，通过切点表达式匹配特定的方法；通知（Advice）定义了在切点处执行的增强逻辑，包括前置通知、后置通知、环绕通知等；引入（Introduction）允许向现有类添加新的方法或属性；织入（Weaving）是将切面应用到目标对象并创建代理对象的过程<a href="https://juejin.cn/post/7590608345923272730">(99)</a>。</p>
+<p>在 Spring AOP 中，连接点始终代表方法执行，这是因为 Spring AOP 基于动态代理实现，只能对方法进行拦截。与 AspectJ 相比，Spring AOP 的功能相对有限，但它提供了与 Spring IoC 容器的无缝集成，并且在大多数企业应用场景中已经足够使用。</p>
+<h3 id="22">2.2 通知类型与执行顺序</h3>
+<p>Spring AOP 支持五种类型的通知，每种通知定义了在特定连接点执行的增强逻辑。理解这些通知类型及其执行顺序对于正确使用 AOP 至关重要。</p>
+<p>** 前置通知（@Before）** 在目标方法执行之前执行，通常用于日志记录、权限校验等场景。前置通知不会影响目标方法的执行，除非在前置通知中抛出异常<a href="https://juejin.cn/post/7590608345923272730">(99)</a>。</p>
+<p>** 后置通知（@After）** 在目标方法执行之后执行，无论方法是否抛出异常，类似于 try-finally 块中的 finally 部分。后置通知通常用于资源清理、统计方法执行时间等操作<a href="https://juejin.cn/post/7590608345923272730">(99)</a>。</p>
+<p>** 返回通知（@AfterReturning）** 在目标方法正常返回后执行，只有在方法成功完成且没有抛出异常时才会触发。返回通知可以访问目标方法的返回值，常用于结果记录或缓存处理<a href="https://juejin.cn/post/7590608345923272730">(99)</a>。</p>
+<p>** 异常通知（@AfterThrowing）** 在目标方法抛出异常后执行，只有在方法抛出异常时才会触发。异常通知可以访问抛出的异常对象，常用于异常处理、错误日志记录等场景<a href="https://juejin.cn/post/7590608345923272730">(99)</a>。</p>
+<p>** 环绕通知（@Around）** 是功能最强大的通知类型，它完全包裹目标方法，可以控制目标方法是否执行、修改方法参数、替换返回值等。环绕通知需要显式调用 ProceedingJoinPoint 的 proceed () 方法来执行目标方法<a href="https://juejin.cn/post/7590608345923272730">(99)</a>。</p>
+<p>当一个方法被多个通知增强时，通知的执行顺序遵循特定规则。对于单个切面内的通知，如果使用 @Around 包裹其他通知，执行顺序类似于 try-catch-finally 结构：环绕通知的 before 部分→前置通知→目标方法→环绕通知获取返回值→返回通知→环绕通知的 after 部分（finally）→后置通知。如果目标方法抛出异常，则执行顺序为：环绕通知的 before 部分→前置通知→目标方法抛出异常→异常通知→环绕通知的 after 部分（finally）→后置通知<a href="https://juejin.cn/post/7590608345923272730">(99)</a>。</p>
+<h3 id="23-jdk-cglib">2.3 JDK 动态代理与 CGLIB 代理机制</h3>
+<p>Spring AOP 的底层实现基于动态代理技术，主要支持两种代理方式：JDK 动态代理和 CGLIB 代理。理解这两种代理机制的原理和适用场景对于优化 AOP 性能和避免潜在问题至关重要。</p>
+<p><strong>JDK 动态代理</strong>是 Java 原生提供的代理机制，它基于反射原理在运行时动态生成代理类。JDK 动态代理要求目标对象必须实现至少一个接口，代理类会实现与目标对象相同的接口，并在代理方法中织入增强逻辑。JDK 动态代理的优势在于它是 Java 标准库的一部分，无需额外依赖，并且在现代 JVM 中通过反射优化后性能表现良好<a href="https://blog.csdn.net/2301_80141552/article/details/150989549">(106)</a>。</p>
+<p><strong>CGLIB 代理</strong>通过字节码生成技术在运行时创建目标类的子类，重写非 final 方法来实现代理功能。CGLIB 代理的优势在于它不需要目标对象实现接口，可以代理任何非 final 的类和方法。在高频调用场景下，CGLIB 代理因避免了反射开销，性能通常优于 JDK 代理<a href="https://blog.csdn.net/2301_80141552/article/details/150989549">(106)</a>。</p>
+<p>Spring AOP 的代理选择策略如下：如果目标对象实现了接口，默认使用 JDK 动态代理；如果目标对象没有实现接口，或者强制设置 spring.aop.proxy-target-class=true，则使用 CGLIB 代理<a href="https://www.iesdouyin.com/share/note/7534669206277705012/?region=\&amp;mid=7168534822384732167\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;schema_type=37\&amp;share_sign=vMTqJ5q21Mz4_pKVqIjBDb85doJ8VtIVG04Sb7q8xWQ-\&amp;share_version=280700\&amp;ts=1769261066\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D">(109)</a>。这种策略确保了在大多数场景下都能选择合适的代理方式。</p>
+<p>在实际应用中，选择代理方式需要考虑多个因素：目标对象是否有接口；是否需要代理 final 类或方法；性能要求；内存占用等。值得注意的是，CGLIB 代理会增加类加载的开销，并且在某些特殊场景下可能出现问题，如类的构造函数有特殊逻辑、使用了第三方字节码增强库等<a href="https://juejin.cn/post/7561442148370137139">(111)</a>。</p>
+<h3 id="24-aspectj">2.4 切点表达式与 AspectJ 集成</h3>
+<p>Spring AOP 使用 AspectJ 的切点表达式语言来定义切点，这种表达式语言提供了丰富的匹配模式，可以精确地定位需要增强的连接点。</p>
+<p>切点表达式的基本语法结构为：execution ([修饰符] 返回值类型 方法全限定名 ([参数列表]) [throws 异常])。其中，execution 是最常用的切点指示符，用于匹配方法执行的连接点<a href="https://blog.csdn.net/weixin_30449239/article/details/99446198">(112)</a>。</p>
+<p><strong>通配符的使用</strong>是切点表达式的核心特性。* 通配符匹配任意数量的字符（不包括包路径分隔符）；.. 通配符匹配任意数量的字符（包括包路径分隔符），在包名中表示多级包，在参数列表中表示任意参数；+ 通配符匹配指定类及其所有子类<a href="https://juejin.cn/post/7509042958204420133">(118)</a>。</p>
+<p><strong>常见的切点表达式示例</strong>包括：匹配 service 包下所有类的所有方法：execution (* com.xxx.service..<em>.</em>(..))；匹配 UserService 类的所有 public 方法：execution (public * com.xxx.service.UserService.<em>(..))；匹配所有返回 String 类型的方法：execution (String com.xxx..</em>(..))；匹配带有 @Transactional 注解的方法：@annotation (org.springframework.transaction.annotation.Transactional)<a href="https://juejin.cn/post/7509042958204420133">(118)</a>。</p>
+<p>除了 execution 表达式，Spring 还支持其他类型的切点指示符：within 用于匹配特定类型内的连接点；target 用于匹配目标对象是特定类型的连接点；this 用于匹配代理对象是特定类型的连接点；args 用于匹配方法参数满足特定类型的连接点；@within 用于匹配类或接口上带有特定注解的连接点；@target 用于匹配目标对象带有特定注解的连接点等<a href="https://www.javascriptcn.com/interview-spring/677f4e6d828d7b20c6314504.html">(117)</a>。</p>
+<p>Spring AOP 与 AspectJ 的集成体现在切点表达式的使用上，但需要注意的是，Spring AOP 仅支持方法级别的连接点，而完整的 AspectJ 还支持构造函数、字段等其他连接点。Spring AOP 使用的是 AspectJ 切点表达式语言的一个子集，通过 aspectjweaver 库来解析和执行这些表达式<a href="https://blog.csdn.net/weixin_30449239/article/details/99446198">(112)</a>。</p>
+<h2 id="3">3. 数据访问与事务管理</h2>
+<h3 id="31">3.1 声明式事务管理原理</h3>
+<p>Spring 的声明式事务管理是企业级应用开发中的核心功能，它通过 @Transactional 注解和 AOP 机制实现了事务管理与业务逻辑的解耦。声明式事务的核心原理基于 AOP 动态代理和事务拦截器机制<a href="https://blog.csdn.net/xiaolyuh123/article/details/156830720">(119)</a>。</p>
+<p><strong>事务管理的核心架构</strong>包括三个关键组件：PlatformTransactionManager 事务管理器，它是 Spring 事务管理的核心接口，定义了事务操作的基本方法（getTransaction、commit、rollback）；TransactionDefinition 事务定义，描述事务的属性（隔离级别、传播行为、超时时间、只读属性等）；TransactionStatus 事务状态，代表当前事务的运行状态，用于事务的控制和监控<a href="https://blog.csdn.net/Prince140678/article/details/146466434">(124)</a>。</p>
+<p><strong>@Transactional 注解的底层机制</strong>通过 AOP 实现。Spring 会为被 @Transactional 标注的 Bean 创建动态代理对象，这个代理对象就是事务的增强器。当调用目标方法时，代理对象会拦截方法调用，根据 @Transactional 的配置信息创建事务、执行目标方法、处理事务的提交或回滚<a href="https://blog.csdn.net/xiaolyuh123/article/details/156830720">(119)</a>。</p>
+<p>事务管理的执行流程如下：首先，AOP 代理拦截目标方法调用；然后，TransactionInterceptor 根据 @Transactional 注解获取事务属性；接着，调用 PlatformTransactionManager 的 getTransaction () 方法获取事务；执行目标方法，如果执行过程中抛出异常，则调用 rollback () 方法回滚事务；如果执行成功，则调用 commit () 方法提交事务<a href="https://blog.csdn.net/Prince140678/article/details/146466434">(124)</a>。</p>
+<h3 id="32-transactional">3.2 @Transactional 传播行为详解</h3>
+<p>@Transactional 注解的 propagation 属性定义了事务的传播行为，用于控制在嵌套方法调用场景下的事务处理策略。Spring 支持七种事务传播行为，每种行为都有其特定的应用场景。</p>
+<p>**REQUIRED（默认传播行为）** 表示如果当前存在事务，则加入该事务；如果当前没有事务，则创建一个新事务。这是最常用的传播行为，适用于大多数业务场景。例如，方法 A 调用方法 B，若方法 A 已经在事务中，则方法 B 加入方法 A 的事务；若方法 A 没有事务，则为方法 B 创建新事务。</p>
+<p><strong>REQUIRES_NEW</strong>表示总是创建一个新事务，如果当前存在事务，则将当前事务挂起。这种传播行为适用于需要完全隔离的事务场景，如日志记录、审计等。方法 A 调用方法 B 时，方法 B 会创建新事务，与方法 A 的事务相互独立，方法 B 的异常不会影响方法 A 的事务。</p>
+<p><strong>NESTED</strong>表示如果当前存在事务，则在当前事务中创建一个嵌套事务；如果当前没有事务，则行为与 REQUIRED 相同。嵌套事务可以部分回滚，父事务可以回滚到嵌套事务开始的保存点，而不影响其他部分的执行。这种传播行为适用于需要部分回滚的复杂业务场景。</p>
+<p><strong>SUPPORTS</strong>表示如果当前存在事务，则加入该事务；如果当前没有事务，则以非事务方式执行。这种传播行为适用于事务可选的操作，如只读查询等。</p>
+<p><strong>NOT_SUPPORTED</strong>表示以非事务方式执行，如果当前存在事务，则将当前事务挂起。这种传播行为适用于不需要事务的操作，如日志记录、缓存更新等。</p>
+<p><strong>NEVER</strong>表示以非事务方式执行，如果当前存在事务，则抛出异常。这种传播行为用于强制要求方法不运行在事务中。</p>
+<p><strong>MANDATORY</strong>表示必须在一个已存在的事务中执行，如果当前没有事务，则抛出异常。这种传播行为用于强制要求方法必须运行在事务中。</p>
+<h3 id="33">3.3 事务隔离级别与失效场景</h3>
+<p>事务隔离级别定义了多个事务之间的隔离程度，用于解决并发事务可能带来的脏读、不可重复读、幻读等问题。Spring 支持五种事务隔离级别，这些级别直接映射到数据库的隔离级别。</p>
+<p><strong>ISOLATION_DEFAULT</strong>使用数据库默认的隔离级别，不同数据库的默认隔离级别可能不同。例如，MySQL 的默认隔离级别是 REPEATABLE_READ，Oracle 的默认隔离级别是 READ_COMMITTED<a href="https://blog.csdn.net/lhmyy521125/article/details/150565066">(127)</a>。</p>
+<p><strong>ISOLATION_READ_UNCOMMITTED</strong>是最低的隔离级别，允许一个事务读取另一个未提交事务的数据。这种隔离级别可能导致脏读、不可重复读、幻读等问题，但性能最好<a href="https://blog.csdn.net/lhmyy521125/article/details/150565066">(127)</a>。</p>
+<p><strong>ISOLATION_READ_COMMITTED</strong>确保一个事务只能读取已提交的数据。这种隔离级别可以避免脏读，但可能出现不可重复读和幻读问题，是大多数数据库的默认隔离级别<a href="https://blog.csdn.net/lhmyy521125/article/details/150565066">(127)</a>。</p>
+<p><strong>ISOLATION_REPEATABLE_READ</strong>确保在同一个事务中多次读取同一数据时，得到相同的结果，即使其他事务修改了该数据。这种隔离级别可以避免脏读和不可重复读，但可能出现幻读问题，是 MySQL 的默认隔离级别<a href="https://blog.csdn.net/lhmyy521125/article/details/150565066">(127)</a>。</p>
+<p><strong>ISOLATION_SERIALIZABLE</strong>是最高的隔离级别，它通过强制事务串行执行来避免所有并发问题。这种隔离级别性能最差，但可以完全避免脏读、不可重复读和幻读问题<a href="https://blog.csdn.net/lhmyy521125/article/details/150565066">(127)</a>。</p>
+<p><strong>事务失效的常见场景</strong>是实际开发中需要特别注意的问题。根据经验总结，事务失效主要包括以下几种情况：</p>
+<p>方法不是 public 修饰符：Spring 的事务代理默认只对 public 方法生效，如果在非 public 方法上使用 @Transactional 注解，事务将失效<a href="https://blog.csdn.net/z55947810/article/details/155201266">(126)</a>。</p>
+<p>同类内部方法调用：当在同一个类中，一个方法调用另一个被 @Transactional 标注的方法时，事务会失效。这是因为 Spring 的事务代理是基于 AOP 实现的，内部方法调用不会经过代理对象，因此不会触发事务增强<a href="https://blog.csdn.net/z55947810/article/details/155201266">(126)</a>。</p>
+<p>异常被捕获：如果在被 @Transactional 标注的方法内部捕获了异常，并且没有重新抛出，事务将无法回滚。Spring 默认只对运行时异常（RuntimeException 及其子类）和 Error 进行回滚，对于受检异常需要通过 rollbackFor 属性显式配置<a href="https://blog.csdn.net/z55947810/article/details/155201266">(126)</a>。</p>
+<p>数据库引擎不支持事务：如果使用的数据库引擎不支持事务（如 MySQL 的 MyISAM 引擎），即使配置了 @Transactional，事务也不会生效。应该使用支持事务的引擎，如 InnoDB<a href="https://blog.csdn.net/lhmyy521125/article/details/150565066">(127)</a>。</p>
+<p>事务方法在构造函数或 @PostConstruct 中调用：由于 Spring 的 AOP 代理是在 Bean 初始化完成后创建的，在构造函数或 @PostConstruct 方法中调用事务方法时，代理对象还未创建，因此事务不会生效<a href="https://blog.csdn.net/z55947810/article/details/155201266">(126)</a>。</p>
+<h3 id="34-validation">3.4 数据校验与 Validation 机制</h3>
+<p>Spring 的数据校验机制基于 JSR-303 Bean Validation 规范，提供了强大而灵活的数据验证能力。数据校验是保证应用数据完整性和业务逻辑正确性的重要手段。</p>
+<p><strong>JSR-303 内置校验注解</strong>提供了基础的验证功能：@NotNull 用于验证对象是否为 null；@NotEmpty 用于验证字符串、集合、数组等是否为空；@NotBlank 用于验证字符串是否为空白（非 null 且长度大于 0）；@Size 用于验证字符串长度或集合、数组的大小；@Min 和 @Max 用于验证数字的最小值和最大值；@Email 用于验证邮箱格式；@Pattern 用于验证正则表达式匹配等<a href="https://docs.spring.io/spring-framework/reference/6.0/core/validation/beanvalidation.html">(134)</a>。</p>
+<p><strong>@Valid 和 @Validated 注解</strong>用于触发数据校验。@Valid 通常用于方法参数、方法返回值、类属性等位置，用于验证对象及其嵌套对象；@Validated 是 Spring 提供的注解，主要用于类级别和方法级别，支持分组校验功能<a href="https://docs.spring.io/spring-framework/reference/6.0/core/validation/beanvalidation.html">(134)</a>。</p>
+<p>在 Spring MVC 应用中，数据校验通常与 @RequestBody、@RequestParam 等注解结合使用。例如：</p>
+<pre><code>@PostMapping(&quot;/user&quot;)
+
+public ResponseEntity\&lt;User&gt; createUser(@Valid @RequestBody User user) {
+
+&amp;#x20;   // 处理用户创建逻辑
+
+}
+</code></pre>
+<p>当数据校验失败时，Spring 会抛出 MethodArgumentNotValidException 异常，可以通过 @ControllerAdvice 进行全局异常处理，返回统一的错误响应格式<a href="https://blog.csdn.net/python15397/article/details/153139481">(133)</a>。</p>
+<p><strong>自定义校验注解</strong>允许开发者实现特定业务规则的验证。创建自定义校验需要以下步骤：定义校验注解，使用 @Constraint 注解指定校验器；实现 ConstraintValidator 接口，编写具体的校验逻辑；在需要校验的字段上使用自定义注解<a href="https://blog.csdn.net/gitblog_00102/article/details/151282299">(135)</a>。</p>
+<p>例如，创建一个 @EnumType 注解用于校验枚举类型：</p>
+<pre><code>@Target({ METHOD, FIELD, ANNOTATION\_TYPE, CONSTRUCTOR, PARAMETER, TYPE\_USE })
+
+@Retention(RUNTIME)
+
+@Constraint(validatedBy = EnumTypeValidator.class)
+
+public @interface EnumType {
+
+&amp;#x20;   String message() default &quot;枚举类型不合法&quot;;
+
+&amp;#x20;   Class\&lt;?&gt;\[] groups() default {};
+
+&amp;#x20;   Class\&lt;? extends Payload&gt;\[] payload() default {};
+
+&amp;#x20;   Class\&lt;? extends Enum\&lt;?&gt;&gt; enumClass();
+
+}
+
+public class EnumTypeValidator implements ConstraintValidator\&lt;EnumType, Object&gt; {
+
+&amp;#x20;   private Class\&lt;? extends Enum\&lt;?&gt;&gt; enumClass;
+
+&amp;#x20;   @Override
+
+&amp;#x20;   public void initialize(EnumType constraintAnnotation) {
+
+&amp;#x20;       this.enumClass = constraintAnnotation.enumClass();
+
+&amp;#x20;   }
+
+&amp;#x20;   @Override
+
+&amp;#x20;   public boolean isValid(Object value, ConstraintValidatorContext context) {
+
+&amp;#x20;       if (value == null) {
+
+&amp;#x20;           return true;
+
+&amp;#x20;       }
+
+&amp;#x20;       try {
+
+&amp;#x20;           Enum\&lt;?&gt;\[] enumConstants = enumClass.getEnumConstants();
+
+&amp;#x20;           for (Enum\&lt;?&gt; enumConstant : enumConstants) {
+
+&amp;#x20;               if (enumConstant.name().equals(value.toString())) {
+
+&amp;#x20;                   return true;
+
+&amp;#x20;               }
+
+&amp;#x20;           }
+
+&amp;#x20;       } catch (Exception e) {
+
+&amp;#x20;           return false;
+
+&amp;#x20;       }
+
+&amp;#x20;       return false;
+
+&amp;#x20;   }
+
+}
+</code></pre>
+<h2 id="4-spring-mvc-web">4. Spring MVC 与 Web 开发架构</h2>
+<h3 id="41-dispatcherservlet">4.1 DispatcherServlet 核心流程</h3>
+<p>DispatcherServlet 是 Spring MVC 的核心组件，它采用前端控制器模式，作为所有 Web 请求的统一入口。理解 DispatcherServlet 的处理流程对于掌握 Spring MVC 架构至关重要。</p>
+<p><strong>DispatcherServlet 的初始化过程</strong>在 Web 应用启动时完成。在传统的 Servlet 环境中，需要在 web.xml 中配置 DispatcherServlet：</p>
+<pre><code>\&lt;servlet&gt;
+
+&amp;#x20;   \&lt;servlet-name&gt;dispatcher\&lt;/servlet-name&gt;
+
+&amp;#x20;   \&lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet\&lt;/servlet-class&gt;
+
+&amp;#x20;   \&lt;init-param&gt;
+
+&amp;#x20;       \&lt;param-name&gt;contextConfigLocation\&lt;/param-name&gt;
+
+&amp;#x20;       \&lt;param-value&gt;/WEB-INF/spring-mvc-config.xml\&lt;/param-value&gt;
+
+&amp;#x20;   \&lt;/init-param&gt;
+
+&amp;#x20;   \&lt;load-on-startup&gt;1\&lt;/load-on-startup&gt;
+
+\&lt;/servlet&gt;
+
+\&lt;servlet-mapping&gt;
+
+&amp;#x20;   \&lt;servlet-name&gt;dispatcher\&lt;/servlet-name&gt;
+
+&amp;#x20;   \&lt;url-pattern&gt;/\&lt;/url-pattern&gt;
+
+\&lt;/servlet-mapping&gt;
+</code></pre>
+<p>在 Servlet 3.0 + 环境中，可以通过 Java 配置的方式注册 DispatcherServlet：</p>
+<pre><code>@Configuration
+
+public class WebConfig implements WebApplicationInitializer {
+
+&amp;#x20;   @Override
+
+&amp;#x20;   public void onStartup(ServletContext servletContext) {
+
+&amp;#x20;       AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
+
+&amp;#x20;       context.register(MvcConfig.class);
+
+&amp;#x20;      &amp;#x20;
+
+&amp;#x20;       DispatcherServlet dispatcherServlet = new DispatcherServlet(context);
+
+&amp;#x20;       ServletRegistration.Dynamic registration = servletContext.addServlet(&quot;dispatcher&quot;, dispatcherServlet);
+
+&amp;#x20;       registration.setLoadOnStartup(1);
+
+&amp;#x20;       registration.addMapping(&quot;/&quot;);
+
+&amp;#x20;   }
+
+}
+</code></pre>
+<p><strong>DispatcherServlet 的核心处理流程</strong>包括以下步骤：</p>
+<ol>
+<li>
+<p><strong>请求接收与预处理</strong>：DispatcherServlet 接收所有符合映射规则的 HTTP 请求，进行初步处理，包括设置请求属性、locale 解析、主题解析等。</p>
+</li>
+<li>
+<p><strong>处理器映射（Handler Mapping）</strong>：DispatcherServlet 调用 HandlerMapping 查找匹配的处理器（Handler）。HandlerMapping 根据请求 URL、HTTP 方法等信息确定对应的处理器。常用的 HandlerMapping 实现包括 RequestMappingHandlerMapping（基于 @RequestMapping 注解）、BeanNameUrlHandlerMapping（基于 Bean 名称）、SimpleUrlHandlerMapping（基于简单 URL 匹配）等<a href="https://blog.csdn.net/weixin_73739493/article/details/151051268">(142)</a>。</p>
+</li>
+<li>
+<p><strong>处理器适配器（Handler Adapter）</strong>：找到处理器后，DispatcherServlet 需要调用合适的 HandlerAdapter 来执行处理器。HandlerAdapter 负责将 DispatcherServlet 的调用适配到具体的处理器类型。常用的 HandlerAdapter 包括 RequestMappingHandlerAdapter（处理 @Controller 注解的处理器）、SimpleControllerHandlerAdapter（处理实现 Controller 接口的处理器）等<a href="https://www.iesdouyin.com/share/video/7514735876019064104/?region=\&amp;mid=7514737312341805835\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=MgyZrG5JrxvekX5nteTVn3uwuLEj5Mo3zulFXgQwWYA-\&amp;share_version=280700\&amp;ts=1769261096\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D">(143)</a>。</p>
+</li>
+<li>
+<p><strong>处理器执行</strong>：HandlerAdapter 执行处理器，包括数据绑定、数据校验、调用目标方法等步骤。处理器执行后返回 ModelAndView 对象，包含视图名称和模型数据。</p>
+</li>
+<li>
+<p><strong>视图解析（View Resolver）</strong>：DispatcherServlet 调用 ViewResolver 解析视图名称，得到具体的 View 对象。ViewResolver 根据逻辑视图名和 Locale 信息查找对应的物理视图。常用的 ViewResolver 包括 InternalResourceViewResolver（处理 JSP 视图）、ThymeleafViewResolver（处理 Thymeleaf 模板）等。</p>
+</li>
+<li>
+<p><strong>视图渲染</strong>：View 对象负责将模型数据渲染到响应中。对于传统的 MVC 应用，视图渲染通常指将模型数据填充到 JSP 或其他模板引擎中；对于 RESTful 应用，通常指将数据转换为 JSON 或 XML 格式的响应体。</p>
+</li>
+<li>
+<p><strong>响应处理</strong>：将渲染结果写入 HttpServletResponse，完成请求处理流程。</p>
+</li>
+</ol>
+<h3 id="42">4.2 核心注解与参数绑定机制</h3>
+<p>Spring MVC 提供了丰富的注解支持，这些注解极大地简化了 Web 应用的开发。理解这些核心注解及其使用场景是掌握 Spring MVC 的基础。</p>
+<p><strong>控制器相关注解</strong>：</p>
+<ul>
+<li>
+<p>@Controller：标识一个控制器类，用于处理 Web 请求。</p>
+</li>
+<li>
+<p>@RestController：是 @Controller 和 @ResponseBody 的组合注解，用于创建 RESTful 风格的控制器，自动将返回值转换为响应体。</p>
+</li>
+<li>
+<p>@RequestMapping：用于映射 URL 路径，可以标注在类或方法上，支持 URL 模板、请求方法限定等功能。</p>
+</li>
+<li>
+<p>@GetMapping、@PostMapping、@PutMapping、@DeleteMapping、@PatchMapping：是 @RequestMapping 的快捷方式，分别对应 HTTP 的 GET、POST、PUT、DELETE、PATCH 方法<a href="https://blog.csdn.net/2401_83675559/article/details/156147464">(147)</a>。</p>
+</li>
+</ul>
+<p><strong>请求参数绑定注解</strong>：</p>
+<ul>
+<li>@PathVariable：用于绑定 URL 路径中的占位符参数，例如：</li>
+</ul>
+<pre><code>@GetMapping(&quot;/user/{id}&quot;)
+
+public User getUser(@PathVariable Long id) {
+
+&amp;#x20;   // 根据id查询用户
+
+}
+</code></pre>
+<ul>
+<li>@RequestParam：用于绑定查询参数或表单参数，支持 defaultValue、required 等属性：</li>
+</ul>
+<pre><code>@GetMapping(&quot;/users&quot;)
+
+public List\&lt;User&gt; getUsers(@RequestParam(defaultValue = &quot;0&quot;) int page,&amp;#x20;
+
+&amp;#x20;                          @RequestParam(defaultValue = &quot;10&quot;) int size) {
+
+&amp;#x20;   // 分页查询用户
+
+}
+</code></pre>
+<ul>
+<li>@RequestBody：用于绑定请求体中的数据，通常与 @Valid 结合使用进行数据校验：</li>
+</ul>
+<pre><code>@PostMapping(&quot;/user&quot;)
+
+public User createUser(@Valid @RequestBody User user) {
+
+&amp;#x20;   // 创建用户
+
+}
+</code></pre>
+<ul>
+<li>
+<p>@RequestHeader：用于绑定请求头信息。</p>
+</li>
+<li>
+<p>@CookieValue：用于绑定 Cookie 值。</p>
+</li>
+</ul>
+<p><strong>参数绑定机制</strong>的底层原理是通过 DataBinder 和 WebDataBinder 来实现的。Spring MVC 支持多种类型的参数绑定：</p>
+<ul>
+<li>
+<p>基本类型和 String 类型的自动转换</p>
+</li>
+<li>
+<p>对象类型的属性绑定</p>
+</li>
+<li>
+<p>集合和数组类型的绑定</p>
+</li>
+<li>
+<p>自定义类型转换器的支持</p>
+</li>
+</ul>
+<p>数据绑定的执行流程包括：提取请求参数、类型转换、数据校验、绑定到目标对象等步骤。当绑定过程中发生错误时，错误信息会存储在 BindingResult 对象中，可以通过方法参数或 Model 对象获取这些错误信息<a href="https://blog.csdn.net/python15397/article/details/153139481">(133)</a>。</p>
+<h3 id="43">4.3 统一异常处理与跨域支持</h3>
+<p>在 Web 应用开发中，统一的异常处理和跨域支持是保证应用稳定性和可扩展性的重要功能。</p>
+<p><strong>全局异常处理机制</strong>通过 @ControllerAdvice 和 @ExceptionHandler 注解实现。@ControllerAdvice 用于标识全局异常处理类，@ExceptionHandler 用于指定处理的异常类型。例如：</p>
+<pre><code>@ControllerAdvice
+
+public class GlobalExceptionHandler {
+
+&amp;#x20;   @ExceptionHandler(MethodArgumentNotValidException.class)
+
+&amp;#x20;   public ResponseEntity\&lt;ErrorResponse&gt; handleValidationException(MethodArgumentNotValidException ex) {
+
+&amp;#x20;       List\&lt;String&gt; errors = ex.getBindingResult().getFieldErrors().stream()
+
+&amp;#x20;               .map(FieldError::getDefaultMessage)
+
+&amp;#x20;               .collect(Collectors.toList());
+
+&amp;#x20;       ErrorResponse errorResponse = new ErrorResponse(&quot;VALIDATION\_ERROR&quot;, errors);
+
+&amp;#x20;       return ResponseEntity.badRequest().body(errorResponse);
+
+&amp;#x20;   }
+
+&amp;#x20;   @ExceptionHandler(UserNotFoundException.class)
+
+&amp;#x20;   public ResponseEntity\&lt;ErrorResponse&gt; handleUserNotFoundException(UserNotFoundException ex) {
+
+&amp;#x20;       ErrorResponse errorResponse = new ErrorResponse(&quot;USER\_NOT\_FOUND&quot;, Collections.singletonList(ex.getMessage()));
+
+&amp;#x20;       return ResponseEntity.notFound().body(errorResponse);
+
+&amp;#x20;   }
+
+&amp;#x20;   @ExceptionHandler(Exception.class)
+
+&amp;#x20;   public ResponseEntity\&lt;ErrorResponse&gt; handleAllExceptions(Exception ex) {
+
+&amp;#x20;       ErrorResponse errorResponse = new ErrorResponse(&quot;INTERNAL\_SERVER\_ERROR&quot;, Collections.singletonList(&quot;服务器内部错误&quot;));
+
+&amp;#x20;       return ResponseEntity.status(500).body(errorResponse);
+
+&amp;#x20;   }
+
+}
+</code></pre>
+<p>这种全局异常处理机制可以统一处理 Controller 层抛出的所有异常，返回标准格式的错误响应，避免了在每个 Controller 中编写大量的 try-catch 代码<a href="https://blog.csdn.net/m0_46091798/article/details/157258114">(149)</a>。</p>
+<p><strong>跨域资源共享（CORS）支持</strong>是现代 Web 应用开发中的常见需求。Spring MVC 提供了多种方式支持跨域请求：</p>
+<ol>
+<li><strong>使用 @CrossOrigin 注解</strong>：可以在 Controller 类或方法上使用 @CrossOrigin 注解，例如：</li>
+</ol>
+<pre><code>@RestController
+
+@RequestMapping(&quot;/api&quot;)
+
+@CrossOrigin(origins = &quot;http://localhost:3000&quot;, maxAge = 3600)
+
+public class UserController {
+
+&amp;#x20;  &amp;#x20;
+
+&amp;#x20;   @GetMapping(&quot;/users&quot;)
+
+&amp;#x20;   @CrossOrigin(origins = &quot;\*&quot;) // 方法级别的配置会覆盖类级别的配置
+
+&amp;#x20;   public List\&lt;User&gt; getUsers() {
+
+&amp;#x20;       // 获取用户列表
+
+&amp;#x20;   }
+
+}
+</code></pre>
+<ol>
+<li><strong>通过 WebMvcConfigurer 配置</strong>：实现 WebMvcConfigurer 接口的 addCorsMappings 方法：</li>
+</ol>
+<pre><code>@Configuration
+
+public class WebConfig implements WebMvcConfigurer {
+
+&amp;#x20;  &amp;#x20;
+
+&amp;#x20;   @Override
+
+&amp;#x20;   public void addCorsMappings(CorsRegistry registry) {
+
+&amp;#x20;       registry.addMapping(&quot;/api/\*\*&quot;)
+
+&amp;#x20;               .allowedOrigins(&quot;http://localhost:3000&quot;, &quot;https://example.com&quot;)
+
+&amp;#x20;               .allowedMethods(&quot;GET&quot;, &quot;POST&quot;, &quot;PUT&quot;, &quot;DELETE&quot;)
+
+&amp;#x20;               .allowedHeaders(&quot;\*&quot;)
+
+&amp;#x20;               .allowCredentials(true)
+
+&amp;#x20;               .maxAge(3600);
+
+&amp;#x20;   }
+
+}
+</code></pre>
+<ol>
+<li><strong>使用 Filter</strong>：可以注册 CorsFilter 来处理跨域请求：</li>
+</ol>
+<pre><code>@Bean
+
+public CorsFilter corsFilter() {
+
+&amp;#x20;   UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+
+&amp;#x20;   CorsConfiguration config = new CorsConfiguration();
+
+&amp;#x20;   config.setAllowedOrigins(Collections.singletonList(&quot;\*&quot;));
+
+&amp;#x20;   config.setAllowedMethods(Collections.singletonList(&quot;\*&quot;));
+
+&amp;#x20;   config.setAllowedHeaders(Collections.singletonList(&quot;\*&quot;));
+
+&amp;#x20;   source.registerCorsConfiguration(&quot;/\*\*&quot;, config);
+
+&amp;#x20;   return new CorsFilter(source);
+
+}
+</code></pre>
+<p>跨域配置需要注意的要点包括：allowedOrigins 指定允许的源，可以使用 "*" 表示所有源；allowedMethods 指定允许的 HTTP 方法；allowedHeaders 指定允许的请求头；allowCredentials 指定是否允许携带认证信息（如 Cookie）；maxAge 指定预检请求的缓存时间<a href="https://blog.csdn.net/2401_83675559/article/details/156147464">(147)</a>。</p>
+<h3 id="44">4.4 拦截器与过滤器机制对比</h3>
+<p>在 Spring Web 应用中，拦截器（Interceptor）和过滤器（Filter）都提供了对请求进行预处理和后处理的能力，但它们在实现机制、作用范围、生命周期等方面存在显著差异。</p>
+<p><strong>拦截器（Interceptor）机制</strong>：</p>
+<p>拦截器是 Spring MVC 框架的一部分，基于 AOP 思想实现，需要依赖 Spring 环境。拦截器通过实现 HandlerInterceptor 接口或继承 HandlerInterceptorAdapter 抽象类来定义，主要有三个方法：</p>
+<ul>
+<li>
+<p>preHandle (HttpServletRequest request, HttpServletResponse response, Object handler)：在处理器执行前调用，可以用于权限校验、日志记录等，返回 false 将中断请求处理流程。</p>
+</li>
+<li>
+<p>postHandle (HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)：在处理器执行后、视图渲染前调用，可以修改 ModelAndView。</p>
+</li>
+<li>
+<p>afterCompletion (HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)：在整个请求完成后（包括视图渲染）调用，通常用于资源清理、统计耗时等。</p>
+</li>
+</ul>
+<p>拦截器通过 WebMvcConfigurer 的 addInterceptors 方法注册：</p>
+<pre><code>@Configuration
+
+public class WebConfig implements WebMvcConfigurer {
+
+&amp;#x20;  &amp;#x20;
+
+&amp;#x20;   @Autowired
+
+&amp;#x20;   private LoginInterceptor loginInterceptor;
+
+&amp;#x20;  &amp;#x20;
+
+&amp;#x20;   @Override
+
+&amp;#x20;   public void addInterceptors(InterceptorRegistry registry) {
+
+&amp;#x20;       registry.addInterceptor(loginInterceptor)
+
+&amp;#x20;               .addPathPatterns(&quot;/api/\*\*&quot;)
+
+&amp;#x20;               .excludePathPatterns(&quot;/api/login&quot;, &quot;/api/register&quot;);
+
+&amp;#x20;   }
+
+}
+</code></pre>
+<p><strong>过滤器（Filter）机制</strong>：</p>
+<p>过滤器是 Servlet 规范的一部分，独立于任何 Web 框架，在 Servlet 容器级别工作。过滤器通过实现 javax.servlet.Filter 接口来定义，主要有三个方法：</p>
+<ul>
+<li>
+<p>init (FilterConfig filterConfig)：在过滤器初始化时调用，用于读取配置参数。</p>
+</li>
+<li>
+<p>doFilter (ServletRequest request, ServletResponse response, FilterChain chain)：核心方法，用于处理请求和响应。</p>
+</li>
+<li>
+<p>destroy ()：在过滤器销毁时调用，用于资源清理<a href="https://blog.csdn.net/darling_cats/article/details/142108333">(153)</a>。</p>
+</li>
+</ul>
+<p>过滤器通过 @WebFilter 注解或在 web.xml 中配置：</p>
+<pre><code>@WebFilter(filterName = &quot;characterEncodingFilter&quot;, urlPatterns = &quot;/\*&quot;)
+
+public class CharacterEncodingFilter implements Filter {
+
+&amp;#x20;  &amp;#x20;
+
+&amp;#x20;   @Override
+
+&amp;#x20;   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)&amp;#x20;
+
+&amp;#x20;           throws IOException, ServletException {
+
+&amp;#x20;       request.setCharacterEncoding(&quot;UTF-8&quot;);
+
+&amp;#x20;       response.setCharacterEncoding(&quot;UTF-8&quot;);
+
+&amp;#x20;       chain.doFilter(request, response);
+
+&amp;#x20;   }
+
+}
+</code></pre>
+<p><strong>拦截器与过滤器的主要区别</strong>：</p>
+<ol>
+<li>
+<p><strong>作用范围</strong>：</p>
+</li>
+<li>
+<p>过滤器作用于整个 Web 应用，包括静态资源（HTML、CSS、JS 等）、Servlet、JSP 等所有资源。</p>
+</li>
+<li>
+<p>拦截器只作用于 Spring MVC 框架处理的请求，无法拦截静态资源和非 Spring MVC 的请求<a href="https://blog.csdn.net/darling_cats/article/details/142108333">(153)</a>。</p>
+</li>
+<li>
+<p><strong>执行时机</strong>：</p>
+</li>
+<li>
+<p>过滤器在请求进入 Servlet 容器后、进入 Servlet 之前执行。</p>
+</li>
+<li>
+<p>拦截器在请求进入 Servlet 之后、执行 Controller 方法之前执行<a href="https://www.iesdouyin.com/share/video/7482798033780886823/?region=\&amp;mid=7468608251074824208\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=ZOx4tNvC9kQDeImzqXWkDCeuFHJrBuhBzb3Tlyxeau4-\&amp;share_version=280700\&amp;ts=1769261096\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D">(156)</a>。</p>
+</li>
+<li>
+<p><strong>实现机制</strong>：</p>
+</li>
+<li>
+<p>过滤器基于函数回调机制实现。</p>
+</li>
+<li>
+<p>拦截器基于 Spring 的 AOP 机制和反射实现<a href="https://www.iesdouyin.com/share/video/7482798033780886823/?region=\&amp;mid=7468608251074824208\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=ZOx4tNvC9kQDeImzqXWkDCeuFHJrBuhBzb3Tlyxeau4-\&amp;share_version=280700\&amp;ts=1769261096\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D">(156)</a>。</p>
+</li>
+<li>
+<p><strong>依赖关系</strong>：</p>
+</li>
+<li>
+<p>过滤器独立于 Spring 框架，可以在任何 Servlet 容器中使用。</p>
+</li>
+<li>
+<p>拦截器必须依赖 Spring 环境，只能在 Spring 应用中使用<a href="https://blog.csdn.net/darling_cats/article/details/142108333">(153)</a>。</p>
+</li>
+<li>
+<p><strong>功能特点</strong>：</p>
+</li>
+<li>
+<p>过滤器更适合处理与业务逻辑无关的通用功能，如字符编码转换、压缩解压缩、请求日志记录等。</p>
+</li>
+<li>
+<p>拦截器更适合处理与业务逻辑相关的功能，如权限校验、用户认证、数据统计等<a href="https://blog.csdn.net/darling_cats/article/details/142108333">(153)</a>。</p>
+</li>
+</ol>
+<p>在实际应用中，通常结合使用拦截器和过滤器：使用过滤器处理底层的通用功能，如字符编码、跨域处理等；使用拦截器处理业务相关的功能，如权限控制、日志记录等。这种组合能够充分发挥两者的优势，实现高效、灵活的 Web 应用开发。</p>
+<h2 id="5-spring-boot">5. Spring Boot 核心特性</h2>
+<h3 id="51">5.1 自动配置原理与机制</h3>
+<p>Spring Boot 的自动配置是其核心特性之一，它通过 "约定优于配置" 的理念，极大地简化了 Spring 应用的配置工作。自动配置的核心机制基于 @EnableAutoConfiguration 注解、SpringFactoriesLoader 和 @Conditional 条件注解<a href="https://blog.csdn.net/weixin_44289947/article/details/152934791">(160)</a>。</p>
+<p><strong>自动配置的核心流程</strong>如下：</p>
+<ol>
+<li>
+<p><strong>@SpringBootApplication 注解</strong>是 Spring Boot 应用的入口，它实际上是一个组合注解，包含了 @SpringBootConfiguration、@EnableAutoConfiguration 和 @ComponentScan 三个注解。其中，@EnableAutoConfiguration 负责启用自动配置功能<a href="https://www.iesdouyin.com/share/video/7521646695231261995/?region=\&amp;mid=7521646742656437055\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=aEttfIuhoXE0nfBfbatqGrVGlTrR6k35rN94kVHqqwo-\&amp;share_version=280700\&amp;ts=1769261127\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D">(163)</a>。</p>
+</li>
+<li>
+<p><strong>SpringFactoriesLoader 机制</strong>是自动配置的关键。Spring Boot 在 classpath 下的 META-INF/spring.factories 文件中定义了所有的自动配置类。例如，spring-boot-autoconfigure 模块中的 spring.factories 文件包含了大量的自动配置类，如 DataSourceAutoConfiguration、WebMvcAutoConfiguration 等<a href="https://blog.csdn.net/weixin_44289947/article/details/152934791">(160)</a>。</p>
+</li>
+<li>
+<p><strong>条件化配置</strong>通过 @Conditional 系列注解实现。自动配置类使用各种条件注解来判断是否应该生效，例如：</p>
+</li>
+<li>
+<p>@ConditionalOnClass：当类路径下存在指定类时生效</p>
+</li>
+<li>
+<p>@ConditionalOnMissingBean：当容器中不存在指定 Bean 时生效</p>
+</li>
+<li>
+<p>@ConditionalOnProperty：当指定的配置属性存在且匹配时生效</p>
+</li>
+<li>
+<p>@ConditionalOnWebApplication：当应用是 Web 应用时生效</p>
+</li>
+<li>
+<p>@ConditionalOnNotWebApplication：当应用不是 Web 应用时生效<a href="https://blog.csdn.net/weixin_44289947/article/details/152934791">(160)</a></p>
+</li>
+<li>
+<p><strong>自动配置类的执行顺序</strong>通过 @AutoConfigureOrder 和 @AutoConfigureAfter 注解控制。这些注解确保自动配置类按照正确的顺序执行，避免依赖问题<a href="https://blog.csdn.net/yzyyishi/article/details/150590104">(162)</a>。</p>
+</li>
+</ol>
+<p>自动配置的工作原理可以概括为：Spring Boot 启动时，@EnableAutoConfiguration 注解会触发 SpringFactoriesLoader 加载所有的自动配置类；然后，Spring 会根据条件注解判断每个自动配置类是否应该生效；对于生效的自动配置类，会注册相应的 Bean 定义到容器中；开发者可以通过自定义配置来覆盖自动配置的默认值，实现 "约定与配置" 的平衡<a href="https://blog.51cto.com/u_16213627/14365236">(166)</a>。</p>
+<h3 id="52-starter">5.2 Starter 机制与依赖管理</h3>
+<p>Spring Boot 的 Starter 机制是其依赖管理的核心创新，它通过提供精心设计的依赖模块，让开发者能够快速添加特定功能到应用中。Starter 本质上是一个 Maven 或 Gradle 的依赖描述符，它声明了应用需要的一组相关依赖。</p>
+<p><strong>Starter 命名约定</strong>：Spring Boot 官方提供的 Starter 遵循统一的命名规范：spring-boot-starter-*，其中星号部分表示特定的功能。例如：</p>
+<ul>
+<li>
+<p>spring-boot-starter-web：Web 应用开发（包括 Tomcat 和 Spring MVC）</p>
+</li>
+<li>
+<p>spring-boot-starter-data-jpa：JPA 数据访问（包括 Hibernate 和 Spring Data JPA）</p>
+</li>
+<li>
+<p>spring-boot-starter-test：测试支持（包括 JUnit、Spring Test 等）</p>
+</li>
+<li>
+<p>spring-boot-starter-security：安全认证支持</p>
+</li>
+<li>
+<p>spring-boot-starter-mail：邮件发送支持<a href="https://developer.aliyun.com:443/article/1689530">(161)</a></p>
+</li>
+</ul>
+<p><strong>自定义 Starter 的实现</strong>通常包含以下步骤：</p>
+<ol>
+<li>
+<p>创建一个 Maven 或 Gradle 项目，作为 Starter 的基础。</p>
+</li>
+<li>
+<p>在 pom.xml 或 build.gradle 中声明 Starter 的依赖。例如，创建一个 spring-boot-starter-mybatis：</p>
+</li>
+</ol>
+<pre><code>\&lt;dependencies&gt;
+
+&amp;#x20;   \&lt;dependency&gt;
+
+&amp;#x20;       \&lt;groupId&gt;org.springframework.boot\&lt;/groupId&gt;
+
+&amp;#x20;       \&lt;artifactId&gt;spring-boot-autoconfigure\&lt;/artifactId&gt;
+
+&amp;#x20;   \&lt;/dependency&gt;
+
+&amp;#x20;   \&lt;dependency&gt;
+
+&amp;#x20;       \&lt;groupId&gt;org.mybatis.spring.boot\&lt;/groupId&gt;
+
+&amp;#x20;       \&lt;artifactId&gt;mybatis-spring-boot-starter\&lt;/artifactId&gt;
+
+&amp;#x20;       \&lt;version&gt;2.0.6\&lt;/version&gt;
+
+&amp;#x20;   \&lt;/dependency&gt;
+
+\&lt;/dependencies&gt;
+</code></pre>
+<ol>
+<li>
+<p>创建自动配置类，使用 @Configuration 和 @Conditional 注解实现条件化配置。</p>
+</li>
+<li>
+<p>在 META-INF/spring.factories 文件中声明自动配置类：</p>
+</li>
+</ol>
+<pre><code>org.springframework.boot.autoconfigure.EnableAutoConfiguration=\\
+
+com.example.autoconfigure.MybatisAutoConfiguration
+</code></pre>
+<ol>
+<li>提供必要的属性配置类，使用 @ConfigurationProperties 注解绑定配置属性。</li>
+</ol>
+<p>Starter 机制的优势在于：简化了依赖管理，开发者无需了解每个功能所需的所有依赖；提供了一致的项目结构和配置方式；支持条件化配置，避免不必要的依赖冲突；便于团队内部或开源社区分享通用功能模块<a href="https://developer.aliyun.com:443/article/1689530">(161)</a>。</p>
+<h3 id="53">5.3 外部化配置加载顺序</h3>
+<p>Spring Boot 的外部化配置机制允许将应用配置与代码分离，支持多种配置源和灵活的加载顺序。理解配置加载顺序对于正确管理应用配置至关重要。</p>
+<p>根据官方文档，Spring Boot 的配置源加载顺序（从高到低）如下：</p>
+<ol>
+<li>
+<p><strong>命令行参数</strong>：通过命令行指定的参数（如 --spring.profiles.active=prod）具有最高优先级。</p>
+</li>
+<li>
+<p><strong>SPRING_APPLICATION_JSON</strong>：可以通过环境变量或系统属性指定 inline JSON 格式的配置。</p>
+</li>
+<li>
+<p><strong>ServletConfig 初始化参数</strong>：ServletContext 中的初始化参数。</p>
+</li>
+<li>
+<p><strong>ServletContext 初始化参数</strong>：ServletContext 的上下文参数。</p>
+</li>
+<li>
+<p><strong>JNDI 属性</strong>：来自 java:comp/env 的 JNDI 属性。</p>
+</li>
+<li>
+<p><strong>Java 系统属性（System.getProperties ()）</strong>：可以通过 - D 参数指定的系统属性。</p>
+</li>
+<li>
+<p><strong>操作系统环境变量</strong>：系统环境变量。</p>
+</li>
+<li>
+<p><strong>RandomValuePropertySource</strong>：用于生成随机值的特殊属性源（如 \${random.int}）。</p>
+</li>
+<li>
+<p><strong>应用配置文件</strong>：这是最常用的配置源，包括：</p>
+</li>
+<li>
+<p>application.properties 和 application.yaml（所有 profile）</p>
+</li>
+<li>
+<p>application-{profile}.properties 和 application-{profile}.yaml（特定 profile）</p>
+</li>
+<li>
+<p><strong>@PropertySource 注解指定的属性源</strong>：通过 @PropertySource 注解加载的属性文件。</p>
+</li>
+<li>
+<p><strong>默认属性</strong>：通过 SpringApplication.setDefaultProperties (Map) 设置的默认属性<a href="https://blog.csdn.net/ma_nong33/article/details/140558777">(170)</a>。</p>
+</li>
+</ol>
+<p>对于应用配置文件，Spring Boot 会按以下顺序搜索和加载（优先级从高到低）：</p>
+<ol>
+<li>
+<p>当前目录下的 config 子目录</p>
+</li>
+<li>
+<p>当前目录</p>
+</li>
+<li>
+<p>类路径下的 config 包</p>
+</li>
+<li>
+<p>类路径根目录</p>
+</li>
+</ol>
+<p>例如，对于 application.properties 文件，Spring Boot 会依次检查以下位置：</p>
+<ul>
+<li>
+<p>file:./config/application.properties</p>
+</li>
+<li>
+<p>file:./application.properties</p>
+</li>
+<li>
+<p>classpath:/config/application.properties</p>
+</li>
+<li>
+<p>classpath:/application.properties</p>
+</li>
+</ul>
+<p>当多个位置存在同名配置时，后面加载的配置会覆盖前面的配置。这种设计允许开发者在不同环境中灵活地覆盖默认配置<a href="https://docs.spring.io/spring-boot/3.4/reference/features/external-config.html">(167)</a>。</p>
+<p><strong>Profile 特定配置</strong>的加载遵循类似规则。如果激活了 prod profile，Spring Boot 会加载：</p>
+<ul>
+<li>
+<p>application.properties（或 yaml）</p>
+</li>
+<li>
+<p>application-prod.properties（或 yaml）</p>
+</li>
+</ul>
+<p>其中，application-prod.properties 中的配置会覆盖 application.properties 中的同名配置。</p>
+<h3 id="54-web">5.4 内嵌 Web 容器架构</h3>
+<p>Spring Boot 的内嵌 Web 容器是其 "可执行 Jar" 特性的核心，它允许将 Web 应用打包成一个独立的可执行文件，无需外部 Servlet 容器即可运行。这种设计极大地简化了应用的部署和运维。</p>
+<p>Spring Boot 默认支持以下内嵌 Web 容器：</p>
+<ol>
+<li>
+<p><strong>Tomcat</strong>：默认的 Web 容器，适合大多数 Java Web 应用场景。Tomcat 是最成熟、最广泛使用的 Servlet 容器，提供了稳定可靠的 Web 服务支持。</p>
+</li>
+<li>
+<p><strong>Jetty</strong>：轻量级的 Web 容器，支持 WebSocket 和嵌入式 JDBC，在某些高并发场景下表现优异。Jetty 的启动速度快，内存占用少，适合资源受限的环境<a href="https://blog.csdn.net/zp357252539/article/details/147181807">(175)</a>。</p>
+</li>
+<li>
+<p><strong>Undertow</strong>：由 Red Hat 开发的高性能 Web 容器，基于 NIO2 异步 IO 模型，支持 HTTP/2 和 WebSocket。Undertow 在处理大量并发连接时具有出色的性能表现，特别适合微服务和云原生应用<a href="https://blog.csdn.net/zp357252539/article/details/147181807">(175)</a>。</p>
+</li>
+<li>
+<p><strong>Reactor Netty</strong>：用于 Spring WebFlux 响应式 Web 应用的反应式 Web 服务器，基于 Netty 构建，提供了非阻塞的高性能 Web 服务能力<a href="https://www.spring-doc.cn/spring-boot/3.3.1/how-to_webserver.html">(174)</a>。</p>
+</li>
+</ol>
+<p><strong>容器切换机制</strong>：在 Spring Boot 应用中，可以通过修改依赖来切换 Web 容器。例如，从默认的 Tomcat 切换到 Undertow：</p>
+<pre><code>\&lt;!-- 排除默认的Tomcat依赖 --&gt;
+
+\&lt;dependency&gt;
+
+&amp;#x20;   \&lt;groupId&gt;org.springframework.boot\&lt;/groupId&gt;
+
+&amp;#x20;   \&lt;artifactId&gt;spring-boot-starter-web\&lt;/artifactId&gt;
+
+&amp;#x20;   \&lt;exclusions&gt;
+
+&amp;#x20;       \&lt;exclusion&gt;
+
+&amp;#x20;           \&lt;groupId&gt;org.springframework.boot\&lt;/groupId&gt;
+
+&amp;#x20;           \&lt;artifactId&gt;spring-boot-starter-tomcat\&lt;/artifactId&gt;
+
+&amp;#x20;       \&lt;/exclusion&gt;
+
+&amp;#x20;   \&lt;/exclusions&gt;
+
+\&lt;/dependency&gt;
+
+\&lt;!-- 添加Undertow依赖 --&gt;
+
+\&lt;dependency&gt;
+
+&amp;#x20;   \&lt;groupId&gt;org.springframework.boot\&lt;/groupId&gt;
+
+&amp;#x20;   \&lt;artifactId&gt;spring-boot-starter-undertow\&lt;/artifactId&gt;
+
+\&lt;/dependency&gt;
+</code></pre>
+<p><strong>容器配置</strong>：Spring Boot 提供了丰富的配置选项来定制内嵌 Web 容器的行为。常见的配置包括：</p>
+<ul>
+<li>
+<p>服务器端口配置：server.port=8080</p>
+</li>
+<li>
+<p>上下文路径配置：server.servlet.context-path=/app</p>
+</li>
+<li>
+<p>会话配置：server.servlet.session.timeout=30m</p>
+</li>
+<li>
+<p>Tomcat 特定配置：server.tomcat.max-threads=200</p>
+</li>
+<li>
+<p>Undertow 特定配置：server.undertow.io-threads=8</p>
+</li>
+</ul>
+<p>这些配置可以在 application.properties 或 application.yaml 文件中设置，也可以通过环境变量或命令行参数指定<a href="https://docs.spring.io/spring-boot/3.3/how-to/webserver.html">(173)</a>。</p>
+<p><strong>嵌入式容器的优势</strong>：</p>
+<ul>
+<li>
+<p>简化部署：应用和容器打包成一个文件，无需单独安装和配置 Servlet 容器</p>
+</li>
+<li>
+<p>统一环境：开发、测试、生产环境保持一致，避免 "环境不一致" 问题</p>
+</li>
+<li>
+<p>快速启动：内嵌容器的启动速度通常比独立容器更快</p>
+</li>
+<li>
+<p>灵活配置：可以通过配置文件灵活调整容器参数</p>
+</li>
+<li>
+<p>支持多种容器：根据应用需求选择最适合的 Web 容器<a href="https://blog.csdn.net/haohaizi_liu/article/details/154063534">(178)</a>。</p>
+</li>
+</ul>
+<h2 id="6">6. 高级特性与扩展机制</h2>
+<h3 id="61-applicationevent">6.1 事件驱动模型与 ApplicationEvent</h3>
+<p>Spring 的事件驱动模型基于观察者设计模式，提供了一种松耦合的组件间通信机制。这种机制允许应用中的不同组件通过事件进行通信，而无需直接依赖，极大地提高了应用的可扩展性和可维护性。</p>
+<p><strong>事件驱动模型的核心组件</strong>：</p>
+<ol>
+<li><strong>ApplicationEvent（事件对象）</strong>：所有应用事件的基类，是一个抽象类，定义了事件的基本属性，如事件源（source）、事件发生时间（timestamp）等。开发者可以通过继承 ApplicationEvent 类来创建自定义事件<a href="https://blog.csdn.net/zuiyuelong/article/details/150165155">(180)</a>。</li>
+</ol>
+<pre><code>public class UserRegisteredEvent extends ApplicationEvent {
+
+&amp;#x20;   private final User user;
+
+&amp;#x20;  &amp;#x20;
+
+&amp;#x20;   public UserRegisteredEvent(User user) {
+
+&amp;#x20;       super(user);
+
+&amp;#x20;       this.user = user;
+
+&amp;#x20;   }
+
+&amp;#x20;  &amp;#x20;
+
+&amp;#x20;   public User getUser() {
+
+&amp;#x20;       return user;
+
+&amp;#x20;   }
+
+}
+</code></pre>
+<ol>
+<li><strong>ApplicationListener（事件监听器）</strong>：定义了事件处理的接口，只有一个 onApplicationEvent 方法。监听器通过实现 ApplicationListener 接口来处理特定类型的事件<a href="https://blog.csdn.net/zuiyuelong/article/details/150165155">(180)</a>。</li>
+</ol>
+<pre><code>@Component
+
+public class UserRegistrationListener implements ApplicationListener\&lt;UserRegisteredEvent&gt; {
+
+&amp;#x20;  &amp;#x20;
+
+&amp;#x20;   @Override
+
+&amp;#x20;   public void onApplicationEvent(UserRegisteredEvent event) {
+
+&amp;#x20;       User user = event.getUser();
+
+&amp;#x20;       // 处理用户注册事件，如发送欢迎邮件、记录日志等
+
+&amp;#x20;       System.out.println(&quot;用户注册事件：&quot; + user.getUsername());
+
+&amp;#x20;   }
+
+}
+</code></pre>
+<ol>
+<li><strong>ApplicationEventPublisher（事件发布器）</strong>：用于发布事件的接口。ApplicationContext 实现了这个接口，因此可以在 Spring Bean 中直接注入 ApplicationEventPublisher 来发布事件<a href="https://juejin.cn/post/7569072953901334579">(97)</a>。</li>
+</ol>
+<pre><code>@Service
+
+public class UserService {
+
+&amp;#x20;  &amp;#x20;
+
+&amp;#x20;   @Autowired
+
+&amp;#x20;   private ApplicationEventPublisher eventPublisher;
+
+&amp;#x20;  &amp;#x20;
+
+&amp;#x20;   public void registerUser(User user) {
+
+&amp;#x20;       // 执行用户注册逻辑
+
+&amp;#x20;       // 发布用户注册事件
+
+&amp;#x20;       eventPublisher.publishEvent(new UserRegisteredEvent(user));
+
+&amp;#x20;   }
+
+}
+</code></pre>
+<p><strong>事件发布与监听的执行流程</strong>：</p>
+<ol>
+<li>
+<p>应用代码调用 ApplicationEventPublisher 的 publishEvent 方法发布事件</p>
+</li>
+<li>
+<p>Spring 通过 ApplicationEventMulticaster 查找所有注册的监听器</p>
+</li>
+<li>
+<p>筛选出能够处理该事件类型的监听器（包括父类和接口）</p>
+</li>
+<li>
+<p>依次调用这些监听器的 onApplicationEvent 方法</p>
+</li>
+<li>
+<p>如果需要异步处理，可以通过 @Async 注解实现异步事件监听<a href="https://blog.csdn.net/weixin_46619605/article/details/146566012">(96)</a></p>
+</li>
+</ol>
+<p><strong>@EventListener 注解</strong>是 Spring 4.2 引入的简化事件监听的注解，它可以直接标注在方法上，无需实现 ApplicationListener 接口：</p>
+<pre><code>@Component
+
+public class UserEventProcessor {
+
+&amp;#x20;  &amp;#x20;
+
+&amp;#x20;   @EventListener
+
+&amp;#x20;   public void handleUserRegisteredEvent(UserRegisteredEvent event) {
+
+&amp;#x20;       // 处理用户注册事件
+
+&amp;#x20;   }
+
+&amp;#x20;  &amp;#x20;
+
+&amp;#x20;   @EventListener(condition = &quot;#event.user.age &gt; 18&quot;)
+
+&amp;#x20;   public void handleAdultUserRegisteredEvent(UserRegisteredEvent event) {
+
+&amp;#x20;       // 处理成年用户注册事件
+
+&amp;#x20;   }
+
+}
+</code></pre>
+<p><strong>事件的继承机制</strong>允许一个监听器处理多种相关事件。例如，如果定义了一个基类事件 BaseEvent 和多个子类事件（UserEvent、OrderEvent 等），那么监听 BaseEvent 的监听器也会收到所有子类事件<a href="https://blog.csdn.net/zuiyuelong/article/details/150165155">(180)</a>。</p>
+<h3 id="62">6.2 异步处理与调度机制</h3>
+<p>Spring 提供了强大的异步处理和调度机制，支持 @Async 注解实现方法的异步执行和 @Scheduled 注解实现定时任务调度。这些机制对于提高应用性能和实现定时任务至关重要。</p>
+<p><strong>@Async 异步处理机制</strong>：</p>
+<ol>
+<li><strong>启用异步支持</strong>：在配置类上添加 @EnableAsync 注解来启用异步处理功能：</li>
+</ol>
+<pre><code>@Configuration
+
+@EnableAsync
+
+public class AsyncConfig {
+
+}
+</code></pre>
+<ol>
+<li><strong>使用 @Async 注解</strong>：在需要异步执行的方法上添加 @Async 注解：</li>
+</ol>
+<pre><code>@Service
+
+public class AsyncService {
+
+&amp;#x20;  &amp;#x20;
+
+&amp;#x20;   @Async
+
+&amp;#x20;   public CompletableFuture\&lt;String&gt; asyncMethod() {
+
+&amp;#x20;       // 执行耗时操作
+
+&amp;#x20;       return CompletableFuture.completedFuture(&quot;异步执行完成&quot;);
+
+&amp;#x20;   }
+
+}
+</code></pre>
+<ol>
+<li><strong>自定义线程池配置</strong>：Spring Boot 提供了自动配置的线程池，可以通过 application.properties 进行配置：</li>
+</ol>
+<pre><code>spring.task.execution.pool.core-size=8
+
+spring.task.execution.pool.max-size=16
+
+spring.task.execution.pool.queue-capacity=100
+
+spring.task.execution.pool.keep-alive=60s
+</code></pre>
+<p>也可以通过实现 AsyncConfigurer 接口来自定义线程池：</p>
+<pre><code>@Configuration
+
+@EnableAsync
+
+public class AsyncConfig implements AsyncConfigurer {
+
+&amp;#x20;  &amp;#x20;
+
+&amp;#x20;   @Override
+
+&amp;#x20;   public Executor getAsyncExecutor() {
+
+&amp;#x20;       ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+
+&amp;#x20;       executor.setCorePoolSize(8);
+
+&amp;#x20;       executor.setMaxPoolSize(16);
+
+&amp;#x20;       executor.setQueueCapacity(100);
+
+&amp;#x20;       executor.setThreadNamePrefix(&quot;async-thread-&quot;);
+
+&amp;#x20;       executor.initialize();
+
+&amp;#x20;       return executor;
+
+&amp;#x20;   }
+
+&amp;#x20;  &amp;#x20;
+
+&amp;#x20;   @Override
+
+&amp;#x20;   public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
+
+&amp;#x20;       return new SimpleAsyncUncaughtExceptionHandler();
+
+&amp;#x20;   }
+
+}
+</code></pre>
+<p><strong>@Scheduled 定时任务机制</strong>：</p>
+<ol>
+<li><strong>启用调度支持</strong>：在配置类上添加 @EnableScheduling 注解：</li>
+</ol>
+<pre><code>@Configuration
+
+@EnableScheduling
+
+public class SchedulingConfig {
+
+}
+</code></pre>
+<ol>
+<li><strong>使用 @Scheduled 注解</strong>：支持多种调度方式：</li>
+</ol>
+<pre><code>@Service
+
+public class ScheduledService {
+
+&amp;#x20;  &amp;#x20;
+
+&amp;#x20;   @Scheduled(fixedRate = 5000)
+
+&amp;#x20;   public void fixedRateTask() {
+
+&amp;#x20;       System.out.println(&quot;Fixed rate task executed at: &quot; + new Date());
+
+&amp;#x20;   }
+
+&amp;#x20;  &amp;#x20;
+
+&amp;#x20;   @Scheduled(fixedDelay = 3000, initialDelay = 1000)
+
+&amp;#x20;   public void fixedDelayTask() {
+
+&amp;#x20;       System.out.println(&quot;Fixed delay task executed at: &quot; + new Date());
+
+&amp;#x20;   }
+
+&amp;#x20;  &amp;#x20;
+
+&amp;#x20;   @Scheduled(cron = &quot;0 0/1 \* \* \* ?&quot;)
+
+&amp;#x20;   public void cronTask() {
+
+&amp;#x20;       System.out.println(&quot;Cron task executed at: &quot; + new Date());
+
+&amp;#x20;   }
+
+}
+</code></pre>
+<ul>
+<li>
+<p>fixedRate：按固定速率执行，上一次开始执行时间点之后每隔指定时间执行一次</p>
+</li>
+<li>
+<p>fixedDelay：按固定延迟执行，上一次执行完成时间点之后每隔指定时间执行一次</p>
+</li>
+<li>
+<p>cron：使用 Cron 表达式定义执行时间</p>
+</li>
+<li>
+<p>initialDelay：首次执行延迟时间</p>
+</li>
+<li>
+<p><strong>调度线程池配置</strong>：可以通过 application.properties 配置调度线程池：</p>
+</li>
+</ul>
+<pre><code>spring.task.scheduling.pool.size=10
+
+spring.task.scheduling.thread-name-prefix=scheduling-
+</code></pre>
+<p><strong>高级特性</strong>：</p>
+<ol>
+<li><strong>@SchedulerLock 分布式锁</strong>：当应用部署在多个节点时，可以使用 @SchedulerLock 注解来确保同一个定时任务在集群中只执行一次：</li>
+</ol>
+<pre><code>@Scheduled(cron = &quot;0 0 0 \* \* ?&quot;)
+
+@SchedulerLock(name = &quot;dailyCleanup&quot;, lockAtMostFor = &quot;PT5M&quot;)
+
+public void dailyCleanup() {
+
+&amp;#x20;   // 执行每日清理任务
+
+}
+</code></pre>
+<ol>
+<li><strong>动态调度</strong>：可以通过实现 SchedulingConfigurer 接口来动态配置调度任务：</li>
+</ol>
+<pre><code>@Configuration
+
+@EnableScheduling
+
+public class DynamicSchedulingConfig implements SchedulingConfigurer {
+
+&amp;#x20;  &amp;#x20;
+
+&amp;#x20;   @Override
+
+&amp;#x20;   public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
+
+&amp;#x20;       taskRegistrar.addTriggerTask(
+
+&amp;#x20;           () -&gt; System.out.println(&quot;Dynamic task executed&quot;),
+
+&amp;#x20;           triggerContext -&gt; {
+
+&amp;#x20;               // 动态计算下次执行时间
+
+&amp;#x20;               return new CronTrigger(&quot;0 0/5 \* \* \* ?&quot;).nextExecutionTime(triggerContext);
+
+&amp;#x20;           }
+
+&amp;#x20;       );
+
+&amp;#x20;   }
+
+}
+</code></pre>
+<h3 id="63">6.3 扩展点机制与最佳实践</h3>
+<p>Spring 框架提供了丰富的扩展点，允许开发者在不修改框架核心代码的情况下，定制和增强框架的功能。理解和掌握这些扩展点对于构建灵活、可维护的 Spring 应用至关重要。</p>
+<p><strong>BeanPostProcessor 扩展点</strong>：</p>
+<p>BeanPostProcessor 是 Spring 中最重要的扩展点之一，它允许在 Bean 初始化前后插入自定义逻辑。Spring 内部大量使用 BeanPostProcessor 来实现核心功能，如 @Autowired 注解的依赖注入、@PostConstruct 和 @PreDestroy 注解的处理、AOP 代理的创建等<a href="http://m.toutiao.com/group/7592874726532383267/?upstream_biz=doubao">(78)</a>。</p>
+<p>自定义 BeanPostProcessor 的实现示例：</p>
+<pre><code>@Component
+
+public class CustomBeanPostProcessor implements BeanPostProcessor {
+
+&amp;#x20;  &amp;#x20;
+
+&amp;#x20;   @Override
+
+&amp;#x20;   public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+
+&amp;#x20;       System.out.println(&quot;Before initialization: &quot; + beanName);
+
+&amp;#x20;       return bean;
+
+&amp;#x20;   }
+
+&amp;#x20;  &amp;#x20;
+
+&amp;#x20;   @Override
+
+&amp;#x20;   public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+
+&amp;#x20;       System.out.println(&quot;After initialization: &quot; + beanName);
+
+&amp;#x20;       return bean;
+
+&amp;#x20;   }
+
+}
+</code></pre>
+<p><strong>BeanFactoryPostProcessor 扩展点</strong>：</p>
+<p>BeanFactoryPostProcessor 在 BeanDefinition 加载完成后、Bean 实例化之前执行，主要用于修改 BeanDefinition 的配置信息。常见应用场景包括：替换占位符、动态注册 BeanDefinition、根据环境条件修改 Bean 配置等<a href="https://blog.csdn.net/weixin_46425661/article/details/144420284">(86)</a>。</p>
+<p><strong>ApplicationListener 扩展点</strong>：</p>
+<p>除了用于业务事件外，Spring 自身也发布了大量应用事件，开发者可以监听这些事件来扩展应用功能：</p>
+<ul>
+<li>
+<p>ApplicationStartingEvent：应用开始启动时发布</p>
+</li>
+<li>
+<p>ApplicationEnvironmentPreparedEvent：环境准备完成后发布</p>
+</li>
+<li>
+<p>ApplicationPreparedEvent：ApplicationContext 准备完成后发布</p>
+</li>
+<li>
+<p>ApplicationStartedEvent：应用启动完成后发布</p>
+</li>
+<li>
+<p>ApplicationReadyEvent：应用准备好接收请求时发布</p>
+</li>
+<li>
+<p>ApplicationFailedEvent：应用启动失败时发布<a href="https://blog.csdn.net/weixin_43004044/article/details/131754324">(185)</a></p>
+</li>
+</ul>
+<p>监听这些事件可以实现一些高级功能，如：在应用启动完成后执行特定初始化任务；在应用准备好时发送健康检查通知；在应用启动失败时执行清理操作等。</p>
+<p><strong>EnvironmentPostProcessor 扩展点</strong>：</p>
+<p>EnvironmentPostProcessor 允许在 ApplicationContext 刷新之前对 Environment 进行修改。这是 Spring Boot 提供的一个非常早期的扩展点，常用于：</p>
+<ul>
+<li>
+<p>从特殊位置加载配置（如云端配置中心）</p>
+</li>
+<li>
+<p>对配置值进行加密解密处理</p>
+</li>
+<li>
+<p>根据环境变量动态修改配置</p>
+</li>
+</ul>
+<p>创建自定义 EnvironmentPostProcessor：</p>
+<pre><code>public class CustomEnvironmentPostProcessor implements EnvironmentPostProcessor {
+
+&amp;#x20;  &amp;#x20;
+
+&amp;#x20;   @Override
+
+&amp;#x20;   public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
+
+&amp;#x20;       // 自定义环境处理逻辑
+
+&amp;#x20;       MutablePropertySources propertySources = environment.getPropertySources();
+
+&amp;#x20;       propertySources.addLast(new ResourcePropertySource(&quot;custom-property-source&quot;, &quot;classpath:custom.properties&quot;));
+
+&amp;#x20;   }
+
+}
+</code></pre>
+<p>然后在 META-INF/spring.factories 中声明：</p>
+<pre><code>org.springframework.boot.env.EnvironmentPostProcessor=\\
+
+com.example.CustomEnvironmentPostProcessor
+</code></pre>
+<p><strong>ApplicationRunner 和 CommandLineRunner 扩展点</strong>：</p>
+<p>这两个接口允许在 Spring 应用启动完成后执行特定的初始化任务。它们的区别在于：</p>
+<ul>
+<li>
+<p>ApplicationRunner 的 run 方法接收 ApplicationArguments 参数，提供了更友好的参数访问方式</p>
+</li>
+<li>
+<p>CommandLineRunner 的 run 方法接收 String 数组参数，与 main 方法的参数一致</p>
+</li>
+</ul>
+<p>通常使用场景包括：</p>
+<ul>
+<li>
+<p>加载数据到缓存</p>
+</li>
+<li>
+<p>建立外部系统连接</p>
+</li>
+<li>
+<p>执行数据迁移或初始化脚本</p>
+</li>
+<li>
+<p>注册定时任务或监听器</p>
+</li>
+</ul>
+<pre><code>@Component
+
+public class ApplicationStartupRunner implements ApplicationRunner {
+
+&amp;#x20;  &amp;#x20;
+
+&amp;#x20;   @Override
+
+&amp;#x20;   public void run(ApplicationArguments args) throws Exception {
+
+&amp;#x20;       System.out.println(&quot;Application started with arguments: &quot; + args.getSourceArgs());
+
+&amp;#x20;       // 执行应用启动后的初始化任务
+
+&amp;#x20;   }
+
+}
+</code></pre>
+<p><strong>最佳实践总结</strong>：</p>
+<ol>
+<li>
+<p><strong>合理使用扩展点</strong>：优先使用已有的扩展点，避免直接修改 Spring 核心代码。这样可以保证与 Spring 版本的兼容性，便于后续升级。</p>
+</li>
+<li>
+<p><strong>控制扩展逻辑的复杂度</strong>：扩展点方法应该保持简洁，避免复杂的业务逻辑。如果逻辑过于复杂，应该将其封装到独立的 Service 中。</p>
+</li>
+<li>
+<p><strong>注意执行顺序</strong>：某些扩展点（如 BeanPostProcessor）的执行顺序可能影响功能，需要通过实现 Ordered 接口或 @Order 注解来控制顺序。</p>
+</li>
+<li>
+<p><strong>避免循环依赖</strong>：在扩展点中获取 Bean 时要小心，避免产生循环依赖。可以考虑使用 ApplicationContextAware 接口来延迟获取 Bean。</p>
+</li>
+<li>
+<p><strong>测试扩展逻辑</strong>：扩展点的逻辑也需要进行充分测试，可以通过 Spring Boot Test 框架来验证扩展功能的正确性。</p>
+</li>
+<li>
+<p><strong>文档说明</strong>：对于自定义的扩展点实现，应该提供清晰的文档说明，包括使用场景、配置方式、注意事项等，便于团队其他成员理解和维护。</p>
+</li>
+</ol>
+<h2 id="7">7. 架构设计与性能优化</h2>
+<h3 id="71-spring">7.1 基于 Spring 的微服务架构设计</h3>
+<p>随着云原生技术的发展，基于 Spring 的微服务架构已成为企业级应用的主流选择。Spring Cloud 作为 Spring 生态系统的重要组成部分，提供了完整的微服务解决方案。</p>
+<p><strong>核心组件与架构模式</strong>：</p>
+<ol>
+<li>
+<p><strong>服务注册与发现（Eureka/Nacos）</strong>：</p>
+</li>
+<li>
+<p>Eureka 是 Netflix 开源的服务注册中心，Spring Cloud 集成了 Eureka Client 和 Eureka Server</p>
+</li>
+<li>
+<p>Nacos 是阿里巴巴开源的服务发现和配置管理平台，提供了更丰富的功能</p>
+</li>
+<li>
+<p>服务注册：每个微服务启动时向注册中心注册自己的服务信息</p>
+</li>
+<li>
+<p>服务发现：客户端通过注册中心获取服务列表，实现服务间的调用</p>
+</li>
+<li>
+<p><strong>服务网关（Spring Cloud Gateway）</strong>：</p>
+</li>
+<li>
+<p>统一的入口网关，负责请求路由、负载均衡、流量控制、安全认证等功能</p>
+</li>
+<li>
+<p>基于 Spring WebFlux 构建，支持异步非阻塞处理</p>
+</li>
+<li>
+<p>提供了丰富的路由规则和过滤器链机制</p>
+</li>
+<li>
+<p><strong>配置中心（Spring Cloud Config）</strong>：</p>
+</li>
+<li>
+<p>集中管理各微服务的配置，支持版本控制、环境隔离、配置继承等功能</p>
+</li>
+<li>
+<p>可以与 Git、SVN 等版本控制系统集成</p>
+</li>
+<li>
+<p>支持配置的动态刷新（配合 @RefreshScope 注解）</p>
+</li>
+<li>
+<p><strong>服务调用（Feign/RestTemplate）</strong>：</p>
+</li>
+<li>
+<p>Feign：声明式的 HTTP 客户端，简化了服务间的 RESTful 调用</p>
+</li>
+<li>
+<p>RestTemplate：Spring 提供的同步 HTTP 客户端</p>
+</li>
+<li>
+<p>支持负载均衡（配合 Ribbon）和断路器（配合 Hystrix 或 Resilience4J）</p>
+</li>
+<li>
+<p><strong>分布式事务（Seata）</strong>：</p>
+</li>
+<li>
+<p>解决微服务架构中的分布式事务问题</p>
+</li>
+<li>
+<p>提供了 AT、TCC、SAGA 等多种事务模式</p>
+</li>
+<li>
+<p>与 Spring Cloud 和 Spring Boot 有良好的集成</p>
+</li>
+</ol>
+<p><strong>架构设计最佳实践</strong>：</p>
+<ol>
+<li>
+<p><strong>服务拆分原则</strong>：</p>
+</li>
+<li>
+<p>单一职责原则：每个微服务应该专注于单一业务功能</p>
+</li>
+<li>
+<p>高内聚低耦合：服务内部功能高度相关，服务间依赖尽可能少</p>
+</li>
+<li>
+<p>业务边界清晰：按照业务领域进行服务划分</p>
+</li>
+<li>
+<p>规模适中：避免服务过大或过小，通常建议每个服务包含 10-100 个类</p>
+</li>
+<li>
+<p><strong>服务间通信策略</strong>：</p>
+</li>
+<li>
+<p>优先使用 RESTful API 进行服务间通信</p>
+</li>
+<li>
+<p>采用异步消息队列处理非关键业务流程</p>
+</li>
+<li>
+<p>使用 gRPC 或其他高性能协议处理对性能要求极高的场景</p>
+</li>
+<li>
+<p>实现服务接口的幂等性，确保重试安全</p>
+</li>
+<li>
+<p><strong>数据一致性设计</strong>：</p>
+</li>
+<li>
+<p>采用最终一致性模型处理跨服务数据操作</p>
+</li>
+<li>
+<p>使用事件源（Event Sourcing）和 CQRS 模式处理复杂业务场景</p>
+</li>
+<li>
+<p>实现分布式事务时优先考虑可靠事件模式</p>
+</li>
+<li>
+<p><strong>监控与链路追踪</strong>：</p>
+</li>
+<li>
+<p>集成 Spring Boot Actuator 提供健康检查和指标监控</p>
+</li>
+<li>
+<p>使用 Spring Cloud Sleuth 实现分布式链路追踪</p>
+</li>
+<li>
+<p>配合 Zipkin、Jaeger 等工具进行链路分析</p>
+</li>
+<li>
+<p>实现统一的日志收集和分析系统</p>
+</li>
+<li>
+<p><strong>部署与运维</strong>：</p>
+</li>
+<li>
+<p>使用 Docker 容器化部署，配合 Kubernetes 进行容器编排</p>
+</li>
+<li>
+<p>实现蓝绿部署、灰度发布等高级部署策略</p>
+</li>
+<li>
+<p>建立完善的告警和故障恢复机制</p>
+</li>
+<li>
+<p>使用配置管理工具（如 Ansible）进行基础设施自动化管理</p>
+</li>
+</ol>
+<h3 id="72">7.2 性能优化策略与实践</h3>
+<p>在企业级应用开发中，性能优化是一个持续的过程。基于 Spring 的应用可以从多个层面进行性能优化。</p>
+<p><strong>应用层性能优化</strong>：</p>
+<ol>
+<li>
+<p><strong>减少 Bean 创建和依赖注入开销</strong>：</p>
+</li>
+<li>
+<p>使用 @Lazy 注解延迟加载非必需的 Bean</p>
+</li>
+<li>
+<p>避免在循环中使用 @Autowired 注入 Bean</p>
+</li>
+<li>
+<p>优先使用构造器注入，避免使用 setter 注入</p>
+</li>
+<li>
+<p>合理设置 Bean 的作用域，避免不必要的 prototype Bean</p>
+</li>
+<li>
+<p><strong>优化 AOP 使用</strong>：</p>
+</li>
+<li>
+<p>避免在高频调用的方法上使用 AOP</p>
+</li>
+<li>
+<p>精确设置切点表达式，避免匹配过多的方法</p>
+</li>
+<li>
+<p>考虑使用静态代理替代动态代理（如 CGLIB）</p>
+</li>
+<li>
+<p>使用 @EnableAspectJAutoProxy 的 proxyTargetClass 属性优化代理策略</p>
+</li>
+<li>
+<p><strong>缓存优化</strong>：</p>
+</li>
+<li>
+<p>使用 Spring Cache 抽象统一管理缓存</p>
+</li>
+<li>
+<p>合理设置缓存过期时间，避免内存溢出</p>
+</li>
+<li>
+<p>使用多级缓存策略（如 Redis + 本地缓存）</p>
+</li>
+<li>
+<p>实现缓存预热，减少首次访问延迟</p>
+</li>
+<li>
+<p><strong>异步处理优化</strong>：</p>
+</li>
+<li>
+<p>对耗时操作使用 @Async 异步处理</p>
+</li>
+<li>
+<p>合理配置线程池大小，避免线程过多导致的上下文切换开销</p>
+</li>
+<li>
+<p>使用 CompletableFuture 进行异步编排，提高代码可读性</p>
+</li>
+</ol>
+<p><strong>数据库访问优化</strong>：</p>
+<ol>
+<li>
+<p><strong>查询优化</strong>：</p>
+</li>
+<li>
+<p>使用索引优化查询性能</p>
+</li>
+<li>
+<p>避免 SELECT *，只查询需要的字段</p>
+</li>
+<li>
+<p>使用分页查询（Pageable）处理大数据量</p>
+</li>
+<li>
+<p>优化关联查询，避免 N+1 问题</p>
+</li>
+<li>
+<p><strong>连接池优化</strong>：</p>
+</li>
+<li>
+<p>合理配置数据库连接池大小（通常为 CPU 核心数的 2-4 倍）</p>
+</li>
+<li>
+<p>使用 HikariCP 作为连接池，它在性能上表现优异</p>
+</li>
+<li>
+<p>配置合适的连接超时时间和空闲连接回收策略</p>
+</li>
+<li>
+<p><strong>事务优化</strong>：</p>
+</li>
+<li>
+<p>减少事务的作用范围，只在必要时使用事务</p>
+</li>
+<li>
+<p>使用批量操作减少数据库交互次数</p>
+</li>
+<li>
+<p>优化事务隔离级别，在保证数据一致性的前提下使用较低的隔离级别</p>
+</li>
+</ol>
+<p><strong>Web 层性能优化</strong>：</p>
+<ol>
+<li>
+<p><strong>HTTP 请求优化</strong>：</p>
+</li>
+<li>
+<p>使用压缩（Gzip）减少响应数据大小</p>
+</li>
+<li>
+<p>实现浏览器缓存策略，设置合适的 Cache-Control 头</p>
+</li>
+<li>
+<p>使用 CDN 加速静态资源访问</p>
+</li>
+<li>
+<p>优化 Cookie 策略，减少 Cookie 大小和数量</p>
+</li>
+<li>
+<p><strong>响应式编程</strong>：</p>
+</li>
+<li>
+<p>使用 Spring WebFlux 构建响应式 Web 应用</p>
+</li>
+<li>
+<p>利用 Reactor 的背压机制处理高并发场景</p>
+</li>
+<li>
+<p>使用 WebClient 替代 RestTemplate 进行异步 HTTP 调用</p>
+</li>
+<li>
+<p><strong>异步 Servlet 支持</strong>：</p>
+</li>
+<li>
+<p>启用 Spring MVC 的异步请求处理</p>
+</li>
+<li>
+<p>使用 DeferredResult 或 Callable 处理长时间运行的请求</p>
+</li>
+<li>
+<p>避免在异步处理中阻塞线程</p>
+</li>
+</ol>
+<p><strong>基础设施优化</strong>：</p>
+<ol>
+<li>
+<p><strong>垃圾回收优化</strong>：</p>
+</li>
+<li>
+<p>使用 G1 垃圾回收器，合理设置堆大小</p>
+</li>
+<li>
+<p>监控 GC 日志，优化 GC 参数</p>
+</li>
+<li>
+<p>避免创建大量短期对象</p>
+</li>
+<li>
+<p><strong>类加载优化</strong>：</p>
+</li>
+<li>
+<p>使用类加载器层次结构优化类加载速度</p>
+</li>
+<li>
+<p>合理使用缓存类加载器</p>
+</li>
+<li>
+<p>避免过多的类加载器</p>
+</li>
+<li>
+<p><strong>网络优化</strong>：</p>
+</li>
+<li>
+<p>使用连接池复用网络连接</p>
+</li>
+<li>
+<p>优化 TCP 参数（如拥塞窗口、超时时间等）</p>
+</li>
+<li>
+<p>使用 NIO 替代传统的 BIO 进行网络通信</p>
+</li>
+</ol>
+<p><strong>性能监控与调优流程</strong>：</p>
+<ol>
+<li>
+<p><strong>性能基线建立</strong>：</p>
+</li>
+<li>
+<p>使用 JMeter、Gatling 等工具进行基准测试</p>
+</li>
+<li>
+<p>记录各项性能指标（响应时间、吞吐量、错误率等）</p>
+</li>
+<li>
+<p>建立性能监控仪表盘</p>
+</li>
+<li>
+<p><strong>性能瓶颈识别</strong>：</p>
+</li>
+<li>
+<p>使用 APM 工具（如 New Relic、AppDynamics）进行性能分析</p>
+</li>
+<li>
+<p>分析线程转储识别线程竞争</p>
+</li>
+<li>
+<p>分析 GC 日志识别内存问题</p>
+</li>
+<li>
+<p>使用 SQL 监控工具识别慢查询</p>
+</li>
+<li>
+<p><strong>优化实施与验证</strong>：</p>
+</li>
+<li>
+<p>制定优化方案，优先处理最严重的性能瓶颈</p>
+</li>
+<li>
+<p>实施优化措施，注意不要引入新的问题</p>
+</li>
+<li>
+<p>重新进行性能测试，验证优化效果</p>
+</li>
+<li>
+<p>记录优化过程和结果，建立性能优化知识库</p>
+</li>
+</ol>
+<h3 id="73">7.3 面试真题解析与答题技巧</h3>
+<p>Spring 相关的技术问题通常涉及深度和广度两个维度。以下是一些常见的面试真题及其解析，帮助你更好地准备面试。</p>
+<p><strong>基础概念类问题</strong>：</p>
+<ol>
+<li><strong>问题</strong>：什么是 Spring IoC 容器？它的核心作用是什么？</li>
+</ol>
+<p><strong>参考答案</strong>：Spring IoC 容器是 Spring 框架的核心，它负责创建、配置和管理 Bean 对象。IoC（控制反转）的核心思想是将对象的创建和依赖关系的管理从应用代码中转移到容器中。容器通过读取配置元数据（XML、注解或 Java 配置）来了解需要创建哪些对象以及它们之间的依赖关系，然后在运行时创建和装配这些对象。这种设计实现了对象之间的松耦合，提高了代码的可测试性和可维护性。</p>
+<ol>
+<li><strong>问题</strong>：BeanFactory 和 ApplicationContext 有什么区别？</li>
+</ol>
+<p><strong>参考答案</strong>：BeanFactory 是 Spring IoC 容器的基础接口，提供了基本的 Bean 管理功能，如获取 Bean、检查 Bean 是否存在等。ApplicationContext 是 BeanFactory 的子接口，它在 BeanFactory 基础上添加了更多企业级功能，包括：与 Spring AOP 功能的集成；国际化消息支持；事件发布机制；Web 应用支持（WebApplicationContext）等。在实际应用中，ApplicationContext 提供了更丰富的功能和更便捷的开发体验，是大多数应用的首选。</p>
+<ol>
+<li><strong>问题</strong>：Spring 如何解决循环依赖？</li>
+</ol>
+<p><strong>参考答案</strong>：Spring 通过三级缓存机制解决单例 Bean 的循环依赖问题。一级缓存（singletonObjects）存储完全初始化的 Bean；二级缓存（earlySingletonObjects）存储提前暴露的原始 Bean；三级缓存（singletonFactories）存储 Bean 的 ObjectFactory。当创建 Bean A 时，先将其 ObjectFactory 放入三级缓存；在填充 A 的属性时发现需要 Bean B，于是创建 B 并将其 ObjectFactory 放入三级缓存；当 B 需要 A 时，从三级缓存获取 A 的 ObjectFactory 生成早期引用。这种机制通过提前暴露未完全初始化的 Bean 引用来打破循环依赖。</p>
+<p><strong>原理机制类问题</strong>：</p>
+<ol>
+<li><strong>问题</strong>：@Transactional 注解的底层原理是什么？</li>
+</ol>
+<p><strong>参考答案</strong>：@Transactional 基于 Spring AOP 实现，通过动态代理机制在目标方法前后织入事务逻辑。当 Spring 容器扫描到 @Transactional 注解时，会为目标 Bean 创建代理对象；在调用目标方法时，代理会拦截方法调用，根据配置创建事务、执行方法、处理提交或回滚。核心组件包括 TransactionInterceptor（事务拦截器）和 PlatformTransactionManager（事务管理器）。</p>
+<ol>
+<li><strong>问题</strong>：Spring AOP 的代理机制是怎样的？JDK 动态代理和 CGLIB 代理有什么区别？</li>
+</ol>
+<p><strong>参考答案</strong>：Spring AOP 默认使用 JDK 动态代理，如果目标对象没有实现接口，则使用 CGLIB 代理。JDK 动态代理基于接口实现，只能代理接口方法；CGLIB 通过继承目标类实现代理，可以代理类的所有非 final 方法。在性能方面，CGLIB 在高频调用场景下通常优于 JDK 代理，但会增加类加载的开销。可以通过设置 spring.aop.proxy-target-class=true 来强制使用 CGLIB 代理。</p>
+<ol>
+<li><strong>问题</strong>：Spring MVC 的工作流程是怎样的？</li>
+</ol>
+<p><strong>参考答案</strong>：Spring MVC 的核心是 DispatcherServlet，它作为前端控制器统一处理所有请求。流程包括：接收请求→查找 HandlerMapping→获取 HandlerAdapter→执行处理器→解析视图→渲染响应。关键组件包括 DispatcherServlet、HandlerMapping、HandlerAdapter、ViewResolver 等。这个流程实现了请求的统一处理和组件的解耦，使得开发者可以专注于业务逻辑的实现。</p>
+<p><strong>高级应用类问题</strong>：</p>
+<ol>
+<li><strong>问题</strong>：如何实现 Spring Boot 的自定义 Starter？</li>
+</ol>
+<p><strong>参考答案</strong>：创建自定义 Starter 需要以下步骤：创建 Maven 项目；添加 spring-boot-autoconfigure 依赖；编写自动配置类，使用 @Configuration 和 @Conditional 注解；在 META-INF/spring.factories 中声明自动配置类；提供必要的属性配置类。Starter 的命名应遵循 spring-boot-starter-* 的规范，便于识别和使用。</p>
+<ol>
+<li><strong>问题</strong>：Spring Boot 的自动配置原理是什么？</li>
+</ol>
+<p><strong>参考答案</strong>：自动配置基于 @EnableAutoConfiguration 注解，它会触发 SpringFactoriesLoader 加载所有自动配置类。每个自动配置类使用 @Conditional 系列注解来判断是否应该生效。自动配置类通常包含 @Bean 方法，用于注册特定功能的 Bean。开发者可以通过自定义配置来覆盖自动配置的默认值，实现 "约定优于配置" 的设计理念。</p>
+<ol>
+<li><strong>问题</strong>：如何实现 Spring 应用的事件驱动架构？</li>
+</ol>
+<p><strong>参考答案</strong>：Spring 的事件驱动基于 ApplicationEvent 和 ApplicationListener 接口。自定义事件需要继承 ApplicationEvent 类；事件监听器需要实现 ApplicationListener 接口或使用 @EventListener 注解。通过 ApplicationEventPublisher 发布事件。这种机制实现了组件间的松耦合通信，特别适合实现观察者模式、发布订阅模式等。</p>
+<p><strong>性能优化类问题</strong>：</p>
+<ol>
+<li><strong>问题</strong>：如何优化 Spring 应用的启动时间？</li>
+</ol>
+<p><strong>参考答案</strong>：优化启动时间的方法包括：减少 Bean 的数量，只加载必要的 Bean；使用延迟加载（@Lazy）非必需 Bean；优化自动配置，排除不必要的自动配置类；使用类路径扫描优化，减少扫描范围；启用 Spring Boot 的 lazy 初始化模式；使用 AOT 编译（Spring Native）将应用编译为本地可执行文件。</p>
+<ol>
+<li><strong>问题</strong>：如何提高 Spring MVC 应用的并发性能？</li>
+</ol>
+<p><strong>参考答案</strong>：提高并发性能的策略包括：启用异步请求处理，避免阻塞线程；使用响应式编程模型（Spring WebFlux）；优化数据库连接池配置；使用缓存减少数据库访问；实现合理的限流和熔断机制；使用连接池和线程池复用资源；优化垃圾回收策略。</p>
+<ol>
+<li><strong>问题</strong>：如何诊断和解决 Spring 应用的内存泄漏问题？</li>
+</ol>
+<p><strong>参考答案</strong>：诊断内存泄漏需要：使用内存分析工具（如 Eclipse Memory Analyzer）分析堆转储；查找持有强引用的对象；检查静态集合类是否正确清理；分析对象的生命周期，确保及时释放资源。常见的内存泄漏原因包括：未正确关闭的资源（如数据库连接、流等）；注册后未注销的监听器；静态缓存中存储的大量对象等。</p>
+<p><strong>答题技巧总结</strong>：</p>
+<ol>
+<li>
+<p><strong>理解问题核心</strong>：仔细分析面试官的问题，明确考察的知识点和深度要求。</p>
+</li>
+<li>
+<p><strong>结构化回答</strong>：采用 "总 - 分 - 总" 的方式，先给出总体回答，再详细展开，最后总结要点。</p>
+</li>
+<li>
+<p><strong>结合实际经验</strong>：在回答中结合具体的项目经验，说明如何在实践中应用相关技术。</p>
+</li>
+<li>
+<p><strong>避免死记硬背</strong>：理解原理比记忆细节更重要，要能够用自己的语言解释技术概念。</p>
+</li>
+<li>
+<p><strong>关注最新特性</strong>：了解 Spring 5.x 和 Spring Boot 3.x 的新特性，这些通常是面试的热点。</p>
+</li>
+<li>
+<p><strong>展示架构思维</strong>：不仅回答 "是什么" 和 "怎么做"，还要说明 "为什么" 和 "如何优化"。</p>
+</li>
+<li>
+<p><strong>诚实面对不足</strong>：对于不熟悉的知识点，要诚实说明，避免编造答案。</p>
+</li>
+<li>
+<p><strong>准备反问问题</strong>：准备一些有深度的问题，展示你的思考能力和学习态度。</p>
+</li>
+</ol>
+<p>通过系统学习和充分准备，结合实际项目经验的总结，相信你能够在 Spring 架构师面试中表现出色。记住，面试不仅是技术能力的展示，也是思维方式和学习能力的体现。保持自信，展现真实的技术水平，相信你一定能够获得理想的机会。</p>
+<p><strong>参考资料&#x20;</strong></p>
+<p>[1] Core Technologies(pdf)<a href="https://docs.spring.io/spring-framework/docs/5.3.18/reference/pdf/core.pdf"> https://docs.spring.io/spring-framework/docs/5.3.18/reference/pdf/core.pdf</a></p>
+<p>[2] (二)Spring 核心之控制反转(IoC)—— 体系结构设计及原理详解_ioc体系结构设计-CSDN博客<a href="https://blog.csdn.net/mrluo735/article/details/135665427"> https://blog.csdn.net/mrluo735/article/details/135665427</a></p>
+<p>[3] Spring中BeanFactory与ApplicationContext的核心区别解析<a href="https://www.iesdouyin.com/share/video/7491571455465934114/?region=\&amp;mid=7491572325003938597\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=UDWfPhnt8GEMMStoDDB9FMNQODOQDrjh9XFwVZ5.oI8-\&amp;share_version=280700\&amp;ts=1769260967\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/7491571455465934114/?region=\&amp;mid=7491572325003938597\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=UDWfPhnt8GEMMStoDDB9FMNQODOQDrjh9XFwVZ5.oI8-\&amp;share_version=280700\&amp;ts=1769260967\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[4] Chapter 3. The IoC container<a href="https://docs.spring.io/spring-framework/docs/2.5.x/reference/beans.html"> https://docs.spring.io/spring-framework/docs/2.5.x/reference/beans.html</a></p>
+<p>[5] 源码分析:Spring IOC容器初始化过程这篇文章，我们将通过剖析 Spring 5.x源码，深度分析 Spring - 掘金<a href="https://juejin.cn/post/7481601410229960739"> https://juejin.cn/post/7481601410229960739</a></p>
+<p>[6] 深入解析Spring IoC容器:从启动流程到BeanPostProcessor扩展点-腾讯云开发者社区-腾讯云<a href="https://cloud.tencent.com.cn/developer/article/2560564"> https://cloud.tencent.com.cn/developer/article/2560564</a></p>
+<p>[7] 深入源码剖析Spring容器启动过程与设计模式-开发者社区-阿里云<a href="https://developer.aliyun.com/article/1652205"> https://developer.aliyun.com/article/1652205</a></p>
+<p>[8] 深入理解 Spring IOC 容器:架构设计、核心机制与实战优化-CSDN博客<a href="https://blog.csdn.net/zqmgx13291/article/details/150005449"> https://blog.csdn.net/zqmgx13291/article/details/150005449</a></p>
+<p>[9] Core Technologies<a href="https://docs.spring.io/spring-framework/docs/5.3.6/reference/html/core.html"> https://docs.spring.io/spring-framework/docs/5.3.6/reference/html/core.html</a></p>
+<p>[10] The IoC Container<a href="https://docs.spring.io/spring-framework/reference/6.0/core/beans.html"> https://docs.spring.io/spring-framework/reference/6.0/core/beans.html</a></p>
+<p>[11] 手把手带你吃透Spring Bean生命周期!从实例化到销毁全流程解析_springbean什么时候实例化-CSDN博客<a href="https://blog.csdn.net/weixin_42148384/article/details/148770132"> https://blog.csdn.net/weixin_42148384/article/details/148770132</a></p>
+<p>[12] Spring Bean 完整生命周期-CSDN博客<a href="https://blog.csdn.net/m0_73077921/article/details/153744858"> https://blog.csdn.net/m0_73077921/article/details/153744858</a></p>
+<p>[13] Spring Bean 生命周期详解-CSDN博客<a href="https://blog.csdn.net/u011265143/article/details/155617376"> https://blog.csdn.net/u011265143/article/details/155617376</a></p>
+<p>[14] Spring核心机制解析：Bean生命周期、MVC流程与自动配置原理<a href="https://www.iesdouyin.com/share/video/7547681594941754659/?region=\&amp;mid=7547681974123891508\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=mTXIZ5vyPOx02yEFuUStsseUP.0rSP9EsGl7p6uITaQ-\&amp;share_version=280700\&amp;ts=1769260967\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/7547681594941754659/?region=\&amp;mid=7547681974123891508\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=mTXIZ5vyPOx02yEFuUStsseUP.0rSP9EsGl7p6uITaQ-\&amp;share_version=280700\&amp;ts=1769260967\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[15] 深入剖析 Spring Bean 的生命周期:从诞生到销毁的完整旅程_spirng bean的生命周期-CSDN博客<a href="https://blog.csdn.net/cyf123__/article/details/150447650"> https://blog.csdn.net/cyf123__/article/details/150447650</a></p>
+<p>[16] spring bean生命周期-腾讯云开发者社区-腾讯云<a href="https://cloud.tencent.cn/developer/article/2561170"> https://cloud.tencent.cn/developer/article/2561170</a></p>
+<p>[17] 通俗易懂的讲解SpringBean生命周期_51CTO博客_springbean生命周期详解<a href="https://blog.51cto.com/liaozhiweiblog/14201840"> https://blog.51cto.com/liaozhiweiblog/14201840</a></p>
+<p>[18] Spring 循环依赖问题原理-CSDN博客<a href="https://blog.csdn.net/2403_88625492/article/details/153690120"> https://blog.csdn.net/2403_88625492/article/details/153690120</a></p>
+<p>[19] Spring 循环 依赖 三级 缓存 原理 ， 一 口气 讲 清楚 ！ # Java # java 面试 # java 程序员 # 程序员 # 抖音 知识 年终 大 赏<a href="https://www.iesdouyin.com/share/video/7590624683045719348/?region=\&amp;mid=7590624816974072618\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=EhXHQ71xHTfbhom9lBQaTXQImPAvVGDhGyNkYg9ybAg-\&amp;share_version=280700\&amp;ts=1769260986\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/7590624683045719348/?region=\&amp;mid=7590624816974072618\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=EhXHQ71xHTfbhom9lBQaTXQImPAvVGDhGyNkYg9ybAg-\&amp;share_version=280700\&amp;ts=1769260986\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[20] Spring 中的循环依赖与三级缓存机制_springbean的依赖注入与三级缓存-CSDN博客<a href="https://blog.csdn.net/weixin_43598533/article/details/147937146"> https://blog.csdn.net/weixin_43598533/article/details/147937146</a></p>
+<p>[21] Spring如何解决循环依赖问题。_spring三级缓存如何解决循环依赖-CSDN博客<a href="https://blog.csdn.net/weixin_43521001/article/details/148685461"> https://blog.csdn.net/weixin_43521001/article/details/148685461</a></p>
+<p>[22] 深入浅出:Spring三级缓存如何巧妙化解Bean循环依赖?-CSDN博客<a href="https://blog.csdn.net/yiridancan/article/details/148850486"> https://blog.csdn.net/yiridancan/article/details/148850486</a></p>
+<p>[23] Spring如何解决循环依赖:深入剖析三级缓存机制_循环依赖解决方案(三级缓存机制)-CSDN博客<a href="https://blog.csdn.net/qq_16242613/article/details/146992861"> https://blog.csdn.net/qq_16242613/article/details/146992861</a></p>
+<p>[24] Spring 三级缓存解决循环依赖深度剖析_getsingleton singletonlock-CSDN博客<a href="https://blog.csdn.net/qq_45750561/article/details/145735468"> https://blog.csdn.net/qq_45750561/article/details/145735468</a></p>
+<p>[25] Spring循环依赖三级缓存如此easy!!-CSDN博客<a href="https://blog.csdn.net/2301_81675556/article/details/146494774"> https://blog.csdn.net/2301_81675556/article/details/146494774</a></p>
+<p>[26] Spring 是怎么解决循环依赖的?-CSDN博客<a href="https://blog.csdn.net/2401_87189717/article/details/149151159"> https://blog.csdn.net/2401_87189717/article/details/149151159</a></p>
+<p>[27] Spring如何解决Bean的循环依赖-CSDN博客<a href="https://blog.csdn.net/m0_64630668/article/details/150533339"> https://blog.csdn.net/m0_64630668/article/details/150533339</a></p>
+<p>[28] Spring循环依赖解决方案：三级缓存机制解析<a href="https://www.iesdouyin.com/share/video/7589097284321026481/?region=\&amp;mid=7589097247170743076\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=dxNwEVTUZJhVLGPbT7MYf_dkbSVGovvgIEqlEk2kXQ8-\&amp;share_version=280700\&amp;ts=1769260986\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/7589097284321026481/?region=\&amp;mid=7589097247170743076\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=dxNwEVTUZJhVLGPbT7MYf_dkbSVGovvgIEqlEk2kXQ8-\&amp;share_version=280700\&amp;ts=1769260986\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[29] 【Spring】Spring是如何解决循环依赖问题的_spring怎么解决循环依赖-CSDN博客<a href="https://blog.csdn.net/weixin_45325628/article/details/146216031"> https://blog.csdn.net/weixin_45325628/article/details/146216031</a></p>
+<p>[30] Spring循环依赖的三级缓存?图解+源码彻底讲透_编程我最懂<a href="http://m.toutiao.com/group/7488546569550037513/?upstream_biz=doubao"> http://m.toutiao.com/group/7488546569550037513/?upstream_biz=doubao</a></p>
+<p>[31] ​Spring 解决循环依赖的核心机制_spring 三级缓存获取a的objectfactory-CSDN博客<a href="https://blog.csdn.net/weixin_73344672/article/details/146469739"> https://blog.csdn.net/weixin_73344672/article/details/146469739</a></p>
+<p>[32] 面试官:“什么是BeanDefinition?BeanDefinition中有哪些属性?”​ BeanDefinitio - 掘金<a href="https://juejin.cn/post/7473299165290381350"> https://juejin.cn/post/7473299165290381350</a></p>
+<p>[33] Spring-CSDN博客<a href="https://blog.csdn.net/qq_45000512/article/details/149825750"> https://blog.csdn.net/qq_45000512/article/details/149825750</a></p>
+<p>[34] 手写Bean创建过程解析：单例模式与依赖注入<a href="https://www.iesdouyin.com/share/video/7554311802851446052/?region=\&amp;mid=7554311949115231015\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=bMmX_aGK44qdkLrDzk66TEJpmA36fyi17U.A6U9jxRI-\&amp;share_version=280700\&amp;ts=1769260986\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/7554311802851446052/?region=\&amp;mid=7554311949115231015\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=bMmX_aGK44qdkLrDzk66TEJpmA36fyi17U.A6U9jxRI-\&amp;share_version=280700\&amp;ts=1769260986\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[35] Spring Bean 深度剖析:生命周期、加载机制与作用域的底层实现_java 静态类中每次获取bean是否消耗服务资源、是否增加程序执行时间-CSDN博客<a href="https://blog.csdn.net/weixin_38436441/article/details/149390229"> https://blog.csdn.net/weixin_38436441/article/details/149390229</a></p>
+<p>[36] Spring源码解析 - Bean的创建详解!_spring bean 解析过程-CSDN博客<a href="https://blog.csdn.net/weixin_66592566/article/details/144920994"> https://blog.csdn.net/weixin_66592566/article/details/144920994</a></p>
+<p>[37] [20章完结]Java高手提薪精选--Spring源码解析到手写核心组件/s/1PRGmpJQ2W4I4JyydhChN - 掘金<a href="https://juejin.cn/post/7493887688829124643"> https://juejin.cn/post/7493887688829124643</a></p>
+<p>[38] Spring框架中Bean是如何加载的?从底层源码入手，详细解读Bean的创建流程-阿里云开发者社区<a href="https://developer.aliyun.com/article/1608415"> https://developer.aliyun.com/article/1608415</a></p>
+<p>[39] 面试官:“Spring中的BeanFactory和FactoryBean的区别是什么?”-CSDN博客<a href="https://blog.csdn.net/Like0703/article/details/145719948"> https://blog.csdn.net/Like0703/article/details/145719948</a></p>
+<p>[40] Spring源码之FactoryBean接口的作用和实现原理_spring factory接口-CSDN博客<a href="https://blog.csdn.net/chaochao2113/article/details/127394913"> https://blog.csdn.net/chaochao2113/article/details/127394913</a></p>
+<p>[41] Spring隐藏技能:FactoryBean的“&amp; “魔法与单例缓存黑科技!在Spring框架的底层设计中，Factory - 掘金<a href="https://juejin.cn/post/7520514539638505498"> https://juejin.cn/post/7520514539638505498</a></p>
+<p>[42] 解析Spring中BeanFactory与FactoryBean的区别及应用场景<a href="https://www.iesdouyin.com/share/video/7438526333380021516/?region=\&amp;mid=7438526342246763290\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=mVo_mmX2MrqHKIGoDR7tH8dYV.xAMl_bzdgMY9zGoSQ-\&amp;share_version=280700\&amp;ts=1769260995\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/7438526333380021516/?region=\&amp;mid=7438526342246763290\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=mVo_mmX2MrqHKIGoDR7tH8dYV.xAMl_bzdgMY9zGoSQ-\&amp;share_version=280700\&amp;ts=1769260995\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[43] Spring中FactoryBean接口详解FactoryBean是Spring框架中的一个重要接口，通过实现这个接口， - 掘金<a href="https://juejin.cn/post/7459299503528738831"> https://juejin.cn/post/7459299503528738831</a></p>
+<p>[44] Spring 源码解析 - FactoryBean 获取 Bean 过程_factorybean实现的bean-CSDN博客<a href="https://blog.csdn.net/qq_43692950/article/details/131109087"> https://blog.csdn.net/qq_43692950/article/details/131109087</a></p>
+<p>[45] spring 源码 getObjectForBeanInstance_mob6454cc71b244的技术博客_51CTO博客<a href="https://blog.51cto.com/u_16099279/13503894"> https://blog.51cto.com/u_16099279/13503894</a></p>
+<p>[46] BeanFactory和FactoryBean_bean factory-CSDN博客<a href="https://blog.csdn.net/weixin_46425661/article/details/144705005#BeanFactory_5"> https://blog.csdn.net/weixin_46425661/article/details/144705005#BeanFactory_5</a></p>
+<p>[47] 解析Spring中BeanFactory与FactoryBean的核心差异<a href="https://www.iesdouyin.com/share/video/7438416635871907072/?region=\&amp;mid=7438416624799304499\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=x9.7FHZrN6DBhOajA2pGJFlY29Jbxb2MVQj1ZenrtyA-\&amp;share_version=280700\&amp;ts=1769260995\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/7438416635871907072/?region=\&amp;mid=7438416624799304499\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=x9.7FHZrN6DBhOajA2pGJFlY29Jbxb2MVQj1ZenrtyA-\&amp;share_version=280700\&amp;ts=1769260995\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[48] 一文搞懂BeanFactory 和 FactoryBean_重写factory.beanfactory-CSDN博客<a href="https://blog.csdn.net/fan521dan/article/details/133886723"> https://blog.csdn.net/fan521dan/article/details/133886723</a></p>
+<p>[49] 🎭 FactoryBean vs BeanFactory:Spring界的"双胞胎"之谜!🎬 开场白:谁是谁? 嘿， - 掘金<a href="https://juejin.cn/post/7564047018794713107"> https://juejin.cn/post/7564047018794713107</a></p>
+<p>[50] Bean Factory与 Factory Bean 的区别核心区别:Bean Factory 是 Spring 的容器 - 掘金<a href="https://juejin.cn/post/7547425901316210726"> https://juejin.cn/post/7547425901316210726</a></p>
+<p>[51] BeanFactory 和 FactoryBean 的区别是什么?-CSDN博客<a href="https://blog.csdn.net/smart_an/article/details/144922051"> https://blog.csdn.net/smart_an/article/details/144922051</a></p>
+<p>[52] spring中的“工厂大师”:factorybean深度解析与实战<a href="http://m.toutiao.com/group/7592897525301756457/?upstream_biz=doubao"> http://m.toutiao.com/group/7592897525301756457/?upstream_biz=doubao</a></p>
+<p>[53] 深入剖析Spring FactoryBean-CSDN博客<a href="https://blog.csdn.net/ZuanShi1111/article/details/150416286"> https://blog.csdn.net/ZuanShi1111/article/details/150416286</a></p>
+<p>[54] Spring框架中FactoryBean的使用_org.springframework.beans.factory-CSDN博客<a href="https://blog.csdn.net/2501_92540271/article/details/149776079"> https://blog.csdn.net/2501_92540271/article/details/149776079</a></p>
+<p>[55] 第 15 集 ： 依赖 注入 的 方式 有 哪些 3 动力 节点 Spring 面试 题 视频 教程 # spring 面试 题 # spring 面试 # 动力 节点 # java # java 培训<a href="https://www.iesdouyin.com/share/video/7525750475317153074/?region=\&amp;mid=7525750538299050802\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=Bt.VQv035XLkfrDCsYTB_2kDeGo5ImCBQJu1XKGHS0g-\&amp;share_version=280700\&amp;ts=1769260995\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/7525750475317153074/?region=\&amp;mid=7525750538299050802\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=Bt.VQv035XLkfrDCsYTB_2kDeGo5ImCBQJu1XKGHS0g-\&amp;share_version=280700\&amp;ts=1769260995\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[56] Spring FactoryBean 深度解析-CSDN博客<a href="https://blog.csdn.net/weixin_51786043/article/details/148202104"> https://blog.csdn.net/weixin_51786043/article/details/148202104</a></p>
+<p>[57] spring BeanFactory和FactoryBean作用和区别-CSDN博客<a href="https://blog.csdn.net/tan809417133/article/details/151868848"> https://blog.csdn.net/tan809417133/article/details/151868848</a></p>
+<p>[58] 深入理解Spring FactoryBean:灵活创建复杂对象的秘密武器引言 在 Spring 框架中，Bean 的创建 - 掘金<a href="https://juejin.cn/post/7473015463284490292"> https://juejin.cn/post/7473015463284490292</a></p>
+<p>[59] Day06: 条件装配的奥秘:@Conditional实现原理深度揭秘-CSDN博客<a href="https://blog.csdn.net/yezi1238/article/details/149164390"> https://blog.csdn.net/yezi1238/article/details/149164390</a></p>
+<p>[60] 深入 Spring 条件化配置底层:从硬编码到通用注解的实现原理_硬编码 声明式注解-CSDN博客<a href="https://blog.csdn.net/weixin_44289947/article/details/153060560"> https://blog.csdn.net/weixin_44289947/article/details/153060560</a></p>
+<p>[61] 【 Java 面试 】 @ Conditional 注解 的 原理 是 什么 ？ 实际 用 过 吗 ？&#x20;</p>
+<p>&#x20;# 程序员 # Java 面试 # Java 后端 # 找 工作 # IT<a href="https://www.iesdouyin.com/share/video/7596160606789438783/?region=\&amp;mid=7596160639836474122\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=zAnutlwYLj7WVc3EvV1ZMskZD4OoPtDV_Qqoa9SkbrQ-\&amp;share_version=280700\&amp;ts=1769261008\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/7596160606789438783/?region=\&amp;mid=7596160639836474122\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=zAnutlwYLj7WVc3EvV1ZMskZD4OoPtDV_Qqoa9SkbrQ-\&amp;share_version=280700\&amp;ts=1769261008\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[62] Spring框架中@Conditional注解全面解析Spring框架中@Conditional注解全面解析 一、引言 - 掘金<a href="https://juejin.cn/post/7483704056648237068"> https://juejin.cn/post/7483704056648237068</a></p>
+<p>[63] 深度解析 Spring @Conditional:实现智能条件化配置的利器-CSDN博客<a href="https://blog.csdn.net/qq_33181292/article/details/155532272"> https://blog.csdn.net/qq_33181292/article/details/155532272</a></p>
+<p>[64] Externalized Configuration :: Spring Boot<a href="https://docs.spring.io/spring-boot/reference/features/external-config.html"> https://docs.spring.io/spring-boot/reference/features/external-config.html</a></p>
+<p>[65] 深入剖析 Spring/Spring Boot 配置类加载顺序与原理_图灵spring类加载原理-CSDN博客<a href="https://guosy.blog.csdn.net/article/details/152333868"> https://guosy.blog.csdn.net/article/details/152333868</a></p>
+<p>[66] Spring Boot配置读取的六种方式解析与应用场景<a href="https://www.iesdouyin.com/share/video/7511990566175968564/?region=\&amp;mid=7511991021035670312\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=LYb9SeCmz3LI3Rzogm8Gm5RRAzyuhh0wMQ5GS2TJNkU-\&amp;share_version=280700\&amp;ts=1769261008\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/7511990566175968564/?region=\&amp;mid=7511991021035670312\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=LYb9SeCmz3LI3Rzogm8Gm5RRAzyuhh0wMQ5GS2TJNkU-\&amp;share_version=280700\&amp;ts=1769261008\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[67] Spring Boot配置文件加载顺序:从原理到实战全解析_从程序员到架构师<a href="http://m.toutiao.com/group/7598877763747054134/?upstream_biz=doubao"> http://m.toutiao.com/group/7598877763747054134/?upstream_biz=doubao</a></p>
+<p>[68] 从配置到日志:Java / Spring 在云原生时代的配置管理与日志体系_RendaZhang<a href="http://m.toutiao.com/group/7576231759542387235/?upstream_biz=doubao"> http://m.toutiao.com/group/7576231759542387235/?upstream_biz=doubao</a></p>
+<p>[69] application.yaml加载原理Spring Boot 中 application.yaml 的加载原理涉及环境 - 掘金<a href="https://juejin.cn/post/7487542928132751423"> https://juejin.cn/post/7487542928132751423</a></p>
+<p>[70] 环境配置与读取yml_environment.yml配置环境-CSDN博客<a href="https://blog.csdn.net/m0_49054880/article/details/146542182"> https://blog.csdn.net/m0_49054880/article/details/146542182</a></p>
+<p>[71] 5. Resources<a href="https://docs.spring.io/spring-framework/docs/4.0.4.RELEASE/spring-framework-reference/html/resources.html"> https://docs.spring.io/spring-framework/docs/4.0.4.RELEASE/spring-framework-reference/html/resources.html</a></p>
+<p>[72] Resources<a href="https://www.spring-doc.cn/spring-framework/6.1.21/core_resources.en.html"> https://www.spring-doc.cn/spring-framework/6.1.21/core_resources.en.html</a></p>
+<p>[73] 🗂️ Spring的Resource:代码界的"万能钥匙"!🎬 开场白:文件都藏哪儿了? 嘿，小伙伴们!👋 今天我 - 掘金<a href="https://juejin.cn/post/7564235452455157801"> https://juejin.cn/post/7564235452455157801</a></p>
+<p>[74] 第 23 集 ： 依赖 注入 的 方式 有 哪些 _ 扩展 问题 1 动力 节点 Spring 面试 题 视频 教程 # spring 面试 题 # spring 面试 # 动力 节点 # java # java 培训<a href="https://www.iesdouyin.com/share/video/7530186750912646419/?region=\&amp;mid=7530186828882266926\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=PuWlBtsFdvRIMzcSzBsXBgAommt1acGT2kiCZwGqz30-\&amp;share_version=280700\&amp;ts=1769261008\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/7530186750912646419/?region=\&amp;mid=7530186828882266926\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=PuWlBtsFdvRIMzcSzBsXBgAommt1acGT2kiCZwGqz30-\&amp;share_version=280700\&amp;ts=1769261008\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[75] Spring Framework资源加载优先级:Classpath与文件系统策略-CSDN博客<a href="https://blog.csdn.net/gitblog_00979/article/details/151337702"> https://blog.csdn.net/gitblog_00979/article/details/151337702</a></p>
+<p>[76] bestJavaer/spring/spring-resource.md at master · crisxuan/bestJavaer · GitHub<a href="https://github.com/crisxuan/bestJavaer/blob/master/spring/spring-resource.md"> https://github.com/crisxuan/bestJavaer/blob/master/spring/spring-resource.md</a></p>
+<p>[77] 资源 (Resources) | Spring Framework6.1.14-SNAPSHOT中文文档|Spring官方文档|SpringBoot 教程|Spring中文网<a href="https://www.spring-doc.cn/spring-framework/6.1.14-SNAPSHOT/core_resources.html"> https://www.spring-doc.cn/spring-framework/6.1.14-SNAPSHOT/core_resources.html</a></p>
+<p>[78] BeanPostProcessor 详解:Spring Bean 生命周期的核心扩展点_搬梯子摘星星<a href="http://m.toutiao.com/group/7592874726532383267/?upstream_biz=doubao"> http://m.toutiao.com/group/7592874726532383267/?upstream_biz=doubao</a></p>
+<p>[79] Spring Bean 完整生命周期-CSDN博客<a href="https://blog.csdn.net/m0_73077921/article/details/153744858"> https://blog.csdn.net/m0_73077921/article/details/153744858</a></p>
+<p>[80] Spring前置处理器和后置处理器执行顺序如何?_编程语言-CSDN问答<a href="https://ask.csdn.net/questions/8909562"> https://ask.csdn.net/questions/8909562</a></p>
+<p>[81] Spring核心机制解析：Bean生命周期、MVC流程与自动配置原理<a href="https://www.iesdouyin.com/share/video/7547681594941754659/?region=\&amp;mid=7547681974123891508\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=mTXIZ5vyPOx02yEFuUStsseUP.0rSP9EsGl7p6uITaQ-\&amp;share_version=280700\&amp;ts=1769261030\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/7547681594941754659/?region=\&amp;mid=7547681974123891508\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=mTXIZ5vyPOx02yEFuUStsseUP.0rSP9EsGl7p6uITaQ-\&amp;share_version=280700\&amp;ts=1769261030\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[82] Spring框架中的Bean后置处理器:IoC容器强大扩展性的幕后英雄-腾讯云开发者社区-腾讯云<a href="https://cloud.tencent.com.cn/developer/article/2560668?frompage=seopage\&amp;policyId=undefined"> https://cloud.tencent.com.cn/developer/article/2560668?frompage=seopage\&amp;policyId=undefined</a></p>
+<p>[83] 【Spring】Bean的生命周期-CSDN博客<a href="https://blog.csdn.net/qq_36634055/article/details/142848337"> https://blog.csdn.net/qq_36634055/article/details/142848337</a></p>
+<p>[84] Spring 中最重要的扩展点之 BeanPostProcessor详解_奔跑的蜗牛<a href="http://m.toutiao.com/group/7570741517300613641/?upstream_biz=doubao"> http://m.toutiao.com/group/7570741517300613641/?upstream_biz=doubao</a></p>
+<p>[85] Spring中BeanFactoryPostProcessor和BeanPostProcessor的区别_beanfactorypostprocessor作用-CSDN博客<a href="https://blog.csdn.net/weixin_37522117/article/details/146333248"> https://blog.csdn.net/weixin_37522117/article/details/146333248</a></p>
+<p>[86] 一文看懂 BeanFactoryPostProcessor 与 BeanPostProcessor 接口_beanpostprocessor和beanfactorypostprocessor-CSDN博客<a href="https://blog.csdn.net/weixin_46425661/article/details/144420284"> https://blog.csdn.net/weixin_46425661/article/details/144420284</a></p>
+<p>[87] Spring的发布处理器(BeanPostProcessor)_spring 发布bean-CSDN博客<a href="https://blog.csdn.net/lzghxjt/article/details/51870186"> https://blog.csdn.net/lzghxjt/article/details/51870186</a></p>
+<p>[88] 解析BeanFactoryPostProcessor的核心作用与Spring源码机制<a href="https://www.iesdouyin.com/share/video/7521726987006790927/?region=\&amp;mid=7521727301269179163\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=ByDeY6FfkSp8PzKwYXjLUz_cUqiHyk.rmyiy_qwg2Mc-\&amp;share_version=280700\&amp;ts=1769261029\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/7521726987006790927/?region=\&amp;mid=7521727301269179163\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=ByDeY6FfkSp8PzKwYXjLUz_cUqiHyk.rmyiy_qwg2Mc-\&amp;share_version=280700\&amp;ts=1769261029\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[89] BeanPostProcessor 和 BeanFactoryPostProcessor的作用，能实现什么功能 - CSDN文库<a href="https://wenku.csdn.net/answer/1tpea9gpb2"> https://wenku.csdn.net/answer/1tpea9gpb2</a></p>
+<p>[90] Spring - Bean的实例化流程及生命周期_beandefinition创建出普通对象流程-CSDN博客<a href="https://blog.csdn.net/weixin_51351637/article/details/131087131"> https://blog.csdn.net/weixin_51351637/article/details/131087131</a></p>
+<p>[91] Spring Framework后处理器:BeanPostProcessor与BeanFactoryPostProcessor-CSDN博客<a href="https://blog.csdn.net/gitblog_00628/article/details/152592673"> https://blog.csdn.net/gitblog_00628/article/details/152592673</a></p>
+<p>[92] 深度解析Spring事件机制:基于观察者模式的解耦利器-CSDN博客<a href="https://blog.csdn.net/zuiyuelong/article/details/150165155"> https://blog.csdn.net/zuiyuelong/article/details/150165155</a></p>
+<p>[93] 深入理解 Spring 的事件驱动模型:构建松耦合、可扩展的 Java 应用_java事件驱动模型应用-CSDN博客<a href="https://yishuo.blog.csdn.net/article/details/154937646"> https://yishuo.blog.csdn.net/article/details/154937646</a></p>
+<p>[94] 深入浅出 Spring Event:原理剖析与实战指南-CSDN博客<a href="https://blog.csdn.net/Crayon26/article/details/156397959"> https://blog.csdn.net/Crayon26/article/details/156397959</a></p>
+<p>[95] Spring 框架——事件驱动模型_spring事件驱动模型-CSDN博客<a href="https://blog.csdn.net/weixin_43004044/article/details/131754324"> https://blog.csdn.net/weixin_43004044/article/details/131754324</a></p>
+<p>[96] Spring 事件监听机制介绍以及源码分析-CSDN博客<a href="https://blog.csdn.net/weixin_46619605/article/details/146566012"> https://blog.csdn.net/weixin_46619605/article/details/146566012</a></p>
+<p>[97] Spring 订阅发布模式(事件驱动模型)Spring 订阅发布模式(事件驱动模型) Spring 订阅发布模式基于 - 掘金<a href="https://juejin.cn/post/7569072953901334579"> https://juejin.cn/post/7569072953901334579</a></p>
+<p>[98] spring的事件驱动有时候比消息队列好用-腾讯云开发者社区-腾讯云<a href="https://cloud.tencent.com.cn/developer/article/2526812"> https://cloud.tencent.com.cn/developer/article/2526812</a></p>
+<p>[99] aop---深入理解核心概念 → 代理原理 → 通知类型与执行顺序 → 切点表达式(execution/annotati - 掘金<a href="https://juejin.cn/post/7590608345923272730"> https://juejin.cn/post/7590608345923272730</a></p>
+<p>[100] Spring aop 五种通知类型-CSDN博客<a href="https://blog.csdn.net/2509_94228653/article/details/156811599"> https://blog.csdn.net/2509_94228653/article/details/156811599</a></p>
+<p>[101] Spring AOP 核心知识笔记Spring AOP 核心知识笔记 一、AOP 核心思想与实现原理 AOP(面向切面编 - 掘金<a href="https://juejin.cn/post/7582425536463699994"> https://juejin.cn/post/7582425536463699994</a></p>
+<p>[102] Spring AOP通知类型及执行顺序解析<a href="https://www.iesdouyin.com/share/video/6940661185809288489/?region=\&amp;mid=6940661216373132069\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=QntMBeZFvm2vO_xByeNQsidYwSra3532QSMKaINA_rM-\&amp;share_version=280700\&amp;ts=1769261066\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/6940661185809288489/?region=\&amp;mid=6940661216373132069\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=QntMBeZFvm2vO_xByeNQsidYwSra3532QSMKaINA_rM-\&amp;share_version=280700\&amp;ts=1769261066\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[103] SpringAOP通知细节-避坑指南_博观而约取，厚积而薄发的技术博客_mob6454cc659b12的技术博客_51CTO博客<a href="https://blog.51cto.com/u_16099194/14325738"> https://blog.51cto.com/u_16099194/14325738</a></p>
+<p>[104] 一文读懂Spring AOP:从原理到实战，再也不怕面试问-CSDN博客<a href="https://blog.csdn.net/2303_79998710/article/details/155392437"> https://blog.csdn.net/2303_79998710/article/details/155392437</a></p>
+<p>[105] spring AOP的复习和5中通知的执行顺序_前置、环绕、最终、异常通知,返回5种通知的执行顺序-CSDN博客<a href="https://blog.csdn.net/jaryle/article/details/72910929"> https://blog.csdn.net/jaryle/article/details/72910929</a></p>
+<p>[106] Spring AOP:JDK与CGLIB代理机制解析_spring选择cglib和jdk动态代理的代码逻辑分析-CSDN博客<a href="https://blog.csdn.net/2301_80141552/article/details/150989549"> https://blog.csdn.net/2301_80141552/article/details/150989549</a></p>
+<p>[107] 【Spring】AOP深度解析:代理机制、拦截器链与事务失效全解-CSDN博客<a href="https://blog.csdn.net/Txx318026/article/details/156722083"> https://blog.csdn.net/Txx318026/article/details/156722083</a></p>
+<p>[108] 完整教程:Spring Boot 机制四: AOP 代理机制源码级深度解析(JDK / CGLIB 全链路)_51CTO博客_spring boot aop原理<a href="https://blog.51cto.com/u_15469972/14437262"> https://blog.51cto.com/u_15469972/14437262</a></p>
+<p>[109] Spring AOP代理方式选择逻辑及性能对比解析<a href="https://www.iesdouyin.com/share/note/7534669206277705012/?region=\&amp;mid=7168534822384732167\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;schema_type=37\&amp;share_sign=vMTqJ5q21Mz4_pKVqIjBDb85doJ8VtIVG04Sb7q8xWQ-\&amp;share_version=280700\&amp;ts=1769261066\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/note/7534669206277705012/?region=\&amp;mid=7168534822384732167\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;schema_type=37\&amp;share_sign=vMTqJ5q21Mz4_pKVqIjBDb85doJ8VtIVG04Sb7q8xWQ-\&amp;share_version=280700\&amp;ts=1769261066\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[110] 深入理解 Spring AOP 代理机制:JDK 动态代理与 CGLIB 的对比与选择_aop jdk和cglib-CSDN博客<a href="https://blog.csdn.net/Landcc/article/details/149224101"> https://blog.csdn.net/Landcc/article/details/149224101</a></p>
+<p>[111] JDK 动态代理 vs CGLIB:原理、区别与 Spring AOP 底层揭秘本文深入解析 JDK 动态代理与 CGL - 掘金<a href="https://juejin.cn/post/7561442148370137139"> https://juejin.cn/post/7561442148370137139</a></p>
+<p>[112] spring AOP 之四:@AspectJ切入点标识符语法详解-CSDN博客<a href="https://blog.csdn.net/weixin_30449239/article/details/99446198"> https://blog.csdn.net/weixin_30449239/article/details/99446198</a></p>
+<p>[113] 在Spring框架中使用AspectJ实现AOP(面向切面编程)_spring aspectj-CSDN博客<a href="https://blog.csdn.net/Liu_Downloads/article/details/146905252"> https://blog.csdn.net/Liu_Downloads/article/details/146905252</a></p>
+<p>[114] 深度解析切入点表达式 及 详细代码展示_切入点表达式源码怎么看-CSDN博客<a href="https://blog.csdn.net/csdn_tom_168/article/details/148921168"> https://blog.csdn.net/csdn_tom_168/article/details/148921168</a></p>
+<p>[115] Spring AOP切点表达式核心用法与应用技巧解析<a href="https://www.iesdouyin.com/share/video/7589646713829330217/?region=\&amp;mid=7589646909789588262\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=UFK6FylKLD3rO8cBexCSksN0eVuHSigkAr7EGFz956c-\&amp;share_version=280700\&amp;ts=1769261065\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/7589646713829330217/?region=\&amp;mid=7589646909789588262\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=UFK6FylKLD3rO8cBexCSksN0eVuHSigkAr7EGFz956c-\&amp;share_version=280700\&amp;ts=1769261065\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[116] Spring-AOP @AspectJ语法基础-阿里云开发者社区<a href="https://developer.aliyun.com/article/1408845"> https://developer.aliyun.com/article/1408845</a></p>
+<p>[117] Spring AOP 中如何定义切点?-JavaScript中文网-JavaScript教程资源分享门户<a href="https://www.javascriptcn.com/interview-spring/677f4e6d828d7b20c6314504.html"> https://www.javascriptcn.com/interview-spring/677f4e6d828d7b20c6314504.html</a></p>
+<p>[118] 分析 Spring 的 AOP 实现原理与切点表达式​ #创作者训练营话题并加 #AI编程 目录 一、AOP 核心概念 - 掘金<a href="https://juejin.cn/post/7509042958204420133"> https://juejin.cn/post/7509042958204420133</a></p>
+<p>[119] Spring 事务核心原理 深度解析-CSDN博客<a href="https://blog.csdn.net/xiaolyuh123/article/details/156830720"> https://blog.csdn.net/xiaolyuh123/article/details/156830720</a></p>
+<p>[120] @Transactional的底层原理@Transactional 是 Spring 框架中用于声明式事务管理的注解，其 - 掘金<a href="https://juejin.cn/post/7528576810286071848"> https://juejin.cn/post/7528576810286071848</a></p>
+<p>[121] `@Transactional` 注解深度解析:Spring 声明式事务的核心_org.springframework.transaction.annotation.transac-CSDN博客<a href="https://blog.csdn.net/csdn_tom_168/article/details/148925487"> https://blog.csdn.net/csdn_tom_168/article/details/148925487</a></p>
+<p>[122] Spring事务管理核心原理与实现机制解析<a href="https://www.iesdouyin.com/share/note/7490466122802793768/?region=\&amp;mid=7043672073613936641\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;schema_type=37\&amp;share_sign=.Fm4rF226r8DefdwU8LoIsu3gQuetLbhVZZl9sL38fA-\&amp;share_version=280700\&amp;ts=1769261080\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/note/7490466122802793768/?region=\&amp;mid=7043672073613936641\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;schema_type=37\&amp;share_sign=.Fm4rF226r8DefdwU8LoIsu3gQuetLbhVZZl9sL38fA-\&amp;share_version=280700\&amp;ts=1769261080\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[123] Spring 声明式事务:原理、使用及失效场景详解-CSDN博客<a href="https://blog.csdn.net/2201_75355172/article/details/156796590"> https://blog.csdn.net/2201_75355172/article/details/156796590</a></p>
+<p>[124] Spring 事务管理全解析:原理、源码与实战_spring 事务原理解析-CSDN博客<a href="https://blog.csdn.net/Prince140678/article/details/146466434"> https://blog.csdn.net/Prince140678/article/details/146466434</a></p>
+<p>[125] Spring事务原理Spring声明式事务管理的原理基于 AOP(面向切面编程) 和 事务管理器(PlatformTra - 掘金<a href="https://juejin.cn/post/7474823756672450587"> https://juejin.cn/post/7474823756672450587</a></p>
+<p>[126] MySQL Spring 事务全家桶:事务本质、隔离级别、传播机制与失效场景全解析-CSDN博客<a href="https://blog.csdn.net/z55947810/article/details/155201266"> https://blog.csdn.net/z55947810/article/details/155201266</a></p>
+<p>[127] 别再踩坑!Spring事务@Transactional失效?一文读懂参数与8大失效场景-CSDN博客<a href="https://blog.csdn.net/lhmyy521125/article/details/150565066"> https://blog.csdn.net/lhmyy521125/article/details/150565066</a></p>
+<p>[128] @Transactional详解(作用、失效场景与解决方法)-CSDN博客<a href="https://blog.csdn.net/qq_57581439/article/details/132086303"> https://blog.csdn.net/qq_57581439/article/details/132086303</a></p>
+<p>[129] 解析@Transactional失效的常见场景与原因<a href="https://www.iesdouyin.com/share/video/7429329879021161779/?region=\&amp;mid=7429330001905945344\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=q9L1AXWc2g2ubX8o61pXDeLTFJ.q8y7S3lG.8WMHrl0-\&amp;share_version=280700\&amp;ts=1769261080\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/7429329879021161779/?region=\&amp;mid=7429330001905945344\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=q9L1AXWc2g2ubX8o61pXDeLTFJ.q8y7S3lG.8WMHrl0-\&amp;share_version=280700\&amp;ts=1769261080\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[130] 【spring】@Transactional 注解失效的原因及解决办法_transactional 失效-CSDN博客<a href="https://blog.csdn.net/m0_74823611/article/details/144339267"> https://blog.csdn.net/m0_74823611/article/details/144339267</a></p>
+<p>[131] @Transactional注解使用及事务失效场景详解_聪蛋U三国<a href="http://m.toutiao.com/group/7490395925387510287/?upstream_biz=doubao"> http://m.toutiao.com/group/7490395925387510287/?upstream_biz=doubao</a></p>
+<p>[132] 事物注解 @Transactional的 13个失效场景 | 程序员小富<a href="http://www.xiaofucode.com/guide/springboot101/base/%E4%BA%8B%E7%89%A9%E6%B3%A8%E8%A7%A3%20@Transactional%E7%9A%84%2013%E4%B8%AA%E5%A4%B1%E6%95%88%E5%9C%BA%E6%99%AF.html"> http://www.xiaofucode.com/guide/springboot101/base/%E4%BA%8B%E7%89%A9%E6%B3%A8%E8%A7%A3%20@Transactional%E7%9A%84%2013%E4%B8%AA%E5%A4%B1%E6%95%88%E5%9C%BA%E6%99%AF.html</a></p>
+<p>[133] Spring MVC 数据验证与类型转换深度解析-CSDN博客<a href="https://blog.csdn.net/python15397/article/details/153139481"> https://blog.csdn.net/python15397/article/details/153139481</a></p>
+<p>[134] Java Bean Validation<a href="https://docs.spring.io/spring-framework/reference/6.0/core/validation/beanvalidation.html"> https://docs.spring.io/spring-framework/reference/6.0/core/validation/beanvalidation.html</a></p>
+<p>[135] 数据校验新范式:Spring自定义校验注解全攻略-CSDN博客<a href="https://blog.csdn.net/gitblog_00102/article/details/151282299"> https://blog.csdn.net/gitblog_00102/article/details/151282299</a></p>
+<p>[136] 使用自定义约束注解实现接口参数优雅校验<a href="https://www.iesdouyin.com/share/video/7550920913504439592/?region=\&amp;mid=7550921291646192393\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=bD1NG5343RPDEwMIGjxBxTj8Bf1uedQx6O0RDLzSgmw-\&amp;share_version=280700\&amp;ts=1769261080\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/7550920913504439592/?region=\&amp;mid=7550921291646192393\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=bD1NG5343RPDEwMIGjxBxTj8Bf1uedQx6O0RDLzSgmw-\&amp;share_version=280700\&amp;ts=1769261080\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[137] Spring Validation中9个数据校验工具Spring Validation作为Spring生态系统的重要组成 - 掘金<a href="https://juejin.cn/post/7502248648074526772"> https://juejin.cn/post/7502248648074526772</a></p>
+<p>[138] 还在用 if 硬刚参数校验?这波操作土到掉渣!SpringBoot 高阶玩法直接封神-51CTO.COM<a href="https://www.51cto.com/article/814437.html"> https://www.51cto.com/article/814437.html</a></p>
+<p>[139] Springboot 数据校验_张一雄的技术博客_51CTO博客<a href="https://blog.51cto.com/xiongod/14268519"> https://blog.51cto.com/xiongod/14268519</a></p>
+<p>[140] Spring MVC-CSDN博客<a href="https://blog.csdn.net/xiake1573/article/details/145406538"> https://blog.csdn.net/xiake1573/article/details/145406538</a></p>
+<p>[141] 讲讲Spring MVC的处理流程-CSDN博客<a href="https://blog.csdn.net/gdpu2400502251/article/details/157095160"> https://blog.csdn.net/gdpu2400502251/article/details/157095160</a></p>
+<p>[142] SpringMVC的执行流程_springmvc执行流程-CSDN博客<a href="https://blog.csdn.net/weixin_73739493/article/details/151051268"> https://blog.csdn.net/weixin_73739493/article/details/151051268</a></p>
+<p>[143] Spring MVC核心流程解析：DispatcherServlet的请求处理机制<a href="https://www.iesdouyin.com/share/video/7514735876019064104/?region=\&amp;mid=7514737312341805835\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=MgyZrG5JrxvekX5nteTVn3uwuLEj5Mo3zulFXgQwWYA-\&amp;share_version=280700\&amp;ts=1769261096\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/7514735876019064104/?region=\&amp;mid=7514737312341805835\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=MgyZrG5JrxvekX5nteTVn3uwuLEj5Mo3zulFXgQwWYA-\&amp;share_version=280700\&amp;ts=1769261096\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[144] Spring MVC 核心枢纽:DispatcherServlet 的深度解析与实践价值-CSDN博客<a href="https://blog.csdn.net/qq_52331401/article/details/148563845"> https://blog.csdn.net/qq_52331401/article/details/148563845</a></p>
+<p>[145] 详细介绍:Spring MVC 请求执行流程详解_mob64ca13fdd43c的技术博客_51CTO博客<a href="https://blog.51cto.com/u_16213606/14234261"> https://blog.51cto.com/u_16213606/14234261</a></p>
+<p>[146] Spring MVC 中 `DispatcherServlet` 处理请求的完整流程_spring mvc 的 dispatcherservlet 工作流程?-CSDN博客<a href="https://blog.csdn.net/csdn_tom_168/article/details/148585823"> https://blog.csdn.net/csdn_tom_168/article/details/148585823</a></p>
+<p>[147] SpringMVC核心原理与实战全解析-CSDN博客<a href="https://blog.csdn.net/2401_83675559/article/details/156147464"> https://blog.csdn.net/2401_83675559/article/details/156147464</a></p>
+<p>[148] Spring MVC核心流程深度解析:从请求到响应的完美掌控-CSDN博客<a href="https://blog.csdn.net/qq_44870477/article/details/157137210"> https://blog.csdn.net/qq_44870477/article/details/157137210</a></p>
+<p>[149] SpringBoot全局异常处理:三大核心方案深度解析与选型-CSDN博客<a href="https://blog.csdn.net/m0_46091798/article/details/157258114"> https://blog.csdn.net/m0_46091798/article/details/157258114</a></p>
+<p>[150] SpringMVC 开发避坑指南:十大常见问题深度解析与解决方案_spring mvc 异常详情没有抛出-CSDN博客<a href="https://blog.csdn.net/qq_35766758/article/details/148744777"> https://blog.csdn.net/qq_35766758/article/details/148744777</a></p>
+<p>[151] SpringMvc常见问题-CSDN博客<a href="https://blog.csdn.net/m0_74891778/article/details/151427694"> https://blog.csdn.net/m0_74891778/article/details/151427694</a></p>
+<p>[152] 详解@ControllerAdvice:Spring MVC全局统一处理的终极解决方案_搬梯子摘星星<a href="http://m.toutiao.com/group/7595053131176722994/?upstream_biz=doubao"> http://m.toutiao.com/group/7595053131176722994/?upstream_biz=doubao</a></p>
+<p>[153] Spring MVC中的拦截器和Servlet中的filter(过滤器)有什么区别?_1、spring mvc中的拦截器和servlet中的filter有什么区别?-CSDN博客<a href="https://blog.csdn.net/darling_cats/article/details/142108333"> https://blog.csdn.net/darling_cats/article/details/142108333</a></p>
+<p>[154] 拦截器和过滤器的区别-CSDN博客<a href="https://blog.csdn.net/2303_78263863/article/details/146186380"> https://blog.csdn.net/2303_78263863/article/details/146186380</a></p>
+<p>[155] 38-Springmvc拦截器概述以及简单实现(和过滤器的区别)_mvc拦截器能作用到其他模块吗-CSDN博客<a href="https://blog.csdn.net/qq_47128897/article/details/131465244"> https://blog.csdn.net/qq_47128897/article/details/131465244</a></p>
+<p>[156] 过滤器与拦截器的核心区别对比分析<a href="https://www.iesdouyin.com/share/video/7482798033780886823/?region=\&amp;mid=7468608251074824208\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=ZOx4tNvC9kQDeImzqXWkDCeuFHJrBuhBzb3Tlyxeau4-\&amp;share_version=280700\&amp;ts=1769261096\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/7482798033780886823/?region=\&amp;mid=7468608251074824208\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=ZOx4tNvC9kQDeImzqXWkDCeuFHJrBuhBzb3Tlyxeau4-\&amp;share_version=280700\&amp;ts=1769261096\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[157] 过滤器和拦截器的区别?-CSDN博客<a href="https://blog.csdn.net/weixin_43249298/article/details/150987620"> https://blog.csdn.net/weixin_43249298/article/details/150987620</a></p>
+<p>[158] Spring MVC 拦截器与过滤器深度解析_springmvc过滤器和拦截器的区别-CSDN博客<a href="https://blog.csdn.net/shine19/article/details/147165713"> https://blog.csdn.net/shine19/article/details/147165713</a></p>
+<p>[159] SpringMVC拦截器(Interceptor)与Servlet过滤器(Filter)区别_springmvc拦截器和过滤器的区别-CSDN博客<a href="https://blog.csdn.net/2501_90417743/article/details/145917826"> https://blog.csdn.net/2501_90417743/article/details/145917826</a></p>
+<p>[160] Spring Boot自动配置:原理、利弊与实践指南-CSDN博客<a href="https://blog.csdn.net/weixin_44289947/article/details/152934791"> https://blog.csdn.net/weixin_44289947/article/details/152934791</a></p>
+<p>[161] Spring Boot 核心原理解析与实践(含代码示例)-阿里云开发者社区<a href="https://developer.aliyun.com:443/article/1689530"> https://developer.aliyun.com:443/article/1689530</a></p>
+<p>[162] 解密 Spring Boot 自动配置:原理、流程与核心组件协同-CSDN博客<a href="https://blog.csdn.net/yzyyishi/article/details/150590104"> https://blog.csdn.net/yzyyishi/article/details/150590104</a></p>
+<p>[163] 解析Spring Boot自动配置原理及核心流程<a href="https://www.iesdouyin.com/share/video/7521646695231261995/?region=\&amp;mid=7521646742656437055\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=aEttfIuhoXE0nfBfbatqGrVGlTrR6k35rN94kVHqqwo-\&amp;share_version=280700\&amp;ts=1769261127\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/7521646695231261995/?region=\&amp;mid=7521646742656437055\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=aEttfIuhoXE0nfBfbatqGrVGlTrR6k35rN94kVHqqwo-\&amp;share_version=280700\&amp;ts=1769261127\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[164] SpringBoot自动装配原理详解附带图解-CSDN博客<a href="https://blog.csdn.net/qq_65138851/article/details/148332237"> https://blog.csdn.net/qq_65138851/article/details/148332237</a></p>
+<p>[165] springboot的自动配置原理_spring.datasource.enabled-CSDN博客<a href="https://blog.csdn.net/qq_56851614/article/details/146333065"> https://blog.csdn.net/qq_56851614/article/details/146333065</a></p>
+<p>[166] springboot(三)springboot的自动配置原理<a href="https://blog.51cto.com/u_16213627/14365236"> https://blog.51cto.com/u_16213627/14365236</a></p>
+<p>[167] Externalized Configuration<a href="https://docs.spring.io/spring-boot/3.4/reference/features/external-config.html"> https://docs.spring.io/spring-boot/3.4/reference/features/external-config.html</a></p>
+<p>[168] 深度解析 Spring Boot 配置机制深度解析 Spring Boot 配置机制 优先级、Profile 与外部化配 - 掘金<a href="https://juejin.cn/post/7486170504270741530"> https://juejin.cn/post/7486170504270741530</a></p>
+<p>[169] Spring Boot高频面试真题解析：配置加载顺序及优先级<a href="https://www.iesdouyin.com/share/video/7501862246765022524/?region=\&amp;mid=7501862088302725907\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=AR3Ic.2_Ax03BPgIBcSa5rlRPz5yyEUcfPHwvQKvMc8-\&amp;share_version=280700\&amp;ts=1769261127\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/7501862246765022524/?region=\&amp;mid=7501862088302725907\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=AR3Ic.2_Ax03BPgIBcSa5rlRPz5yyEUcfPHwvQKvMc8-\&amp;share_version=280700\&amp;ts=1769261127\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[170] SpringBoot读取配置按什么优先级顺序?_springboot配置文件优先级-CSDN博客<a href="https://blog.csdn.net/ma_nong33/article/details/140558777"> https://blog.csdn.net/ma_nong33/article/details/140558777</a></p>
+<p>[171] springboot的外部配置加载顺序_springboot外部配置加载顺序-CSDN博客<a href="https://blog.csdn.net/m0_46580983/article/details/146154041"> https://blog.csdn.net/m0_46580983/article/details/146154041</a></p>
+<p>[172] SpringBoot读取配置优先级顺序是什么?-腾讯云开发者社区-腾讯云<a href="https://cloud.tencent.cn/developer/article/2491457?frompage=seopage\&amp;policyId=20240000\&amp;traceId=01k1a51b2jjzxqd577052azznc"> https://cloud.tencent.cn/developer/article/2491457?frompage=seopage\&amp;policyId=20240000\&amp;traceId=01k1a51b2jjzxqd577052azznc</a></p>
+<p>[173] Embedded Web Servers<a href="https://docs.spring.io/spring-boot/3.3/how-to/webserver.html"> https://docs.spring.io/spring-boot/3.3/how-to/webserver.html</a></p>
+<p>[174] 嵌入式 Web 服务器 (Embedded Web Servers) | Spring Boot3.3.1中文文档|Spring官方文档|SpringBoot 教程|Spring中文网<a href="https://www.spring-doc.cn/spring-boot/3.3.1/how-to_webserver.html"> https://www.spring-doc.cn/spring-boot/3.3.1/how-to_webserver.html</a></p>
+<p>[175] Spring Boot 支持的内嵌服务器(Tomcat、Jetty、Undertow、Netty(用于 WebFlux 响应式应用))详解_springboot tomcat jetty undertow netty-CSDN博客<a href="https://blog.csdn.net/zp357252539/article/details/147181807"> https://blog.csdn.net/zp357252539/article/details/147181807</a></p>
+<p>[176] Spring Boot内置Tomcat启动原理解析<a href="https://www.iesdouyin.com/share/video/7499012255057448192/?region=\&amp;mid=7499012742410504999\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=VfVc6VxrtAKug1yn9BhaNrpGxqYVGvVIkkPrNNBbVlY-\&amp;share_version=280700\&amp;ts=1769261127\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/7499012255057448192/?region=\&amp;mid=7499012742410504999\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=VfVc6VxrtAKug1yn9BhaNrpGxqYVGvVIkkPrNNBbVlY-\&amp;share_version=280700\&amp;ts=1769261127\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[177] Spring Boot内嵌服务器全解析:Tomcat vs Jetty vs Undertow 选型指南_springboot tomcat undertow-CSDN博客<a href="https://blog.csdn.net/qq479850581/article/details/147049836"> https://blog.csdn.net/qq479850581/article/details/147049836</a></p>
+<p>[178] 深入理解 Spring Boot 嵌入式 Web 容器:从原理到性能调优_嵌入式容器技术、原生容器、实时容器技术-CSDN博客<a href="https://blog.csdn.net/haohaizi_liu/article/details/154063534"> https://blog.csdn.net/haohaizi_liu/article/details/154063534</a></p>
+<p>[179] 【Spring Boot 支持哪些内嵌的 Web 服务器详细分析】_springboot web服务器-CSDN博客<a href="https://blog.csdn.net/qq_33545255/article/details/144545176"> https://blog.csdn.net/qq_33545255/article/details/144545176</a></p>
+<p>[180] 深度解析Spring事件机制:基于观察者模式的解耦利器-CSDN博客<a href="https://blog.csdn.net/zuiyuelong/article/details/150165155"> https://blog.csdn.net/zuiyuelong/article/details/150165155</a></p>
+<p>[181] Interface ApplicationListener\<E extends ApplicationEvent><a href="https://docs.spring.io/spring-framework/docs/6.1.1/javadoc-api/org/springframework/context/ApplicationListener.html"> https://docs.spring.io/spring-framework/docs/6.1.1/javadoc-api/org/springframework/context/ApplicationListener.html</a></p>
+<p>[182] 介绍一下spring的ApplicationListener-CSDN博客<a href="https://blog.csdn.net/T2_phage/article/details/145138635"> https://blog.csdn.net/T2_phage/article/details/145138635</a></p>
+<p>[183] 解析Spring事件监听机制与观察者设计模式的核心原理<a href="https://www.iesdouyin.com/share/video/7463456755255741711/?region=\&amp;mid=7463458976496192292\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=RwUGqPdYJCdW5ReQHF_r6lNJJi2d2ntohfEu.C5qGbE-\&amp;share_version=280700\&amp;ts=1769261148\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/7463456755255741711/?region=\&amp;mid=7463458976496192292\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=RwUGqPdYJCdW5ReQHF_r6lNJJi2d2ntohfEu.C5qGbE-\&amp;share_version=280700\&amp;ts=1769261148\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[184] 事件驱动架构实战:SpringBoot中ApplicationEvent与EventListener应用场景揭秘 - CSDN文库<a href="https://wenku.csdn.net/column/1eueaky33y"> https://wenku.csdn.net/column/1eueaky33y</a></p>
+<p>[185] Spring 框架——事件驱动模型_spring事件驱动模型-CSDN博客<a href="https://blog.csdn.net/weixin_43004044/article/details/131754324"> https://blog.csdn.net/weixin_43004044/article/details/131754324</a></p>
+<p>[186] インターフェース ApplicationListener\<E extends ApplicationEvent><a href="https://spring.pleiades.io/spring-framework/docs/current/javadoc-api/org/springframework/context/ApplicationListener.html"> https://spring.pleiades.io/spring-framework/docs/current/javadoc-api/org/springframework/context/ApplicationListener.html</a></p>
+<p>[187] Task Execution and Scheduling<a href="https://docs.spring.io/spring-framework/reference/6.1/integration/scheduling.html"> https://docs.spring.io/spring-framework/reference/6.1/integration/scheduling.html</a></p>
+<p>[188] Spring之定时任务和异步任务_异步定时任务-CSDN博客<a href="https://blog.csdn.net/weixin_43583736/article/details/147847773"> https://blog.csdn.net/weixin_43583736/article/details/147847773</a></p>
+<p>[189] SpringBoot使用Schedule实现异步执行定时任务(多线程)_springboot schedule 异步多线程-CSDN博客<a href="https://blog.csdn.net/AlbenXie/article/details/108347392"> https://blog.csdn.net/AlbenXie/article/details/108347392</a></p>
+<p>[190] Spring Boot线程池优化实现百万数据高效批量插入<a href="https://www.iesdouyin.com/share/video/7487601655442083084/?region=\&amp;mid=7487603076375857930\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=ZVmbXAMupFlmgwknrLoT30EqE.fxKKJv4h2j1Y7bdbg-\&amp;share_version=280700\&amp;ts=1769261148\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/7487601655442083084/?region=\&amp;mid=7487603076375857930\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=ZVmbXAMupFlmgwknrLoT30EqE.fxKKJv4h2j1Y7bdbg-\&amp;share_version=280700\&amp;ts=1769261148\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[191] Spring Boot 中 @Async 与 @Scheduled 的线程池配置与常见问题一、默认行为:不配置线程池的风 - 掘金<a href="https://juejin.cn/post/7477875020913164297"> https://juejin.cn/post/7477875020913164297</a></p>
+<p>[192] Spring Boot 异步与任务调度_spring boot 任务调度-CSDN博客<a href="https://blog.csdn.net/Flying_Fish_roe/article/details/144826101"> https://blog.csdn.net/Flying_Fish_roe/article/details/144826101</a></p>
+<p>[193] Task Execution and Scheduling<a href="https://docs.spring.io/spring-boot/reference/features/task-execution-and-scheduling.html"> https://docs.spring.io/spring-boot/reference/features/task-execution-and-scheduling.html</a></p>
+<p>[194] Spring Boot 中的 EnvironmentPostProcessor:自定义环境配置-51CTO.COM<a href="https://www.51cto.com/article/825785.html"> https://www.51cto.com/article/825785.html</a></p>
+<p>[195] Spring Boot 核心接口与扩展点详细指南-CSDN博客<a href="https://blog.csdn.net/lilinhai548/article/details/156463403"> https://blog.csdn.net/lilinhai548/article/details/156463403</a></p>
+<p>[196] SpringBoot扩展点之ApplicationRunner与CommandLineRunner_springboot applicantionrunner command-CSDN博客<a href="https://blog.csdn.net/dongdong199033/article/details/129330816"> https://blog.csdn.net/dongdong199033/article/details/129330816</a></p>
+<p>[197] Spring Boot中Environment接口获取配置信息的使用解析<a href="https://www.iesdouyin.com/share/video/7535450268717042996/?region=\&amp;mid=7535450352322120482\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=CIEx8yijB_JagCzqZWLcN5XYA9438CzSSPWq2au1bsw-\&amp;share_version=280700\&amp;ts=1769261149\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D"> https://www.iesdouyin.com/share/video/7535450268717042996/?region=\&amp;mid=7535450352322120482\&amp;u_code=0\&amp;did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\&amp;with_sec_did=1\&amp;video_share_track_ver=\&amp;titleType=title\&amp;share_sign=CIEx8yijB_JagCzqZWLcN5XYA9438CzSSPWq2au1bsw-\&amp;share_version=280700\&amp;ts=1769261149\&amp;from_aid=1128\&amp;from_ssr=1\&amp;share_track_info=%7B%22link_description_type%22%3A%22%22%7D</a></p>
+<p>[198] SpringBoot 核心扩展点详解与案例SpringBoot 核心扩展点详解与案例 SpringBoot 提供了丰富的 - 掘金<a href="https://juejin.cn/post/7563843746165997611"> https://juejin.cn/post/7563843746165997611</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.instant", "navigation.tracking", "toc.follow", "toc.integrate", "search.highlight", "search.suggest", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

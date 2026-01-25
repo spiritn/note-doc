@@ -1,0 +1,3666 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://spiritn.github.io/note-doc/java/spring/spring/02-IocContainer/">
+      
+      
+        <link rel="prev" href="../01-Overview/">
+      
+      
+        <link rel="next" href="../03-Ioc%E5%AE%B9%E5%99%A8/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>IOC容器 - 我的技术文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#11-iocbeans" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="我的技术文档" class="md-header__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的技术文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              IOC容器
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../database/02-mysql%E6%9E%B6%E6%9E%84/" class="md-tabs__link">
+          
+  
+  
+  数据库
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../java8/" class="md-tabs__link">
+          
+  
+  
+  Java
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../01-Overview/" class="md-tabs__link">
+          
+  
+  
+  spring
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../spring-boot/GettingStarted/" class="md-tabs__link">
+          
+  
+  
+  springboot
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="我的技术文档" class="md-nav__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    我的技术文档
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/02-mysql%E6%9E%B6%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mySQL架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/00-%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/03-InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    InnoDB存储引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/04-%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/05-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日志系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JAVA8
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-Overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IOC容器
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IOC容器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11-iocbeans" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 IoC容器和Beans
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 容器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 容器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.1 配置元数据
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.3 使用容器
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-bean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Bean
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 Bean">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        覆盖Bean
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3bean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.Bean的命名
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.Bean的命名">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-xml-bean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 XML 配置中的 Bean 命名
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-bean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 未显式命名的 Bean
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-bean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Bean 命名规范
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-bean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 类路径扫描的 Bean 命名
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-bean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Bean 别名（外部定义）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4bean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.实例化Bean
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.实例化Bean">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bean_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        通过构造器来实例化Bean
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bean_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        静态工厂方法来实例化Bean
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bean_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        实例工厂方法创建Bean
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bean_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        确定Bean的运行时类型
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bean_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附录：Bean 的生命周期
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-bean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6 自定义Bean的性质
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.6 自定义Bean的性质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        生命周期回调
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="生命周期回调">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        初始化回调
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        销毁回调
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        启动和关闭回调 Lifecycle
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="启动和关闭回调 Lifecycle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        组合使用多种生命周期机制
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        其他aware接口
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        容器扩展点（重点！！！）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="容器扩展点（重点！！！）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#beanpostprocessorbean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        使用BeanPostProcessor自定义Bean
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="使用BeanPostProcessor自定义Bean">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#beanpostprocessor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        多 BeanPostProcessor 执行顺序
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心特性与作用域
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        自动检测与注册
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        编程式注册
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        与 AOP 自动代理的兼容问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autowiredannotationbeanpostprocessor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型应用：AutowiredAnnotationBeanPostProcessor
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beanfactorypostprocessor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、使用BeanFactoryPostProcessor自定义配置元数据
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、使用BeanFactoryPostProcessor自定义配置元数据">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 核心规则
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 自动检测与注册
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-1propertysourcesplaceholderconfigurer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 示例 1：PropertySourcesPlaceholderConfigurer（属性占位符替换）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 示例 1：PropertySourcesPlaceholderConfigurer（属性占位符替换）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键特性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-2propertyoverrideconfigurer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 示例 2：PropertyOverrideConfigurer（属性覆盖）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#factorybean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、使用 FactoryBean 自定义实例化逻辑
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、使用 FactoryBean 自定义实例化逻辑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 核心方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 核心特性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.9 基于注解的容器配置
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autowired" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        使用 @Autowired 注解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="使用 @Autowired 注解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-autowired" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. @Autowired 注解的应用场景
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. @Autowired 注解的应用场景">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 构造函数注入
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-setter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Setter 方法注入
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 任意方法注入
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 字段注入（支持与构造函数混合使用）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-self-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 自注入（Self Injection）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 注入集合 / 数组类型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 注入集合 / 数组类型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 集合排序
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 注入 Map 类型
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 非必需注入（可选依赖）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 非必需注入（可选依赖）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 构造函数 / 工厂方法参数的特殊规则
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 其他可选依赖声明方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-spring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 注入 Spring 内置容器对象
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 注解生效限制
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 注解生效限制">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#112-java-based" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.12 Java-based 容器配置
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.12 Java-based 容器配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1121-bean-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.12.1 基础概念：@Bean 和 @Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1122-annotationconfigapplicationcontextspring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.12.2 通过AnnotationConfigApplicationContext实例化spring容器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1123-bean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.12.3 @Bean的使用
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.12.3 @Bean的使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#declaring-a-bean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Declaring a Bean
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bean_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bean的依赖
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        接受生命周期的回调
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beanscope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        指定Bean的scope
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bean_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        自定义Bean的名称
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1124-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.12.4 @Configuration注解的使用
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.12.4 @Configuration注解的使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bean_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bean之间的依赖表达
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lookup-method-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lookup Method Injection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-based" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        进一步探究Java-based的配置工作原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1125-java-based" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.12.5 Java-based配置的组合使用
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.12.5 Java-based配置的组合使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        使用@Import注解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurationbean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        有条件地包含@Configuration类或@Bean方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combining-java-and-xml-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Combining Java and XML Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-Ioc%E5%AE%B9%E5%99%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IOC容器2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-Resource/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resource
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Validation-DataBinding-Type-Conversion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spring-AOP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AOP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Null-safetyAndLogging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Null-safe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Spring%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    spring常见问题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    springboot
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    springboot
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring-boot/GettingStarted/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    简介
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring-boot/UsingSpringBoot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    如何使用
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring-boot/spring-boot-features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    功能特性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring-boot/spring-boot%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    核心概念
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p>这部分章节涵盖了Spring 框架不可或缺的全部核心技术。
+其中最关键的是 Spring 框架的控制反转（IoC）容器。文档在对 Spring 框架 IoC 容器进行深入阐述后，紧接着全面介绍了 Spring 的面向切面编程（AOP）技术。Spring 框架拥有自研的 AOP 框架，该框架概念清晰易懂，能够很好地满足 Java 企业级编程中 80% 的 AOP 核心需求。
+文档还介绍了 Spring 与 AspectJ 的集成方案 ——AspectJ 是目前 Java 企业级领域中功能最丰富、且最为成熟的 AOP 实现方案。
+AOT技术可用于对应用程序进行提前优化，该技术通常适用于基于 GraalVM 的原生镜像部署场景。</p>
+<p>章节概要</p>
+<ul>
+<li>IoC 容器核心概念与基本原理</li>
+<li>Bean 的定义、创建与生命周期管理</li>
+<li>依赖注入（DI）机制与配置方式</li>
+<li>Singleton、Prototype、Request、Session 等作用域</li>
+<li>Bean 初始化和销毁回调的定制</li>
+<li>Bean 定义的继承与复用</li>
+<li>BeanPostProcessor、BeanFactoryPostProcessor 等扩展点</li>
+<li>@Autowired、@Component、@Repository 等注解的使用</li>
+<li>组件扫描（Component Scan）与自动装配</li>
+<li>@Inject、@Named 等 JSR 330 标准注解</li>
+<li>@Configuration、@Bean 编程式配置</li>
+<li>Environment 接口与 Profile 管理</li>
+<li>LoadTimeWeaver 注册与字节码增强</li>
+<li>ApplicationContext 的高级功能</li>
+<li>BeanFactory 核心接口 API</li>
+</ul>
+<h2 id="11-iocbeans">1.1 IoC容器和Beans</h2>
+<p>本章介绍 Spring 框架对控制反转（IoC）原则的实现。依赖注入（DI）是控制反转的一种特定形式，在这种模式下，对象仅通过以下三种方式定义自身的依赖项（即协同工作的其他对象）：构造函数参数、工厂方法参数，或对象实例被构造完成、或从工厂方法返回后为其设置的属性。IoC 容器会在创建 Bean 时，自动注入这些依赖项。这一过程与 Bean 自身通过直接实例化类、或采用服务定位器模式等方式控制依赖项的实例化和获取路径，在逻辑上是完全相反的 —— 这也是 “控制反转” 名称的由来。
+org.springframework.beans 和 org.springframework.context 这两个包是 Spring 框架 IoC 容器的基础。BeanFactory 接口提供了一套高级配置机制，能够管理任意类型的对象。ApplicationContext 是 BeanFactory 的子接口，它在父接口的基础上新增了以下功能：</p>
+<ul>
+<li>更便捷地与 Spring 面向切面编程（AOP）特性集成</li>
+<li>消息资源处理（用于国际化场景）</li>
+<li>事件发布功能</li>
+<li>适用于应用层的特定上下文，例如 Web 应用专用的 WebApplicationContext</li>
+</ul>
+<p>简而言之，BeanFactory 提供了配置框架和基础功能，而 ApplicationContext 则在此之上添加了更多企业级特性。ApplicationContext 是 BeanFactory 的完整超集，因此本章在描述 Spring IoC 容器时，均以 ApplicationContext 为核心展开。若你需要了解如何使用 BeanFactory 而非 ApplicationContext，可参考《BeanFactory API》相关章节。</p>
+<p>在 Spring 中，构成应用程序核心、且由 Spring IoC 容器管理的对象被称为 Bean。Bean 是由 Spring IoC 容器负责实例化、组装和管理的对象；除此之外，它与应用程序中的其他普通对象并无区别。Bean 及其之间的依赖关系，均体现在容器所使用的配置元数据中。</p>
+<h1 id="12">1.2 容器</h1>
+<p>org.springframework.context.ApplicationContext 接口代表 Spring 控制反转（IoC）容器，负责 Bean 的实例化、配置和组装。容器通过读取配置元数据，获取需要实例化、配置和组装的组件相关指令。配置元数据可通过带注解的组件类、包含工厂方法的配置类，或外部 XML 文件、Groovy 脚本进行定义。无论采用哪种格式，你都可以构建应用程序，并处理这些组件之间复杂的依赖关系。
+ApplicationContext 接口的多个实现类都属于 Spring 核心模块。在独立应用程序中，通常会创建 AnnotationConfigApplicationContext 或 ClassPathXmlApplicationContext 的实例。
+在大多数应用场景下，无需编写显式的用户代码来实例化一个或多个 Spring IoC 容器。例如，在普通 Web 应用场景中，只需在应用的 web.xml 文件中编写一段简单的模板化 Web 描述符 XML 即可（详情参见《Web 应用的便捷 ApplicationContext 实例化》）。在 Spring Boot 场景中，应用上下文会基于通用的配置约定，为你自动隐式启动。</p>
+<h2 id="121">1.2.1 配置元数据</h2>
+<p>正如图中所示，Spring 控制反转（IoC）容器会读取某种格式的配置元数据。这些配置元数据的作用，是让应用开发者能够告知 Spring 容器，应当如何实例化、配置并组装应用中的各个组件。
+Spring IoC 容器本身与配置元数据的实际编写格式完全解耦。如今，许多开发者会为自己的 Spring 应用选择基于 Java 的配置方式：</p>
+<ul>
+<li>基于注解的配置：在应用的组件类上，通过基于注解的配置元数据来定义 Bean。</li>
+<li>基于 Java 的配置：借助基于 Java 的配置类，在应用类外部定义 Bean。若要使用这些功能，请参考 @Configuration、@Bean、@Import 和 @DependsOn 注解。</li>
+</ul>
+<p>Spring 配置至少包含一个、通常包含多个需要由容器管理的 Bean 定义。基于 Java 的配置一般会在 @Configuration 标注的类中，使用 @Bean 注解标注方法，每个方法对应一个 Bean 定义。
+这些 Bean 定义对应着构成应用的实际对象。通常情况下，你可以定义服务层对象、持久层对象（例如资源库或数据访问对象（DAO））、表现层对象（例如 Web 控制器），以及基础设施类对象（例如 JPA 实体管理器工厂、Java 消息服务队列等）。一般而言，无需在容器中配置细粒度的领域对象，因为创建和加载领域对象的职责通常由资源库和业务逻辑来承担。</p>
+<p>Spring 提供了多种 <code>ApplicationContext</code> 的实现。在独立应用中，常见的实现有 <code>ClassPathXmlApplicationContext</code> 和 <code>FileSystemXmlApplicationContext</code>。虽然 XML 是传统的配置格式，但可以通过少量 XML 来启用注解或 Java 配置的支持，从而让容器使用注解或代码作为元数据来源。</p>
+<p>在大多数场景下，无需在应用代码中显式创建 <code>ApplicationContext</code> 实例。例如在 Web 应用中，通常只需在 <code>web.xml</code> 中添加几行标准配置模板（参见“Web 应用的便捷 ApplicationContext 实例化”）。如果使用 Spring Tools for Eclipse 等 IDE，也可以通过图形化操作快速生成这些配置。</p>
+<p>Spring 的配置通常由若干 bean 定义组成。基于 XML 的元数据将这些 bean 作为顶层 <code>&lt;beans/&gt;</code> 元素下的多个 <code>&lt;bean/&gt;</code> 定义；Java 配置则通常在 <code>@Configuration</code> 类中的 <code>@Bean</code> 方法里声明。</p>
+<p>这些 bean 定义对应于构成应用程序的实际对象，例如服务层对象、数据访问对象（DAO）、表示层对象（如控制器实例）、以及基础设施对象（如 Hibernate 的 SessionFactory、JMS 队列等）。通常不会将细粒度的领域对象放到容器中管理，因为这类对象通常由 DAO 或业务逻辑在运行时创建。然而，借助 Spring 与 AspectJ 的集成，也可以对在容器外部创建的对象应用依赖注入，详见“使用 AspectJ 与 Spring 进行依赖注入域对象”。</p>
+<h2 id="123">1.2.3 使用容器</h2>
+<p><code>ApplicationContext</code> 是一个高级工厂接口，维护着容器中各个 bean 及其依赖关系的注册表。通常通过 <code>getBean(String name, Class&lt;T&gt; requiredType)</code> 或 <code>getBean(Class&lt;T&gt; requiredType)</code> 等方法检索 bean 实例。</p>
+<p>例如，使用基于 XML 的配置可以这样创建并获取 bean：</p>
+<pre><code class="language-java">// create and configure beans
+ApplicationContext context = new ClassPathXmlApplicationContext(&quot;services.xml&quot;, &quot;daos.xml&quot;);
+
+// retrieve configured instance
+PetStoreService service = context.getBean(&quot;petStore&quot;, PetStoreService.class);
+
+// use configured instance
+List&lt;String&gt; userList = service.getUsernameList();
+</code></pre>
+<p>更灵活的做法是使用 <code>GenericApplicationContext</code> 结合不同的 <code>BeanDefinitionReader</code>（例如 <code>XmlBeanDefinitionReader</code>）来从多种配置源加载 bean 定义：</p>
+<pre><code class="language-java">GenericApplicationContext context = new GenericApplicationContext();
+new XmlBeanDefinitionReader(context).loadBeanDefinitions(&quot;services.xml&quot;, &quot;daos.xml&quot;);
+context.refresh();
+</code></pre>
+<p>你可以在同一 <code>ApplicationContext</code> 中混合不同的读取器，从不同配置源加载 bean 定义。</p>
+<p>尽管可以在代码中直接调用 <code>getBean()</code>，但理想情况下应用逻辑不应依赖于该调用。更好的做法是使用依赖注入（例如通过注解或构造器注入），这样应用代码与 Spring API 解耦。在 Web 场景下，Spring 与各类 Web 框架集成后，会在控制器等组件上自动注入所需的依赖，无需显式调用 <code>getBean()</code>。</p>
+<h1 id="13-bean">1.3 Bean</h1>
+<p>Spring IoC 容器管理一个或多个 Bean。这些 Bean 是通过你提供给容器的配置元数据创建的（例如，以 XML <bean/> 定义的形式）。
+在容器内部，这些 Bean 定义以 BeanDefinition 对象的形式存在，其中包含（但不限于）以下元数据：</p>
+<ul>
+<li>包限定的类名: 通常是被定义的Bean的实际实现类.</li>
+<li>Bean的行为配置，它说明了Bean在容器中应该表现的状态(scope, lifecycle callbacks等)</li>
+<li>对其他Bean的引用，这些引用是Bean工作所需要的，也被成为依赖</li>
+<li>要在新创建的对象中设置的其他配置元素。例如，池的大小、连接池的连接数等（即对象的属性）。</li>
+</ul>
+<p>这些元数据组成一组属性，这些属性构成了每个Bean定义，如下表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Property</th>
+<th style="text-align: left;">Explained in…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Class</td>
+<td style="text-align: left;"><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-class">Instantiating Beans</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;"><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-beanname">Naming Beans</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Scope</td>
+<td style="text-align: left;"><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-scopes">Bean Scopes</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Constructor arguments</td>
+<td style="text-align: left;"><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-collaborators">Dependency Injection</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Properties</td>
+<td style="text-align: left;"><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-collaborators">Dependency Injection</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Autowiring mode</td>
+<td style="text-align: left;"><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-autowire">Autowiring Collaborators</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Lazy initialization mode</td>
+<td style="text-align: left;"><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-lazy-init">Lazy-initialized Beans</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Initialization method</td>
+<td style="text-align: left;"><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-lifecycle-initializingbean">Initialization Callbacks</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Destruction method</td>
+<td style="text-align: left;"><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-lifecycle-disposablebean">Destruction Callbacks</a></td>
+</tr>
+</tbody>
+</table>
+<p>除了包含创建特定 Bean 相关信息的 Bean 定义外，ApplicationContext 实现类还允许注册容器外部（由用户）创建的现有对象。这可通过 getAutowireCapableBeanFactory() 方法获取 ApplicationContext 的 BeanFactory（返回 DefaultListableBeanFactory 实现类），并调用其 registerSingleton(..) 和 registerBeanDefinition(..) 方法完成。不过，典型应用通常仅使用通过常规 Bean 定义元数据定义的 Bean。</p>
+<p>Bean 元数据和手动提供的单例实例需尽早注册，以便容器在自动装配和其他内省步骤中正确处理它们。虽然容器在一定程度上支持覆盖现有元数据和单例实例，但不官方支持运行时注册新 Bean（与工厂的实时访问并发进行），这可能导致并发访问异常、Bean 容器状态不一致，或两者皆有。</p>
+<h2 id="bean">覆盖Bean</h2>
+<p>当使用已被占用的标识符注册 Bean 时，会发生 Bean 覆盖。尽管 Bean 覆盖是可行的，但会降低配置的可读性。
+   注意：Bean 覆盖功能将在未来版本中被废弃。</p>
+<p>若要完全禁用 Bean 覆盖，可在 ApplicationContext 刷新前将 allowBeanDefinitionOverriding 标志设为 false。在此配置下，若尝试覆盖 Bean，容器会抛出异常。
+   默认情况下，容器会以 INFO 级别记录每次 Bean 覆盖的尝试，方便你调整配置。尽管不推荐，但你也可将 allowBeanDefinitionOverriding 设为 true 来关闭这些日志。</p>
+<p>Java 配置中的 Bean 覆盖 
+使用 Java 配置时，只要 @Bean 方法的返回类型与扫描到的 Bean 类匹配，该方法会静默覆盖同名的组件类 Bean。这意味着容器会优先调用 @Bean 工厂方法，而非 Bean 类中预先声明的构造函数。
+我们承认在测试场景中覆盖 Bean 较为便捷，Spring 也为此提供了显式支持（详见相关章节）。</p>
+<h2 id="3bean">3.Bean的命名</h2>
+<p>每个 Bean 有一个或多个标识符，这些标识符在托管该 Bean 的容器中必须唯一。Bean 通常只有一个标识符，若需多个，额外的标识符可视为别名（aliases）。</p>
+<h3 id="31-xml-bean">3.1 XML 配置中的 Bean 命名</h3>
+<p>在基于 XML 的配置元数据中，可通过 id 属性、name 属性或两者结合来指定 Bean 标识符：
+id 属性：仅能指定一个唯一 ID，通常为字母数字格式（如 myBean、someService），也可包含特殊字符。
+name 属性：可指定多个别名，用逗号（,）、分号（;）或空格分隔。
+尽管 id 属性在 XML 规范中为 xsd:string 类型，但 Bean ID 的唯一性由容器（而非 XML 解析器）保证。</p>
+<h3 id="32-bean">3.2 未显式命名的 Bean</h3>
+<p>你无需为 Bean 提供 name 或 id：若未显式指定，容器会为该 Bean 生成唯一名称。但如果需要通过 ref 元素或服务定位器（Service Locator）风格的查找来引用该 Bean，则必须提供名称。不命名的常见场景包括内部 Bean 和自动装配协作对象。</p>
+<h3 id="33-bean">3.3 Bean 命名规范</h3>
+<p>Bean 命名遵循 Java 实例字段的标准命名规范：以小写字母开头，后续采用驼峰命名法（如 accountManager、accountService、userDao、loginController）。
+统一的命名规范可提升配置的可读性，且在 Spring AOP 中，按名称为一组相关 Bean 应用通知时也会更便捷。</p>
+<h3 id="34-bean">3.4 类路径扫描的 Bean 命名</h3>
+<p>类路径扫描时，Spring 会为未命名的组件生成 Bean 名称，规则如下：
+取类的简单名称，将首字母转为小写；
+特殊情况（罕见）：若类名前两个字符均为大写，则保留原大小写（与 java.beans.Introspector.decapitalize 规则一致，Spring 底层采用此方法）。</p>
+<h3 id="35-bean">3.5 Bean 别名（外部定义）</h3>
+<p>在 Bean 定义内部，可通过 id 属性（最多一个）和 name 属性（多个）组合为 Bean 提供多个名称。但有时需要为其他位置定义的 Bean 引入别名（例如大型系统中，各子系统有独立配置）。</p>
+<pre><code class="language-xml">&lt;alias name=&quot;fromName&quot; alias=&quot;toName&quot;/&gt;
+</code></pre>
+<p>在这种情况下，名为fromName的bean（在同一个容器中）在使用这个别名定义之后，也可以被称为toName。
+例如，子系统 A 的配置元数据可以用 <code>subsystemA-dataSource</code> 的名称来引用一个 DataSource。子系统B的配置元数据可以用<code>subsystemB-dataSource</code>的名称来引用DataSource。当组成使用这两个子系统的主应用程序时，主应用程序以<code>myApp-dataSource</code>的名称来引用DataSource。要让这三个名称都引用同一个对象，可以在配置元数据中添加以下别名定义。</p>
+<pre><code class="language-XML">&lt;alias name=&quot;myApp-dataSource&quot; alias=&quot;subsystemA-dataSource&quot;/&gt;
+&lt;alias name=&quot;myApp-dataSource&quot; alias=&quot;subsystemB-dataSource&quot;/&gt;
+</code></pre>
+<p>现在每个子系统和主系统都可以通过一个唯一的name引用dataSource，并且不与其他定义发生冲突，但引用的是同一个dataSource。</p>
+<p>使用注解也可以定义多个Bean的别名。</p>
+<h2 id="4bean">4.实例化Bean</h2>
+<p>Bean 定义本质上是创建一个或多个对象的 “配方”。容器在收到请求时，会根据命名 Bean 的配方，使用 Bean 定义封装的配置元数据创建（或获取）实际对象。
+在基于 XML 的配置中，<bean/> 元素的 class 属性指定要实例化的对象类型，该属性（对应 BeanDefinition 的 Class 属性）通常是必需的（例外情况见《通过实例工厂方法实例化》和《Bean 定义继承》）。Class 属性有两种使用方式：</p>
+<ul>
+<li>直接构造：容器通过反射调用类的构造函数创建 Bean（等效于 Java 的 new 关键字）；</li>
+<li>静态工厂方法：容器调用类的静态工厂方法创建 Bean，此时 class 属性指定包含工厂方法的类，返回对象的类型可能与该类相同或不同。</li>
+</ul>
+<h3 id="bean_1">通过构造器来实例化Bean</h3>
+<p>通过构造函数创建 Bean 时，所有普通类都可与 Spring 兼容 —— 无需实现特定接口或遵循特殊编码规范，只需指定 Bean 类即可（若使用特定 IoC 方式，可能需要默认无参构造函数）。</p>
+<p>Spring IoC 容器几乎可管理任意类（不限于标准 JavaBean），但大多数用户偏好使用 “默认无参构造函数 + 对应 getter/setter” 的标准 JavaBean。即使是不遵循 JavaBean 规范的遗留类（如老式连接池），Spring 也能管理。</p>
+<pre><code class="language-xml">&lt;bean id=&quot;exampleBean&quot; class=&quot;examples.ExampleBean&quot;/&gt;
+
+&lt;bean name=&quot;anotherExample&quot; class=&quot;examples.ExampleBeanTwo&quot;/&gt;
+</code></pre>
+<h3 id="bean_2">静态工厂方法来实例化Bean</h3>
+<p>当定义一个使用静态工厂方法创建的Bean时，使用class属性来指定包含静态工厂方法的类，并使用名为factory-method的属性来指定工厂方法本身的名称。你应该能够调用这个方法（有可选的参数，如后面所述）并返回一个活的对象，随后这个对象被当作是通过构造函数创建的。这种bean定义的一个用途是在遗留代码中调用静态工厂。</p>
+<p>下面的Bean定义指定通过调用工厂方法来创建Bean。该定义没有指定返回对象的类型（类），只指定了包含工厂方法的类。在这个例子中，createInstance()方法必须是一个静态方法。下面的例子展示了如何指定工厂方法。</p>
+<pre><code class="language-java">&lt;bean id=&quot;clientService&quot;
+    class=&quot;examples.ClientService&quot;
+    factory-method=&quot;createInstance&quot;/&gt;
+
+
+public class ClientService {
+    private static ClientService clientService = new ClientService();
+    private ClientService() {}
+
+    public static ClientService createInstance() {
+        return clientService;
+    }
+}
+</code></pre>
+<h3 id="bean_3">实例工厂方法创建Bean</h3>
+<p>与静态工厂方法类似，但实例工厂方法是调用容器中现有 Bean 的非静态方法来创建新 Bean：</p>
+<pre><code class="language-xml">&lt;bean id=&quot;serviceLocator&quot; class=&quot;examples.DefaultServiceLocator&quot;&gt;
+    &lt;!-- inject any dependencies required by this locator bean --&gt;
+&lt;/bean&gt;
+
+&lt;bean id=&quot;clientService&quot;
+    factory-bean=&quot;serviceLocator&quot;
+    factory-method=&quot;createClientServiceInstance&quot;/&gt;
+
+&lt;bean id=&quot;accountService&quot;
+    factory-bean=&quot;serviceLocator&quot;
+    factory-method=&quot;createAccountServiceInstance&quot;/&gt;
+</code></pre>
+<pre><code class="language-java">public class DefaultServiceLocator {
+
+    private static ClientService clientService = new ClientServiceImpl();
+
+    private static AccountService accountService = new AccountServiceImpl();
+
+    public ClientService createClientServiceInstance() {
+        return clientService;
+    }
+
+    public AccountService createAccountServiceInstance() {
+        return accountService;
+    }
+}
+</code></pre>
+<h3 id="bean_4">确定Bean的运行时类型</h3>
+<p>确定 Bean 的运行时类型并非易事：
+- Bean 元数据中的 class 仅为初始引用，结合工厂方法或 FactoryBean 时，实际运行时类型可能不同；
+- AOP 代理可能为 Bean 包装接口代理，导致目标 Bean 的实际类型仅暴露其实现的接口。
+推荐方式：调用 BeanFactory.getType(beanName) 获取 Bean 的实际运行时类型，该方法会考虑上述所有情况，返回与 BeanFactory.getBean(beanName) 一致的对象类型。</p>
+<h2 id="bean_5">附录：Bean 的生命周期</h2>
+<p><img alt="Bean生命周期" src="../images/Bean%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png" /></p>
+<p>Spring统一管理Bean的生命周期</p>
+<ol>
+<li>Bean的实例化与属性注入</li>
+</ol>
+<p>在第一次调用getBean()时生成Bean的实例，通常通过反射或者CGLIB动态字节码来生成Bean实例或子类。但是并不是直接返回构造完成的对象实例，而是进行包裹返回相应的BeanWrapper实例，这样的好处是可以在接下来非常方便的设置对象的属性（不然如果直接返回实例对象，那么你要通过反射的API才能去增加对象的属性，很麻烦），而且BeanWrapper继承了PropertyAccessor接口可以方便的获取对象属性，也继承了PropertyEditorRegister和TypeConverter接口，可以方便转换属性类型。</p>
+<ol>
+<li>
+<p>检查设置Aware接口</p>
+</li>
+<li>
+<p>BeanPostprocessor的before和after方法,和中间的InitializingBean和init-method方法</p>
+</li>
+<li>
+<p>检查单例 Bean 是否实现了 <code>DisposableBean</code> 接口，并注册销毁时的回调。通常在 Spring 容器关闭时会调用这些销毁方法（例如通过调用 <code>ConfigurableApplicationContext.close()</code>）；不应依赖容器内部的手动方法来触发销毁。</p>
+</li>
+</ol>
+<p>下面是按方法执行的前后顺序排列</p>
+<ul>
+<li>
+<p><strong>BeanDefinitionRegistryPostProcessor</strong></p>
+<blockquote>
+<p>继承BeanFactoryPostProcessor，在运行BeanFactoryPostProcessor之前允许更多的bean definitions注册。特别的，这个类可以注册更多的bean definitions，甚至包括BeanFactoryPostProcessor的实例</p>
+</blockquote>
+<p>如Apollo里DefaultConfigPropertySourcesProcessorHelper就利用BeanDefinitionRegistryPostProcessor，向容器中注册了多个用于Processor的Bean。</p>
+</li>
+<li>
+<p><strong>BeanFactoryPostProcessor.postProcessBeanFactory()</strong></p>
+<blockquote>
+<p>用来在所有的bean definitions加载后，但是还没有实例化bean之前调用本方法
+可以修改bean的定义，如是否是单例，是否lazy init，DependsOn，FactoryBeanName等等等等，一般用来修改属性值，一个典型的实现是PropertyResourceConfigurer，用来从配置文件里加载属性放进bean里，或者更换${...}placeHolder</p>
+</blockquote>
+<p>如Apollo里PropertySourcesProcessor利用BeanFactoryPostProcessor，将config包装成ConfigPropertySource添加到Spring中。</p>
+</li>
+<li>
+<p><strong>bean的构造方法</strong></p>
+</li>
+<li>
+<p><strong>BeanPostProcessor.postProcessBeforeInitialization()</strong></p>
+<blockquote>
+<p>在bean进行初始化方法（如InitializingBean.afterPropertiesSet或者自定义的init方法@PostConstruct）的回调之前调用
+调用此方法时，bean的属性值已经设置好
+可以返回一个包装类</p>
+</blockquote>
+</li>
+<li>
+<p><strong>@PostConstruct</strong></p>
+<blockquote>
+<p>用来标注在bean的方法上，在<strong>依赖注入后</strong>，放入spring容器前执行一些init逻辑（init方法中可以使用依赖属性）。一个bean中只能有一个@PostConstruct
+然后注意，这是java规定的注解！！
+如果在拦截器中,（没见过这个用法，不太懂）
+必须有InvocationContext方法参数，可以有Object返回值
+如果不是在拦截器类中：
+不能有返回值和方法参数
+标注的方法可以是public, protected,package private or private
+可以是final的
+不能抛出运行时异常，会导致容器启动失败</p>
+</blockquote>
+</li>
+<li>
+<p><strong>InitializingBean.afterPropertiesSet()</strong></p>
+<blockquote>
+<p>用来BeanFactory将bean的所有属性都设置后，执行一些init逻辑或者只是check属性是否正确和缺失。</p>
+</blockquote>
+</li>
+<li>
+<p><strong>BeanPostProcessor.postProcessAfterInitialization()</strong></p>
+<blockquote>
+<p>在bean进行初始化方法（如InitializingBean.afterPropertiesSet或者自定义的init方法@PostConstruct）的回调之后调用
+调用此方法时，bean的属性值已经设置好
+可以返回一个包装类
+可能被多次调用</p>
+</blockquote>
+</li>
+<li>
+<p><strong>SmartInitializingSingleton</strong></p>
+<blockquote>
+<p>这个接口可以被一个单例的bean实现，在BeanFactory实例化所有单例bean之后执行。
+一般用来执行一些init逻辑，在想要急切获取其他bean时可以用来替换InitializingBean.afterPropertiesSet()的方案</p>
+</blockquote>
+</li>
+<li>
+<p><strong>SmartLifecycle.start()</strong></p>
+<blockquote>
+<p>Lifecycle接口的扩展，用来实现想在容器启动刷新，或者shutdown时执行一些逻辑。
+isAutoStartup()用来表示在容器刷新时这个bean是否启动，否则只有容器start时重新创建
+stop(Runnable)用于需要异步的关闭逻辑，必须要调用callback.run()
+Phased用于控制多个bean的启动顺序，value较小的会先启动，shutdown时会后关闭。
+如ComponentB依赖componentA先启动，则componentA.phase()应该返回一个较小的值，关闭时B会先关闭。
+如果明确指定depends-on，以depends-on为准。
+任何没有实现SmartLifecycle的bean的phase会是0，这也就意味着如果SmartLifecycle Bean的phase返回负数，将优先于所有的容器bean启动，正数反之。
+SmartLifecycle的DEFAULT_PHASE = Integer.MAX_VALUE;</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="16-bean">1.6 自定义Bean的性质</h1>
+<p>Spring 框架提供了多个接口，可用于自定义 Bean 的特性。本节将这些接口分为以下三类介绍：</p>
+<ul>
+<li>生命周期回调接口</li>
+<li>ApplicationContextAware 和 BeanNameAware 接口</li>
+<li>其他 Aware 接口</li>
+</ul>
+<h2 id="_1">生命周期回调</h2>
+<p>若要与容器对 Bean 生命周期的管理进行交互，可实现 Spring 提供的 InitializingBean 和 DisposableBean 接口。容器会为实现 InitializingBean 接口的 Bean 调用 afterPropertiesSet() 方法，为实现 DisposableBean 接口的 Bean 调用 destroy() 方法，让 Bean 能在初始化和销毁阶段执行特定操作。</p>
+<p>在现代 Spring 应用中，接收生命周期回调的最佳实践是使用 JSR-250 规范的 @PostConstruct 和 @PreDestroy 注解。使用这两个注解的优势在于，Bean 无需耦合 Spring 专属的接口。相关细节可参考《使用 @PostConstruct 和 @PreDestroy》章节。
+若你不想使用 JSR-250 注解，但仍希望解除代码与 Spring 的耦合，可考虑使用 Bean 定义元数据中的 init-method 和 destroy-method 属性。</p>
+<p>Spring 框架内部会通过 BeanPostProcessor 的实现类，处理所有可识别的回调接口并调用对应的方法。如果需要实现 Spring 默认未提供的自定义特性或其他生命周期行为，你可以自行实现 BeanPostProcessor 接口。更多信息可参考《容器扩展点》章节。
+除了初始化和销毁回调外，由 Spring 管理的对象还可实现 Lifecycle 接口，使这些对象能跟随容器自身的生命周期，参与启动和关闭流程。
+下文将详细介绍各类生命周期回调接口。</p>
+<h3 id="_2">初始化回调</h3>
+<p>org.springframework.beans.factory.InitializingBean 接口允许 Bean 在容器为其注入所有必要属性后，执行初始化操作。该接口仅定义了一个方法：
+java
+运行</p>
+<pre><code class="language-java">void afterPropertiesSet() throws Exception;
+</code></pre>
+<p>不推荐使用 InitializingBean 接口，因为它会让代码不必要地耦合到 Spring 框架。作为替代方案，建议使用 @PostConstruct 注解，或指定一个普通 Java 对象（POJO）的初始化方法。
+- 基于 XML 的配置元数据中，可通过 init-method 属性指定初始化方法的名称，该方法需满足无返回值、无参数的签名要求；
+- 基于 Java 的配置方式中，可使用 @Bean 注解的 initMethod 属性。</p>
+<pre><code class="language-java">public class ExampleBean {
+    public void init() {
+        // 执行初始化操作
+    }
+}
+</code></pre>
+<p>上述示例的效果，与以下实现 InitializingBean 接口的示例几乎完全一致：</p>
+<pre><code class="language-java">public class AnotherExampleBean implements InitializingBean {
+    @Override
+    public void afterPropertiesSet() {
+        // 执行初始化操作
+    }
+}
+</code></pre>
+<p>不同的是，第一个示例的代码未与 Spring 框架耦合。</p>
+<p>需要注意的是，@PostConstruct 注解标注的方法及各类初始化方法，均在容器的单例创建锁内执行。只有当 @PostConstruct 方法执行完成后，Bean 实例才会被视为完全初始化，并对外发布。这类独立的初始化方法，仅适用于验证配置状态，或根据给定配置初始化部分数据结构，不可在此阶段访问外部 Bean，否则存在初始化死锁的风险。</p>
+<p>若需要执行耗时的初始化后操作（例如异步的数据库准备步骤），你的 Bean 应选择以下两种方式实现：
+- 实现 SmartInitializingSingleton 接口，重写 afterSingletonsInstantiated() 方法；
+- 监听容器刷新事件：实现 ApplicationListener<ContextRefreshedEvent> 接口，或使用等效的注解 @EventListener(ContextRefreshedEvent.class)。</p>
+<p>以上两种方式的执行时机，均在所有常规单例 Bean 初始化完成后，因此不会处于任何单例创建锁的范围内。
+此外，你也可以实现 (Smart)Lifecycle 接口，融入容器的整体生命周期管理，该接口支持自动启动机制、销毁前的停止步骤，以及可能的停止 / 重启回调（详见下文）。</p>
+<h3 id="_3">销毁回调</h3>
+<p>实现 org.springframework.beans.factory.DisposableBean 接口的 Bean，会在其所属容器销毁时收到回调通知。该接口仅定义了一个方法：</p>
+<pre><code class="language-java">void destroy() throws Exception;
+</code></pre>
+<p>不推荐使用 DisposableBean 回调接口，因为它会让代码不必要地耦合到 Spring 框架。作为替代方案，建议使用 @PreDestroy 注解，或为 Bean 定义指定一个通用的销毁方法。</p>
+<ul>
+<li>基于 XML 的配置元数据中，可在 <bean/> 标签上使用 destroy-method 属性；</li>
+<li>基于 Java 的配置方式中，可使用 @Bean 注解的 destroyMethod 属性。</li>
+</ul>
+<pre><code class="language-java">public class ExampleBean {
+    public void cleanup() {
+        // 执行销毁操作（如释放连接池）
+    }
+}
+</code></pre>
+<pre><code class="language-xml">&lt;bean id=&quot;exampleDestructionBean&quot; class=&quot;examples.ExampleBean&quot; destroy-method=&quot;cleanup&quot;/&gt;
+</code></pre>
+<p>上述定义的效果，与以下实现 DisposableBean 接口的定义几乎完全一致：</p>
+<p>pring 还支持自动推断销毁方法，会自动检测 Bean 中名为 close 或 shutdown 的公共方法。这是 Java 配置类中 @Bean 方法的默认行为，且会自动匹配实现了 java.lang.AutoCloseable 或 java.io.Closeable 接口的类，同样不会将销毁逻辑耦合到 Spring 框架。
+在 XML 配置中，可将 <bean> 元素的 destroy-method 属性设为特殊值 (inferred)，指示 Spring 为该 Bean 定义自动检测其类中的公共 close 或 shutdown 方法作为销毁方法。也可在 <beans> 元素的 default-destroy-method 属性中设置该特殊值，让整个配置文件中的所有 Bean 定义都应用此行为（详见《默认的初始化和销毁方法》章节）。
+若需要更精细的关闭阶段控制，可实现 Lifecycle 接口，在所有单例 Bean 的销毁方法执行前，接收提前的停止信号；也可实现 SmartLifecycle 接口，定义有时间限制的停止步骤，容器会等待所有此类停止操作完成后，再执行销毁方法。</p>
+<p>Spring 容器保证：在为 Bean 注入所有依赖后，立即调用配置的初始化回调方法。因此，初始化回调方法是在原始 Bean 引用上执行的，这意味着 AOP 拦截器等代理逻辑尚未应用到该 Bean 上。容器会先完整创建目标 Bean，再为其应用包含拦截器链的 AOP 代理。若目标 Bean 和代理 Bean 是单独定义的，代码甚至可以绕过代理，直接与原始目标 Bean 交互。因此，将拦截器应用到初始化方法上是不符合逻辑的 —— 这会让目标 Bean 的生命周期与代理 / 拦截器耦合，且当代码直接操作原始目标 Bean 时，会出现异常的语义行为。</p>
+<h2 id="lifecycle">启动和关闭回调 Lifecycle</h2>
+<p>Lifecycle 接口为拥有自身生命周期需求的对象（例如需要启动和停止后台进程的对象）定义了核心方法：</p>
+<pre><code class="language-java">public interface Lifecycle {
+void start();
+void stop();
+boolean isRunning();
+}
+</code></pre>
+<p>所有由 Spring 管理的对象都可实现 Lifecycle 接口。当 ApplicationContext 自身接收到启动和停止信号时（例如运行时的停止 / 重启场景），会将这些调用级联传递给上下文中所有 Lifecycle 接口的实现类，该过程通过委托给 LifecycleProcessor 接口完成，接口定义如下：</p>
+<pre><code class="language-java">public interface LifecycleProcessor extends Lifecycle {
+void onRefresh();
+void onClose();
+}
+</code></pre>
+<p>LifecycleProcessor 接口本身是 Lifecycle 接口的扩展，还新增了两个方法，用于响应容器的刷新和关闭事件。
+需要注意的是，标准的 org.springframework.context.Lifecycle 接口仅为显式的启动和停止通知定义了契约，并不意味着容器刷新时会自动启动。若需要对自动启动进行精细控制，或需要优雅地停止特定 Bean（包括启动和停止阶段），应考虑实现扩展的 org.springframework.context.SmartLifecycle 接口。
+此外，无法保证停止通知一定在销毁操作之前执行：在常规的容器关闭流程中，所有 Lifecycle Bean 会先接收停止通知，再执行通用的销毁回调；但在容器生命周期内的热刷新，或刷新尝试失败时，容器只会调用销毁方法。
+启动和关闭的调用顺序至关重要：若两个对象之间存在 depends-on 依赖关系，被依赖的对象会先启动、后停止，依赖方则会后启动、先停止。但在某些场景下，对象间的直接依赖关系是未知的，你可能仅知道某类对象应在另一类对象之前启动。此时，SmartLifecycle 接口提供了另一个配置项 —— 其超接口 Phased 中定义的 getPhase() 方法。
+Phased 接口的定义如下：</p>
+<pre><code class="language-java">public interface Phased {
+int getPhase();
+}
+</code></pre>
+<p>SmartLifecycle 接口的定义如下：</p>
+<pre><code class="language-java">public interface SmartLifecycle extends Lifecycle, Phased {
+boolean isAutoStartup();
+void stop(Runnable callback);
+}
+</code></pre>
+<p>启动时，阶段值（phase）越小的对象越先启动；停止时，则按照相反的顺序执行。因此，实现 SmartLifecycle 接口且 getPhase() 方法返回 Integer.MIN_VALUE 的对象，会是最先启动、最后停止的对象；反之，阶段值为 Integer.MAX_VALUE 的对象，会最后启动、最先停止（通常因为该对象依赖其他进程的运行）。
+需要注意的是，未实现 SmartLifecycle 接口的普通 Lifecycle 对象，默认阶段值为 0。因此：
+阶段值为负数的对象，会在标准组件之前启动、之后停止；
+阶段值为正数的对象，会在标准组件之后启动、之前停止。
+SmartLifecycle 接口定义的 stop 方法接收一个回调参数，所有实现类必须在自身的关闭流程完成后，调用该回调的 run() 方法。这让容器在必要时支持异步关闭—— 因为 LifecycleProcessor 接口的默认实现类 DefaultLifecycleProcessor，会为每个阶段的对象组等待指定的超时时间，直到其调用回调方法。默认的单阶段超时时间为 30 秒。
+你可以通过在容器中定义一个名为 lifecycleProcessor 的 Bean，覆盖默认的生命周期处理器实例；若仅需修改超时时间，配置如下即可：</p>
+<pre><code class="language-xml">&lt;bean id=&quot;lifecycleProcessor&quot; class=&quot;org.springframework.context.support.DefaultLifecycleProcessor&quot;&gt;
+        &lt;!-- 超时时间，单位：毫秒 --&gt;
+&lt;property name=&quot;timeoutPerShutdownPhase&quot; value=&quot;10000&quot;/&gt;
+        &lt;/bean&gt;
+</code></pre>
+<p>如前所述，LifecycleProcessor 接口还为容器的刷新和关闭定义了回调方法：
+容器关闭时的回调，会驱动关闭流程，效果等同于显式调用 stop() 方法；
+容器刷新时的回调，则为 SmartLifecycle Bean 提供了另一项特性：当容器完成刷新（所有对象实例化并初始化完成）后，会调用该回调。此时，默认的生命周期处理器会检查每个 SmartLifecycle 对象的 isAutoStartup() 方法返回的布尔值 —— 若返回 true，则该对象会在此时自动启动，而非等待显式调用容器或自身的 start() 方法（与容器刷新不同，标准的容器实现不会自动执行容器的 start() 方法）。启动顺序仍由阶段值和 depends-on 依赖关系决定。</p>
+<h3 id="_4">组合使用多种生命周期机制</h3>
+<p>从 Spring 2.5 开始，控制 Bean 生命周期行为有三种可选方式：
+- 实现 InitializingBean 和 DisposableBean 回调接口；
+- 自定义 init() 和 destroy() 方法；
+- 使用 @PostConstruct 和 @PreDestroy 注解。</p>
+<p>你可以为同一个 Bean 组合使用上述多种机制。
+若为一个 Bean 配置了多种生命周期机制，且每种机制指定的方法名不同，那么所有配置的方法会按照下述顺序依次执行；若为多种生命周期机制配置了相同的方法名（例如，将 init() 同时指定为多种机制的初始化方法），则该方法只会执行一次，如前文所述。
+为同一个 Bean 配置多种生命周期机制且初始化方法名不同时，执行顺序如下：
+1. 标注 @PostConstruct 注解的方法；
+2. 实现 InitializingBean 接口的 afterPropertiesSet() 方法；
+3. 自定义配置的 init() 方法。</p>
+<p>销毁方法的执行顺序与初始化方法一致：</p>
+<ol>
+<li>标注 @PreDestroy 注解的方法；</li>
+<li>实现 DisposableBean 接口的 destroy() 方法；</li>
+<li>自定义配置的 destroy() 方法。</li>
+</ol>
+<h2 id="aware">其他aware接口</h2>
+<pre><code class="language-java">public interface ApplicationContextAware {
+    void setApplicationContext(ApplicationContext applicationContext) throws BeansException;
+}
+</code></pre>
+<pre><code class="language-java">@Component
+@Slf4j
+public class SpringUtil implements ApplicationContextAware {
+
+    private static ApplicationContext context;
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        if(context == null){
+            context = applicationContext;
+        }
+    }
+
+    public static ApplicationContext getApplicationContext(){
+        return context;
+    }
+
+    public static &lt;T&gt; T getBean(String name) {
+        if (context == null){
+            throw new IllegalStateException(&quot;applicaitonContext un inject&quot;);
+        }
+        try {
+            return (T)context.getBean(name);
+        } catch (BeansException e) {
+            log.error(&quot; get Bean error&quot;,e);
+        }
+        return null;
+    }
+
+    public static &lt;T&gt; T getBeanByClass(Class className){
+        if (context == null){
+            throw new IllegalStateException(&quot;applicaitonContext un inject&quot;);
+        }
+        try {
+            return (T)context.getBean(className);
+        } catch (BeansException e) {
+            log.error(&quot;get Bean by className error&quot;,e);
+        }
+        return null;
+    }
+    /**
+    * @description  发布event
+    */
+    public static void publishEvent(ApplicationEvent event){
+        getApplicationContext().publishEvent(event);
+    }
+
+}
+</code></pre>
+<p>除了前文介绍的 ApplicationContextAware 和 BeanNameAware，Spring 还提供了一系列 Aware 回调接口，让 Bean 能向容器表明自身需要的特定基础设施依赖。通用规则是：接口名称会直接指示依赖的类型。
+下表总结了最常用的 Aware 接口：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Injected Dependency会注入的依赖</th>
+<th style="text-align: left;">Explained in…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>ApplicationContextAware</code></td>
+<td style="text-align: left;">注入<code>ApplicationContext</code>，最常用和最全面的</td>
+<td style="text-align: left;"><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-aware"><code>ApplicationContextAware</code> and <code>BeanNameAware</code></a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>ApplicationEventPublisherAware</code></td>
+<td style="text-align: left;">注入<code>ApplicationEventPublisher</code>用于event发布</td>
+<td style="text-align: left;"><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#context-introduction">Additional Capabilities of the <code>ApplicationContext</code></a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>MessageSourceAware</code></td>
+<td style="text-align: left;">注入用于配置国际化的<code>MessageSource</code>。Configured strategy for resolving messages (with support for parametrization and internationalization).</td>
+<td style="text-align: left;"><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#context-introduction">Additional Capabilities of the <code>ApplicationContext</code></a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>ResourceLoaderAware</code></td>
+<td style="text-align: left;">获取Resource。Configured loader for low-level access to resources.</td>
+<td style="text-align: left;"><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#resources">Resources</a></td>
+</tr>
+</tbody>
+</table>
+<p>上面是applicationContext特有的aware接口，也会更可能用到。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Injected Dependency</th>
+<th style="text-align: left;">Explained in…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>BeanClassLoaderAware</code></td>
+<td style="text-align: left;">Class loader used to load the bean classes.</td>
+<td style="text-align: left;"><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-class">Instantiating Beans</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>BeanFactoryAware</code></td>
+<td style="text-align: left;">Declaring <code>BeanFactory</code>.</td>
+<td style="text-align: left;"><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-aware"><code>ApplicationContextAware</code> and <code>BeanNameAware</code></a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>BeanNameAware</code></td>
+<td style="text-align: left;">Name of the declaring bean.</td>
+<td style="text-align: left;"><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-aware"><code>ApplicationContextAware</code> and <code>BeanNameAware</code></a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>LoadTimeWeaverAware</code></td>
+<td style="text-align: left;">Defined weaver for processing class definition at load time.</td>
+<td style="text-align: left;"><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#aop-aj-ltw">Load-time Weaving with AspectJ in the Spring Framework</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>NotificationPublisherAware</code></td>
+<td style="text-align: left;">Spring JMX notification publisher.</td>
+<td style="text-align: left;"><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#jmx-notifications">Notifications</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>ServletConfigAware</code></td>
+<td style="text-align: left;">Current <code>ServletConfig</code> the container runs in. Valid only in a web-aware Spring <code>ApplicationContext</code>.</td>
+<td style="text-align: left;"><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#mvc">Spring MVC</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>ServletContextAware</code></td>
+<td style="text-align: left;">Current <code>ServletContext</code> the container runs in. Valid only in a web-aware Spring <code>ApplicationContext</code>.</td>
+<td style="text-align: left;"><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#mvc">Spring MVC</a></td>
+</tr>
+</tbody>
+</table>
+<p>请再次注意，使用这些接口会将您的代码和Spring API耦合，并且违反IOC风格。因此，建议将他们用于需要对容器进行编程访问的基础Bean。</p>
+<h1 id="_5">容器扩展点（重点！！！）</h1>
+<h2 id="beanpostprocessorbean">使用<code>BeanPostProcessor</code>自定义Bean</h2>
+<p><code>BeanPostProcessor</code> 接口定义了回调方法，你可以实现这些方法来提供自定义的（或覆盖容器默认的）实例化逻辑、依赖解析逻辑等。如果希望在 Spring 容器完成 Bean 的实例化、配置和初始化后执行一些自定义逻辑，你可以接入一个或多个自定义的 <code>BeanPostProcessor</code> 实现类。</p>
+<h3 id="beanpostprocessor">多 BeanPostProcessor 执行顺序</h3>
+<p>你可以配置多个 <code>BeanPostProcessor</code> 实例，并通过设置 <code>order</code> 属性控制它们的执行顺序。<strong>仅当 <code>BeanPostProcessor</code> 实现 <code>Ordered</code> 接口时，才能设置该属性</strong>。如果你编写自定义的 <code>BeanPostProcessor</code>，也建议实现 <code>Ordered</code> 接口。更多细节可参考 <code>BeanPostProcessor</code> 和 <code>Ordered</code> 接口的 Javadoc，同时可参考「以编程方式注册 BeanPostProcessor 实例」的说明。</p>
+<h3 id="_6">核心特性与作用域</h3>
+<ul>
+<li><code>BeanPostProcessor</code> 作用于 <strong>Bean（或对象）实例</strong>：Spring IoC 容器先实例化 Bean 实例，再由 <code>BeanPostProcessor</code> 执行处理逻辑。</li>
+<li>作用域为<strong>每个容器独立</strong>：仅对定义它的容器内的 Bean 生效，即使容器存在层级关系，跨容器的 <code>BeanPostProcessor</code> 也不会处理彼此的 Bean。</li>
+<li>区别于 <code>BeanFactoryPostProcessor</code>：<code>BeanPostProcessor</code> 操作 Bean 实例，而修改 Bean 定义（即 Bean 的配置蓝图）需使用 <code>BeanFactoryPostProcessor</code>（详见下文）。</li>
+</ul>
+<h3 id="_7">核心方法</h3>
+<p><code>org.springframework.beans.factory.config.BeanPostProcessor</code> 接口仅包含两个回调方法：</p>
+<ol>
+<li><code>postProcessBeforeInitialization</code>：容器调用 Bean 初始化方法（如 <code>InitializingBean.afterPropertiesSet()</code> 或自定义 <code>init-method</code>）<strong>之前</strong>执行；</li>
+<li><code>postProcessAfterInitialization</code>：Bean 初始化回调执行<strong>之后</strong>执行。</li>
+</ol>
+<p>处理器可对 Bean 实例执行任意操作（包括完全忽略回调），典型场景包括：检查回调接口、<strong>为 Bean 包装代理对象。Spring AOP 的自动代理功能正是通过 <code>BeanPostProcessor</code> 实现代理包装逻辑的</strong>。</p>
+<p>自定义例子：</p>
+<pre><code class="language-java">package scripting;
+
+import org.springframework.beans.factory.config.BeanPostProcessor;
+
+public class InstantiationTracingBeanPostProcessor implements BeanPostProcessor {
+
+    // 初始化前：直接返回原 Bean 实例
+    public Object postProcessBeforeInitialization(Object bean, String beanName) {
+        return bean;
+    }
+
+    // 初始化后：打印 Bean 名称和 toString() 结果
+    public Object postProcessAfterInitialization(Object bean, String beanName) {
+        System.out.println(&quot;Bean '&quot; + beanName + &quot;' created : &quot; + bean.toString());
+        return bean;
+    }
+}
+</code></pre>
+<h3 id="_8">自动检测与注册</h3>
+<ul>
+<li><code>ApplicationContext</code> 会自动检测配置元数据中所有实现 <code>BeanPostProcessor</code> 接口的 Bean，并将其注册为后置处理器，在创建 Bean 时调用。</li>
+<li>特殊注意：通过配置类的 <code>@Bean</code> 工厂方法声明 <code>BeanPostProcessor</code> 时，工厂方法的返回类型需为实现类本身或至少是 <code>BeanPostProcessor</code> 接口 —— 否则 <code>ApplicationContext</code> 无法在完全创建该 Bean 前通过类型自动检测到它（<code>BeanPostProcessor</code> 需提前实例化以处理其他 Bean 的初始化）。</li>
+</ul>
+<h3 id="_9">编程式注册</h3>
+<p>尽管推荐使用 <code>ApplicationContext</code> 自动检测，但也可通过 <code>ConfigurableBeanFactory</code> 的 <code>addBeanPostProcessor</code> 方法编程式注册。这种方式适用于注册前需执行条件逻辑，或跨容器层级复制处理器的场景，但需注意：</p>
+<ul>
+<li>编程式注册的 <code>BeanPostProcessor</code> 不遵循 <code>Ordered</code> 接口，执行顺序由注册顺序决定；</li>
+<li>编程式注册的处理器<strong>始终优先于</strong>自动检测的处理器执行（无论显式排序如何）。</li>
+</ul>
+<h3 id="aop">与 AOP 自动代理的兼容问题</h3>
+<p>实现 <code>BeanPostProcessor</code> 的类是容器的特殊组件：</p>
+<ul>
+<li>所有 <code>BeanPostProcessor</code> 及其直接引用的 Bean 会在 <code>ApplicationContext</code> 启动阶段提前实例化；</li>
+<li>AOP 自动代理本身也是 <code>BeanPostProcessor</code> 实现，因此 <code>BeanPostProcessor</code> 实例及其直接引用的 Bean <strong>不支持自动代理</strong>，无法织入切面；</li>
+<li>若通过自动装配 /<code>@Resource</code> 注入依赖，Spring 可能会访问意外的 Bean，导致这些 Bean 失去自动代理或后置处理的资格。</li>
+</ul>
+<h3 id="autowiredannotationbeanpostprocessor">典型应用：AutowiredAnnotationBeanPostProcessor</h3>
+<p>Spring 内置的 <code>AutowiredAnnotationBeanPostProcessor</code> 是 <code>BeanPostProcessor</code> 的经典应用 —— 它能自动装配标注了 <code>@Autowired</code> 的字段、setter 方法和任意配置方法，是扩展 Spring IoC 容器的常用方式。</p>
+<ul>
+<li>
+<p><strong>像注解的处理和AOP代理都是通过BeanPostProcessor来实现的</strong>！！即可以找出添加某个注解和实现某个接口的所有实现类，进行处理设置属性等。如@Async，即在实现BeanPostProcessor的实现类里，检查如果添加@Async，就创建一个代理对象。</p>
+</li>
+<li>
+<p>如Apollo源码里，实现了BeanPostProcessor接口，解析每个Bean中@Value的字段为SpringValue对象，在配置文件更新后反射更新其值。</p>
+</li>
+</ul>
+<h2 id="beanfactorypostprocessor">二、使用<code>BeanFactoryPostProcessor</code>自定义配置元数据</h2>
+<p><code>org.springframework.beans.factory.config.BeanFactoryPostProcessor</code> 是另一个核心扩展点，与 <code>BeanPostProcessor</code> 语义相似，但核心区别是：</p>
+<ul>
+<li><code>BeanFactoryPostProcessor</code> 操作 <strong>Bean 配置元数据</strong>（而非 Bean 实例）；</li>
+<li>容器会在实例化除 <code>BeanFactoryPostProcessor</code> 外的所有 Bean <strong>之前</strong>，调用 <code>BeanFactoryPostProcessor</code> 读取并修改配置元数据。</li>
+</ul>
+<h3 id="21">2.1 核心规则</h3>
+<ul>
+<li><strong>执行顺序</strong>：可通过 <code>Ordered</code> 接口的 <code>order</code> 属性控制多个 <code>BeanFactoryPostProcessor</code> 的执行顺序；</li>
+<li><strong>禁止操作 Bean 实例</strong>：技术上可通过 <code>BeanFactory.getBean()</code> 获取 Bean 实例，但会导致 Bean 提前实例化，违反容器生命周期，可能绕过后置处理；</li>
+<li><strong>作用域</strong>：与 <code>BeanPostProcessor</code> 一致，仅对定义它的容器内的 Bean 定义生效；</li>
+<li><strong>延迟初始化</strong>：<code>BeanFactoryPostProcessor</code> 不支持延迟初始化（即使配置 <code>default-lazy-init="true"</code>，容器也会提前实例化）。</li>
+</ul>
+<h3 id="22">2.2 自动检测与注册</h3>
+<p><code>ApplicationContext</code> 会自动检测实现 <code>BeanFactoryPostProcessor</code> 接口的 Bean，并在合适时机调用其处理逻辑，可像普通 Bean 一样部署。</p>
+<h3 id="23-1propertysourcesplaceholderconfigurer">2.3 示例 1：PropertySourcesPlaceholderConfigurer（属性占位符替换）</h3>
+<p>用于将 Bean 定义中的属性值外置到 <code>.properties</code> 文件，方便配置环境相关参数（如数据库信息）。</p>
+<pre><code class="language-properties">jdbc.driverClassName=org.hsqldb.jdbcDriver
+jdbc.url=jdbc:hsqldb:hsql://production:9002
+jdbc.username=sa
+jdbc.password=root
+</code></pre>
+<pre><code class="language-xml">&lt;!-- 注册属性占位符处理器 --&gt;
+&lt;bean class=&quot;org.springframework.context.support.PropertySourcesPlaceholderConfigurer&quot;&gt;
+    &lt;property name=&quot;locations&quot; value=&quot;classpath:com/something/jdbc.properties&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;!-- 使用占位符定义 DataSource --&gt;
+&lt;bean id=&quot;dataSource&quot; class=&quot;org.apache.commons.dbcp.BasicDataSource&quot; destroy-method=&quot;close&quot;&gt;
+    &lt;property name=&quot;driverClassName&quot; value=&quot;${jdbc.driverClassName}&quot;/&gt;
+    &lt;property name=&quot;url&quot; value=&quot;${jdbc.url}&quot;/&gt;
+    &lt;property name=&quot;username&quot; value=&quot;${jdbc.username}&quot;/&gt;
+    &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot;/&gt;
+&lt;/bean&gt;
+</code></pre>
+<h4 id="_10">关键特性</h4>
+<ul>
+<li>占位符格式为 <code>${property-name}</code>，支持自定义前缀、后缀、默认值分隔符；</li>
+<li>默认会从指定 Properties 文件、Spring Environment 和 Java 系统属性中查找属性；</li>
+<li>可用于动态替换类名（运行时选择实现类）</li>
+</ul>
+<h3 id="24-2propertyoverrideconfigurer">2.4 示例 2：PropertyOverrideConfigurer（属性覆盖）</h3>
+<p>与 <code>PropertySourcesPlaceholderConfigurer</code> 类似，但支持为 Bean 属性设置默认值：</p>
+<ul>
+<li>若覆盖文件中无对应属性，使用 Bean 定义中的默认值；</li>
+<li>覆盖规则：<code>beanName.property=value</code>，支持复合属性名；</li>
+<li>多处理器覆盖同一属性时，最后一个生效。</li>
+</ul>
+<p>当在ApplicationContext内声明一个BeanFactoryPostProcessor时，它就会自动运行，以便对定义容器的配置元数据应用更改。Spring包含了许多预定义的BeanFactoryPostProcessor，如<code>PropertyOverrideConfigurer</code>和<code>PropertySourcesPlaceholderConfigurer</code>。您也可以使用自定义的BeanFactoryPostProcessor--例如，注册自定义属性编辑器。</p>
+<p>ApplicationContext 会自动检测部署到它的任何实现 BeanFactoryPostProcessor 接口的 Bean。它在适当的时候将这些bean用作BeanFactoryPostProcessor。你可以像部署其他bean一样部署这些后处理器bean。</p>
+<p>与BeanPostProcessors一样，你通常不希望将BeanFactoryPostProcessors配置为懒惰初始化。如果没有其他 bean 引用 Bean(Factory)PostProcessor，那么这个后处理器将不会被实例化。因此，将它标记为懒惰初始化将被忽略，即使你在 <code>&lt;beans /&gt;</code> 元素的声明中将 default-lazy-init 属性设置为 true，Bean(Factory)PostProcessor 也会被急切地实例化</p>
+<h2 id="factorybean">三、使用 FactoryBean 自定义实例化逻辑</h2>
+<p>实现 <code>org.springframework.beans.factory.FactoryBean</code> 接口的类本身是「工厂」，可定制复杂的 Bean 实例化逻辑（适合用 Java 代码替代冗长的 XML 配置）。</p>
+<h3 id="31">3.1 核心方法</h3>
+<p><code>FactoryBean&lt;T&gt;</code> 接口包含三个方法：</p>
+<ol>
+<li><code>T getObject()</code>：返回工厂创建的对象实例（可返回单例或原型对象）；</li>
+<li><code>boolean isSingleton()</code>：返回 <code>true</code> 表示单例，<code>false</code> 表示原型（默认返回 <code>true</code>）；</li>
+<li><code>Class&lt;?&gt; getObjectType()</code>：返回 <code>getObject()</code> 方法的返回类型（未知则返回 <code>null</code>）。</li>
+</ol>
+<h3 id="32">3.2 核心特性</h3>
+<ul>
+<li>Spring 框架内置了 50 多个 <code>FactoryBean</code> 实现，是容器实例化逻辑的重要扩展点；</li>
+<li>获取 FactoryBean 本身：调用 <code>ApplicationContext.getBean()</code> 时，在 Bean ID 前加 <code>&amp;</code> 符号（如 <code>getBean("&amp;myBean")</code> 返回 FactoryBean 实例，<code>getBean("myBean")</code> 返回工厂创建的 Bean 实例）。</li>
+</ul>
+<h3 id="_11">总结</h3>
+<ol>
+<li><strong>BeanPostProcessor</strong>：操作 Bean 实例，在 Bean 初始化前后执行，用于修改 Bean 实例、包装代理等；</li>
+<li><strong>BeanFactoryPostProcessor</strong>：操作 Bean 配置元数据，在 Bean 实例化前执行，用于动态修改配置（如属性占位符替换）；</li>
+<li><strong>FactoryBean</strong>：自定义 Bean 实例化逻辑，适合复杂初始化场景，可通过 <code>&amp;</code> 符号区分获取工厂本身和工厂创建的 Bean。</li>
+</ol>
+<h1 id="19">1.9 基于注解的容器配置</h1>
+<p>Spring 对基于注解的配置提供了全面支持，其核心是通过在组件类对应的类、方法或字段声明上添加注解，直接操作组件类自身的元数据。正如《示例：AutowiredAnnotationBeanPostProcessor》一节所述，Spring 会将 <code>BeanPostProcessor</code> 与注解结合使用，使核心 IoC 容器能够识别特定注解。</p>
+<p>例如，<code>@Autowired</code> 注解具备《自动装配协作对象》章节中描述的全部功能，同时还提供了更细粒度的控制能力和更广的适用范围。此外，Spring 还支持 JSR-250 注解（如 <code>@PostConstruct</code> 和 <code>@PreDestroy</code>），以及 <code>jakarta.inject</code> 包中包含的 JSR-330（Java 依赖注入）注解（如 <code>@Inject</code> 和 <code>@Named</code>）。有关这些注解的详细信息可参考对应章节。</p>
+<p><strong>注解注入的执行时机早于外部属性注入</strong>。因此，当采用混合配置方式时，外部配置（例如通过 XML 指定的 Bean 属性）会有效覆盖通过注解配置的属性值。</p>
+<p>从技术层面来说，你可以将这些后置处理器注册为独立的 Bean 定义，但在 <code>AnnotationConfigApplicationContext</code> 中，它们已经被隐式注册完成。</p>
+<p>Spring 基于注解的配置通过 <code>BeanPostProcessor</code> 识别注解元数据，<code>@Autowired</code> 注解相比传统自动装配具备更细粒度的控制能力。</p>
+<p><strong>执行顺序</strong>：注解注入先于外部属性注入执行，外部配置可覆盖注解配置的属性值。</p>
+<h1 id="autowired">使用 @Autowired 注解</h1>
+<p>在本节的示例中，你可以使用 JSR 330 规范的 <code>@Inject</code> 注解替代 Spring 自带的 <code>@Autowired</code> 注解。相关详情可参考此处。</p>
+<h2 id="1-autowired">1. @Autowired 注解的应用场景</h2>
+<h3 id="11">1.1 构造函数注入</h3>
+<p>你可以将 <code>@Autowired</code> 注解应用于构造函数，示例如下：</p>
+<pre><code class="language-java">public class MovieRecommender {
+
+    private final CustomerPreferenceDao customerPreferenceDao;
+
+    @Autowired
+    public MovieRecommender(CustomerPreferenceDao customerPreferenceDao) {
+        this.customerPreferenceDao = customerPreferenceDao;
+    }
+
+    // 其他方法...
+}
+</code></pre>
+<blockquote>
+<p><strong>注意</strong>：如果目标 Bean 仅定义了一个构造函数，则无需在该构造函数上添加 <code>@Autowired</code> 注解。但如果存在多个构造函数，且没有标记为主要（primary）或默认构造函数时，必须为其中至少一个构造函数添加 <code>@Autowired</code> 注解，以告知容器应使用哪个构造函数。具体可参考「构造函数解析」相关说明。</p>
+</blockquote>
+<h3 id="12-setter">1.2 Setter 方法注入</h3>
+<p><code>@Autowired</code> 也可应用于传统的 setter 方法，示例如下：</p>
+<pre><code class="language-java">public class SimpleMovieLister {
+
+    private MovieFinder movieFinder;
+
+    @Autowired
+    public void setMovieFinder(MovieFinder movieFinder) {
+        this.movieFinder = movieFinder;
+    }
+
+    // 其他方法...
+}
+</code></pre>
+<h3 id="13">1.3 任意方法注入</h3>
+<p>你可以将 <code>@Autowired</code> 应用于任意名称、包含多个参数的方法，示例如下：</p>
+<pre><code class="language-java">public class MovieRecommender {
+
+    private MovieCatalog movieCatalog;
+
+    private CustomerPreferenceDao customerPreferenceDao;
+
+    @Autowired
+    public void prepare(MovieCatalog movieCatalog,
+            CustomerPreferenceDao customerPreferenceDao) {
+        this.movieCatalog = movieCatalog;
+        this.customerPreferenceDao = customerPreferenceDao;
+    }
+
+    // 其他方法...
+}
+</code></pre>
+<h3 id="14">1.4 字段注入（支持与构造函数混合使用）</h3>
+<p><code>@Autowired</code> 还可直接应用于字段，甚至与构造函数注入混合使用，示例如下：</p>
+<pre><code class="language-java">public class MovieRecommender {
+
+    private final CustomerPreferenceDao customerPreferenceDao;
+
+    @Autowired
+    private MovieCatalog movieCatalog;
+
+    @Autowired
+    public MovieRecommender(CustomerPreferenceDao customerPreferenceDao) {
+        this.customerPreferenceDao = customerPreferenceDao;
+    }
+
+    // 其他方法...
+}
+</code></pre>
+<blockquote>
+<p><strong>重要提示</strong>：确保你标注 <code>@Autowired</code> 的注入点所使用的类型，与目标组件（如 <code>MovieCatalog</code> 或 <code>CustomerPreferenceDao</code>）的声明类型保持一致。否则，运行时可能因 “未找到类型匹配项” 错误导致注入失败。</p>
+<ul>
+<li>对于 XML 定义的 Bean 或通过类路径扫描发现的组件类，容器通常能提前知晓其具体类型；</li>
+<li>对于 <code>@Bean</code> 工厂方法，需确保声明的返回类型足够明确（至少与注入点所需类型一致）。</li>
+</ul>
+</blockquote>
+<h2 id="2-self-injection">2. 自注入（Self Injection）</h2>
+<p><code>@Autowired</code> 也支持注入自身引用（即指向当前正在被注入的 Bean 的引用），但需注意：</p>
+<ul>
+<li>自注入是<strong>兜底机制</strong>：对其他组件的常规依赖始终优先于自注入，自引用不会参与常规的自动装配候选选择，因此永远不会成为 “主要（primary）” 候选，优先级最低；</li>
+<li>实际使用中应仅作为最后手段：例如通过 Bean 的事务代理调用同一实例的其他方法。更优方案是将相关方法抽离到独立的委托 Bean 中，或使用 <code>@Resource</code>（可通过唯一名称获取指向当前 Bean 的代理）；</li>
+<li>同一 <code>@Configuration</code> 类中注入 <code>@Bean</code> 方法的返回结果，本质上也属于自引用场景：需在实际需要的方法签名中延迟解析此类引用（而非在配置类的自动装配字段中），或将受影响的 <code>@Bean</code> 方法声明为 <code>static</code>，使其与配置类实例及其生命周期解耦。否则，此类 Bean 仅会在兜底阶段被考虑，容器会优先选择其他配置类中匹配的 Bean（若存在）。</li>
+</ul>
+<h2 id="3">3. 注入集合 / 数组类型</h2>
+<p>你可以为期望数组类型的字段或方法添加 <code>@Autowired</code> 注解，让 Spring 从 <code>ApplicationContext</code> 中注入所有特定类型的 Bean，示例如下：</p>
+<pre><code class="language-java">public class MovieRecommender {
+
+    @Autowired
+    private MovieCatalog[] movieCatalogs;
+
+    // 其他方法...
+}
+</code></pre>
+<p>该规则同样适用于带类型的集合，示例如下：</p>
+<pre><code class="language-java">public class MovieRecommender {
+
+    private Set&lt;MovieCatalog&gt; movieCatalogs;
+
+    @Autowired
+    public void setMovieCatalogs(Set&lt;MovieCatalog&gt; movieCatalogs) {
+        this.movieCatalogs = movieCatalogs;
+    }
+
+    // 其他方法...
+}
+</code></pre>
+<h3 id="31_1">3.1 集合排序</h3>
+<p>若希望数组 / 列表中的元素按特定顺序排列，目标 Bean 可实现 <code>org.springframework.core.Ordered</code> 接口，或使用 <code>@Order</code> 注解、标准 <code>@Priority</code> 注解。否则，元素顺序将遵循容器中对应目标 Bean 定义的注册顺序。</p>
+<blockquote>
+<p><strong>补充说明</strong>：</p>
+<ul>
+<li><code>@Order</code> 注解可标注在目标类级别和 <code>@Bean</code> 方法上（适用于同一 Bean 类有多个定义的场景）；</li>
+<li><code>@Order</code> 值仅影响注入点的优先级，不影响单例 Bean 的启动顺序（启动顺序由依赖关系和 <code>@DependsOn</code> 声明决定）；</li>
+<li>配置类上的 <code>@Order</code> 仅影响启动时配置类的解析顺序，不影响内部 <code>@Bean</code> 方法；</li>
+<li>标准的 <code>jakarta.annotation.Priority</code> 注解无法用于 <code>@Bean</code> 方法（不能标注在方法上），可通过 <code>@Order</code> 结合 <code>@Primary</code> 注解模拟其语义。</li>
+</ul>
+</blockquote>
+<h3 id="32-map">3.2 注入 Map 类型</h3>
+<p>只要 Map 的键类型为 <code>String</code>，带类型的 Map 实例也可被自动装配：Map 的值为所有匹配类型的 Bean，键为对应的 Bean 名称，示例如下：</p>
+<pre><code class="language-java">public class MovieRecommender {
+
+    private Map&lt;String, MovieCatalog&gt; movieCatalogs;
+
+    @Autowired
+    public void setMovieCatalogs(Map&lt;String, MovieCatalog&gt; movieCatalogs) {
+        this.movieCatalogs = movieCatalogs;
+    }
+
+    // 其他方法...
+}
+</code></pre>
+<h2 id="4">4. 非必需注入（可选依赖）</h2>
+<p>默认情况下，若某个注入点没有匹配的候选 Bean，自动装配会失败（数组 / 集合 / Map 类型要求至少有一个匹配元素）。</p>
+<p>默认行为下，标注注解的方法和字段被视为 “必需依赖”。你可以通过设置 <code>@Autowired</code> 的 <code>required</code> 属性为 <code>false</code>，将注入点标记为非必需，让框架跳过无法满足的注入点，示例如下：</p>
+<pre><code class="language-java">public class SimpleMovieLister {
+
+    private MovieFinder movieFinder;
+
+    @Autowired(required = false)
+    public void setMovieFinder(MovieFinder movieFinder) {
+        this.movieFinder = movieFinder;
+    }
+
+    // 其他方法...
+}
+</code></pre>
+<blockquote>
+<p><strong>行为说明</strong>：</p>
+<ul>
+<li>若非必需方法的依赖（或多参数方法中的任一依赖）不可用，该方法不会被调用；</li>
+<li>若非必需字段的依赖不可用，该字段不会被赋值，保持默认值；</li>
+<li><code>required=false</code> 表示该属性对自动装配而言是可选的，无法装配时会被忽略，允许通过依赖注入选择性覆盖属性的默认值。</li>
+</ul>
+</blockquote>
+<h3 id="41">4.1 构造函数 / 工厂方法参数的特殊规则</h3>
+<p>构造函数和工厂方法参数是特殊情况：由于 Spring 的构造函数解析算法可能处理多个构造函数，<code>@Autowired</code> 的 <code>required</code> 属性语义略有不同。</p>
+<ul>
+<li>构造函数 / 工厂方法参数默认是 “必需的”，但在单构造函数场景下有特殊规则：若注入点为数组 / 集合 / Map 类型且无匹配 Bean，会解析为空实例；</li>
+<li>这支持一种常见实现模式：将所有依赖声明在唯一的多参数构造函数中（例如仅声明一个公共构造函数，无需添加 <code>@Autowired</code> 注解）；</li>
+<li>一个 Bean 类中仅能有一个构造函数将 <code>@Autowired</code> 的 <code>required</code> 属性设为 <code>true</code>；若 <code>required</code> 保持默认值 <code>true</code>，则仅能有一个构造函数标注 <code>@Autowired</code>；若多个构造函数标注该注解，需均设置 <code>required=false</code>，容器会选择依赖数量最多且能匹配到 Bean 的构造函数。</li>
+</ul>
+<h3 id="42">4.2 其他可选依赖声明方式</h3>
+<p>除了 <code>required=false</code>，还可通过以下方式声明非必需依赖：</p>
+<ol>
+<li>使用 Java 的 <code>java.util.Optional</code> 包装依赖类型：</li>
+</ol>
+<p>```java
+   public class SimpleMovieLister {</p>
+<pre><code>   @Autowired
+   public void setMovieFinder(Optional&lt;MovieFinder&gt; movieFinder) {
+       // 业务逻辑...
+   }
+</code></pre>
+<p>}
+   ```</p>
+<ol>
+<li>使用参数级别的 <code>@Nullable</code> 注解（任意包下的该注解均可，如 JSpecify 的 <code>org.jspecify.annotations.Nullable</code>）：</li>
+</ol>
+<p>```java
+   public class SimpleMovieLister {</p>
+<pre><code>   @Autowired
+   public void setMovieFinder(@Nullable MovieFinder movieFinder) {
+       // 业务逻辑...
+   }
+</code></pre>
+<p>}
+   ```</p>
+<ol>
+<li>Kotlin 可直接利用内置的空安全特性。</li>
+</ol>
+<h2 id="5-spring">5. 注入 Spring 内置容器对象</h2>
+<p><code>@Autowired</code> 可用于注入 Spring 内置的、可自动解析的依赖接口：<code>BeanFactory</code>、<code>ApplicationContext</code>、<code>Environment</code>、<code>ResourceLoader</code>、<code>ApplicationEventPublisher</code> 和 <code>MessageSource</code>。这些接口及其扩展接口（如 <code>ConfigurableApplicationContext</code>、<code>ResourcePatternResolver</code>）无需特殊配置即可自动解析，示例如下：</p>
+<pre><code class="language-java">public class MovieRecommender {
+
+    @Autowired
+    private ApplicationContext context;
+
+    public MovieRecommender() {
+    }
+
+    // 其他方法...
+}
+</code></pre>
+<h2 id="6">6. 注解生效限制</h2>
+<p><code>@Autowired</code>、<code>@Inject</code>、<code>@Value</code> 和 <code>@Resource</code> 注解由 Spring 的 <code>BeanPostProcessor</code> 实现类处理。这意味着：</p>
+<ul>
+<li>你<strong>无法</strong>在自定义的 <code>BeanPostProcessor</code> 或 <code>BeanFactoryPostProcessor</code> 类型中应用这些注解；</li>
+<li>此类处理器必须通过 XML 或 Spring <code>@Bean</code> 方法<strong>显式装配</strong>。</li>
+</ul>
+<h3 id="_12">总结</h3>
+<ol>
+<li><strong>@Autowired 核心用法</strong>：支持构造函数、setter 方法、任意方法、字段注入，可注入单个 Bean 或集合 / 数组 / Map 类型的多个 Bean，集合可通过 <code>@Order</code>/<code>Ordered</code> 控制顺序；</li>
+<li><strong>可选依赖配置</strong>：可通过 <code>required=false</code>、<code>Optional</code>、<code>@Nullable</code> 声明非必需依赖，避免注入失败；</li>
+<li><strong>特殊场景限制</strong>：自注入优先级最低，Spring 内置处理器类中无法使用 <code>@Autowired</code>，需显式装配。</li>
+</ol>
+<h1 id="112-java-based">1.12 Java-based 容器配置</h1>
+<p>这节介绍如何在Java代码中通过注解的方式配置Spring容器，它包括：</p>
+<ul>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-java-basic-concepts">基本概念: <code>@Bean</code> and <code>@Configuration</code></a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-java-instantiating-container">通过<code>AnnotationConfigApplicationContext实例化spring容器</code></a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-java-bean-annotation">使用 <code>@Bean</code> Annotation</a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-java-configuration-annotation">使用<code>@Configuration</code> annotation</a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-java-composing-configuration-classes">Composing Java-based Configurations</a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-definition-profiles">Bean Definition Profiles</a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-property-source-abstraction"><code>PropertySource</code> Abstraction</a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-using-propertysource">使用 <code>@PropertySource</code></a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-placeholder-resolution-in-statements">Placeholder Resolution in Statements</a></li>
+</ul>
+<h2 id="1121-bean-configuration">1.12.1 基础概念：<code>@Bean</code> 和 <code>@Configuration</code></h2>
+<p>Spring新的Java-configuration的核心构件是<code>@Configuration</code>注解的类和<code>@Bean</code>注解的方法</p>
+<p>@Bean注解用于表示一个方法实例化、配置和初始化一个新的对象，以便Spring Ioc容器管理。@Bean注解的作用与XML配置文件中的<code>&lt;bean/&gt;</code>元素作用相同。您可以在任何Spring @Component中使用@Bean注解的方法。然而，它们最常被用于@Configuration beans。</p>
+<p>@Configuration注解的类表明它的主要目的是作为bean定义的来源。此外，@Configuration类还允许通过调用同一类中的其他@Bean方法来定义bean间的依赖关系。最简单的@Configuration类的内容如下:</p>
+<pre><code class="language-java">@Configuration
+public class AppConfig {
+
+    @Bean
+    public MyService myService() {
+        return new MyServiceImpl();
+    }
+}
+</code></pre>
+<p><strong>完整的@Configuration与 "精简 "的@Bean模式？</strong></p>
+<p>当@Bean方法被声明在没有注解@Configuration的类中时，它们被称为以 "精简 "模式处理。在@Component甚至在一个普通的类中声明的Bean方法被认为是 "精简 "的，包含类的主要目的不同，@Bean方法在那里是一种奖励。例如，服务组件可能会通过在每个适用的组件类上额外的@Bean方法向容器暴露管理视图。在这样的场景下，@Bean方法是一种通用的工厂方法机制。</p>
+<p>与完整的@Configuration不同，精简的@Bean方法不能声明bean间的依赖关系。相反，它们是在它们所包含的组件的内部状态上进行操作，并且可以选择在它们可能声明的参数上进行操作。因此，这样的@Bean方法不应该调用其他@Bean方法。每个这样的方法从字面上看只是一个特定bean引用的工厂方法，没有任何特殊的运行时语义。这里的积极副作用是，无需在运行时应用CGLIB子类，因此在类设计方面没有限制（即包含的类可以是final等）。</p>
+<p>在常见的场景中，@Bean方法要在@Configuration类中声明，确保始终使用 "完整 "模式，因此跨方法引用会被重定向到容器的生命周期管理中。这样可以防止同一个@Bean方法通过常规的Java调用被意外调用，这有助于减少在 "精简 "模式下运行时难以追踪的细微bug。</p>
+<h2 id="1122-annotationconfigapplicationcontextspring">1.12.2 通过AnnotationConfigApplicationContext实例化spring容器</h2>
+<p>下面的章节记录了Spring在Spring 3.0中引入的<code>AnnotationConfigApplicationContext</code>。这个多功能的<code>ApplicationContext</code>实现不仅能接受@Configuration类作为输入，还能接受普通的<code>@Component</code>类和用JSR-330元数据注释的类。</p>
+<p>当<code>@Configuration</code>类被提供为输入时，<code>@Configuration</code>类本身被注册为bean定义，并且该类中所有声明的<code>@Bean</code>方法也被注册为bean定义。</p>
+<p>当提供<code>@Component</code>和JSR-330类时，它们被注册为bean定义，并且假定在这些类中必要时使用了DI元数据，如@Autowired或@Inject。</p>
+<p><strong>简单的实例化</strong></p>
+<p>与实例化ClassPathXmlApplicationContext时使用Spring XML文件作为输入一样，您可以在实例化AnnotationConfigApplicationContext时使用@Configuration类作为输入。这就允许完全不使用XML的Spring容器，如下例所示：</p>
+<pre><code class="language-java">public static void main(String[] args) {
+    ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
+    MyService myService = ctx.getBean(MyService.class);
+    myService.doStuff();
+}
+</code></pre>
+<p>如前所述，AnnotationConfigApplicationContext并不限于只与@Configuration类一起工作。任何@Component或JSR-330注解类都可以作为输入提供给构造函数，如下例所示:</p>
+<pre><code class="language-java">public static void main(String[] args) {
+    ApplicationContext ctx = new AnnotationConfigApplicationContext(MyServiceImpl.class, Dependency1.class, Dependency2.class);
+    MyService myService = ctx.getBean(MyService.class);
+    myService.doStuff();
+}
+</code></pre>
+<p><strong>使用<code>register(Class&lt;?&gt;…)</code>编程构建容器</strong></p>
+<p>您可以使用无参数构造函数实例化一个AnnotationConfigApplicationContext，然后使用register()方法配置它。当以编程方式构建AnnotationConfigApplicationContext时，这种方法特别有用。下面的示例展示了如何做到这一点：</p>
+<pre><code class="language-java">public static void main(String[] args) {
+    AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+    ctx.register(AppConfig.class, OtherConfig.class);
+    ctx.register(AdditionalConfig.class);
+    ctx.refresh();
+    MyService myService = ctx.getBean(MyService.class);
+    myService.doStuff();
+}
+</code></pre>
+<p><strong><code>scan(String…)</code>开启包扫描</strong></p>
+<pre><code class="language-java">@Configuration
+@ComponentScan(basePackages = &quot;com.acme&quot;) 
+public class AppConfig  {
+    ...
+}
+</code></pre>
+<p>在前面的示例中，<code>com.acme</code>包被扫描以查找任何<code>@Component-annotated</code>类，这些类被注册为容器中的Spring bean定义。<code>AnnotationConfigApplicationContext</code>公开了<code>scan(String...)</code>方法，以允许同样的组件扫描功能，如下例所示：</p>
+<pre><code class="language-java">public static void main(String[] args) {
+    AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+    ctx.scan(&quot;com.acme&quot;);
+    ctx.refresh();
+    MyService myService = ctx.getBean(MyService.class);
+}
+</code></pre>
+<p>请记住，<code>@Configuration</code>类是用<code>@Component</code>进行元注解的，所以它们是组件扫描的候选对象。在前面的例子中，假设AppConfig是在<code>com.acme</code>包（或下面的任何包）中声明的，那么在调用scan()的过程中，它就会被选中。一旦刷新()，它的所有@Bean方法都会被处理并在容器中注册为bean定义。</p>
+<h2 id="1123-bean">1.12.3 @Bean的使用</h2>
+<p>@Bean是个方法级别的注解，和XML中的 <code>&lt;bean/&gt;</code> 相同作用。这个注解也支持 * <a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-lifecycle-initializingbean">init-method</a> * <a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-lifecycle-disposablebean">destroy-method</a> * <a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-autowire">autowiring</a> *属性。</p>
+<h3 id="declaring-a-bean">Declaring a Bean</h3>
+<p>声明一个Bean，可以在方法上使用@Bean注解，方法的返回值就是Bean的类型。默认的，<strong>Bean 的name就是方法名</strong>！如：</p>
+<pre><code class="language-java">@Configuration
+public class AppConfig {
+
+    @Bean
+    public TransferServiceImpl transferService() {
+        return new TransferServiceImpl();
+    }
+}
+</code></pre>
+<p>当然也可以声明返回接口</p>
+<pre><code class="language-java">@Configuration
+public class AppConfig {
+
+    @Bean
+    public TransferService transferService() {
+        return new TransferServiceImpl();
+    }
+}
+</code></pre>
+<p>类似于</p>
+<pre><code class="language-xml">&lt;beans&gt;
+    &lt;bean id=&quot;transferService&quot; class=&quot;com.acme.TransferServiceImpl&quot;/&gt;
+&lt;/beans&gt;
+</code></pre>
+<p>Both declarations make a bean named <code>transferService</code> available in the <code>ApplicationContext</code>, bound to an object instance of type <code>TransferServiceImpl</code>, 如下:</p>
+<pre><code>transferService -&gt; com.acme.TransferServiceImpl
+</code></pre>
+<h3 id="bean_6">Bean的依赖</h3>
+<p>一个Bean注解的方法可以有任意数量的参数，这些参数描述了构建该Bean所需的依赖。例如如果我们的TransferService需要一个AccountRepository，我们可以用方法参数来具体化这个依赖关系，如下例所示：</p>
+<pre><code class="language-java">@Configuration
+public class AppConfig {
+
+    @Bean
+    public TransferService transferService(AccountRepository accountRepository) {
+        return new TransferServiceImpl(accountRepository);
+    }
+}
+</code></pre>
+<p>上面的解决机制和基于构造的依赖差不多。</p>
+<h3 id="_13">接受生命周期的回调</h3>
+<p>任何使用 @Bean 注解定义的类都支持常见的生命周期回调，并且可以使用 JSR-250 中的 <code>@PostConstruct</code> 和 <code>@PreDestroy</code> 注解。更多细节请参见 <a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-postconstruct-and-predestroy-annotations">JSR-250 annotations</a>。</p>
+<p>常规的Spring生命周期回调也是完全支持的。如果一个bean实现了<code>InitializingBean</code>, <code>DisposableBean</code>或<code>Lifecycle</code>，它们各自的方法就会被容器调用。</p>
+<p>标准的<code>*Aware</code>接口集（如BeanFactoryAware、BeanNameAware、MessageSourceAware、ApplicationContextAware等）也是完全支持的。</p>
+<p>@Bean注解支持指定任意的初始化和销毁的回调方法，就像Spring XML在bean元素上的init-method和destroy-method属性一样，如下例所示。</p>
+<pre><code class="language-java">public class BeanOne {
+
+    public void init() {
+        // initialization logic
+    }
+}
+
+public class BeanTwo {
+
+    public void cleanup() {
+        // destruction logic
+    }
+}
+
+@Configuration
+public class AppConfig {
+
+    @Bean(initMethod = &quot;init&quot;)
+    public BeanOne beanOne() {
+        return new BeanOne();
+    }
+
+    @Bean(destroyMethod = &quot;cleanup&quot;)
+    public BeanTwo beanTwo() {
+        return new BeanTwo();
+    }
+}
+</code></pre>
+<p>默认情况下，用 Java 配置的具有公共<code>close</code>或<code>shutdown</code>方法的 bean 会自动地被征集一个销毁回调。如果您有一个公共的关闭或关闭方法，并且您不希望它在容器关闭时被调用，您可以将@Bean(destroyMethod="")添加到您的bean定义中以禁用默认（推断）模式。</p>
+<pre><code class="language-java">@Bean(destroyMethod=&quot;&quot;)
+public DataSource dataSource() throws NamingException {
+    return (DataSource) jndiTemplate.lookup(&quot;MyDS&quot;);
+}
+</code></pre>
+<p>直接在code中调用<code>init()</code>也是可以的</p>
+<pre><code class="language-java">@Configuration
+public class AppConfig {
+
+    @Bean
+    public BeanOne beanOne() {
+        BeanOne beanOne = new BeanOne();
+        beanOne.init();
+        return beanOne;
+    }
+
+    // ...
+}
+</code></pre>
+<p>当你直接通过Java代码工作时，你可以对你的对象做任何你喜欢的事情，而不是总是需要依赖容器的生命周期。</p>
+<h3 id="beanscope">指定Bean的scope</h3>
+<p>Bean的默认scope是 <code>singleton</code>,但是可以使用 <code>@Scope</code> 指定</p>
+<pre><code class="language-java">@Configuration
+public class MyConfiguration {
+
+    @Bean
+    @Scope(&quot;prototype&quot;)
+    public Encryptor encryptor() {
+        // ...
+    }
+}
+</code></pre>
+<h3 id="bean_7">自定义Bean的名称</h3>
+<p>使用name属性可以指定Bean的名称，默认Bean的名称是方法名。</p>
+<pre><code class="language-java">@Configuration
+public class AppConfig {
+
+    @Bean(name = &quot;myThing&quot;)
+    public Thing thing() {
+        return new Thing();
+    }
+}
+</code></pre>
+<pre><code class="language-java">@Configuration
+public class AppConfig {
+
+    // 可以指定多个别名 Aliasing
+    @Bean({&quot;dataSource&quot;, &quot;subsystemA-dataSource&quot;, &quot;subsystemB-dataSource&quot;})
+    public DataSource dataSource() {
+        // instantiate, configure and return DataSource bean...
+    }
+}
+</code></pre>
+<pre><code class="language-java">@Configuration
+public class AppConfig {
+
+    // 对Bean进行描述，在一些如JMX连接时可以提供更多信息
+    @Bean
+    @Description(&quot;Provides a basic example of a bean&quot;)
+    public Thing thing() {
+        return new Thing();
+    }
+}
+</code></pre>
+<h2 id="1124-configuration">1.12.4  <code>@Configuration</code>注解的使用</h2>
+<p>@Configuration是类级别的注解，表示该是Bean定义的源。<code>@Configuration</code>类内部通过@Bean注解的public方法来声明Bean，<code>@Configuration</code>类中的@Bean方法也可以用来声明Bean之间的依赖关系。</p>
+<h3 id="bean_8">Bean之间的依赖表达</h3>
+<p>当Bean依赖另一个Bean时，只需要简单的调用另一个Bean方法即可，举例如下：</p>
+<pre><code class="language-java">@Configuration
+public class AppConfig {
+
+    @Bean
+    public BeanOne beanOne() {
+        // 通过beanTwo()注入BeanTwo
+        return new BeanOne(beanTwo());
+    }
+
+    @Bean
+    public BeanTwo beanTwo() {
+        return new BeanTwo();
+    }
+}
+</code></pre>
+<p>这种通过方法来声明依赖Bean的方式只能在@Configuration的类中使用，不能用于@Component注解的类中。</p>
+<h3 id="lookup-method-injection">Lookup Method Injection</h3>
+<p>如前所述，查找方法注入是一个高级功能，你应该很少使用。在单例Bean依赖原型Bean的情况下，它很有用。使用Java进行这种类型的配置，为实现这种模式提供了一种自然的手段。下面举例：</p>
+<pre><code class="language-java">public abstract class CommandManager {
+    public Object process(Object commandState) {
+        // 获取一个合适的Command实例
+        Command command = createCommand();
+        // set the state on the (hopefully brand new) Command instance
+        command.setState(commandState);
+        return command.execute();
+    }
+
+    // 但是谁来实现这个方法呢？
+    protected abstract Command createCommand();
+}
+</code></pre>
+<p>通过使用Java配置，您可以创建CommandManager的子类，其中抽象的createCommand()方法被重载，以使其查找一个新的（原型）命令对象。</p>
+<pre><code class="language-java">@Bean
+@Scope(&quot;prototype&quot;)
+public AsyncCommand asyncCommand() {
+    AsyncCommand command = new AsyncCommand();
+    // inject dependencies here as required
+    return command;
+}
+
+@Bean
+public CommandManager commandManager() {
+    // return new anonymous implementation of CommandManager with createCommand()
+    // overridden to return a new prototype Command object
+    return new CommandManager() {
+        protected Command createCommand() {
+            return asyncCommand();
+        }
+    }
+}
+</code></pre>
+<h3 id="java-based">进一步探究Java-based的配置工作原理</h3>
+<p>考虑下面一种场景，一个@Bean方法被调用了两次：</p>
+<pre><code class="language-java">@Configuration
+public class AppConfig {
+
+    @Bean
+    public ClientService clientService1() {
+        ClientServiceImpl clientService = new ClientServiceImpl();
+        clientService.setClientDao(clientDao());
+        return clientService;
+    }
+
+    @Bean
+    public ClientService clientService2() {
+        ClientServiceImpl clientService = new ClientServiceImpl();
+        clientService.setClientDao(clientDao());
+        return clientService;
+    }
+
+    @Bean
+    public ClientDao clientDao() {
+        return new ClientDaoImpl();
+    }
+}
+</code></pre>
+<p>ClientDao()已经在clientService1()和clientService2()中被调用过一次。由于该方法创建了一个新的 ClientDaoImpl 实例并将其返回，您通常会期望有两个实例（每个服务一个）。这肯定有问题，在Spring中，实例化的Bean默认是单例的。这就是神奇的地方，所有的@Configuration类在启动时都会被CGLIB实现子类。在子类中，重写的方法首先会检查容器中是否有缓存的Bean，没有才会去调用父方法创建一个新的实例。</p>
+<p>这里有一些限制，因为CGLIB是在运行时动态的添加功能，所以配置类不能final。然而从Spring4.3开始，配置类中可以使用任何构造方法，包括使用<code>@Autowired</code>或者非默认的构造来进行默认注入。</p>
+<p>如果你更倾向于避免CGLIB施加的限制，你可以在非<code>@Configuration</code>注解的类中使用@Bean（如使用@Component代理)，这样，@Bean方法之间的交叉调用就不会被拦截，你可以完全依赖构造或方法级别的注入。</p>
+<h2 id="1125-java-based">1.12.5 Java-based配置的组合使用</h2>
+<p>Spring’s Java-based configuration允许你组合注解，减少配置的复杂性。</p>
+<h3 id="import">使用@Import注解</h3>
+<p>这个注解允许你从其他配置类加载@Bean定义，如：</p>
+<pre><code class="language-java">@Configuration
+public class ConfigA {
+
+    @Bean
+    public A a() {
+        return new A();
+    }
+}
+
+@Configuration
+@Import(ConfigA.class)
+public class ConfigB {
+
+    @Bean
+    public B b() {
+        return new B();
+    }
+}
+</code></pre>
+<p>现在，你不需要在实例化容器的时候同时指定 <code>ConfigA.class</code> 和<code>ConfigB.class</code> ，只需要明确的指定ConfigB即可，</p>
+<pre><code class="language-java">public static void main(String[] args) {
+    ApplicationContext ctx = new AnnotationConfigApplicationContext(ConfigB.class);
+
+    // now both beans A and B will be available...
+    A a = ctx.getBean(A.class);
+    B b = ctx.getBean(B.class);
+}
+</code></pre>
+<p>这种方式简化了容器实例化，你只需要处理一个配置类，而不是记住所有的配置类。</p>
+<p>从Spring4.2，@Import也支持导入一个普通的Bean，类似<code>AnnotationConfigApplicationContext.register</code>方法，这在你想避免component scanning，只需要很少的配置类来明确定义你所有的Components。</p>
+<p><strong>在导入的@Bean定义上注入依赖关系</strong></p>
+<p>前面的例子是可行的，但很简单。在大多数实际场景中，bean在不同的配置类中都有相互依赖关系。当使用XML时，这不是问题，因为不涉及编译器，你可以声明<code>ref="someBean"</code>，并相信Spring会在容器初始化期间解决它。当使用<code>@Configuration</code>类时，Java编译器会对配置模型进行约束，即对其他bean的引用必须是有效的Java语法。</p>
+<p>幸运的是，解决这个问题很简单。正如我们已经讨论过的，一个<code>@Bean</code>方法可以有任意数量的参数来描述bean的依赖关系。考虑以下更真实的场景，有几个<code>@Configuration</code>类，每个类都依赖于其他类中声明的bean。</p>
+<pre><code class="language-java">@Configuration
+public class ServiceConfig {
+
+    @Bean
+    public TransferService transferService(AccountRepository accountRepository) {
+        return new TransferServiceImpl(accountRepository);
+    }
+}
+
+@Configuration
+public class RepositoryConfig {
+
+    @Bean
+    public AccountRepository accountRepository(DataSource dataSource) {
+        return new JdbcAccountRepository(dataSource);
+    }
+}
+
+@Configuration
+@Import({ServiceConfig.class, RepositoryConfig.class})
+public class SystemTestConfig {
+
+    @Bean
+    public DataSource dataSource() {
+        // return new DataSource
+    }
+}
+
+public static void main(String[] args) {
+    ApplicationContext ctx = new AnnotationConfigApplicationContext(SystemTestConfig.class);
+    // everything wires up across configuration classes...
+    TransferService transferService = ctx.getBean(TransferService.class);
+    transferService.transfer(100.00, &quot;A123&quot;, &quot;C456&quot;);
+}
+</code></pre>
+<p>还有另一种方法可以达到同样的效果。请记住，@Configuration类最终只是容器中的另一个Bean。这意味着它们可以像其他bean一样利用@Autowired和@Value注入以及其他功能。</p>
+<p>确保你以这种方式注入的依赖关系只是最简单的那种。在上下文的初始化过程中，@Configuration类的处理时间相当早，强迫以这种方式注入依赖关系可能会导致意外的早期初始化。只要有可能，就像前面的例子一样，采用基于参数的注入方式。</p>
+<p>另外，对于通过@Bean定义的BeanPostProcessor和BeanFactoryPostProcessor要特别小心。这些通常应该被声明为静态的@Bean方法，而不是触发其包含配置类的实例化。否则，@Autowired和@Value可能对配置类本身不起作用，因为它有可能比AutowiredAnnotationBeanPostProcessor更早地创建它作为bean实例。</p>
+<p>下面的例子展示了如何将一个Bean自动注入到另一个Bean：</p>
+<pre><code class="language-java">@Configuration
+public class ServiceConfig {
+
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @Bean
+    public TransferService transferService() {
+        return new TransferServiceImpl(accountRepository);
+    }
+}
+
+@Configuration
+public class RepositoryConfig {
+
+    private final DataSource dataSource;
+
+    public RepositoryConfig(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
+    @Bean
+    public AccountRepository accountRepository() {
+        return new JdbcAccountRepository(dataSource);
+    }
+}
+
+@Configuration
+@Import({ServiceConfig.class, RepositoryConfig.class})
+public class SystemTestConfig {
+
+    @Bean
+    public DataSource dataSource() {
+        // return new DataSource
+    }
+}
+
+public static void main(String[] args) {
+    ApplicationContext ctx = new AnnotationConfigApplicationContext(SystemTestConfig.class);
+    // everything wires up across configuration classes...
+    TransferService transferService = ctx.getBean(TransferService.class);
+    transferService.transfer(100.00, &quot;A123&quot;, &quot;C456&quot;);
+}
+</code></pre>
+<p>在@Configuration类中的构造函数注入只在Spring Framework 4.3中支持。还需要注意的是，<strong>如果目标Bean只定义了一个构造函数，就不需要指定@Autowired</strong>。</p>
+<p><strong>完全合格的beans ，方便导航</strong></p>
+<p>在前面的方案中，使用@Autowired效果很好，并且提供了所需的模块化，但是确定自动生成的bean定义到底是在哪里声明的，还是有些模糊。例如，作为一个负责<code>ServiceConfig</code>的开发人员，你怎么知道<code>@Autowired AccountRepository</code> bean到底是在哪里声明的？在代码中并没有明确，这可能就好办了。请记住，Spring Tools for Eclipse提供的工具可以呈现出显示所有东西如何连接的图表，这可能是你所需要的全部。此外，你的Java IDE可以很容易地找到AccountRepository类型的所有声明和使用，并迅速向你展示返回该类型的@Bean方法的位置。</p>
+<p>在不能接受这种模棱两可的情况下，如果您希望在您的IDE内从一个@Configuration类直接导航到另一个@Configuration类，请考虑对配置类本身进行自动布线。下面的例子展示了如何做到这一点：</p>
+<pre><code class="language-java">@Configuration
+public class ServiceConfig {
+
+    @Autowired
+    private RepositoryConfig repositoryConfig;
+
+    @Bean
+    public TransferService transferService() {
+        // navigate 'through' the config class to the @Bean method!
+        return new TransferServiceImpl(repositoryConfig.accountRepository());
+    }
+}
+</code></pre>
+<p>在前面的情况下，AccountRepository的定义是完全明确的。然而，ServiceConfig现在与RepositoryConfig紧密耦合。这就是权衡。通过使用基于接口或基于抽象类的@Configuration类，可以在一定程度上缓解这种紧耦合。考虑下面的例子:</p>
+<pre><code class="language-java">@Configuration
+public class ServiceConfig {
+
+    @Autowired
+    private RepositoryConfig repositoryConfig;
+
+    @Bean
+    public TransferService transferService() {
+        return new TransferServiceImpl(repositoryConfig.accountRepository());
+    }
+}
+
+@Configuration
+public interface RepositoryConfig {
+
+    @Bean
+    AccountRepository accountRepository();
+}
+
+@Configuration
+public class DefaultRepositoryConfig implements RepositoryConfig {
+
+    @Bean
+    public AccountRepository accountRepository() {
+        return new JdbcAccountRepository(...);
+    }
+}
+
+@Configuration
+@Import({ServiceConfig.class, DefaultRepositoryConfig.class})  // import the concrete config!
+public class SystemTestConfig {
+
+    @Bean
+    public DataSource dataSource() {
+        // return DataSource
+    }
+
+}
+
+public static void main(String[] args) {
+    ApplicationContext ctx = new AnnotationConfigApplicationContext(SystemTestConfig.class);
+    TransferService transferService = ctx.getBean(TransferService.class);
+    transferService.transfer(100.00, &quot;A123&quot;, &quot;C456&quot;);
+}
+</code></pre>
+<p>现在ServiceConfig与具体的DefaultRepositoryConfig松散耦合，内置的IDE工具仍然有用。你可以很容易地得到RepositoryConfig实现的类型层次结构。这样一来，导航@Configuration类和它们的依赖关系就变得和通常导航基于接口的代码的过程没有什么不同。</p>
+<p>如果你想影响某些bean的启动创建顺序，可以考虑将其中的一些bean声明为@Lazy（用于在首次访问时创建，而不是在启动时创建），或者声明为@DependsOn某些其他bean（确保特定的其他bean在当前bean之前创建，超出后者的直接依赖关系意味着什么）。</p>
+<h3 id="configurationbean"><strong>有条件地包含@Configuration类或@Bean方法</strong></h3>
+<p>基于一些任意的系统状态，有条件地启用或禁用一个完整的@Configuration类，甚至是单个的@Bean方法，通常是很有用的。一个常见的例子是使用@Profile注解仅在Spring环境中启用了特定的配置文件时才激活bean（详见 <a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-definition-profiles">Bean Definition Profiles</a>）。</p>
+<p>实际上，@Profile 注解是通过使用名为 <code>@Conditional</code> 这个更灵活的注解来实现的。@Conditional注解指示了在注册@Bean之前应该参考的特定<code>org.springframework.context.annotation.Condition</code>实现。</p>
+<p>Condition接口的实现提供了一个match(...)方法，该方法返回true或false。例如，下面的列表显示了实际用于@Profile的Condition实现:</p>
+<pre><code class="language-java">@Override
+public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+    // Read the @Profile annotation attributes
+    MultiValueMap&lt;String, Object&gt; attrs = metadata.getAllAnnotationAttributes(Profile.class.getName());
+    if (attrs != null) {
+        for (Object value : attrs.get(&quot;value&quot;)) {
+            if (context.getEnvironment().acceptsProfiles(((String[]) value))) {
+                return true;
+            }
+        }
+        return false;
+    }
+    return true;
+}
+</code></pre>
+<h3 id="combining-java-and-xml-configuration">Combining Java and XML Configuration</h3>
+<p>在 @Configuration 类是配置容器的主要机制的应用程序中，仍然可能需要使用至少一些 XML。在这些情况下，您可以使用 @ImportResource 并只定义您需要的 XML。这样做实现了一种 "以Java为中心 "的配置容器的方法，并将XML保持在最低限度。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.instant", "navigation.tracking", "toc.follow", "toc.integrate", "search.highlight", "search.suggest", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

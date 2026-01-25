@@ -1,0 +1,1443 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://spiritn.github.io/note-doc/java/spring/spring/spring-mvc/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Spring mvc - 我的技术文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#webmvcconfigurer" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="我的技术文档" class="md-header__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的技术文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Spring mvc
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../database/02-mysql%E6%9E%B6%E6%9E%84/" class="md-tabs__link">
+          
+  
+  
+  数据库
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../java8/" class="md-tabs__link">
+          
+  
+  
+  Java
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../01-Overview/" class="md-tabs__link">
+          
+  
+  
+  spring
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../spring-boot/GettingStarted/" class="md-tabs__link">
+          
+  
+  
+  springboot
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="我的技术文档" class="md-nav__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    我的技术文档
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/02-mysql%E6%9E%B6%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mySQL架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/00-%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/03-InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    InnoDB存储引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/04-%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/05-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日志系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JAVA8
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-Overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-IocContainer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IOC容器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-Ioc%E5%AE%B9%E5%99%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IOC容器2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-Resource/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resource
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Validation-DataBinding-Type-Conversion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spring-AOP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AOP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Null-safetyAndLogging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Null-safe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Spring%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    spring常见问题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    springboot
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    springboot
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring-boot/GettingStarted/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    简介
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring-boot/UsingSpringBoot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    如何使用
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring-boot/spring-boot-features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    功能特性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring-boot/spring-boot%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    核心概念
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><a href="https://docs.spring.io/spring-framework/docs/5.3.1/reference/html/web.html#mvc">https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#mvc</a></p>
+<p><a href="https://www.w3cschool.cn/spring_mvc_documentation_linesh_translation/spring_mvc_documentation_linesh_translation-dgcm27r3.htm">w3cSchool spring-mvc中文文档</a></p>
+<h1 id="webmvcconfigurer">WebMvcConfigurer</h1>
+<p><em>@EnableWebMvc会import导入</em>DelegatingWebMvcConfiguration类，这个类继承了WebMvcConfigurationSupport，并且持有WebMvcConfigurerComposite属性，</p>
+<pre><code class="language-java">class WebMvcConfigurerComposite implements WebMvcConfigurer {
+
+    // 持有所有的WebMvcConfigurer实现，包括自定义的
+    private final List&lt;WebMvcConfigurer&gt; delegates = new ArrayList&lt;&gt;();
+
+
+    public void addWebMvcConfigurers(List&lt;WebMvcConfigurer&gt; configurers) {
+        if (!CollectionUtils.isEmpty(configurers)) {
+            this.delegates.addAll(configurers);
+        }
+    }
+}
+</code></pre>
+<p>所以我们只需要实现自己的WebMvcConfigurer，去定义自己的配置即可。</p>
+<p>接下来我们看下WebMvcConfigurer提供了哪些配置接口出来：</p>
+<pre><code class="language-java">public interface WebMvcConfigurer {
+
+    /**
+    * 用来配置HandlerMappings时的斜杠支持，后缀，路径匹配等等
+    **/
+    default void configurePathMatch(PathMatchConfigurer configurer) {
+    }
+    /**
+     * 配置Convert和Formatter
+     */
+    default void addFormatters(FormatterRegistry registry) {
+    }
+
+    /**
+     * 
+     */
+    default void addInterceptors(InterceptorRegistry registry) {
+    }
+
+    /**
+    * 配置HttpMessageConverter用来解析request和responsede body的读和写。
+    * 新的List会覆盖默认的，如果不想覆盖使用下面的extendMessageConverters   
+    **/
+    default void configureMessageConverters(List&lt;HttpMessageConverter&lt;?&gt;&gt; converters) {
+    }
+    default void extendMessageConverters(List&lt;HttpMessageConverter&lt;?&gt;&gt; converters) {
+    }
+}    
+</code></pre>
+<h1 id="requestmappinghandleradapter">RequestMappingHandlerAdapter</h1>
+<p>这个类主要实现了HandlerAdapter，InitializingBean和Order接口。用来服务支撑<em>@RequestMapping修饰的方法，</em></p>
+<p><em>支持自定义参数解析器（</em><em>setCustomArgumentResolvers</em><em>）和返回值处理器（</em><em>setCustomReturnValueHandlers</em><em>），也可以重新配置，装饰已有的参数解析器和返回值处理器。</em></p>
+<h2 id="1-handlermethodargumentresolverhandlermethodreturnvaluehandler">1. 初始化所有的HandlerMethodArgumentResolver和HandlerMethodReturnValueHandler。</h2>
+<pre><code class="language-java">@Override
+public void afterPropertiesSet() {
+    // Do this first, it may add ResponseBody advice beans
+    initControllerAdviceCache();
+
+    if (this.argumentResolvers == null) {
+        List&lt;HandlerMethodArgumentResolver&gt; resolvers = getDefaultArgumentResolvers();
+        this.argumentResolvers = new HandlerMethodArgumentResolverComposite().addResolvers(resolvers);
+    }
+    if (this.initBinderArgumentResolvers == null) {
+        List&lt;HandlerMethodArgumentResolver&gt; resolvers = getDefaultInitBinderArgumentResolvers();
+        this.initBinderArgumentResolvers = new HandlerMethodArgumentResolverComposite().addResolvers(resolvers);
+    }
+    if (this.returnValueHandlers == null) {
+        List&lt;HandlerMethodReturnValueHandler&gt; handlers = getDefaultReturnValueHandlers();
+        this.returnValueHandlers = new HandlerMethodReturnValueHandlerComposite().addHandlers(handlers);
+    }
+}
+/**
+* Return the list of return value handlers to use including built-in and
+* custom handlers provided via {@link #setReturnValueHandlers}.
+*/
+private List&lt;HandlerMethodReturnValueHandler&gt; getDefaultReturnValueHandlers() {
+    List&lt;HandlerMethodReturnValueHandler&gt; handlers = new ArrayList&lt;&gt;(20);
+
+    // Single-purpose return value types
+    handlers.add(new ModelAndViewMethodReturnValueHandler());
+    handlers.add(new ModelMethodProcessor());
+    handlers.add(new ViewMethodReturnValueHandler());
+    handlers.add(new ResponseBodyEmitterReturnValueHandler(getMessageConverters(),
+                                                           this.reactiveAdapterRegistry, this.taskExecutor, this.contentNegotiationManager));
+    handlers.add(new StreamingResponseBodyReturnValueHandler());
+    handlers.add(new HttpEntityMethodProcessor(getMessageConverters(),
+                                               this.contentNegotiationManager, this.requestResponseBodyAdvice));
+    handlers.add(new HttpHeadersReturnValueHandler());
+    handlers.add(new CallableMethodReturnValueHandler());
+    handlers.add(new DeferredResultMethodReturnValueHandler());
+    handlers.add(new AsyncTaskMethodReturnValueHandler(this.beanFactory));
+
+    // Annotation-based return value types
+    handlers.add(new ModelAttributeMethodProcessor(false));
+    handlers.add(new RequestResponseBodyMethodProcessor(getMessageConverters(),
+                                                        this.contentNegotiationManager, this.requestResponseBodyAdvice));
+
+    // Multi-purpose return value types
+    handlers.add(new ViewNameMethodReturnValueHandler());
+    handlers.add(new MapMethodProcessor());
+
+    // Custom return value types
+    if (getCustomReturnValueHandlers() != null) {
+        handlers.addAll(getCustomReturnValueHandlers());
+    }
+
+    // Catch-all
+    if (!CollectionUtils.isEmpty(getModelAndViewResolvers())) {
+        handlers.add(new ModelAndViewResolverMethodReturnValueHandler(getModelAndViewResolvers()));
+    }
+    else {
+        handlers.add(new ModelAttributeMethodProcessor(true));
+    }
+
+    return handlers;
+}
+/**
+* Return the list of argument resolvers to use including built-in resolvers
+* and custom resolvers provided via {@link #setCustomArgumentResolvers}.
+*/
+private List&lt;HandlerMethodArgumentResolver&gt; getDefaultArgumentResolvers() {
+    List&lt;HandlerMethodArgumentResolver&gt; resolvers = new ArrayList&lt;&gt;(30);
+
+    // Annotation-based argument resolution
+    resolvers.add(new RequestParamMethodArgumentResolver(getBeanFactory(), false));
+    resolvers.add(new RequestParamMapMethodArgumentResolver());
+    resolvers.add(new PathVariableMethodArgumentResolver());
+    resolvers.add(new PathVariableMapMethodArgumentResolver());
+    resolvers.add(new MatrixVariableMethodArgumentResolver());
+    resolvers.add(new MatrixVariableMapMethodArgumentResolver());
+    resolvers.add(new ServletModelAttributeMethodProcessor(false));
+    resolvers.add(new RequestResponseBodyMethodProcessor(getMessageConverters(), this.requestResponseBodyAdvice));
+    resolvers.add(new RequestPartMethodArgumentResolver(getMessageConverters(), this.requestResponseBodyAdvice));
+    resolvers.add(new RequestHeaderMethodArgumentResolver(getBeanFactory()));
+    resolvers.add(new RequestHeaderMapMethodArgumentResolver());
+    resolvers.add(new ServletCookieValueMethodArgumentResolver(getBeanFactory()));
+    resolvers.add(new ExpressionValueMethodArgumentResolver(getBeanFactory()));
+    resolvers.add(new SessionAttributeMethodArgumentResolver());
+    resolvers.add(new RequestAttributeMethodArgumentResolver());
+
+    // Type-based argument resolution
+    resolvers.add(new ServletRequestMethodArgumentResolver());
+    resolvers.add(new ServletResponseMethodArgumentResolver());
+    resolvers.add(new HttpEntityMethodProcessor(getMessageConverters(), this.requestResponseBodyAdvice));
+    resolvers.add(new RedirectAttributesMethodArgumentResolver());
+    resolvers.add(new ModelMethodProcessor());
+    resolvers.add(new MapMethodProcessor());
+    resolvers.add(new ErrorsMethodArgumentResolver());
+    resolvers.add(new SessionStatusMethodArgumentResolver());
+    resolvers.add(new UriComponentsBuilderMethodArgumentResolver());
+
+    // Custom arguments
+    if (getCustomArgumentResolvers() != null) {
+        resolvers.addAll(getCustomArgumentResolvers());
+    }
+
+    // Catch-all
+    resolvers.add(new RequestParamMethodArgumentResolver(getBeanFactory(), true));
+    resolvers.add(new ServletModelAttributeMethodProcessor(true));
+
+    return resolvers;
+}
+</code></pre>
+<h2 id="2">2. 配置自定义的参数解析器和返回值处理器</h2>
+<pre><code class="language-java">/**
+* Provide resolvers for custom argument types. Custom resolvers are ordered
+* after built-in ones. To override the built-in support for argument
+* resolution use {@link #setArgumentResolvers} instead.
+* 添加自定义的customArgumentResolvers，它的执行在内置的后面
+*
+**/
+public void setCustomArgumentResolvers(@Nullable List&lt;HandlerMethodArgumentResolver&gt; argumentResolvers) {
+    this.customArgumentResolvers = argumentResolvers;
+}
+
+/**
+* 拿到内置的参数解析器列表，从而进行装饰加强，或覆盖
+*/
+public void setArgumentResolvers(@Nullable List&lt;HandlerMethodArgumentResolver&gt; argumentResolvers) {
+    if (argumentResolvers == null) {
+        this.argumentResolvers = null;
+    }
+    else {
+        this.argumentResolvers = new HandlerMethodArgumentResolverComposite();
+        this.argumentResolvers.addResolvers(argumentResolvers);
+    }
+}
+
+
+/**
+* 添加自定义的返回值处理器列表
+*/
+public void setCustomReturnValueHandlers(@Nullable List&lt;HandlerMethodReturnValueHandler&gt; returnValueHandlers) {
+    this.customReturnValueHandlers = returnValueHandlers;
+}
+
+/**
+* 拿到内置的返回值处理器列表，从而进行装饰加强，或覆盖
+*/
+public void setReturnValueHandlers(@Nullable List&lt;HandlerMethodReturnValueHandler&gt; returnValueHandlers) {
+    if (returnValueHandlers == null) {
+        this.returnValueHandlers = null;
+    }
+    else {
+        this.returnValueHandlers = new HandlerMethodReturnValueHandlerComposite();
+        this.returnValueHandlers.addHandlers(returnValueHandlers);
+    }
+}
+</code></pre>
+<h2 id="3-setrequestbodyadvicesetresponsebodyadvice">3. 设置setRequestBodyAdvice和setResponseBodyAdvice</h2>
+<p>用来在responseBody转换之前的拦截通知。比如添加统一的返回对象</p>
+<pre><code class="language-java">/**
+* Add one or more {@code RequestBodyAdvice} instances to intercept the
+* request before it is read and converted for {@code @RequestBody} and
+* {@code HttpEntity} method arguments.
+*/
+public void setRequestBodyAdvice(@Nullable List&lt;RequestBodyAdvice&gt; requestBodyAdvice) {
+    if (requestBodyAdvice != null) {
+        this.requestResponseBodyAdvice.addAll(requestBodyAdvice);
+    }
+}
+
+/**
+* Add one or more {@code ResponseBodyAdvice} instances to intercept the
+* response before {@code @ResponseBody} or {@code ResponseEntity} return
+* values are written to the response body.
+*/
+public void setResponseBodyAdvice(@Nullable List&lt;ResponseBodyAdvice&lt;?&gt;&gt; responseBodyAdvice) {
+    if (responseBodyAdvice != null) {
+        this.requestResponseBodyAdvice.addAll(responseBodyAdvice);
+    }
+}
+</code></pre>
+<h1 id="1-filter">1. filter</h1>
+<p>spring-web提供了几个有用的filter：</p>
+<h4 id="formcontentfilter">FormContentFilter</h4>
+<p>浏览器只能提交GET，POST方式的请求，非浏览器端可以使用如PUT，PATCH，DELETE等方式的请求。但是 Servlet API 的ServletRequest.getParameter*()方法只能支持POST HTTP。</p>
+<p>spring web提供了FormContentFilter，拦截content type为application/x-www-form-urlencodedPUT,PATCH，DELETE请求，从request body中读取数据，封装起来，使得 Servlet API 的ServletRequest.getParameter*()方法可以使用。</p>
+<h4 id="forwarded-headers">Forwarded Headers</h4>
+<p>一个请求经过代理如负载均衡后，他的host，post等可能发生改变，这时想要获取正确的原始地址就十分困难。</p>
+<p>所以定义了forward header来存放原始的请求信息，如<code>X-Forwarded-Host</code>, <code>X-Forwarded-Port</code>, <code>X-Forwarded-Proto</code>, <code>X-Forwarded-Ssl</code>, and <code>X-Forwarded-Prefix。</code></p>
+<p>ForwardedHeaderFilter可以基于forward header修改请求的host，port，schema,并且去除这些header。这个filter会包装request，所以他必须在其他filter之前，如RequestContextFilter。</p>
+<h4 id="shallowetagheaderfilter">ShallowEtagHeaderFilter</h4>
+<p>通过Etag，如果请求的内容没有发生改变，返回304。</p>
+<h4 id="corsfilter">CorsFilter</h4>
+<p>spring mvc提供了细粒度 的CORS支持，可以在controller方法上添加注解的方式。</p>
+<p>注意如果使用Spring Security框架，注意CorsFilter保持在spring security的filter前面</p>
+<p>另外，spring mvc中的过滤器基本都继承自OncePerRequestFilter，这个接口好好看看。自己写的filter也可以继承这个类</p>
+<h1 id="2-httpmessageconverter">2. HttpMessageConverter</h1>
+<p>这篇文章介绍springmvc中的HttpMessageConverter，它负责将http请求中进行java object和json,xml之间的转换。</p>
+<p><strong><em>client和server之间的通信</em></strong>：</p>
+<p>每个HttpMessageConverter实现类都有支持的MIME Types。当接收到一个http请求时，spring会根据request header里的accept决定返回什么格式的内容。然后寻找MIME Type对应的HttpMessageConverter，利用它将entity进行转换返回。</p>
+<p>如果请求的body里是json数据，spring会根据Content-Type的application/json，来寻找一个<em>HttpMessageConverter来</em>解析request body的json反序列化为java object。</p>
+<p>默认启用的HttpMessageConverter有10个：</p>
+<p><img alt="image.png" src="../images/httpMessageConverter.png" /></p>
+<h1 id="json">传输json</h1>
+<p>@<em>ResponseBody</em> 会将controller方法的返回值序列化为json写入到response。</p>
+<p>MappingJackson2HttpMessageConverter是我们最常用的，<em>主要用来json的转换，可以是指定的类型，也可以是无类型的如map。默认支持的</em><em>MediaType是</em><em>application/json</em>  <em>application/*+json with</em> <em>UTF-8，可以进行修改配置。</em></p>
+<p><em>其他的MediaType由其他默认的HttpMessageConverter负责转换：</em></p>
+<p><img alt="MappingJackson2HttpMessageConverter.jpg" src="../images/httpMessageConverter%E6%8E%A5%E5%8F%A3.jpeg" />*</p>
+<p><em>使用的json转换是利用</em><code>com.fasterxml.jackson.databind.ObjectMapper</code>，通常我们能做的也就是定义自己的ObjectMapper，来配置我们自己的特殊的json转换。比如定义自己的JavaTimeModule。spring5.0已经支持LocalDateTime，所有RequestBody里的LocalDateTime可以正常反序列化。</p>
+<p>所以，<em>HttpMessageConverter作用的范围也就是@RequestBody和@ResponseBody这两个需要json序列化和反序列化的地方??</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.instant", "navigation.tracking", "toc.follow", "toc.integrate", "search.highlight", "search.suggest", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

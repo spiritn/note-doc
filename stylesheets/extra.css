@@ -1,0 +1,31 @@
+/* 增强字体渲染、清晰度和对比度 */
+body {
+  font-weight: 400; /* 适当加粗正文 */
+  text-rendering: optimizeLegibility; /* 优化字体渲染 */
+  -webkit-font-smoothing: antialiased; /* Mac 字体抗锯齿 */
+  -moz-osx-font-smoothing: grayscale; /* Firefox 字体抗锯齿 */
+}
+
+/* 提高正文字体大小和行高 */
+.md-typeset {
+  font-size: 0.75rem; /* 稍微调大基础字号 */
+  line-height: 1.6;   /* 增加行高，提升可读性 */
+}
+
+/* 增强标题清晰度 */
+.md-typeset h1, .md-typeset h2 {
+  font-weight: 600; /* 标题字体加粗 */
+  color: var(--md-default-fg-color--light); /* 使用主题变量，通常对比度更高 */
+}
+
+/* 增强代码块和内联代码的视觉体验 */
+.md-typeset code {
+  font-weight: 500; /* 代码加粗 */
+  background-color: var(--md-code-bg-color); /* 使用主题变量，对比度更好 */
+  border-radius: 0.2rem; /* 轻微圆角 */
+}
+
+/* 可选：调整导航栏和侧边栏的字体清晰度 */
+.md-nav__item .md-nav__link {
+  font-weight: 500;
+}

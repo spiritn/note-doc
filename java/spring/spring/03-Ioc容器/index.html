@@ -1,0 +1,2036 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://spiritn.github.io/note-doc/java/spring/spring/03-Ioc%E5%AE%B9%E5%99%A8/">
+      
+      
+        <link rel="prev" href="../02-IocContainer/">
+      
+      
+        <link rel="next" href="../04-Resource/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>IOC容器2 - 我的技术文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#environment" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="我的技术文档" class="md-header__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的技术文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              IOC容器2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../database/02-mysql%E6%9E%B6%E6%9E%84/" class="md-tabs__link">
+          
+  
+  
+  数据库
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../java8/" class="md-tabs__link">
+          
+  
+  
+  Java
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../01-Overview/" class="md-tabs__link">
+          
+  
+  
+  spring
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../spring-boot/GettingStarted/" class="md-tabs__link">
+          
+  
+  
+  springboot
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="我的技术文档" class="md-nav__button md-logo" aria-label="我的技术文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    我的技术文档
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/02-mysql%E6%9E%B6%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mySQL架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/00-%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/03-InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    InnoDB存储引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/04-%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../database/05-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日志系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../java8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JAVA8
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-Overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-IocContainer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IOC容器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IOC容器2
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IOC容器2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#beanprofiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bean定义的Profiles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bean定义的Profiles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        使用 @Profile 注解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        配置文件表达式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        自定义组合注解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#profile_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @Profile 生效规则
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#profile_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        激活Profile
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#propertysource" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        属性源抽象PropertySource的抽象
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="属性源抽象PropertySource的抽象">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#propertysource_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @PropertySource的使用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        语句中的占位符解析
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附录
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-Resource/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resource
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Validation-DataBinding-Type-Conversion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spring-AOP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AOP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Null-safetyAndLogging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Null-safe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Spring%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    spring常见问题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    springboot
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    springboot
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring-boot/GettingStarted/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    简介
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring-boot/UsingSpringBoot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    如何使用
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring-boot/spring-boot-features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    功能特性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring-boot/spring-boot%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    核心概念
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="environment">Environment 的抽象</h1>
+<p>Environment 接口是集成在容器中的一种抽象，它封装了应用环境的两个核心维度：配置文件（profiles） 和 属性（properties）。
+- 配置文件（profiles）
+配置文件是一组命名的、逻辑化的 Bean 定义集合，仅当指定的配置文件处于激活状态时，对应的 Bean 定义才会注册到容器中。无论 Bean 是通过 XML 还是注解定义，都可以为其分配配置文件。Environment 对象在配置文件管理中的作用是：确定当前激活的配置文件（若有），以及默认应激活的配置文件（若有）。
+- 属性（properties）
+属性在几乎所有应用中都扮演着重要角色，其来源多种多样，包括：属性文件、JVM 系统属性、系统环境变量、JNDI、Servlet 上下文参数、临时 Properties 对象、Map 对象等。Environment 对象在属性管理中的作用是：为用户提供便捷的服务接口，用于配置属性源（PropertySource）和从属性源中解析属性值。</p>
+<h2 id="beanprofiles">Bean定义的Profiles</h2>
+<p>Bean 定义配置文件是核心容器提供的一种机制，支持在不同环境中注册不同的 Bean。这里的 “环境” 对不同用户可能有不同含义，该特性可满足多种使用场景，例如：
+- 开发环境使用内存数据源，而 QA 或生产环境从 JNDI 中查找同一数据源；
+- 仅当应用部署到性能测试环境时，才注册监控基础设施；
+- 为客户 A 和客户 B 的部署场景，注册不同的 Bean 自定义实现。</p>
+<p>场景示例
+假设某应用需要一个 DataSource：
+测试环境：使用嵌入式数据库，配置如下：</p>
+<pre><code class="language-java">@Bean
+public DataSource dataSource() {
+    return new EmbeddedDatabaseBuilder()
+        .setType(EmbeddedDatabaseType.HSQL)
+        .addScript(&quot;my-schema.sql&quot;)
+        .addScript(&quot;my-test-data.sql&quot;)
+        .build();
+}
+</code></pre>
+<p>现生产环境：数据源已注册到应用服务器的 JNDI 目录，配置如下：</p>
+<pre><code class="language-java">@Bean(destroyMethod=&quot;&quot;)
+public DataSource dataSource() throws Exception {
+    Context ctx = new InitialContext();
+    return (DataSource) ctx.lookup(&quot;java:comp/env/jdbc/datasource&quot;);
+}
+</code></pre>
+<p>核心问题是如何根据当前环境切换这两种配置。Spring 提供的 Bean 定义配置文件功能，正是解决该问题的核心方案。</p>
+<h3 id="profile">使用 @Profile 注解</h3>
+<p>@Profile 注解用于标识：仅当一个或多个指定的配置文件激活时，对应的组件才会被注册到容器中。基于上述示例，可通过 @Profile 重构配置：</p>
+<pre><code class="language-java">@Configuration
+@Profile(&quot;development&quot;)
+public class StandaloneDataConfig {
+
+    @Bean
+    public DataSource dataSource() {
+        return new EmbeddedDatabaseBuilder()
+            .setType(EmbeddedDatabaseType.HSQL)
+            .addScript(&quot;classpath:com/bank/config/sql/schema.sql&quot;)
+            .addScript(&quot;classpath:com/bank/config/sql/test-data.sql&quot;)
+            .build();
+    }
+}
+</code></pre>
+<pre><code class="language-java">@Configuration
+@Profile(&quot;production&quot;)
+public class JndiDataConfig {
+
+    @Bean(destroyMethod=&quot;&quot;)// 禁用默认的销毁方法推断
+    public DataSource dataSource() throws Exception {
+        Context ctx = new InitialContext();
+        return (DataSource) ctx.lookup(&quot;java:comp/env/jdbc/datasource&quot;);
+    }
+}
+</code></pre>
+<h3 id="_1">配置文件表达式</h3>
+<p>@Profile 的值可以是简单配置文件名（如 production），也可以是配置文件表达式（支持复杂逻辑，如 production &amp; us-east）。支持的运算符如下：
+- !：逻辑 “非”（NOT）
+- &amp;：逻辑 “与”（AND）
+- |：逻辑 “或”（OR）
+注意：若同时使用 &amp; 和 |，必须通过括号明确优先级。例如 production &amp; us-east | eu-central 是无效表达式，需改为 production &amp; (us-east | eu-central)。</p>
+<h3 id="_2">自定义组合注解</h3>
+<p>@Profile 可作为元注解，用于创建自定义组合注解。例如，定义一个 @Production 注解，替代 @Profile("production")：</p>
+<pre><code class="language-java">@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Profile(&quot;production&quot;)
+public @interface Production {
+}
+</code></pre>
+<h3 id="profile_1">@Profile 生效规则</h3>
+<ul>
+<li>若 @Configuration 类标注 @Profile，则仅当指定配置文件激活时，该类中的所有 @Bean 方法和 @Import 注解才会生效；</li>
+<li>若 @Component 或 @Configuration 类标注 @Profile({"p1", "p2"})，则仅当 p1 或 p2 激活时，该类才会被注册和处理；</li>
+<li>若配置文件名前缀为 !（如 @Profile({"p1", "!p2"})），则仅当 p1 激活 或 p2 未激活时，标注的组件才会被注册。</li>
+</ul>
+<p>方法级别的 @Profile</p>
+<p>@Profile 也可标注在 @Bean 方法上，用于为同一个配置类中的某个 Bean 指定配置文件（例如，为同一个 Bean 提供不同环境的变体）：</p>
+<pre><code class="language-java">@Configuration
+public class AppConfig {
+
+    @Bean(&quot;dataSource&quot;)
+    @Profile(&quot;development&quot;) // development被激活时才会注册
+    public DataSource standaloneDataSource() {
+        return new EmbeddedDatabaseBuilder()
+            .setType(EmbeddedDatabaseType.HSQL)
+            .addScript(&quot;classpath:com/bank/config/sql/schema.sql&quot;)
+            .addScript(&quot;classpath:com/bank/config/sql/test-data.sql&quot;)
+            .build();
+    }
+
+    @Bean(&quot;dataSource&quot;)
+    @Profile(&quot;production&quot;) // production被激活时才会注册
+    public DataSource jndiDataSource() throws Exception {
+        Context ctx = new InitialContext();
+        return (DataSource) ctx.lookup(&quot;java:comp/env/jdbc/datasource&quot;);
+    }
+}
+</code></pre>
+<blockquote>
+<p>注意：若 @Bean 方法存在重载（同名不同参数），则所有重载方法必须统一标注 @Profile 条件。否则，仅第一个重载方法的 @Profile 生效，且无法通过 @Profile 选择不同参数签名的重载方法</p>
+</blockquote>
+<h2 id="profile_2"><strong>激活Profile</strong></h2>
+<p>配置完成后，需明确告知 Spring 激活哪个配置文件。若未激活任何配置文件，容器将无法找到 dataSource 等按配置文件隔离的 Bean，会抛出 NoSuchBeanDefinitionException。</p>
+<p>激活profile可以通过多种方式进行，但最直接的方式是通过ApplicationContext对Environment API进行编程。下面的例子展示了如何做到这一点。
+1. 编程式激活</p>
+<pre><code class="language-java">AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+ctx.getEnvironment().setActiveProfiles(&quot;development&quot;);
+ctx.register(SomeConfig.class, StandaloneDataConfig.class, JndiDataConfig.class);
+ctx.refresh();
+</code></pre>
+<ol>
+<li>声明式激活
+   通过 spring.profiles.active 属性激活，支持多种配置方式：
+   系统环境变量；
+   JVM 系统属性（如 -Dspring.profiles.active=development）；
+   web.xml 中的 Servlet 上下文参数；
+   JNDI 配置；
+   集成测试中，通过 spring-test 模块的 @ActiveProfiles 注解 </li>
+<li>激活多个配置文件
+   编程式：setActiveProfiles() 支持可变参数</li>
+<li><strong>Default Profile</strong></li>
+</ol>
+<p>default profile表示默认情况下启用：</p>
+<pre><code class="language-java">@Configuration
+@Profile(&quot;default&quot;)
+public class DefaultDataConfig {
+
+    @Bean
+    public DataSource dataSource() {
+        return new EmbeddedDatabaseBuilder()
+            .setType(EmbeddedDatabaseType.HSQL)
+            .addScript(&quot;classpath:com/bank/config/sql/schema.sql&quot;)
+            .build();
+    }
+}
+</code></pre>
+<p>如果没有profile被激活，就会创建这个dataSource。你可以把它看作是为一个或多个bean提供默认定义的一种方式。如果启用了任何配置文件，则默认配置文件不适用。</p>
+<p>你可以通过使用环境中的setDefaultProfiles()或声明性地使用spring.profile.default属性来更改默认配置文件的名称。</p>
+<h2 id="propertysource">属性源抽象<code>PropertySource</code>的抽象</h2>
+<p>Spring 的 Environment 抽象支持在可配置的属性源层级中搜索属性。
+核心概念
+PropertySource：对键值对属性源的简单抽象（如系统属性、环境变量、属性文件等）；
+层级搜索：Environment 会在多个 PropertySource 中按优先级搜索属性，优先级高的属性源会覆盖优先级低的。
+默认属性源
+StandardEnvironment（适用于独立应用）：默认包含两个属性源，优先级为：JVM 系统属性（System.getProperties()）&gt; 系统环境变量（System.getenv()）；
+StandardServletEnvironment（适用于 Web 应用）：在 StandardEnvironment 基础上，新增 Servlet 配置参数、Servlet 上下文参数、JNDI 属性源（若 JNDI 可用），优先级顺序为：
+ServletConfig 参数（如 DispatcherServlet 上下文）
+ServletContext 参数（web.xml 中的 context-param）
+JNDI 环境变量（java:comp/env/ 下的配置）
+JVM 系统属性（-D 命令行参数）
+操作系统环境变量</p>
+<pre><code class="language-java">ApplicationContext ctx = new GenericApplicationContext();
+Environment env = ctx.getEnvironment();
+boolean containsMyProperty = env.containsProperty(&quot;my-property&quot;);
+System.out.println(&quot;Does my environment contain the 'my-property' property? &quot; + containsMyProperty);
+</code></pre>
+<p>在这段代码中，我们看到了询问Spring是否为当前环境定义了my-property属性的高级方法。为了回答这个问题，Environment对象在一组PropertySource对象上执行搜索。<strong>PropertySource是对任何来源 key-value 键值对的简单抽象</strong>，Spring的StandardEnvironment配置了两个PropertySource对象--一个代表JVM系统属性集（System.getProperties()），一个代表系统环境变量集（System.getenv()）。</p>
+<blockquote>
+<p>这些默认属性源存在于StandardEnvironment中，用于独立的应用程序。StandardServletEnvironment被填充了额外的默认属性源，包括servlet config和servlet上下文参数。它可以选择启用一个JndiPropertySource。</p>
+</blockquote>
+<p>具体来说，当你使用StandardEnvironment时，如果运行时存在my-property系统属性或my-property环境变量，则调用env.containsProperty("my-property")返回true。</p>
+<p>执行的搜索是分层的。默认情况下，系统属性优先于环境变量。因此，如果在调用env.getProperty("my-property")的过程中，my-property属性恰好在两个地方都被设置了，那么系统属性值就会 "获胜 "并被返回。请注意，属性值不会被合并，而是被前面的条目完全覆盖。</p>
+<p>对于一个普通的StandardServletEnvironment，完整的层次结构如下，最高优先级的条目在顶部:</p>
+<ol>
+<li>ServletConfig 参数(if applicable — 例如<code>DispatcherServlet</code> 的上下文)</li>
+<li>ServletContext 参数(web.xml context-param entries)</li>
+<li>JNDI environment variables (<code>java:comp/env/</code> entries)</li>
+<li>JVM system properties系统属性 (<code>-D</code> command-line arguments)</li>
+<li>JVM system environment (操作系统环境变量operating system environment variables)</li>
+</ol>
+<p>最重要的是，整个机制是可配置的。假如你有一个自定义的属性源，你想把它集成到这个搜索中。要做到这一点，请实现并实例化您自己的<code>PropertySource</code>，并将其添加到当前<code>Environment</code>的<code>PropertySources</code>集合中。下面的例子展示了如何做到这一点：</p>
+<pre><code class="language-java">ConfigurableApplicationContext ctx = new GenericApplicationContext();
+MutablePropertySources sources = ctx.getEnvironment().getPropertySources();
+sources.addFirst(new MyPropertySource());
+</code></pre>
+<pre><code class="language-java">public class ApolloEncryptApplicationContextInitializer implements ApplicationContextInitializer&lt;ConfigurableApplicationContext&gt; {
+    public ApolloEncryptApplicationContextInitializer() {
+    }
+    // 会让bootstrap.yml配置文件失效，因为改变了bootstrap.yml在application启动之前就加载的默认配置
+    public void initialize(ConfigurableApplicationContext applicationContext) {
+        ConfigurableEnvironment environment = applicationContext.getEnvironment();
+        Properties properties = new Properties();
+        properties.setProperty(&quot;jasypt.encryptor.password&quot;, &quot;aaaa&quot;);
+        PropertiesPropertySource propertiesPropertySource = new PropertiesPropertySource(&quot;applicationConfig&quot;, properties);
+        MutablePropertySources mutablePropertySources = environment.getPropertySources();
+        mutablePropertySources.addFirst(propertiesPropertySource);
+    }
+}
+</code></pre>
+<p>在前面的代码中，MyPropertySource在搜索中以最高优先级被添加。如果它包含一个my-property属性，则检测并返回该属性，而不是任何其他PropertySource中的任何my-property属性。MutablePropertySources API暴露了许多方法，这些方法允许对属性源集合进行精确的操作。</p>
+<h3 id="propertysource_1">@PropertySource的使用</h3>
+<p>使用 @PropertySource 注解
+@PropertySource 注解提供了一种便捷的声明式方式，用于向 Spring 的 Environment 中添加 PropertySource。</p>
+<p>假设有 app.properties 文件，内容为 testbean.name=myTestBean，通过 @PropertySource 引入：</p>
+<pre><code class="language-java">@Configuration
+@PropertySource(&quot;classpath:/com/myco/app.properties&quot;)
+public class AppConfig {
+
+    @Autowired
+    Environment env;
+
+    @Bean
+    public TestBean testBean() {
+        TestBean testBean = new TestBean();
+        testBean.setName(env.getProperty(&quot;testbean.name&quot;));
+        return testBean;
+    }
+}
+</code></pre>
+<p>占位符支持</p>
+<p>@PropertySource 的资源路径中支持 ${...} 占位符，占位符会从已注册的属性源中解析：</p>
+<pre><code class="language-java">@Configuration
+@PropertySource(&quot;classpath:/com/${my.placeholder:default/path}/app.properties&quot;)
+public class AppConfig {
+
+    @Autowired
+    Environment env;
+
+    @Bean
+    public TestBean testBean() {
+        TestBean testBean = new TestBean();
+        testBean.setName(env.getProperty(&quot;testbean.name&quot;));
+        return testBean;
+    }
+}
+</code></pre>
+<p>假设my.placeholder存在于已经注册的某个属性源中（例如系统属性或环境变量），则placeholder会被解析为相应的值。如果没有，则使用default/path作为默认值。如果没有指定默认值，且无法解析属性，则会抛出IllegalArgumentException。</p>
+<p>根据Java 8惯例，@PropertySource注解是可以重复的。但是，所有这样的@PropertySource注解都需要在同一层次上声明，可以直接在配置类上声明，也可以在同一个自定义注解中作为元注解声明。不推荐混合使用直接注解和元注解，因为直接注解有效地覆盖了元注解。如：</p>
+<pre><code class="language-java">@Getter
+@Setter
+@Component
+@ConfigurationProperties(&quot;data.redis&quot;)
+@PropertySource(value = &quot;classpath:data/read/test.properties&quot;, ignoreResourceNotFound = true) 
+@PropertySource(value = &quot;file://${CONFIG_HOME}/data/redis/test.properties&quot;, ignoreResourceNotFound = true)
+public class DataProperties {
+
+    private UserProps user;
+
+    private Device connect;
+    private String oauthJwtSecret;
+
+    private List&lt;Device&gt; devices;
+
+    @Getter
+    @Setter
+    public static class UserProps {
+        private String email;
+        private String countryCode;
+        private String password;
+    }
+
+    @Getter
+    @Setter
+    public static class Device {
+        private String uuid;
+        private String pid;
+    }
+}
+</code></pre>
+<h3 id="_3">语句中的占位符解析</h3>
+<p>历史上，XML 元素中的占位符仅能通过 JVM 系统属性或环境变量解析。如今，由于 Environment 抽象已集成到整个容器中，占位符解析可通过 Environment 灵活配置：
+调整系统属性和环境变量的搜索优先级；
+移除默认属性源；
+添加自定义属性源。
+示例
+无论 customer 属性定义在哪个属性源中，只要能被 Environment 访问到，以下配置即可生效：</p>
+<pre><code class="language-xml">&lt;beans&gt;
+    &lt;import resource=&quot;com/bank/service/${customer}-config.xml&quot;/&gt;
+&lt;/beans&gt;
+</code></pre>
+<h2 id="_4">附录</h2>
+<p><strong>环境变量system environment variables</strong>是和操作系统相关的，Windows和Linux是不同的语法</p>
+<p>环境变量的获取通过<code>System.getenv()</code>，不提供设置环境变量的方法。</p>
+<p>环境变量产生更多的<strong>全局效应</strong>，因为它们不仅对Java子进程可见，而且对于定义它们的进程的<strong>所有子进程都是可见的</strong>。在不同的操作系统上，它们的语义有细微的差别，比如，不区分大小写。因此环境变量更可能有意料不到的副作用。程序中尽可能使用系统属性。环境变量应该在需要全局效应的时候使用，或者在外部系统接口要求使用环境变量时使用（比如 PATH）</p>
+<p>而<strong>系统属性 JVM system properties</strong> 是属于JVM的，</p>
+<ul>
+<li>系统属性的设置: 通过JVM参数: <code>-D属性名=值</code> 或者在代码中通过<code>Sytem.setProperty(String key, String value)</code>来设置.</li>
+<li>系统属性的获取: 在Java中通过<code>System.getProperty(String key)</code>获取属性值.</li>
+</ul>
+<pre><code class="language-java">@Configuration
+// @ConditionalOnExpression(&quot;!'pro'.equals(environment['env'])&quot;)
+public class SwaggerEnableConfig implements EnvironmentAware {
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        // 获取环境变量
+        Map&lt;String, String&gt; env = System.getenv();
+
+        // 获取系统属性
+        Properties properties = System.getProperties();
+
+        System.out.println(properties);
+    }
+}
+</code></pre>
+<p><a href="https://fangshixiang.blog.csdn.net/article/details/90694330?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control">环境变量和系统属性的区别</a></p>
+<p><img alt="aspectJ" src="../images/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.png" /></p>
+<h1 id="loadtimeweaver">注册<code>LoadTimeWeaver</code></h1>
+<p>LoadTimeWeaver被Spring用于在类被加载到Java虚拟机（JVM）中时进行动态转换。</p>
+<p>开启加载时织入(load-time weaving)，需要开启配置：</p>
+<pre><code class="language-java">@Configuration
+@EnableLoadTimeWeaving
+public class AppConfig {
+}
+</code></pre>
+<p>一旦为ApplicationContext配置，该ApplicationContext中的任何bean都可以实现<code>LoadTimeWeaverAware</code>，从而接收对加载时织入实例的引用。在结合Spring的JPA支持时，这一点特别有用，因为在JPA类转换中可能需要加载时织入。更多细节请查阅 <a href="https://docs.spring.io/spring-framework/docs/5.3.2/javadoc-api/org/springframework/orm/jpa/LocalContainerEntityManagerFactoryBean.html"><code>LocalContainerEntityManagerFactoryBean</code></a>和 <a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#aop-aj-ltw">Load-time Weaving with AspectJ in the Spring Framework</a>.</p>
+<h1 id="applicationcontext">ApplicationContext的其他能力</h1>
+<p>正如在章节介绍中所讨论的那样，<code>org.springframework.beans.factory</code>包提供了管理和操作Bean的基本功能，包括以编程的方式。<code>org.springframework.context</code>包增加了ApplicationContext接口，它继承BeanFactory接口，另外继承了其他接口以更加面向应用框架的方式提供额外的功能。很多人在使用ApplicationContext时，完全采用声明式的方式，甚至不以编程的方式创建它，而是依靠ContextLoader等支持类来自动实例化ApplicationContext，作为Java EE Web应用正常启动过程的一部分。</p>
+<p>为了以更加面向框架的风格增强 <code>BeanFactory</code> 接口的功能,  context 包还提供了以下功能：</p>
+<ul>
+<li>通过 <code>MessageSource</code> 接口，访问i18n风格的消息</li>
+<li>通过 <code>ResourceLoader</code> 接口，访问resource，如URL和file</li>
+<li>通过 <code>ApplicationEventPublisher</code> 接口，向<code>ApplicationListener</code>的实现事件发布</li>
+<li>通过<code>HierarchicalBeanFactory</code>接口，加载多个（分层）上下文，让每个上下文都集中在一个特定的层上，如应用程序的web层。</li>
+</ul>
+<p><img alt="applicationContext" src="../images/applicationContext.png" /></p>
+<h2 id="messagesource">使用MessageSource实现国际化</h2>
+<p>ApplicationContext接口继承了名为MessageSource的接口，因此，它提供了国际化（"i18n"）功能。Spring还提供了HierarchicalMessageSource接口，它可以对消息进行分级解析。这些接口共同提供了Spring实现消息解析的基础。这些接口上定义的方法包括：</p>
+<p>当加载ApplicationContext时，它会自动搜索上下文中定义的MessageSource Bean。这个Bean的名字必须是messageSource。如果找到了这样一个bean，所有对前面方法的调用都会委托给这个message source。如果没有找到message source，ApplicationContext 试图找到一个包含相同名称的 bean 的父类。如果找到了，它将使用该bean作为message source。如果ApplicationContext找不到任何message source，为了能够接受对上面定义的方法的调用，就会实例化一个空的DelegatingMessageSource。</p>
+<p>Spring提供了两个MessageSource实现，即<code>ResourceBundleMessageSource</code>和<code>StaticMessageSource</code>。两者都实现了HierarchicalMessageSource，以便进行嵌套消息传递。StaticMessageSource很少使用，一般不用于生产环境，但提供了向消息源添加消息的程序化方法。下面的例子展示了ResourceBundleMessageSource:</p>
+<pre><code class="language-xml">&lt;beans&gt;
+    &lt;bean id=&quot;messageSource&quot;
+            class=&quot;org.springframework.context.support.ResourceBundleMessageSource&quot;&gt;
+        &lt;property name=&quot;basenames&quot;&gt;
+            &lt;list&gt;
+                &lt;value&gt;format&lt;/value&gt;
+                &lt;value&gt;exceptions&lt;/value&gt;
+                &lt;value&gt;windows&lt;/value&gt;
+            &lt;/list&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre>
+<p>本例假设在classpath中定义了三个resource bundles资源包，分别为format,exceptions和windows。任何解析消息的请求都是以JDK标准的方式通过ResourceBundle对象解析消息来处理的。在本例中，假设上述两个资源捆绑文件的内容如下：</p>
+<pre><code class="language-properties"># in format.properties
+ message=Alligators rock!
+</code></pre>
+<pre><code class="language-properties"># in exceptions.properties
+argument.required=The {0} argument is required.
+</code></pre>
+<p>下一个例子显示了一个运行MessageSource功能的程序。请记住，所有的ApplicationContext实现也是MessageSource实现，因此可以转为MessageSource接口：</p>
+<pre><code class="language-java">public static void main(String[] args) {
+    MessageSource resources = new ClassPathXmlApplicationContext(&quot;beans.xml&quot;);
+    String message = resources.getMessage(&quot;message&quot;, null, &quot;Default&quot;, Locale.ENGLISH);
+    System.out.println(message);
+}
+</code></pre>
+<p>这段代码的输出为<code>Alligators rock!</code></p>
+<p>总结一下，MessageSource定义在一个名为beans.xml的文件中，它存在于classpath的根目录下。messageSource bean定义通过它的basenames属性来引用一些资源捆绑。列表中传递给basenames属性的三个文件作为文件存在于你的classpath的根路径，分别称为format.properties、exceptions.properties和windows.properties。</p>
+<p>下一个例子显示了传递给消息查找的参数。这些参数被转换为String对象，并插入到查找消息的占位符中：</p>
+<pre><code class="language-java">public class Example {
+
+    private MessageSource messages;
+
+    public void setMessages(MessageSource messages) {
+        this.messages = messages;
+    }
+
+    public void execute() {
+        String message = this.messages.getMessage(&quot;argument.required&quot;,
+            new Object [] {&quot;userDao&quot;}, &quot;Required&quot;, Locale.ENGLISH);
+        System.out.println(message);
+    }
+}
+</code></pre>
+<p>这段代码输出为：</p>
+<pre><code class="language-shell">The userDao argument is required.
+</code></pre>
+<p>关于国际化（"i18n"），Spring的各种MessageSource实现遵循与标准JDK <code>ResourceBundle</code>相同的locale解析和回退规则。简而言之，继续前面定义的messageSource示例，如果你想解决针对英国（en-GB）本地化的消息，你将创建分别称为format_en_GB.properties、exceptions_en_GB.properties和windows_en_GB.properties的文件。</p>
+<p><strong>按照规定properties文件里的内容按照ISO-8859-1编码的</strong>，所以出现乱码是正常的！</p>
+<p>通常情况下，locale解析是由应用程序的周围环境管理的。在下面的例子中，(英国)消息所针对的locale是手动指定的。</p>
+<pre><code class="language-properties"># in exceptions_en_GB.properties
+argument.required=Ebagum lad, the ''{0}'' argument is required, I say, required.
+</code></pre>
+<pre><code class="language-java">public static void main(final String[] args) {
+    MessageSource resources = new ClassPathXmlApplicationContext(&quot;beans.xml&quot;);
+    String message = resources.getMessage(&quot;argument.required&quot;,
+        new Object [] {&quot;userDao&quot;}, &quot;Required&quot;, Locale.UK);
+    System.out.println(message);
+}
+</code></pre>
+<p>输出为：</p>
+<pre><code>Ebagum lad, the 'userDao' argument is required, I say, required.
+</code></pre>
+<p>您也可以使用<code>MessageSourceAware</code>接口来获取对任何已定义的MessageSource的引用。任何在实现MessageSourceAware接口的ApplicationContext中定义的Bean都会在创建和配置Bean时被注入应用上下文的MessageSource。</p>
+<p>作为<code>ResourceBundleMessageSource</code>的替代，Spring提供了一个<code>ReloadableResourceBundleMessageSource</code>类。这个变体支持相同的捆绑文件格式，但比基于标准JDK的<code>ResourceBundleMessageSource</code>实现更加灵活。特别是，它允许从任何Spring资源位置读取文件（不仅仅是从classpath），并支持捆绑属性文件的热重载（同时有效地缓存它们）。详情请参见 <a href="https://docs.spring.io/spring-framework/docs/5.3.2/javadoc-api/org/springframework/context/support/ReloadableResourceBundleMessageSource.html"><code>ReloadableResourceBundleMessageSource</code></a> 。</p>
+<h2 id="events">标准和自定义的Events</h2>
+<p>ApplicationContext中的event处理是通过ApplicationEvent类和ApplicationListener接口提供的。如果将实现ApplicationListener接口的Bean部署到上下文中，每次ApplicationEvent被发布到ApplicationContext时，该Bean都会得到通知。本质上，这就是标准的Observer观察者设计模式。</p>
+<p>从Spring 4.2开始，event基础架构得到了显著的改进，提供了一个基于注解的模型，以及发布任何任意事件的能力（即不一定从ApplicationEvent扩展的对象）。当这样的object被发布时，我们会将其包裹在一个event中。</p>
+<p>下面展示Spring提供的几个Event：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Event</th>
+<th style="text-align: left;">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>ContextRefreshedEvent</code></td>
+<td style="text-align: left;">在 <code>ApplicationContext</code> is initialized or refreshed (for example, by using the <code>refresh()</code> method on the <code>ConfigurableApplicationContext</code> interface)发布. Here, “initialized” means that all beans are loaded, post-processor beans are detected and activated, singletons are pre-instantiated, and the <code>ApplicationContext</code> object is ready for use. <br />As long as the context has not been closed, a refresh can be triggered multiple times, provided that the chosen <code>ApplicationContext</code> actually supports such “hot” refreshes. For example, <code>XmlWebApplicationContext</code> supports hot refreshes, but <code>GenericApplicationContext</code> does not.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>ContextStartedEvent</code></td>
+<td style="text-align: left;">Published when the <code>ApplicationContext</code> is started by using the <code>start()</code> method on the <code>ConfigurableApplicationContext</code> interface. Here, “started” means that all <code>Lifecycle</code> beans receive an explicit start signal. Typically, this signal is used to restart beans after an explicit stop, but it may also be used to start components that have not been configured for autostart (for example, components that have not already started on initialization).<br />当使用ConfigurableApplicationContext接口上的start()方法启动ApplicationContext时发布。在这里，"started "意味着所有的Lifecycle Bean都收到一个显式的启动信号。通常情况下，这个信号用于在显式停止后重新启动bean，但它也可以用于启动没有被配置为自动启动的组件（例如，在初始化时尚未启动的组件）。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>ContextStoppedEvent</code></td>
+<td style="text-align: left;">Published when the <code>ApplicationContext</code> is stopped by using the <code>stop()</code> method on the <code>ConfigurableApplicationContext</code> interface. Here, “stopped” means that all <code>Lifecycle</code> beans receive an explicit stop signal. A stopped context may be restarted through a <code>start()</code> call.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>ContextClosedEvent</code></td>
+<td style="text-align: left;">Published when the <code>ApplicationContext</code> is being closed by using the <code>close()</code> method on the <code>ConfigurableApplicationContext</code> interface or via a JVM shutdown hook. Here, "closed" means that all singleton beans will be destroyed. Once the context is closed, it reaches its end of life and cannot be refreshed or restarted.<br />当 "ApplicationContext "通过使用 "ConfigurableApplicationContext "接口上的 "close() "方法或通过JVM关闭钩子关闭时发布。在这里，"关闭 "意味着所有的单例Bean将被销毁。一旦上下文被关闭，它的生命就结束了，不能被刷新或重新启动。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>RequestHandledEvent</code></td>
+<td style="text-align: left;">A web-specific event telling all beans that an HTTP request has been serviced. This event is published after the request is complete. This event is only applicable to web applications that use Spring’s <code>DispatcherServlet</code>.<br />一个Web特有的事件，告诉所有Bean一个HTTP请求已经被服务。该事件会在请求完成后发布。该事件仅适用于使用Spring的 "DispatcherServlet "的Web应用程序。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>ServletRequestHandledEvent</code></td>
+<td style="text-align: left;">A subclass of <code>RequestHandledEvent</code> that adds Servlet-specific context information. 增加了servlet特有的上下文信息</td>
+</tr>
+</tbody>
+</table>
+<p>你也可以创建和发布自定义的event，</p>
+<pre><code class="language-java">public class BlockedListEvent extends ApplicationEvent {
+
+    private final String address;
+    private final String content;
+
+    public BlockedListEvent(Object source, String address, String content) {
+        super(source);
+        this.address = address;
+        this.content = content;
+    }
+
+    // accessor and other methods...
+}
+</code></pre>
+<p>要发布一个自定义的ApplicationEvent，请在ApplicationEventPublisher上调用publishEvent()方法。通常情况下，通过创建一个实现ApplicationEventPublisherAware的类并将其注册为Spring bean来实现。</p>
+<pre><code class="language-java">public class EmailService implements ApplicationEventPublisherAware {
+
+    private List&lt;String&gt; blockedList;
+    private ApplicationEventPublisher publisher;
+
+    public void setBlockedList(List&lt;String&gt; blockedList) {
+        this.blockedList = blockedList;
+    }
+
+    public void setApplicationEventPublisher(ApplicationEventPublisher publisher) {
+        this.publisher = publisher;
+    }
+
+    public void sendEmail(String address, String content) {
+        if (blockedList.contains(address)) {
+            publisher.publishEvent(new BlockedListEvent(this, address, content));
+            return;
+        }
+        // send email...
+    }
+}
+</code></pre>
+<pre><code class="language-java">public class BlockedListNotifier implements ApplicationListener&lt;BlockedListEvent&gt; {
+
+    private String notificationAddress;
+
+    public void setNotificationAddress(String notificationAddress) {
+        this.notificationAddress = notificationAddress;
+    }
+
+    public void onApplicationEvent(BlockedListEvent event) {
+        // notify appropriate parties via notificationAddress...
+    }
+}
+</code></pre>
+<p>但注意，默认情况下，事件监听器同步接收事件。这意味着publishEvent()方法会阻塞，直到所有的监听器处理完事件。这种同步和单线程方法的一个优点是，当监听器接收到一个事件时，如果有事务上下文可用，它就会在发布者的事务上下文中操作。</p>
+<p>Spring 的事件机制是为同一应用上下文中 Spring Bean 之间的简单通信而设计的。然而，对于更复杂的企业集成需求，单独维护的 Spring Integration 项目为构建轻量级的、面向模式的、事件驱动的架构提供了完整的支持，这些架构建立在著名的 Spring 编程模型之上。</p>
+<p><strong>基于注解的Event Listeners</strong></p>
+<p>在 Spring 4.2 中，可以通过 <code>@EventListener</code> 注解在 Bean 的任意 public 方法上注册事件监听器。</p>
+<pre><code class="language-java">public class BlockedListNotifier {
+
+    private String notificationAddress;
+
+    public void setNotificationAddress(String notificationAddress) {
+        this.notificationAddress = notificationAddress;
+    }
+
+    @EventListener
+    public void processBlockedListEvent(BlockedListEvent event) {
+        // notify appropriate parties via notificationAddress...
+    }
+}
+</code></pre>
+<p>方法签名再次声明它所监听的事件类型，但是，这次用了一个灵活的名字，而且没有实现特定的监听接口。只要实际的事件类型在其实现层次中能解析为你的通用参数，事件类型也可以通过通用来缩小。</p>
+<p>如果您的方法应该监听多个事件，或者您想在定义方法时不使用任何参数，也可以在注解本身指定事件类型。下面的示例展示了如何做到这一点。</p>
+<pre><code class="language-java">@EventListener({ContextStartedEvent.class, ContextRefreshedEvent.class})
+public void handleContextStart() {
+    // ...
+}
+</code></pre>
+<p>也可以通过使用SpEL表达式来添加额外的过滤，下面的示例显示了如何重写我们的通知器，使其仅在事件的内容属性等于my-event时才被调用。</p>
+<pre><code class="language-java">@EventListener(condition = &quot;#blEvent.content == 'my-event'&quot;)
+public void processBlockedListEvent(BlockedListEvent blockedListEvent) {
+    // notify appropriate parties via notificationAddress...
+}
+</code></pre>
+<p>每个SpEL表达式都是针对一个专用上下文进行评估的。下表列出了上下文可用的项目，以便您可以将它们用于条件事件处理。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Location</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Event</td>
+<td style="text-align: left;">root object</td>
+<td style="text-align: left;">The actual <code>ApplicationEvent</code>.</td>
+<td style="text-align: left;"><code>#root.event</code> or <code>event</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Arguments array</td>
+<td style="text-align: left;">root object</td>
+<td style="text-align: left;">The arguments (as an object array) used to invoke the method.</td>
+<td style="text-align: left;"><code>#root.args</code> or <code>args</code>; <code>args[0]</code> to access the first argument, etc.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><em>Argument name</em></td>
+<td style="text-align: left;">evaluation context</td>
+<td style="text-align: left;">The name of any of the method arguments. If, for some reason, the names are not available (for example, because there is no debug information in the compiled byte code), individual arguments are also available using the <code>#a&lt;#arg&gt;</code> syntax where <code>&lt;#arg&gt;</code> stands for the argument index (starting from 0).</td>
+<td style="text-align: left;"><code>#blEvent</code> or <code>#a0</code> (you can also use <code>#p0</code> or <code>#p&lt;#arg&gt;</code> parameter notation as an alias)</td>
+</tr>
+</tbody>
+</table>
+<p>如果你需要发布一个事件作为处理另一个事件的结果，你可以改变方法签名来返回应该发布的事件，如下例所示:</p>
+<pre><code class="language-java">@EventListener
+public ListUpdateEvent handleBlockedListEvent(BlockedListEvent event) {
+    // notify appropriate parties via notificationAddress and
+    // then publish a ListUpdateEvent...
+}
+</code></pre>
+<p>这个特性在异步监听时不支持</p>
+<p>这个新方法为上面方法处理的每个BlockedListEvent发布一个新的ListUpdateEvent。如果你需要发布多个事件，你可以返回一个事件集合来代替。</p>
+<p>在使用异步事件时要注意以下限制。</p>
+<ul>
+<li>
+<p>如果异步事件监听器抛出了一个Exception，它不会传播给调用者，请参见AsyncUncaughtExceptionHandler了解更多细节。更多细节请参见AsyncUncaughtExceptionHandler。</p>
+</li>
+<li>
+<p>异步事件监听器方法不能通过返回一个值来发布后续事件。如果你需要发布另一个事件作为处理结果，注入一个ApplicationEventPublisher来手动发布事件。</p>
+</li>
+</ul>
+<h3 id="_5">异步的监听</h3>
+<p>如果你想异步地处理事件，可以使用@Async</p>
+<pre><code class="language-java">@EventListener
+@Async
+public void processBlockedListEvent(BlockedListEvent event) {
+    // BlockedListEvent is processed in a separate thread
+}
+</code></pre>
+<h3 id="_6">有序的监听</h3>
+<p>如果你想在另一个监听器之前先监听到事件，可以使用@Order</p>
+<pre><code class="language-java">@EventListener
+@Order(42)
+public void processBlockedListEvent(BlockedListEvent event) {
+    // notify appropriate parties via notificationAddress...
+}
+</code></pre>
+<h3 id="event">泛型event</h3>
+<p>你也可以使用泛型来进一步定义你的事件结构。考虑使用EntityCreatedEvent<T>，其中T是实际创建的实体的类型。例如，您可以创建以下监听器定义，以便只接收Person的EntityCreatedEvent。</p>
+<pre><code class="language-java">@EventListener
+public void onPersonCreated(EntityCreatedEvent&lt;Person&gt; event) {
+    // ...
+}
+</code></pre>
+<p>由于泛型擦除，只有当被触发的事件解析了事件监听器过滤的通用参数时，这个方法才会起作用（也就是说，类似于class PersonCreatedEvent extends EntityCreatedEvent<Person> { ... }）。</p>
+<p>在某些情况下，如果所有的事件都遵循相同的结构，这可能会变得相当乏味（就像前面例子中的事件一样）。在这种情况下，你可以实现ResolvableTypeProvider来引导框架超越运行时环境提供的内容。下面的事件展示了如何做到这一点。</p>
+<pre><code>public class EntityCreatedEvent&lt;T&gt; extends ApplicationEvent implements ResolvableTypeProvider {
+
+    public EntityCreatedEvent(T entity) {
+        super(entity);
+    }
+
+    @Override
+    public ResolvableType getResolvableType() {
+        return ResolvableType.forClassWithGenerics(getClass(), ResolvableType.forInstance(getSource()));
+    }
+}
+</code></pre>
+<h2 id="low-level-resources">方便地获取Low-level Resources</h2>
+<p>为了最佳的使用和理解应用上下文，您应该熟悉Spring的 <code>Resource</code> 抽象，如<a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#resources">Resources</a>中所述。</p>
+<p>一个应用上下文就是一个ResourceLoader，它可以用来加载Resource对象。Resource本质上是JDK java.net.URL类的一个功能更丰富的版本。事实上，Resource的实现在适当的地方包裹了java.net.URL的实例。Resource可以以透明的方式从几乎任何位置获取低级资源，包括从classpath、文件系统位置、任何可以用标准URL描述的地方以及其他一些变化。如果资源位置字符串是一个简单的路径，没有任何特殊的前缀，那么这些资源的来源是特定的，适合于实际的应用程序上下文类型。</p>
+<p>你可以配置一个部署到应用上下文中的Bean来实现特殊的回调接口ResourceLoaderAware，以在初始化时自动回调应用上下文本身传递的ResourceLoader。你也可以暴露 <code>Resource</code>类型的属性，用于访问静态资源。它们像其他属性一样被注入其中。您可以将这些Resource属性指定为简单的字符串路径，并在Bean部署时依靠自动从这些文本字符串转换为实际的Resource对象。</p>
+<p>提供给ApplicationContext构造函数的位置路径或路径实际上是资源字符串，以简单的形式，根据具体的上下文实现进行适当处理。例如ClassPathXmlApplicationContext将一个简单的位置路径视为classpath。你也可以使用带有特殊前缀的位置路径（资源字符串）来强制加载来自classpath或URL的定义，而不管实际的上下文类型如何。</p>
+<h2 id="1154">1.15.4 跟踪应用启动</h2>
+<p>ApplicationContext管理Spring应用程序的生命周期，并围绕组件提供丰富的编程模型。因此，复杂的应用程序可以有同样复杂的组件图和启动阶段。</p>
+<p>通过特定的指标来跟踪应用程序的启动步骤，可以帮助了解在启动阶段的时间花费在哪里，但也可以作为一种方法来更好地理解整个上下文生命周期。</p>
+<p>AbstractApplicationContext(及其子类)的工具是ApplicationStartup，它收集各种启动阶段的StartupStep数据。</p>
+<p>应用上下文生命周期（基础包扫描，配置类管理）。</p>
+<p>beans生命周期（实例化、智能初始化、后处理）。</p>
+<p>应用events 处理</p>
+<pre><code class="language-java">// create a startup step and start recording
+StartupStep scanPackages = this.getApplicationStartup().start(&quot;spring.context.base-packages.scan&quot;);
+// 在当前阶段添加标记
+scanPackages.tag(&quot;packages&quot;, () -&gt; Arrays.toString(basePackages));
+// 执行我们要测量的实际步骤
+this.scanner.scan(basePackages);
+// end the current step
+scanPackages.end();
+</code></pre>
+<p>应用程序的上下文已经有了多个步骤的工具。一旦被记录下来，这些启动步骤就可以通过特定的工具进行收集、显示和分析。对于现有启动步骤的完整列表，您可以查看专门的附录部分。</p>
+<p>默认的ApplicationStartup实现是一个无操作的变量，以最小的开销。这意味着在应用程序启动期间，默认情况下不会收集任何指标。Spring Framework提供了一个用Java Flight Recorder跟踪启动步骤的实现。FlightRecorderApplicationStartup。要使用这个变量，您必须在创建ApplicationContext后立即为其配置一个实例。</p>
+<p>如果开发者要提供自己的AbstractApplicationContext子类，或者希望收集更精确的数据，他们也可以使用ApplicationStartup基础架构。</p>
+<p>ApplicationStartup的目的是只在应用程序启动期间和核心容器中使用；这绝不是Java剖析器或指标库（如Micrometer）的替代品。
+要开始收集自定义的StartupStep，组件可以直接从应用上下文中获取ApplicationStartup实例，使其组件实现ApplicationStartupAware，或者在任何注入点上询问ApplicationStartup类型。</p>
+<p>开发人员在创建自定义启动步骤时，不应使用 "spring.*"命名空间。这个命名空间是为Spring内部使用而保留的，可能会发生变化。</p>
+<h1 id="beanfactory">BeanFactory</h1>
+<p>BeanFactory API 为 Spring 的控制反转（IoC）功能提供了底层基础。其具体的契约接口主要用于与 Spring 其他组件及相关第三方框架的集成，而它的<strong>DefaultListableBeanFactory</strong>实现类，则是更高层级的<strong>GenericApplicationContext</strong>容器中的核心委托类。</p>
+<p>BeanFactory 及其相关接口（如 BeanFactoryAware、InitializingBean、DisposableBean）是其他框架组件的重要集成点。这些接口无需依赖任何注解，甚至无需反射机制，就能让容器与组件之间实现极高效率的交互。应用层的 Bean 也可以使用这些回调接口，但实际开发中，通常更倾向于通过注解或编程式配置的方式，使用声明式的依赖注入。</p>
+<p><strong>注意</strong>：核心的 BeanFactory API 及其 DefaultListableBeanFactory 实现类，并不会对所使用的配置格式或任何组件注解做预设限制。各类配置格式和注解的支持能力，均通过扩展组件（如 XmlBeanDefinitionReader、AutowiredAnnotationBeanPostProcessor）实现，这些扩展组件均以通用的<strong>BeanDefinition</strong>对象作为核心元数据载体进行操作。这正是 Spring 容器具备高度灵活性和可扩展性的本质原因。</p>
+<h2 id="beanfactory-applicationcontext"><code>BeanFactory</code> 还是<code>ApplicationContext</code>?</h2>
+<p>本节将说明 BeanFactory 和 ApplicationContext 两个容器层级的区别，以及二者在容器启动过程中的不同影响。</p>
+<p>除非有充分的特殊理由，否则都应优先使用 ApplicationContext 容器，其中<strong>GenericApplicationContext</strong>及其子类<strong>AnnotationConfigApplicationContext</strong>，是自定义容器启动流程时最常用的实现类。对于所有常规开发场景，它们都是 Spring 核心容器的主要入口，可完成配置文件加载、类路径扫描触发、编程式注册 Bean 定义和注解类，以及（从 Spring 5.0 开始）注册函数式 Bean 定义等操作。</p>
+<p>由于 ApplicationContext 包含了 BeanFactory 的全部功能，因此除了需要对 Bean 处理流程进行完全自定义控制的场景外，<strong>通常推荐优先使用 ApplicationContext，而非原生的 BeanFactory</strong>。在 ApplicationContext 容器中（如 GenericApplicationContext 实现类），容器会通过约定的方式自动识别多种类型的 Bean（即根据 Bean 名称或 Bean 类型识别，后置处理器便是典型）；而原生的 DefaultListableBeanFactory 则对所有特殊 Bean 均无感知。</p>
+<p>对于注解处理、AOP 代理等众多容器扩展功能而言，<strong>BeanPostProcessor</strong>扩展点是实现的核心。如果仅使用原生的 DefaultListableBeanFactory，这类后置处理器默认不会被容器检测到，也无法被激活。这种情况容易造成开发困惑，因为此时的 Bean 配置本身并无错误，只是需要通过额外的配置步骤，才能完成容器的完整启动。</p>
+<p>下表列出了 BeanFactory 和 ApplicationContext 接口及其实现类所提供的功能对比。</p>
+<p>下面表格展示 <code>BeanFactory</code> 和 <code>ApplicationContext</code> 提供的功能列表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Feature</th>
+<th style="text-align: left;"><code>BeanFactory</code></th>
+<th style="text-align: left;"><code>ApplicationContext</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Bean 实例化 / 依赖装配</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">Integrated lifecycle management</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">BeanPostProcessor 自动注册</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">BeanFactoryPostProcessor 自动注册</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">便捷的 MessageSource 访问（用于国际化）</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">内置的 ApplicationEvent 发布机制</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+</tbody>
+</table>
+<p>这也是在基于 Spring 开发的应用中，<strong>优先使用各类 ApplicationContext 实现类，而非原生 DefaultListableBeanFactory</strong>的原因 —— 尤其是在典型的企业级开发中，需要依赖 BeanFactoryPostProcessor 和 BeanPostProcessor 实例实现容器扩展功能时，这一选择的优势更为明显。</p>
+<p><strong>AnnotationConfigApplicationContext</strong>会自动注册所有常用的注解后置处理器，还能通过<code>@EnableTransactionManagement</code>等配置注解，在底层自动引入额外的处理器。在 Spring 基于注解的配置模型抽象层级中，Bean 后置处理器的概念已成为容器的底层实现细节，对开发人员完全透明。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.instant", "navigation.tracking", "toc.follow", "toc.integrate", "search.highlight", "search.suggest", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
