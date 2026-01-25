@@ -418,67 +418,46 @@ public interface BeanNameAware {
 | `ServletContextAware`        | Current `ServletContext` the container runs in. Valid only in a web-aware Spring `ApplicationContext`. | [Spring MVC](https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#mvc) |
 
 请再次注意，使用这些接口会将您的代码和Spring API耦合，并且违反IOC风格。因此，建议将他们用于需要对容器进行编程访问的基础Bean。
+# 容器扩展点（重点！！！）
 
-# 1.8 容器扩展点
+## 使用`BeanPostProcessor`自定义Bean
 
-通常情况下，应用开发者不需要实现ApplicationContext。相反，可以通过插入特殊集成接口的实现来扩展Spring IoC容器。接下来的几节将介绍这些集成接口。
+`BeanPostProcessor` 接口定义了回调方法，你可以实现这些方法来提供自定义的（或覆盖容器默认的）实例化逻辑、依赖解析逻辑等。如果希望在 Spring 容器完成 Bean 的实例化、配置和初始化后执行一些自定义逻辑，你可以接入一个或多个自定义的 `BeanPostProcessor` 实现类。
 
-## 1.8.1 使用`BeanPostProcessor`自定义Bean
+###  多 BeanPostProcessor 执行顺序
 
- `BeanPostProcessor`接口定义了回调方法，你可以据此来提供自己的（或者覆盖容器的）实例化逻辑，依赖解析等。如果你想要在Spring容器完成实例化、配置和初始化Bean之后实现一些自定义逻辑，你可以插入一个或多个自定义的 `BeanPostProcessor`实现。
+你可以配置多个 `BeanPostProcessor` 实例，并通过设置 `order` 属性控制它们的执行顺序。**仅当 `BeanPostProcessor` 实现 `Ordered` 接口时，才能设置该属性**。如果你编写自定义的 `BeanPostProcessor`，也建议实现 `Ordered` 接口。更多细节可参考 `BeanPostProcessor` 和 `Ordered` 接口的 Javadoc，同时可参考「以编程方式注册 BeanPostProcessor 实例」的说明。
 
-> 如Apollo源码里，实现了BeanPostProcessor接口，解析每个Bean中@Value的字段为SpringValue对象，在配置文件更新后反射更新其值。
+### 核心特性与作用域
 
-您可以配置多个 `BeanPostProcessor`实现，并且可以通过设置Order属性来控制这些实现的执行顺序。只有当 `BeanPostProcessor`实现了Order接口，才可以设置这个属性。如果你写了自己的 `BeanPostProcessor`，应该考虑实现Order接口。
+- `BeanPostProcessor` 作用于 **Bean（或对象）实例**：Spring IoC 容器先实例化 Bean 实例，再由 `BeanPostProcessor` 执行处理逻辑。
+- 作用域为**每个容器独立**：仅对定义它的容器内的 Bean 生效，即使容器存在层级关系，跨容器的 `BeanPostProcessor` 也不会处理彼此的 Bean。
+- 区别于 `BeanFactoryPostProcessor`：`BeanPostProcessor` 操作 Bean 实例，而修改 Bean 定义（即 Bean 的配置蓝图）需使用 `BeanFactoryPostProcessor`（详见下文）。
 
-> `BeanPostProcessor` instances operate on bean (or object) instances. That is, the Spring IoC container instantiates a bean instance and then `BeanPostProcessor` instances do their work.
->
-> To change the actual bean definition (that is, the blueprint that defines the bean), you instead need to use a `BeanFactoryPostProcessor`, as described in [Customizing Configuration Metadata with a `BeanFactoryPostProcessor`](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-extension-factory-postprocessors).
+### 核心方法
 
-`BeanPostProcessor` 操作一个bean的实例。也就是说，Spring IOC容器是先实例化一个Bean，然后`BeanPostProcessor` 才会进行他们的工作。
+`org.springframework.beans.factory.config.BeanPostProcessor` 接口仅包含两个回调方法：
 
-`BeanPostProcessor` 实例的作用于是容器级别的。这只有使用容器层级结构有关。如果你在一个容器中定义了一个BeanPostProcessor，它只对该容器中的bean进行后处理。换句话说，在一个容器中定义的 bean 不会被另一个容器中定义的 BeanPostProcessor 后处理，即使这两个容器是同一层次结构的一部分。
+1. `postProcessBeforeInitialization`：容器调用 Bean 初始化方法（如 `InitializingBean.afterPropertiesSet()` 或自定义 `init-method`）**之前**执行；
+2. `postProcessAfterInitialization`：Bean 初始化回调执行**之后**执行。
 
-要更改实际的 bean 定义（即定义 bean 的蓝图），则需要使用 BeanFactoryPostProcessor。
-
-> The `org.springframework.beans.factory.config.BeanPostProcessor` interface consists of exactly two callback methods. When such a class is registered as a post-processor with the container, for each bean instance that is created by the container, the post-processor gets a callback from the container both before container initialization methods (such as `InitializingBean.afterPropertiesSet()` or any declared `init` method) are called, and after any bean initialization callbacks. The post-processor can take any action with the bean instance, including ignoring the callback completely. A bean post-processor typically checks for callback interfaces, or it may wrap a bean with a proxy. **Some Spring AOP infrastructure classes are implemented as bean post-processors in order to provide proxy-wrapping logic.**
-
-`org.springframework.beans.factory.config.BeanPostProcessor`接口正好由两个回调方法组成。当这样的类被容器注册为后处理器时，对于容器创建的每一个 bean 实例，后处理器都会在容器初始化方法（如 `InitializingBean.afterPropertiesSet()`或任何声明的 init 方法）被调用之前，以及在任何 bean 初始化回调之后，从容器获得一个回调。后处理器可以对bean实例采取任何操作，包括完全忽略回调。bean后处理器通常会检查回调接口，或者它可能会用代理类包装一个bean。**一些Spring AOP基础架构类就是作为bean后处理器的实现，以提供代理封装逻辑**。也就是Spring AOP基于此实现的？！
-
-
-
-ApplicationContext 会自动检测配置元数据中定义的实现 BeanPostProcessor 接口的任何 Bean。ApplicationContext 将这些 Bean 注册为后处理器，以便它们可以在以后创建 Bean 时被调用。Bean 后处理器可以像其他 Bean 一样部署在容器中。
-
-需要注意的是，在配置类上使用@Bean工厂方法声明BeanPostProcessor时，工厂方法的返回类型应该是实现类本身，或者至少是`org.springframework.beans.factory.config.BeanPostProcessor`接口，明确指出该Bean的后处理性质。否则，ApplicationContext在完全创建它之前，无法按类型自动检测它。由于BeanPostProcessor需要尽早实例化，才能应用于上下文中其他Bean的初始化，所以这个早期的类型检测非常关键。
-
-> `BeanPostProcessor` instances and AOP auto-proxying
->
-> Classes that implement the `BeanPostProcessor` interface are special and are treated differently by the container. All `BeanPostProcessor` instances and beans that they directly reference are instantiated on startup, as part of the special startup phase of the `ApplicationContext`. Next, all `BeanPostProcessor` instances are registered in a sorted fashion and applied to all further beans in the container. Because AOP auto-proxying is implemented as a `BeanPostProcessor` itself, neither `BeanPostProcessor` instances nor the beans they directly reference are eligible for auto-proxying and, thus, do not have aspects woven into them.
->
-> For any such bean, you should see an informational log message: `Bean someBean is not eligible for getting processed by all BeanPostProcessor interfaces (for example: not eligible for auto-proxying)`.
->
-> If you have beans wired into your `BeanPostProcessor` by using autowiring or `@Resource` (which may fall back to autowiring), Spring might access unexpected beans when searching for type-matching dependency candidates and, therefore, make them ineligible for auto-proxying or other kinds of bean post-processing. For example, if you have a dependency annotated with `@Resource` where the field or setter name does not directly correspond to the declared name of a bean and no name attribute is used, Spring accesses other beans for matching them by type.
-
-实现BeanPostProcessor接口的类是特殊的，被容器区别对待。所有BeanPostProcessor实例和它们直接引用的bean都在启动时被实例化，作为ApplicationContext的特殊启动阶段的一部分。接下来，所有BeanPostProcessor实例都会以排序的方式注册，并应用到容器中所有进一步的bean。**由于AOP自动代理是作为BeanPostProcessor本身来实现的**，所以BeanPostProcessor实例和它们直接引用的bean都没有资格进行自动代理，因此，它们没有切面织入。
-
-对于任何这样的bean，你应该看到一个信息日志消息：` `Bean someBean is not eligible for getting processed by all BeanPostProcessor interfaces (for example: not eligible for auto-proxying)`
-
-如果您通过使用autowiring或@Resource（可能会回退到autowiring）将bean注入到BeanPostProcessor中，Spring在按类型搜索匹配的依赖候选者时可能会访问意外的bean，因此，导致它们不符合自动代理或其他类型的bean后处理的条件。例如，如果你有一个用@Resource注解的依赖，其中的字段并不直接对应于Bean的声明名称，也没有使用名称属性，那么Spring就会访问其他Bean来按类型匹配它们。
-
-
+处理器可对 Bean 实例执行任意操作（包括完全忽略回调），典型场景包括：检查回调接口、**为 Bean 包装代理对象。Spring AOP 的自动代理功能正是通过 `BeanPostProcessor` 实现代理包装逻辑的**。
 
 自定义例子：
 
 ```java
+package scripting;
+
 import org.springframework.beans.factory.config.BeanPostProcessor;
 
 public class InstantiationTracingBeanPostProcessor implements BeanPostProcessor {
 
-    // simply return the instantiated bean as-is
+    // 初始化前：直接返回原 Bean 实例
     public Object postProcessBeforeInitialization(Object bean, String beanName) {
-        return bean; // 我们可以潜在的返回任何对象
+        return bean;
     }
 
+    // 初始化后：打印 Bean 名称和 toString() 结果
     public Object postProcessAfterInitialization(Object bean, String beanName) {
         System.out.println("Bean '" + beanName + "' created : " + bean.toString());
         return bean;
@@ -486,106 +465,387 @@ public class InstantiationTracingBeanPostProcessor implements BeanPostProcessor 
 }
 ```
 
+### 自动检测与注册
 
+- `ApplicationContext` 会自动检测配置元数据中所有实现 `BeanPostProcessor` 接口的 Bean，并将其注册为后置处理器，在创建 Bean 时调用。
+- 特殊注意：通过配置类的 `@Bean` 工厂方法声明 `BeanPostProcessor` 时，工厂方法的返回类型需为实现类本身或至少是 `BeanPostProcessor` 接口 —— 否则 `ApplicationContext` 无法在完全创建该 Bean 前通过类型自动检测到它（`BeanPostProcessor` 需提前实例化以处理其他 Bean 的初始化）。
 
-使用回调接口或注解与自定义BeanPostProcessor实现相结合，是扩展Spring IoC容器的一种常见手段。一个例子是 Spring 的 RequiredAnnotationBeanPostProcessor--一个随 Spring 发行版提供的 BeanPostProcessor 实现，它可以确保标有（任意）注解的 Bean 上的 JavaBean 属性实际上被（配置为）依赖注入一个值。
+### 编程式注册
 
-**像注解的处理和AOP代理都是通过BeanPostProcessor来实现的**！！即可以找出添加某个注解和实现某个接口的所有实现类，进行处理设置属性等。
+尽管推荐使用 `ApplicationContext` 自动检测，但也可通过 `ConfigurableBeanFactory` 的 `addBeanPostProcessor` 方法编程式注册。这种方式适用于注册前需执行条件逻辑，或跨容器层级复制处理器的场景，但需注意：
 
-> 如@Async，即在实现BeanPostProcessor的实现类里，检查如果添加@Async，就创建一个代理对象。
->
-> 还有其他的隐含的注解处理器
->
-> [`AutowiredAnnotationBeanPostProcessor`](https://docs.spring.io/spring-framework/docs/5.3.2/javadoc-api/org/springframework/beans/factory/annotation/AutowiredAnnotationBeanPostProcessor.html),[`CommonAnnotationBeanPostProcessor`](https://docs.spring.io/spring-framework/docs/5.3.2/javadoc-api/org/springframework/context/annotation/CommonAnnotationBeanPostProcessor.html), [`PersistenceAnnotationBeanPostProcessor`](https://docs.spring.io/spring-framework/docs/5.3.2/javadoc-api/org/springframework/orm/jpa/support/PersistenceAnnotationBeanPostProcessor.html), 和前面提到的[RequiredAnnotationBeanPostProcessor`](https://docs.spring.io/spring-framework/docs/5.3.2/javadoc-api/org/springframework/beans/factory/annotation/RequiredAnnotationBeanPostProcessor.html)。
+- 编程式注册的 `BeanPostProcessor` 不遵循 `Ordered` 接口，执行顺序由注册顺序决定；
+- 编程式注册的处理器**始终优先于**自动检测的处理器执行（无论显式排序如何）。
 
-## 1.8.2  `BeanFactoryPostProcessor`自定义配置元数据
+### 与 AOP 自动代理的兼容问题
 
-下一个扩展点是`org.springframework.beans.factory.config.BeanFactoryPostProcessor`。这个接口的语义与`BeanPostProcessor`类似，但是有一个重大的区别。`BeanFactoryPostProcessor`可以操作Bean的配置元数据。也就是说，Spring IOC容器允许`BeanFactoryPostProcessor`读取配置元数据，然后**在容器实例化其他Bean之前改变它**。
+实现 `BeanPostProcessor` 的类是容器的特殊组件：
 
-你可以配置多个BeanFactoryPostProcessor实例，你可以通过设置order属性来控制这些BeanFactoryPostProcessor实例的运行顺序。但是，只有当BeanFactoryPostProcessor实现了Ordered接口时，你才能设置这个属性。如果你写了自己的BeanFactoryPostProcessor，你也应该考虑实现Ordered接口。
+- 所有 `BeanPostProcessor` 及其直接引用的 Bean 会在 `ApplicationContext` 启动阶段提前实例化；
+- AOP 自动代理本身也是 `BeanPostProcessor` 实现，因此 `BeanPostProcessor` 实例及其直接引用的 Bean **不支持自动代理**，无法织入切面；
+- 若通过自动装配 /`@Resource` 注入依赖，Spring 可能会访问意外的 Bean，导致这些 Bean 失去自动代理或后置处理的资格。
 
-如果你想改变实际的bean实例（即从配置元数据中创建的对象），那么你需要使用BeanPostProcessor（在前面的使用BeanPostProcessor自定义bean中描述）。虽然技术上可以在BeanFactoryPostProcessor中使用bean实例（例如使用BeanFactory.getBean()），但这样做会导致过早的bean实例化，违反了标准的容器生命周期。这可能会引起负面的副作用，比如绕过bean后处理。
+### 典型应用：AutowiredAnnotationBeanPostProcessor
 
-另外，BeanFactoryPostProcessor实例的作用域是每个容器。这只有在你使用容器层次结构时才有意义。如果你在一个容器中定义了一个BeanFactoryPostProcessor，那么它只应用于该容器中的bean定义。一个容器中的 Bean 定义不会被另一个容器中的 BeanFactoryPostProcessor 实例进行后处理，即使这两个容器是同一层次结构的一部分。
+Spring 内置的 `AutowiredAnnotationBeanPostProcessor` 是 `BeanPostProcessor` 的经典应用 —— 它能自动装配标注了 `@Autowired` 的字段、setter 方法和任意配置方法，是扩展 Spring IoC 容器的常用方式。
 
+- **像注解的处理和AOP代理都是通过BeanPostProcessor来实现的**！！即可以找出添加某个注解和实现某个接口的所有实现类，进行处理设置属性等。如@Async，即在实现BeanPostProcessor的实现类里，检查如果添加@Async，就创建一个代理对象。
 
+- 如Apollo源码里，实现了BeanPostProcessor接口，解析每个Bean中@Value的字段为SpringValue对象，在配置文件更新后反射更新其值。
 
-当在ApplicationContext内声明一个bean工厂后处理器时，它就会自动运行，以便对定义容器的配置元数据应用更改。Spring包含了许多预定义的bean工厂后处理器，如`PropertyOverrideConfigurer`和`PropertySourcesPlaceholderConfigurer`。您也可以使用自定义的BeanFactoryPostProcessor--例如，注册自定义属性编辑器。
+##  二、使用`BeanFactoryPostProcessor`自定义配置元数据
 
-ApplicationContext 会自动检测部署到它的任何实现 BeanFactoryPostProcessor 接口的 Bean。它在适当的时候将这些bean用作bean工厂后处理器。你可以像部署其他bean一样部署这些后处理器bean。
+`org.springframework.beans.factory.config.BeanFactoryPostProcessor` 是另一个核心扩展点，与 `BeanPostProcessor` 语义相似，但核心区别是：
+
+- `BeanFactoryPostProcessor` 操作 **Bean 配置元数据**（而非 Bean 实例）；
+- 容器会在实例化除 `BeanFactoryPostProcessor` 外的所有 Bean **之前**，调用 `BeanFactoryPostProcessor` 读取并修改配置元数据。
+
+### 2.1 核心规则
+
+- **执行顺序**：可通过 `Ordered` 接口的 `order` 属性控制多个 `BeanFactoryPostProcessor` 的执行顺序；
+- **禁止操作 Bean 实例**：技术上可通过 `BeanFactory.getBean()` 获取 Bean 实例，但会导致 Bean 提前实例化，违反容器生命周期，可能绕过后置处理；
+- **作用域**：与 `BeanPostProcessor` 一致，仅对定义它的容器内的 Bean 定义生效；
+- **延迟初始化**：`BeanFactoryPostProcessor` 不支持延迟初始化（即使配置 `default-lazy-init="true"`，容器也会提前实例化）。
+
+### 2.2 自动检测与注册
+
+`ApplicationContext` 会自动检测实现 `BeanFactoryPostProcessor` 接口的 Bean，并在合适时机调用其处理逻辑，可像普通 Bean 一样部署。
+
+### 2.3 示例 1：PropertySourcesPlaceholderConfigurer（属性占位符替换）
+
+用于将 Bean 定义中的属性值外置到 `.properties` 文件，方便配置环境相关参数（如数据库信息）。
+
+```properties
+jdbc.driverClassName=org.hsqldb.jdbcDriver
+jdbc.url=jdbc:hsqldb:hsql://production:9002
+jdbc.username=sa
+jdbc.password=root
+```
+
+```xml
+<!-- 注册属性占位符处理器 -->
+<bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+    <property name="locations" value="classpath:com/something/jdbc.properties"/>
+</bean>
+
+<!-- 使用占位符定义 DataSource -->
+<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <property name="driverClassName" value="${jdbc.driverClassName}"/>
+    <property name="url" value="${jdbc.url}"/>
+    <property name="username" value="${jdbc.username}"/>
+    <property name="password" value="${jdbc.password}"/>
+</bean>
+```
+
+#### 关键特性
+
+- 占位符格式为 `${property-name}`，支持自定义前缀、后缀、默认值分隔符；
+- 默认会从指定 Properties 文件、Spring Environment 和 Java 系统属性中查找属性；
+- 可用于动态替换类名（运行时选择实现类）
+
+### 2.4 示例 2：PropertyOverrideConfigurer（属性覆盖）
+
+与 `PropertySourcesPlaceholderConfigurer` 类似，但支持为 Bean 属性设置默认值：
+
+- 若覆盖文件中无对应属性，使用 Bean 定义中的默认值；
+- 覆盖规则：`beanName.property=value`，支持复合属性名；
+- 多处理器覆盖同一属性时，最后一个生效。
+
+当在ApplicationContext内声明一个BeanFactoryPostProcessor时，它就会自动运行，以便对定义容器的配置元数据应用更改。Spring包含了许多预定义的BeanFactoryPostProcessor，如`PropertyOverrideConfigurer`和`PropertySourcesPlaceholderConfigurer`。您也可以使用自定义的BeanFactoryPostProcessor--例如，注册自定义属性编辑器。
+
+ApplicationContext 会自动检测部署到它的任何实现 BeanFactoryPostProcessor 接口的 Bean。它在适当的时候将这些bean用作BeanFactoryPostProcessor。你可以像部署其他bean一样部署这些后处理器bean。
 
 与BeanPostProcessors一样，你通常不希望将BeanFactoryPostProcessors配置为懒惰初始化。如果没有其他 bean 引用 Bean(Factory)PostProcessor，那么这个后处理器将不会被实例化。因此，将它标记为懒惰初始化将被忽略，即使你在 `<beans />` 元素的声明中将 default-lazy-init 属性设置为 true，Bean(Factory)PostProcessor 也会被急切地实例化
 
-### PropertySourcesPlaceholderConfigurer
+## 三、使用 FactoryBean 自定义实例化逻辑
 
-通常我们不想将类似于密码等重要的配置信息混杂到XML中，以免部署或维护期间改动复杂的配置文件出现问题。所以一般会将如数据库连接等重要的信息单独配置到properties文件中，`PropertySourcesPlaceholderConfigurer`允许我们来替换配置信息里的占位符（PlaceHolder）。
+实现 `org.springframework.beans.factory.FactoryBean` 接口的类本身是「工厂」，可定制复杂的 Bean 实例化逻辑（适合用 Java 代码替代冗长的 XML 配置）。
 
-基本机制就是，当BeanFactory在第一阶段加载完成所有配置信息，其中保存的对象属性信息还是以占位符形式存在，当`PropertySourcesPlaceholderConfigurer`作为`BeanPostProcessors`应用时，它会使用配置文件中的信息来替换BeanDefinition中占位符表示的属性值。另外`PropertySourcesPlaceholderConfigurer`还会从System类中查找属性，并可控制是否进行覆盖。
+### 3.1 核心方法
 
-您可以使用 PropertySourcesPlaceholderConfigurer 通过使用标准的 Java 属性格式，在一个单独的文件中从 bean 定义中外部化属性值。这样做可以使部署应用程序的人能够自定义特定环境的属性（如数据库 URL 和密码），而无需修改容器的主 XML 定义文件或文件的复杂性或风险。
+`FactoryBean<T>` 接口包含三个方法：
 
-### PropertyOverrideConfigurer
+1. `T getObject()`：返回工厂创建的对象实例（可返回单例或原型对象）；
+2. `boolean isSingleton()`：返回 `true` 表示单例，`false` 表示原型（默认返回 `true`）；
+3. `Class<?> getObjectType()`：返回 `getObject()` 方法的返回类型（未知则返回 `null`）。
 
-> The PropertyOverrideConfigurer, another bean factory post-processor, resembles the PropertySourcesPlaceholderConfigurer, but unlike the latter, the original definitions can have default values or no values at all for bean properties. If an overriding Properties file does not have an entry for a certain bean property, the default context definition is used.
->
-> Note that the bean definition is not aware of being overridden, so it is not immediately obvious from the XML definition file that the override configurer is being used. In case of multiple PropertyOverrideConfigurer instances that define different values for the same bean property, the last one wins, due to the overriding mechanism.
+### 3.2 核心特性
 
-`PropertyOverrideConfigurer`是另一个`BeanPostProcessors`，它类似于PropertySourcesPlaceholderConfigurer，但与后者不同的是，Bean属性的原始定义可以有默认值或完全没有值。如果覆盖的Properties文件中没有某个bean属性的条目，则使用默认的上下文定义。
+- Spring 框架内置了 50 多个 `FactoryBean` 实现，是容器实例化逻辑的重要扩展点；
+- 获取 FactoryBean 本身：调用 `ApplicationContext.getBean()` 时，在 Bean ID 前加 `&` 符号（如 `getBean("&myBean")` 返回 FactoryBean 实例，`getBean("myBean")` 返回工厂创建的 Bean 实例）。
 
-[https://developer.aliyun.com/article/459770](https://developer.aliyun.com/article/459770)
+### 总结
 
-如果说`PropertySourcesPlaceholderConfigurer`做的这些是明事的话，那么`PropertyOverrideConfigurer`就有点神不知鬼不觉，它是直接相应的文件中覆盖bean的属性。
-
-需要注意的是，bean定义并不知道被覆盖，所以从XML定义文件中并不能立即看出正在使用覆盖配置器。如果多个`PropertyOverrideConfigurer`实例为同一个Bean属性定义了不同的值，由于覆盖机制的存在，最后一个获胜。
-
-他们父类PropertyResourceConfigurer提供了一个converPropertyValue的方法，允许对配置项进行转换，如对加密后的字符串进行解密后再覆盖到相应的Bean定义中。
-
-## 1.8.3 利用FactoryBean自定义实例逻辑
-
-你可以为本身就是factories的对象实现`org.springframework.beans.factory.FactoryBean`接口。
-
-FactoryBean接口是Spring IoC容器实例化逻辑的一个可插拔点。如果你有复杂的初始化代码，相对于（潜在的）啰嗦的XML量，最好用Java来表达，你可以创建自己的FactoryBean，在这个类里面写复杂的初始化，然后把你自定义的FactoryBean插入到容器中。
-
-FactoryBean接口提供了三个方法。
-
-- `Object getObject()`。返回这个工厂创建的对象的一个实例。这个实例可能是共享的，这取决于这个工厂返回的是单例还是原型。
-
-- `boolean isSingleton()`：如果这个工厂Bean返回单例则返回true。否则返回false。
-
-- Class getObjectType()。返回getObject()方法返回的对象类型，如果事先不知道类型，则返回null。
-
-在Spring框架中，FactoryBean的概念和接口在很多地方被使用。Spring本身就有50多个FactoryBean接口的实现。
-
-当你需要向容器索取一个实际的FactoryBean实例本身而不是它所产生的bean时，在调用ApplicationContext的getBean()方法时，用安培符号(&)将bean的id放在前面。因此，对于一个id为myBean的给定FactoryBean，在容器上调用getBean("myBean")会返回FactoryBean的产物，而调用getBean("&myBean")则会返回FactoryBean实例本身。
-
-> 由BeanFactory中使用的对象实现的接口，这些对象本身就是单个对象的工厂。 如果bean实现此接口，则它将用作对象公开的工厂，而不是直接用作将自身公开的bean实例。
-> 注意：实现此接口的bean不能用作普通bean。 FactoryBean是用bean样式定义的，但是为bean引用公开的对象（ getObject() ）始终是它创建的对象。
-> FactoryBeans可以支持单例和原型，并且可以按需延迟创建对象，也可以在启动时急于创建对象。 SmartFactoryBean接口允许公开更细粒度的行为元数据。
-> 此接口在框架本身中被大量使用，例如用于AOP `org.springframework.aop.framework.ProxyFactoryBean`或`org.springframework.jndi.JndiObjectFactoryBean` 。 它也可以用于自定义组件。 但是，这仅在基础结构代码中很常见。
-> FactoryBean是程序性合同。 实现不应依赖于注解驱动的注入或其他反射功能。 getObjectType() getObject()调用可能会在引导过程的早期到达，甚至在任何后处理器设置之前。 如果需要使用其他bean，请实现BeanFactoryAware并以编程方式获取它们。
-> 容器仅负责管理FactoryBean实例的生命周期，而不负责管理FactoryBean创建的对象的生命周期。 因此，不会自动调用暴露的bean对象上的destroy方法（例如java.io.Closeable.close() 。相反，FactoryBean应该实现DisposableBean并将任何此类close调用委托给基础对象。
-> 最后，FactoryBean对象参与包含BeanFactory的Bean创建同步。 除了出于FactoryBean自身（或类似方式）内部的延迟初始化的目的之外，通常不需要内部同步。
-
-
-
-更多关于FactoryBean的使用有很多博客可以参考，[https://blog.csdn.net/jisuanji12306/article/details/86557711](https://blog.csdn.net/jisuanji12306/article/details/86557711)。简单理解可以结合BeanDefinition批量生成Bean，然后提供给开发者注入使用。
-
-使用参考`org.springframework.scheduling.quartz.CronTriggerFactoryBean`等
+1. **BeanPostProcessor**：操作 Bean 实例，在 Bean 初始化前后执行，用于修改 Bean 实例、包装代理等；
+2. **BeanFactoryPostProcessor**：操作 Bean 配置元数据，在 Bean 实例化前执行，用于动态修改配置（如属性占位符替换）；
+3. **FactoryBean**：自定义 Bean 实例化逻辑，适合复杂初始化场景，可通过 `&` 符号区分获取工厂本身和工厂创建的 Bean。
 
 # 1.9 基于注解的容器配置
 
-容器配置，基于注解比基于XML更好吗？
+Spring 对基于注解的配置提供了全面支持，其核心是通过在组件类对应的类、方法或字段声明上添加注解，直接操作组件类自身的元数据。正如《示例：AutowiredAnnotationBeanPostProcessor》一节所述，Spring 会将 `BeanPostProcessor` 与注解结合使用，使核心 IoC 容器能够识别特定注解。
 
-基于注解的配置的引入提出了这样一个问题：这种方法是否比XML "更好"。简短的回答是 "看情况"。长的答案是，每一种方法都有它的优点和缺点，而且，通常情况下，要由开发人员决定哪种策略更适合他们。由于它们的定义方式，注解在其声明中提供了大量的上下文，导致配置更短、更简洁。然而，XML擅长在不接触组件的源代码或重新编译它们的情况下进行织入。一些开发人员喜欢让布线接近源码，而另一些人则认为，注解类不再是POJO，而且，配置变得分散，更难控制。
+例如，`@Autowired` 注解具备《自动装配协作对象》章节中描述的全部功能，同时还提供了更细粒度的控制能力和更广的适用范围。此外，Spring 还支持 JSR-250 注解（如 `@PostConstruct` 和 `@PreDestroy`），以及 `jakarta.inject` 包中包含的 JSR-330（Java 依赖注入）注解（如 `@Inject` 和 `@Named`）。有关这些注解的详细信息可参考对应章节。
 
-无论如何选择，Spring都可以容纳这两种风格，甚至将它们混合在一起。值得指出的是，通过其JavaConfig选项，Spring可以让注解以一种非侵入式的方式使用，而不会触及目标组件的源代码
+**注解注入的执行时机早于外部属性注入**。因此，当采用混合配置方式时，外部配置（例如通过 XML 指定的 Bean 属性）会有效覆盖通过注解配置的属性值。
 
-基于注解的配置提供了基于XML配置的替代方案，它依赖于字节码元数据来布线组件，而不是通过角括号声明。开发者不使用XML来描述bean布线，而是通过在相关的类、方法或字段声明上使用注解，将配置移到组件类本身。如例中提到的。所需的AnnotationBeanPostProcessor中，**使用BeanPostProcessor与注解相结合是扩展Spring IoC容器的常用手段**。例如，Spring 2.0引入了使用@Required注解强制执行所需属性的可能性。Spring 2.5使得遵循同样的通用方法来驱动Spring的依赖注入成为可能。本质上，@Autowired注解提供了与 [Autowiring Collaborators](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-autowire) 中描述的相同的功能，但具有更精细的控制和更广泛的适用性。Spring 2.5还增加了对JSR-250注解的支持，如@PostConstruct和@PreDestroy。Spring 3.0增加了对JSR-330（Java依赖注入）注解的支持，这些注解包含在javax.inject包中，如@Inject和@Named。关于这些注解的细节可以在相关章节中找到。
+从技术层面来说，你可以将这些后置处理器注册为独立的 Bean 定义，但在 `AnnotationConfigApplicationContext` 中，它们已经被隐式注册完成。
 
-注解注入是在XML注入之前执行的。因此，XML配置会覆盖注解注入的属性。
+Spring 基于注解的配置通过 `BeanPostProcessor` 识别注解元数据，`@Autowired` 注解相比传统自动装配具备更细粒度的控制能力。
 
+**执行顺序**：注解注入先于外部属性注入执行，外部配置可覆盖注解配置的属性值。
 
+# 使用 @Autowired 注解
 
+在本节的示例中，你可以使用 JSR 330 规范的 `@Inject` 注解替代 Spring 自带的 `@Autowired` 注解。相关详情可参考此处。
+
+## 1. @Autowired 注解的应用场景
+
+### 1.1 构造函数注入
+
+你可以将 `@Autowired` 注解应用于构造函数，示例如下：
+
+```java
+public class MovieRecommender {
+
+    private final CustomerPreferenceDao customerPreferenceDao;
+
+    @Autowired
+    public MovieRecommender(CustomerPreferenceDao customerPreferenceDao) {
+        this.customerPreferenceDao = customerPreferenceDao;
+    }
+
+    // 其他方法...
+}
+```
+
+> **注意**：如果目标 Bean 仅定义了一个构造函数，则无需在该构造函数上添加 `@Autowired` 注解。但如果存在多个构造函数，且没有标记为主要（primary）或默认构造函数时，必须为其中至少一个构造函数添加 `@Autowired` 注解，以告知容器应使用哪个构造函数。具体可参考「构造函数解析」相关说明。
+
+### 1.2 Setter 方法注入
+
+`@Autowired` 也可应用于传统的 setter 方法，示例如下：
+
+```java
+public class SimpleMovieLister {
+
+    private MovieFinder movieFinder;
+
+    @Autowired
+    public void setMovieFinder(MovieFinder movieFinder) {
+        this.movieFinder = movieFinder;
+    }
+
+    // 其他方法...
+}
+```
+
+### 1.3 任意方法注入
+
+你可以将 `@Autowired` 应用于任意名称、包含多个参数的方法，示例如下：
+
+```java
+public class MovieRecommender {
+
+    private MovieCatalog movieCatalog;
+
+    private CustomerPreferenceDao customerPreferenceDao;
+
+    @Autowired
+    public void prepare(MovieCatalog movieCatalog,
+            CustomerPreferenceDao customerPreferenceDao) {
+        this.movieCatalog = movieCatalog;
+        this.customerPreferenceDao = customerPreferenceDao;
+    }
+
+    // 其他方法...
+}
+```
+
+### 1.4 字段注入（支持与构造函数混合使用）
+
+`@Autowired` 还可直接应用于字段，甚至与构造函数注入混合使用，示例如下：
+
+```java
+public class MovieRecommender {
+
+    private final CustomerPreferenceDao customerPreferenceDao;
+
+    @Autowired
+    private MovieCatalog movieCatalog;
+
+    @Autowired
+    public MovieRecommender(CustomerPreferenceDao customerPreferenceDao) {
+        this.customerPreferenceDao = customerPreferenceDao;
+    }
+
+    // 其他方法...
+}
+```
+
+> **重要提示**：确保你标注 `@Autowired` 的注入点所使用的类型，与目标组件（如 `MovieCatalog` 或 `CustomerPreferenceDao`）的声明类型保持一致。否则，运行时可能因 “未找到类型匹配项” 错误导致注入失败。
+>
+> - 对于 XML 定义的 Bean 或通过类路径扫描发现的组件类，容器通常能提前知晓其具体类型；
+> - 对于 `@Bean` 工厂方法，需确保声明的返回类型足够明确（至少与注入点所需类型一致）。
+
+## 2. 自注入（Self Injection）
+
+`@Autowired` 也支持注入自身引用（即指向当前正在被注入的 Bean 的引用），但需注意：
+
+- 自注入是**兜底机制**：对其他组件的常规依赖始终优先于自注入，自引用不会参与常规的自动装配候选选择，因此永远不会成为 “主要（primary）” 候选，优先级最低；
+- 实际使用中应仅作为最后手段：例如通过 Bean 的事务代理调用同一实例的其他方法。更优方案是将相关方法抽离到独立的委托 Bean 中，或使用 `@Resource`（可通过唯一名称获取指向当前 Bean 的代理）；
+- 同一 `@Configuration` 类中注入 `@Bean` 方法的返回结果，本质上也属于自引用场景：需在实际需要的方法签名中延迟解析此类引用（而非在配置类的自动装配字段中），或将受影响的 `@Bean` 方法声明为 `static`，使其与配置类实例及其生命周期解耦。否则，此类 Bean 仅会在兜底阶段被考虑，容器会优先选择其他配置类中匹配的 Bean（若存在）。
+
+## 3. 注入集合 / 数组类型
+
+你可以为期望数组类型的字段或方法添加 `@Autowired` 注解，让 Spring 从 `ApplicationContext` 中注入所有特定类型的 Bean，示例如下：
+
+```java
+public class MovieRecommender {
+
+    @Autowired
+    private MovieCatalog[] movieCatalogs;
+
+    // 其他方法...
+}
+```
+
+该规则同样适用于带类型的集合，示例如下：
+
+```java
+public class MovieRecommender {
+
+    private Set<MovieCatalog> movieCatalogs;
+
+    @Autowired
+    public void setMovieCatalogs(Set<MovieCatalog> movieCatalogs) {
+        this.movieCatalogs = movieCatalogs;
+    }
+
+    // 其他方法...
+}
+```
+
+### 3.1 集合排序
+
+若希望数组 / 列表中的元素按特定顺序排列，目标 Bean 可实现 `org.springframework.core.Ordered` 接口，或使用 `@Order` 注解、标准 `@Priority` 注解。否则，元素顺序将遵循容器中对应目标 Bean 定义的注册顺序。
+
+> **补充说明**：
+>
+> - `@Order` 注解可标注在目标类级别和 `@Bean` 方法上（适用于同一 Bean 类有多个定义的场景）；
+> - `@Order` 值仅影响注入点的优先级，不影响单例 Bean 的启动顺序（启动顺序由依赖关系和 `@DependsOn` 声明决定）；
+> - 配置类上的 `@Order` 仅影响启动时配置类的解析顺序，不影响内部 `@Bean` 方法；
+> - 标准的 `jakarta.annotation.Priority` 注解无法用于 `@Bean` 方法（不能标注在方法上），可通过 `@Order` 结合 `@Primary` 注解模拟其语义。
+
+### 3.2 注入 Map 类型
+
+只要 Map 的键类型为 `String`，带类型的 Map 实例也可被自动装配：Map 的值为所有匹配类型的 Bean，键为对应的 Bean 名称，示例如下：
+
+```java
+public class MovieRecommender {
+
+    private Map<String, MovieCatalog> movieCatalogs;
+
+    @Autowired
+    public void setMovieCatalogs(Map<String, MovieCatalog> movieCatalogs) {
+        this.movieCatalogs = movieCatalogs;
+    }
+
+    // 其他方法...
+}
+```
+
+## 4. 非必需注入（可选依赖）
+
+默认情况下，若某个注入点没有匹配的候选 Bean，自动装配会失败（数组 / 集合 / Map 类型要求至少有一个匹配元素）。
+
+默认行为下，标注注解的方法和字段被视为 “必需依赖”。你可以通过设置 `@Autowired` 的 `required` 属性为 `false`，将注入点标记为非必需，让框架跳过无法满足的注入点，示例如下：
+
+```java
+public class SimpleMovieLister {
+
+    private MovieFinder movieFinder;
+
+    @Autowired(required = false)
+    public void setMovieFinder(MovieFinder movieFinder) {
+        this.movieFinder = movieFinder;
+    }
+
+    // 其他方法...
+}
+```
+
+> **行为说明**：
+>
+> - 若非必需方法的依赖（或多参数方法中的任一依赖）不可用，该方法不会被调用；
+> - 若非必需字段的依赖不可用，该字段不会被赋值，保持默认值；
+> - `required=false` 表示该属性对自动装配而言是可选的，无法装配时会被忽略，允许通过依赖注入选择性覆盖属性的默认值。
+
+### 4.1 构造函数 / 工厂方法参数的特殊规则
+
+构造函数和工厂方法参数是特殊情况：由于 Spring 的构造函数解析算法可能处理多个构造函数，`@Autowired` 的 `required` 属性语义略有不同。
+
+- 构造函数 / 工厂方法参数默认是 “必需的”，但在单构造函数场景下有特殊规则：若注入点为数组 / 集合 / Map 类型且无匹配 Bean，会解析为空实例；
+- 这支持一种常见实现模式：将所有依赖声明在唯一的多参数构造函数中（例如仅声明一个公共构造函数，无需添加 `@Autowired` 注解）；
+- 一个 Bean 类中仅能有一个构造函数将 `@Autowired` 的 `required` 属性设为 `true`；若 `required` 保持默认值 `true`，则仅能有一个构造函数标注 `@Autowired`；若多个构造函数标注该注解，需均设置 `required=false`，容器会选择依赖数量最多且能匹配到 Bean 的构造函数。
+
+### 4.2 其他可选依赖声明方式
+
+除了 `required=false`，还可通过以下方式声明非必需依赖：
+
+1. 使用 Java 的 `java.util.Optional` 包装依赖类型：
+
+   ```java
+   public class SimpleMovieLister {
+   
+       @Autowired
+       public void setMovieFinder(Optional<MovieFinder> movieFinder) {
+           // 业务逻辑...
+       }
+   }
+   ```
+
+2. 使用参数级别的 `@Nullable` 注解（任意包下的该注解均可，如 JSpecify 的 `org.jspecify.annotations.Nullable`）：
+
+   ```java
+   public class SimpleMovieLister {
+   
+       @Autowired
+       public void setMovieFinder(@Nullable MovieFinder movieFinder) {
+           // 业务逻辑...
+       }
+   }
+   ```
+
+3. Kotlin 可直接利用内置的空安全特性。
+
+## 5. 注入 Spring 内置容器对象
+
+`@Autowired` 可用于注入 Spring 内置的、可自动解析的依赖接口：`BeanFactory`、`ApplicationContext`、`Environment`、`ResourceLoader`、`ApplicationEventPublisher` 和 `MessageSource`。这些接口及其扩展接口（如 `ConfigurableApplicationContext`、`ResourcePatternResolver`）无需特殊配置即可自动解析，示例如下：
+
+```java
+public class MovieRecommender {
+
+    @Autowired
+    private ApplicationContext context;
+
+    public MovieRecommender() {
+    }
+
+    // 其他方法...
+}
+```
+
+## 6. 注解生效限制
+
+`@Autowired`、`@Inject`、`@Value` 和 `@Resource` 注解由 Spring 的 `BeanPostProcessor` 实现类处理。这意味着：
+
+- 你**无法**在自定义的 `BeanPostProcessor` 或 `BeanFactoryPostProcessor` 类型中应用这些注解；
+- 此类处理器必须通过 XML 或 Spring `@Bean` 方法**显式装配**。
+
+### 总结
+
+1. **@Autowired 核心用法**：支持构造函数、setter 方法、任意方法、字段注入，可注入单个 Bean 或集合 / 数组 / Map 类型的多个 Bean，集合可通过 `@Order`/`Ordered` 控制顺序；
+2. **可选依赖配置**：可通过 `required=false`、`Optional`、`@Nullable` 声明非必需依赖，避免注入失败；
+3. **特殊场景限制**：自注入优先级最低，Spring 内置处理器类中无法使用 `@Autowired`，需显式装配。
 
 
 # 1.12 Java-based 容器配置
@@ -888,8 +1148,6 @@ public class AppConfig {
 
 ## 1.12.4  `@Configuration`注解的使用
 
-> `@Configuration` is a class-level annotation indicating that an object is a source of bean definitions. `@Configuration` classes declare beans through public `@Bean` annotated methods. Calls to `@Bean` methods on `@Configuration` classes can also be used to define inter-bean dependencies. See [Basic Concepts: `@Bean` and `@Configuration`](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-java-basic-concepts) for a general introduction.
-
 @Configuration是类级别的注解，表示该是Bean定义的源。`@Configuration`类内部通过@Bean注解的public方法来声明Bean，`@Configuration`类中的@Bean方法也可以用来声明Bean之间的依赖关系。
 
 ### Bean之间的依赖表达
@@ -990,10 +1248,6 @@ public class AppConfig {
 
 ClientDao()已经在clientService1()和clientService2()中被调用过一次。由于该方法创建了一个新的 ClientDaoImpl 实例并将其返回，您通常会期望有两个实例（每个服务一个）。这肯定有问题，在Spring中，实例化的Bean默认是单例的。这就是神奇的地方，所有的@Configuration类在启动时都会被CGLIB实现子类。在子类中，重写的方法首先会检查容器中是否有缓存的Bean，没有才会去调用父方法创建一个新的实例。
 
->  There are a few restrictions due to the fact that CGLIB dynamically adds features at startup-time. In particular, configuration classes must not be final. However, as of 4.3, any constructors are allowed on configuration classes, including the use of `@Autowired` or a single non-default constructor declaration for default injection.
->
-> If you prefer to avoid any CGLIB-imposed limitations, consider declaring your `@Bean` methods on non-`@Configuration` classes (for example, on plain `@Component` classes instead). Cross-method calls between `@Bean` methods are not then intercepted, so you have to exclusively rely on dependency injection at the constructor or method level there.
-
 这里有一些限制，因为CGLIB是在运行时动态的添加功能，所以配置类不能final。然而从Spring4.3开始，配置类中可以使用任何构造方法，包括使用`@Autowired`或者非默认的构造来进行默认注入。
 
 如果你更倾向于避免CGLIB施加的限制，你可以在非`@Configuration`注解的类中使用@Bean（如使用@Component代理)，这样，@Bean方法之间的交叉调用就不会被拦截，你可以完全依赖构造或方法级别的注入。
@@ -1044,10 +1298,6 @@ public static void main(String[] args) {
 从Spring4.2，@Import也支持导入一个普通的Bean，类似`AnnotationConfigApplicationContext.register`方法，这在你想避免component scanning，只需要很少的配置类来明确定义你所有的Components。
 
 **在导入的@Bean定义上注入依赖关系**
-
-> The preceding example works but is simplistic. In most practical scenarios, beans have dependencies on one another across configuration classes. When using XML, this is not an issue, because no compiler is involved, and you can declare `ref="someBean"` and trust Spring to work it out during container initialization. When using `@Configuration` classes, the Java compiler places constraints on the configuration model, in that references to other beans must be valid Java syntax.
->
-> Fortunately, solving this problem is simple. As [we already discussed](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-java-dependencies), a `@Bean` method can have an arbitrary number of parameters that describe the bean dependencies. Consider the following more real-world scenario with several `@Configuration` classes, each depending on beans declared in the others:
 
 前面的例子是可行的，但很简单。在大多数实际场景中，bean在不同的配置类中都有相互依赖关系。当使用XML时，这不是问题，因为不涉及编译器，你可以声明`ref="someBean"`，并相信Spring会在容器初始化期间解决它。当使用`@Configuration`类时，Java编译器会对配置模型进行约束，即对其他bean的引用必须是有效的Java语法。
 
@@ -1143,12 +1393,7 @@ public static void main(String[] args) {
     transferService.transfer(100.00, "A123", "C456");
 }
 ```
-
-> Constructor injection in `@Configuration` classes is only supported as of Spring Framework 4.3. Note also that there is no need to specify `@Autowired` if the target bean defines only one constructor.
-
 在@Configuration类中的构造函数注入只在Spring Framework 4.3中支持。还需要注意的是，**如果目标Bean只定义了一个构造函数，就不需要指定@Autowired**。
-
-
 
 **完全合格的beans ，方便导航**
 
@@ -1254,13 +1499,6 @@ public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata)
 在 @Configuration 类是配置容器的主要机制的应用程序中，仍然可能需要使用至少一些 XML。在这些情况下，您可以使用 @ImportResource 并只定义您需要的 XML。这样做实现了一种 "以Java为中心 "的配置容器的方法，并将XML保持在最低限度。
 
 # 1.13  Environment 的抽象
-
-> The [`Environment`](https://docs.spring.io/spring-framework/docs/5.3.2/javadoc-api/org/springframework/core/env/Environment.html) interface is an abstraction integrated in the container that models two key aspects of the application environment: [profiles](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-definition-profiles) and [properties](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-property-source-abstraction).
->
-> A profile is a named, logical group of bean definitions to be registered with the container only if the given profile is active. Beans may be assigned to a profile whether defined in XML or with annotations. The role of the `Environment` object with relation to profiles is in determining which profiles (if any) are currently active, and which profiles (if any) should be active by default.
->
-> Properties  play an important role in almost all applications and may originate from a variety of sources: properties files, JVM system properties, system environment variables, JNDI, servlet context parameters, ad-hoc `Properties` objects, `Map` objects, and so on. The role of the `Environment` object with relation to properties is to provide the user with a convenient service interface for configuring property sources and resolving properties from them.
-
  [`Environment`](https://docs.spring.io/spring-framework/docs/5.3.2/javadoc-api/org/springframework/core/env/Environment.html)是集成在容器中的一个抽象概念，它建模了应用程序的两个关键方面： [profiles](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-definition-profiles) and [properties](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-property-source-abstraction).
 
 **profile**是一个命名的，逻辑的Bean定义组。只有在给定的profile激活时才会注册到容器。不管是在XML定义还是用注解，bean都可以被分配给profile。[`Environment`](https://docs.spring.io/spring-framework/docs/5.3.2/javadoc-api/org/springframework/core/env/Environment.html)和关联的Profiles的作用就是确定哪些Profiles（如果有的话）是激活的，哪些是在默认时激活的。
@@ -1645,17 +1883,7 @@ public class AppConfig {
 
 ApplicationContext接口继承了名为MessageSource的接口，因此，它提供了国际化（"i18n"）功能。Spring还提供了HierarchicalMessageSource接口，它可以对消息进行分级解析。这些接口共同提供了Spring实现消息解析的基础。这些接口上定义的方法包括：
 
-- `String getMessage(String code, Object[] args, String default, Locale loc)`：用于从MessageSource中检索消息的基本方法。当没有找到指定locale的消息时，将使用默认消息。任何传递进来的参数都会成为替换值，使用标准库提供的MessageFormat功能。
-
-- `String getMessage(String code, Object[] args, Locale loc)`:基本上与前一个方法相同，但有一点不同。不能指定默认消息。如果找不到消息，将抛出NoSuchMessageException。
-
-- `String getMessage(MessageSourceResolvable resolvable, Locale locale)`：前面方法中使用的所有属性都被封装在一个名为MessageSourceResolvable的类中，你可以用这个方法来使用它。
-
-
-
 当加载ApplicationContext时，它会自动搜索上下文中定义的MessageSource Bean。这个Bean的名字必须是messageSource。如果找到了这样一个bean，所有对前面方法的调用都会委托给这个message source。如果没有找到message source，ApplicationContext 试图找到一个包含相同名称的 bean 的父类。如果找到了，它将使用该bean作为message source。如果ApplicationContext找不到任何message source，为了能够接受对上面定义的方法的调用，就会实例化一个空的DelegatingMessageSource。
-
-
 
 Spring提供了两个MessageSource实现，即`ResourceBundleMessageSource`和`StaticMessageSource`。两者都实现了HierarchicalMessageSource，以便进行嵌套消息传递。StaticMessageSource很少使用，一般不用于生产环境，但提供了向消息源添加消息的程序化方法。下面的例子展示了ResourceBundleMessageSource:
 
@@ -1931,8 +2159,6 @@ public void processBlockedListEvent(BlockedListEvent event) {
 
 ### 泛型event
 
-> You can also use generics to further define the structure of your event. Consider using an `EntityCreatedEvent<T>` where `T` is the type of the actual entity that got created. For example, you can create the following listener definition to receive only `EntityCreatedEvent` for a `Person`:
-
 你也可以使用泛型来进一步定义你的事件结构。考虑使用EntityCreatedEvent<T>，其中T是实际创建的实体的类型。例如，您可以创建以下监听器定义，以便只接收Person的EntityCreatedEvent。
 
 ```java
@@ -1941,10 +2167,6 @@ public void onPersonCreated(EntityCreatedEvent<Person> event) {
     // ...
 }
 ```
-
-> Due to type erasure, this works only if the event that is fired resolves the generic parameters on which the event listener filters (that is, something like `class PersonCreatedEvent extends EntityCreatedEvent<Person> { … }`).
->
-> In certain circumstances, this may become quite tedious if all events follow the same structure (as should be the case for the event in the preceding example). In such a case, you can implement `ResolvableTypeProvider` to guide the framework beyond what the runtime environment provides. The following event shows how to do so:
 
 由于泛型擦除，只有当被触发的事件解析了事件监听器过滤的通用参数时，这个方法才会起作用（也就是说，类似于class PersonCreatedEvent extends EntityCreatedEvent<Person> { ... }）。
 
@@ -2010,39 +2232,37 @@ ApplicationStartup的目的是只在应用程序启动期间和核心容器中�
 
 开发人员在创建自定义启动步骤时，不应使用 "spring.*"命名空间。这个命名空间是为Spring内部使用而保留的，可能会发生变化。
 
-#  1.16 关于`BeanFactory`
+# BeanFactory
 
-> The `BeanFactory` API provides the underlying basis for Spring’s IoC functionality. Its specific contracts are mostly used in integration with other parts of Spring and related third-party frameworks, and its `DefaultListableBeanFactory` implementation is a key delegate within the higher-level `GenericApplicationContext` container.
+BeanFactory API 为 Spring 的控制反转（IoC）功能提供了底层基础。其具体的契约接口主要用于与 Spring 其他组件及相关第三方框架的集成，而它的**DefaultListableBeanFactory**实现类，则是更高层级的**GenericApplicationContext**容器中的核心委托类。
 
->  `BeanFactory` and related interfaces (such as `BeanFactoryAware`, `InitializingBean`, `DisposableBean`) are important integration points for other framework components. By not requiring any annotations or even reflection, they allow for very efficient interaction between the container and its components. Application-level beans may use the same callback interfaces but typically prefer declarative dependency injection instead, either through annotations or through programmatic configuration.
+BeanFactory 及其相关接口（如 BeanFactoryAware、InitializingBean、DisposableBean）是其他框架组件的重要集成点。这些接口无需依赖任何注解，甚至无需反射机制，就能让容器与组件之间实现极高效率的交互。应用层的 Bean 也可以使用这些回调接口，但实际开发中，通常更倾向于通过注解或编程式配置的方式，使用声明式的依赖注入。
 
->  Note that the core `BeanFactory` API level and its `DefaultListableBeanFactory` implementation do not make assumptions about the configuration format or any component annotations to be used. All of these flavors come in through extensions (such as `XmlBeanDefinitionReader` and `AutowiredAnnotationBeanPostProcessor`) and operate on shared `BeanDefinition` objects as a core metadata representation. This is the essence of what makes Spring’s container so flexible and extensible.
+**注意**：核心的 BeanFactory API 及其 DefaultListableBeanFactory 实现类，并不会对所使用的配置格式或任何组件注解做预设限制。各类配置格式和注解的支持能力，均通过扩展组件（如 XmlBeanDefinitionReader、AutowiredAnnotationBeanPostProcessor）实现，这些扩展组件均以通用的**BeanDefinition**对象作为核心元数据载体进行操作。这正是 Spring 容器具备高度灵活性和可扩展性的本质原因。
 
-BeanFactory API为SpringIOC功能提供了底层基础。它具体规定主要用于Spring其他部分和第三方框架的集成，其DefaultListableBeanFactory实现是上层GenericApplicationContext容器的关键代理。
+##  `BeanFactory` 还是`ApplicationContext`?
 
-BeanFactory和相关接口（如BeanFactoryAware、InitializingBean、DisposableBean）是其他框架组件的重要集成点。通过不需要任何注解甚至反射，他们允许容器和其他组件之间进行非常高效的交互。应用级的Bean可以使用相同的回调接口，但通常更倾向于通过注解或代码来声明注入依赖。
+本节将说明 BeanFactory 和 ApplicationContext 两个容器层级的区别，以及二者在容器启动过程中的不同影响。
 
-请注意，核心BeanFactory API层及其实现DefaultListableBeanFactory并没有对配置格式或任何要使用的组件注解做出假设。所有这些格式都是通过扩展（如XmlBeanDefinitionReader和AutowiredAnnotationBeanPostProcessor）进来的，并在共享的BeanDefinition对象上操作，作为核心元数据表示。这就是Spring的容器如此灵活和可扩展的本质。
+除非有充分的特殊理由，否则都应优先使用 ApplicationContext 容器，其中**GenericApplicationContext**及其子类**AnnotationConfigApplicationContext**，是自定义容器启动流程时最常用的实现类。对于所有常规开发场景，它们都是 Spring 核心容器的主要入口，可完成配置文件加载、类路径扫描触发、编程式注册 Bean 定义和注解类，以及（从 Spring 5.0 开始）注册函数式 Bean 定义等操作。
 
-## 1.16.1  `BeanFactory` 还是`ApplicationContext`?
+由于 ApplicationContext 包含了 BeanFactory 的全部功能，因此除了需要对 Bean 处理流程进行完全自定义控制的场景外，**通常推荐优先使用 ApplicationContext，而非原生的 BeanFactory**。在 ApplicationContext 容器中（如 GenericApplicationContext 实现类），容器会通过约定的方式自动识别多种类型的 Bean（即根据 Bean 名称或 Bean 类型识别，后置处理器便是典型）；而原生的 DefaultListableBeanFactory 则对所有特殊 Bean 均无感知。
 
-下面介绍BeanFactory和ApplicationContext容器级别之间的差异以及对引导的影响。
+对于注解处理、AOP 代理等众多容器扩展功能而言，**BeanPostProcessor**扩展点是实现的核心。如果仅使用原生的 DefaultListableBeanFactory，这类后置处理器默认不会被容器检测到，也无法被激活。这种情况容易造成开发困惑，因为此时的 Bean 配置本身并无错误，只是需要通过额外的配置步骤，才能完成容器的完整启动。
 
-你应该使用ApplicationContext，除非你有很好的理由不这样做，GenericApplicationContext及其子类AnnotationConfigApplicationContext是自定义引导的常用实现。这些是Spring核心容器的主要入口点，用于所有常见的目的：加载配置文件、触发classpath扫描、编程注册bean定义和注解类，以及（从5.0开始）注册功能bean定义。
-
-因为ApplicationContext包含了BeanFactory的所有功能，所以一般推荐使用ApplicationContext，而不是普通的BeanFactory，除非是需要完全控制Bean处理的场景。在ApplicationContext中（如GenericApplicationContext实现），有几种Bean是通过惯例（即通过Bean名称或Bean类型--特别是后处理器）来检测的，而普通的DefaultListableBeanFactory对任何特殊的Bean都是不可知的。
-
-对于容器的许多扩展功能，如注解处理和AOP代理，BeanPostProcessor扩展是必不可少的。如果你只使用一个普通的DefaultListableBeanFactory，像后处理器默认不会被检测和激活。这种情况可能会让人感到困惑，因为实际上你的bean配置没有任何问题。相反，在这样的情况下，容器需要通过额外的设置进行完全的引导。
+下表列出了 BeanFactory 和 ApplicationContext 接口及其实现类所提供的功能对比。
 
 下面表格展示 `BeanFactory` 和 `ApplicationContext` 提供的功能列表：
 
-| Feature                                                 | `BeanFactory` | `ApplicationContext` |
-| :------------------------------------------------------ | :------------ | :------------------- |
-| Bean instantiation/wiring                               | Yes           | Yes                  |
-| Integrated lifecycle management                         | No            | Yes                  |
-| Automatic `BeanPostProcessor` registration              | No            | Yes                  |
-| Automatic `BeanFactoryPostProcessor` registration       | No            | Yes                  |
-| Convenient `MessageSource` access (for internalization) | No            | Yes                  |
-| Built-in `ApplicationEvent` publication mechanism       | No            | Yes                  |
+| Feature                                 | `BeanFactory` | `ApplicationContext` |
+| :-------------------------------------- | :------------ | :------------------- |
+| Bean 实例化 / 依赖装配                  | Yes           | Yes                  |
+| Integrated lifecycle management         | No            | Yes                  |
+| BeanPostProcessor 自动注册              | No            | Yes                  |
+| BeanFactoryPostProcessor 自动注册       | No            | Yes                  |
+| 便捷的 MessageSource 访问（用于国际化） | No            | Yes                  |
+| 内置的 ApplicationEvent 发布机制        | No            | Yes                  |
 
-一个AnnotationConfigApplicationContext已经注册了所有常见的注解post-processors，并且可以通过配置注解（如@EnableTransactionManagement）引入额外的处理器。在Spring基于注解的配置模型的抽象层次上，bean后处理器的概念变成了一个单纯的内部容器细节。
+这也是在基于 Spring 开发的应用中，**优先使用各类 ApplicationContext 实现类，而非原生 DefaultListableBeanFactory**的原因 —— 尤其是在典型的企业级开发中，需要依赖 BeanFactoryPostProcessor 和 BeanPostProcessor 实例实现容器扩展功能时，这一选择的优势更为明显。
+
+**AnnotationConfigApplicationContext**会自动注册所有常用的注解后置处理器，还能通过`@EnableTransactionManagement`等配置注解，在底层自动引入额外的处理器。在 Spring 基于注解的配置模型抽象层级中，Bean 后置处理器的概念已成为容器的底层实现细节，对开发人员完全透明。
