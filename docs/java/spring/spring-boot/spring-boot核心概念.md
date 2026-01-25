@@ -164,3 +164,66 @@ public interface SpringApplicationRunListener {
 在启动的main方法中，可以看到在容器开始，准备，加载，运行的各个阶段，都有通过listener去发布相应状态的SpringApplicationEvent
 
 ![image.png](images/startListener.png)
+
+
+
+
+# Spring Boot 自动配置注册机制
+
+## 一句话总结
+**`spring.factories` 是 Spring Boot 自动配置的"服务注册表"，实现配置类的自动发现与智能加载。**
+
+## 核心价值
+- **解决痛点**：避免手动 `@Import` 配置类
+- **核心理念**：实现"约定优于配置"
+- **最终目标**：添加依赖即可使用，无需手动配置
+
+## 工作原理
+
+### 注册机制
+```properties
+# META-INF/spring.factories (Spring Boot 2.x)
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.example.RedisAutoConfiguration
+```
+- **作用**：告诉 Spring Boot "我提供了这些配置类"
+- **位置**：Java 标准元信息目录 `META-INF/`
+- **扫描**：启动时扫描所有依赖中的此文件
+
+### 决策流程
+```
+扫描所有 spring.factories
+    ↓
+收集自动配置类
+    ↓
+检查条件注解
+    ↓
+加载符合条件的类
+```
+
+### 条件控制
+```java
+@ConditionalOnClass(RedisConnectionFactory.class)  // 有依赖才生效
+@ConditionalOnProperty("spring.redis.host")       // 有配置才生效
+public class RedisAutoConfiguration { ... }
+```
+
+## 实际示例
+**添加 Redis Starter 后：**
+1. jar 中包含 `spring.factories` 文件
+2. 文件注册了 `RedisAutoConfiguration`
+3. 启动时检测到 Redis 依赖 → 条件满足
+4. 自动创建 `RedisTemplate` 等 Bean
+5. 可直接 `@Autowired` 使用
+
+## Spring Boot 3.x 改进
+```
+# META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports
+com.example.RedisAutoConfiguration
+```
+- **更简洁**：每行一个类名
+- **更直观**：文件名表明用途
+- **更好支持**：IDE 可直接跳转
+
+## 本质理解
+**没有此机制 → 无法自动发现配置 → 需要手动配置 → 失去 Spring Boot 的核心价值**

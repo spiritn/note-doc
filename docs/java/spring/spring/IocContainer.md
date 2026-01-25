@@ -1,55 +1,55 @@
 
+这部分章节涵盖了Spring 框架不可或缺的全部核心技术。
+其中最关键的是 Spring 框架的控制反转（IoC）容器。文档在对 Spring 框架 IoC 容器进行深入阐述后，紧接着全面介绍了 Spring 的面向切面编程（AOP）技术。Spring 框架拥有自研的 AOP 框架，该框架概念清晰易懂，能够很好地满足 Java 企业级编程中 80% 的 AOP 核心需求。
+文档还介绍了 Spring 与 AspectJ 的集成方案 ——AspectJ 是目前 Java 企业级领域中功能最丰富、且最为成熟的 AOP 实现方案。
+AOT技术可用于对应用程序进行提前优化，该技术通常适用于基于 GraalVM 的原生镜像部署场景。
+
+章节概要
+- IoC 容器核心概念与基本原理
+- Bean 的定义、创建与生命周期管理
+- 依赖注入（DI）机制与配置方式
+- Singleton、Prototype、Request、Session 等作用域
+- Bean 初始化和销毁回调的定制
+- Bean 定义的继承与复用
+- BeanPostProcessor、BeanFactoryPostProcessor 等扩展点
+- @Autowired、@Component、@Repository 等注解的使用
+- 组件扫描（Component Scan）与自动装配
+- @Inject、@Named 等 JSR 330 标准注解
+- @Configuration、@Bean 编程式配置
+- Environment 接口与 Profile 管理
+- LoadTimeWeaver 注册与字节码增强
+- ApplicationContext 的高级功能
+- BeanFactory 核心接口 API
 
 # 1.1 IoC容器和Beans
+本章介绍 Spring 框架对控制反转（IoC）原则的实现。依赖注入（DI）是控制反转的一种特定形式，在这种模式下，对象仅通过以下三种方式定义自身的依赖项（即协同工作的其他对象）：构造函数参数、工厂方法参数，或对象实例被构造完成、或从工厂方法返回后为其设置的属性。IoC 容器会在创建 Bean 时，自动注入这些依赖项。这一过程与 Bean 自身通过直接实例化类、或采用服务定位器模式等方式控制依赖项的实例化和获取路径，在逻辑上是完全相反的 —— 这也是 “控制反转” 名称的由来。
+org.springframework.beans 和 org.springframework.context 这两个包是 Spring 框架 IoC 容器的基础。BeanFactory 接口提供了一套高级配置机制，能够管理任意类型的对象。ApplicationContext 是 BeanFactory 的子接口，它在父接口的基础上新增了以下功能：
+- 更便捷地与 Spring 面向切面编程（AOP）特性集成
+- 消息资源处理（用于国际化场景）
+- 事件发布功能
+- 适用于应用层的特定上下文，例如 Web 应用专用的 WebApplicationContext
 
-> This chapter covers the Spring Framework implementation of the Inversion of Control (IoC) principle. IoC is also known as dependency injection (DI). It is a process whereby objects define their dependencies (that is, the other objects they work with) only through constructor arguments, arguments to a factory method, or properties that are set on the object instance after it is constructed or returned from a factory method. The container then injects those dependencies when it creates the bean. This process is fundamentally the inverse (hence the name, Inversion of Control) of the bean itself controlling the instantiation or location of its dependencies by using direct construction of classes or a mechanism such as the Service Locator pattern.
+简而言之，BeanFactory 提供了配置框架和基础功能，而 ApplicationContext 则在此之上添加了更多企业级特性。ApplicationContext 是 BeanFactory 的完整超集，因此本章在描述 Spring IoC 容器时，均以 ApplicationContext 为核心展开。若你需要了解如何使用 BeanFactory 而非 ApplicationContext，可参考《BeanFactory API》相关章节。
 
-
-本章介绍了 Spring 框架中 IoC（控制反转）原理及其实现。IoC（也称为依赖注入，DI）指的是：对象仅通过构造函数参数、工厂方法参数或在对象构造/从工厂方法返回后设置的属性来声明其依赖关系，容器在创建该 bean 时负责注入这些依赖。该过程与传统由 bean 自行实例化或通过 Service Locator 查找依赖的方式相反，因此称为“控制反转”。
-
-`org.springframework.beans` 与 `org.springframework.context` 包是 Spring IoC 容器的核心组成。`BeanFactory` 接口提供了管理各类 bean 的基础配置和生命周期功能；`ApplicationContext` 是 `BeanFactory` 的子接口，在此基础上扩展了企业级功能，例如：
-
-- 更便捷的 Spring AOP 集成
-- 消息资源处理（用于国际化，即 MessageSource）
-- 事件发布机制（ApplicationEvent 发布/监听）
-- 应用层特定的上下文支持，例如用于 Web 的 `WebApplicationContext`
-
-总体来说，`BeanFactory` 提供了基础的容器能力，而 `ApplicationContext` 则是包含更多框架与企业特性的完整超集。本章以 `ApplicationContext` 为主来说明 Spring IoC 容器的用法。若需仅使用 `BeanFactory`，请参阅[The `BeanFactory`](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-beanfactory)。
-
- 
-
-> In Spring, the objects that form the backbone of your application and that are managed by the Spring IoC container are called beans. A bean is an object that is instantiated, assembled, and managed by a Spring IoC container. Otherwise, a bean is simply one of many objects in your application. Beans, and the dependencies among them, are reflected in the configuration metadata used by a container.
-
-在 Spring 中，由 IoC 容器管理并构成应用骨干的对象被称为 Bean。Bean 是由 Spring IoC 容器负责实例化、组装和管理的对象。Bean 以及它们之间的依赖通过容器所使用的配置元数据来描述和维护。
+在 Spring 中，构成应用程序核心、且由 Spring IoC 容器管理的对象被称为 Bean。Bean 是由 Spring IoC 容器负责实例化、组装和管理的对象；除此之外，它与应用程序中的其他普通对象并无区别。Bean 及其之间的依赖关系，均体现在容器所使用的配置元数据中。
 
 # 1.2 容器
+org.springframework.context.ApplicationContext 接口代表 Spring 控制反转（IoC）容器，负责 Bean 的实例化、配置和组装。容器通过读取配置元数据，获取需要实例化、配置和组装的组件相关指令。配置元数据可通过带注解的组件类、包含工厂方法的配置类，或外部 XML 文件、Groovy 脚本进行定义。无论采用哪种格式，你都可以构建应用程序，并处理这些组件之间复杂的依赖关系。
+ApplicationContext 接口的多个实现类都属于 Spring 核心模块。在独立应用程序中，通常会创建 AnnotationConfigApplicationContext 或 ClassPathXmlApplicationContext 的实例。
+在大多数应用场景下，无需编写显式的用户代码来实例化一个或多个 Spring IoC 容器。例如，在普通 Web 应用场景中，只需在应用的 web.xml 文件中编写一段简单的模板化 Web 描述符 XML 即可（详情参见《Web 应用的便捷 ApplicationContext 实例化》）。在 Spring Boot 场景中，应用上下文会基于通用的配置约定，为你自动隐式启动。
 
-> The `org.springframework.context.ApplicationContext` interface represents the Spring IoC container and is responsible for instantiating, configuring, and assembling the beans. The container gets its instructions on what objects to instantiate, configure, and assemble by reading configuration metadata. The configuration metadata is represented in XML, Java annotations, or Java code. It lets you express the objects that compose your application and the rich interdependencies between those objects
->
+## 1.2.1 配置元数据
 
-
-`org.springframework.context.ApplicationContext` 接口表示 Spring 的 IoC 容器，负责实例化、配置并组装 bean。容器通过读取配置元数据来决定要实例化、配置和组装哪些对象。配置元数据可以用 XML、Java 注解或 Java 代码表示，从而描述应用中的对象及它们之间的依赖关系。
+正如图中所示，Spring 控制反转（IoC）容器会读取某种格式的配置元数据。这些配置元数据的作用，是让应用开发者能够告知 Spring 容器，应当如何实例化、配置并组装应用中的各个组件。
+Spring IoC 容器本身与配置元数据的实际编写格式完全解耦。如今，许多开发者会为自己的 Spring 应用选择基于 Java 的配置方式：
+基于注解的配置：在应用的组件类上，通过基于注解的配置元数据来定义 Bean。
+基于 Java 的配置：借助基于 Java 的配置类，在应用类外部定义 Bean。若要使用这些功能，请参考 @Configuration、@Bean、@Import 和 @DependsOn 注解。
+Spring 配置至少包含一个、通常包含多个需要由容器管理的 Bean 定义。基于 Java 的配置一般会在 @Configuration 标注的类中，使用 @Bean 注解标注方法，每个方法对应一个 Bean 定义。
+这些 Bean 定义对应着构成应用的实际对象。通常情况下，你可以定义服务层对象、持久层对象（例如资源库或数据访问对象（DAO））、表现层对象（例如 Web 控制器），以及基础设施类对象（例如 JPA 实体管理器工厂、Java 消息服务队列等）。一般而言，无需在容器中配置细粒度的领域对象，因为创建和加载领域对象的职责通常由资源库和业务逻辑来承担。
 
 Spring 提供了多种 `ApplicationContext` 的实现。在独立应用中，常见的实现有 `ClassPathXmlApplicationContext` 和 `FileSystemXmlApplicationContext`。虽然 XML 是传统的配置格式，但可以通过少量 XML 来启用注解或 Java 配置的支持，从而让容器使用注解或代码作为元数据来源。
 
 在大多数场景下，无需在应用代码中显式创建 `ApplicationContext` 实例。例如在 Web 应用中，通常只需在 `web.xml` 中添加几行标准配置模板（参见“Web 应用的便捷 ApplicationContext 实例化”）。如果使用 Spring Tools for Eclipse 等 IDE，也可以通过图形化操作快速生成这些配置。
-
-下图展示了 Spring 的工作流程：应用类与配置元数据结合，在 `ApplicationContext` 创建并初始化后，你将得到一个已配置并可运行的系统或应用。
-
-![container magic](https://docs.spring.io/spring-framework/docs/current/reference/html/images/container-magic.png)
-
-## 1.2.1 配置元数据
-
-
-如上所示，Spring IoC 容器以配置元数据为输入，开发人员通过这些元数据告诉容器如何实例化、配置和组装应用对象。
-
-配置元数据传统上以直观的 XML 提供，本章主要用 XML 来说明 Spring IoC 容器的关键概念与特性。但元数据的格式是与容器实现解耦的，现代项目中也常用基于注解或基于 Java 的配置。
-
-有关在 Spring 中使用其他形式元数据的参考，请查看：
-
-- [1.9 Annotation-based configuration](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-annotation-config): Spring 2.5引入的，通过注解配置元数据
-- [1.12 Java-based configuration](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-java): 从Spring3.0开始，可以通过Java代码而不是xml文件来定义你应用的类。更多信息查看 [`@Configuration`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Configuration.html), [`@Bean`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Bean.html), [`@Import`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Import.html), and [`@DependsOn`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/DependsOn.html) 注解。
-
 
 Spring 的配置通常由若干 bean 定义组成。基于 XML 的元数据将这些 bean 作为顶层 `<beans/>` 元素下的多个 `<bean/>` 定义；Java 配置则通常在 `@Configuration` 类中的 `@Bean` 方法里声明。
 
@@ -85,18 +85,8 @@ context.refresh();
 尽管可以在代码中直接调用 `getBean()`，但理想情况下应用逻辑不应依赖于该调用。更好的做法是使用依赖注入（例如通过注解或构造器注入），这样应用代码与 Spring API 解耦。在 Web 场景下，Spring 与各类 Web 框架集成后，会在控制器等组件上自动注入所需的依赖，无需显式调用 `getBean()`。
 
 # 1.3 Bean
-
-Spring容器管理一个或多个Bean。这些Bean通过配置元数据应用到容器中（例如XML中的 `<bean/>` 定义）。
-
-> Within the container itself, these bean definitions are represented as `BeanDefinition` objects, which contain (among other information) the following metadata:
->
-> - A package-qualified class name: typically, the actual implementation class of the bean being defined.
-> - Bean behavioral configuration elements, which state how the bean should behave in the container (scope, lifecycle callbacks, and so forth).
-> - References to other beans that are needed for the bean to do its work. These references are also called collaborators or dependencies.
-> - Other configuration settings to set in the newly created object — for example, the size limit of the pool or the number of connections to use in a bean that manages a connection pool.
-
-在容器本身，这些Bean定义被表示为BeanDefinition对象，它包含以下(除了其他信息)元数据
-
+Spring IoC 容器管理一个或多个 Bean。这些 Bean 是通过你提供给容器的配置元数据创建的（例如，以 XML <bean/> 定义的形式）。
+在容器内部，这些 Bean 定义以 BeanDefinition 对象的形式存在，其中包含（但不限于）以下元数据：
 - 包限定的类名: 通常是被定义的Bean的实际实现类.
 - Bean的行为配置，它说明了Bean在容器中应该表现的状态(scope, lifecycle callbacks等)
 - 对其他Bean的引用，这些引用是Bean工作所需要的，也被成为依赖
@@ -116,85 +106,63 @@ Spring容器管理一个或多个Bean。这些Bean通过配置元数据应用到
 | Initialization method    | [Initialization Callbacks](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-lifecycle-initializingbean) |
 | Destruction method       | [Destruction Callbacks](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-lifecycle-disposablebean) |
 
-> In addition to bean definitions that contain information on how to create a specific bean, the `ApplicationContext` implementations also permit the registration of existing objects that are created outside the container (by users). This is done by accessing the ApplicationContext’s BeanFactory through the `getBeanFactory()` method, which returns the BeanFactory `DefaultListableBeanFactory` implementation. `DefaultListableBeanFactory` supports this registration through the `registerSingleton(..)` and `registerBeanDefinition(..)` methods. However, typical applications work solely with beans defined through regular bean definition metadata.
->
-> Bean metadata and manually supplied singleton instances need to be registered as early as possible, in order for the container to properly reason about them during autowiring and other introspection steps. While overriding existing metadata and existing singleton instances is supported to some degree, the registration of new beans at runtime (concurrently with live access to the factory) is not officially supported and may lead to concurrent access exceptions, inconsistent state in the bean container, or both.
+除了包含创建特定 Bean 相关信息的 Bean 定义外，ApplicationContext 实现类还允许注册容器外部（由用户）创建的现有对象。这可通过 getAutowireCapableBeanFactory() 方法获取 ApplicationContext 的 BeanFactory（返回 DefaultListableBeanFactory 实现类），并调用其 registerSingleton(..) 和 registerBeanDefinition(..) 方法完成。不过，典型应用通常仅使用通过常规 Bean 定义元数据定义的 Bean。
 
-除了包含如何创建特定Bean信息的Bean定义之外，ApplicationContext实现还允许注册在容器之外（由用户）创建的现有对象。这是通过getBeanFactory()方法访问ApplicationContext的BeanFactory来实现的，该方法返回BeanFactory的DefaultListableBeanFactory实现。DefaultListableBeanFactory通过registerSingleton(..)和registerBeanDefinition(..)方法支持这种注册。然而，典型的应用程序只使用通过常规bean定义元数据定义的bean。
+Bean 元数据和手动提供的单例实例需尽早注册，以便容器在自动装配和其他内省步骤中正确处理它们。虽然容器在一定程度上支持覆盖现有元数据和单例实例，但不官方支持运行时注册新 Bean（与工厂的实时访问并发进行），这可能导致并发访问异常、Bean 容器状态不一致，或两者皆有。
 
-Bean 元数据和手动注册的单例应尽早注册，以便容器在执行自动装配和其他推断操作时能够正确处理。虽然在一定程度上支持覆盖现有元数据和单例，但在运行时（尤其在有并发访问的情况下）注册新的 bean 并非官方支持，可能导致并发访问异常或容器状态不一致。
+## 覆盖Bean
+当使用已被占用的标识符注册 Bean 时，会发生 Bean 覆盖。尽管 Bean 覆盖是可行的，但会降低配置的可读性。
+   注意：Bean 覆盖功能将在未来版本中被废弃。
 
-## 1.3.1 Bean的命名
+若要完全禁用 Bean 覆盖，可在 ApplicationContext 刷新前将 allowBeanDefinitionOverriding 标志设为 false。在此配置下，若尝试覆盖 Bean，容器会抛出异常。
+   默认情况下，容器会以 INFO 级别记录每次 Bean 覆盖的尝试，方便你调整配置。尽管不推荐，但你也可将 allowBeanDefinitionOverriding 设为 true 来关闭这些日志。
 
-> Every bean has one or more identifiers. These identifiers must be unique within the container that hosts the bean. A bean usually has only one identifier. However, if it requires more than one, the extra ones can be considered aliases.
->
-> In XML-based configuration metadata, you use the `id` attribute, the `name` attribute, or both to specify the bean identifiers. The `id` attribute lets you specify exactly one id. Conventionally, these names are alphanumeric ('myBean', 'someService', etc.), but they can contain special characters as well. If you want to introduce other aliases for the bean, you can also specify them in the `name` attribute, separated by a comma (`,`), semicolon (`;`), or white space. As a historical note, in versions prior to Spring 3.1, the `id` attribute was defined as an `xsd:ID` type, which constrained possible characters. As of 3.1, it is defined as an `xsd:string` type. Note that bean `id` uniqueness is still enforced by the container, though no longer by XML parsers.
->
-> You are not required to supply a `name` or an `id` for a bean. If you do not supply a `name` or `id` explicitly, the container generates a unique name for that bean. However, if you want to refer to that bean by name, through the use of the `ref` element or a Service Locator style lookup, you must provide a name. Motivations for not supplying a name are related to using [inner beans](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-inner-beans) and [autowiring collaborators](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-autowire).
-
-每个Bean都有一个或多个标识符。这些标识符在对应的容器中必须是唯一的。一个Bean通常只有一个标识符。然而，如果它需要多个标识符，那么额外的标识符会被认为是别名。
-
-在基于XML的元数据配置中，可以使用id，name属性，或者同时使用，来指定Bean的标识符。id属性可以让你精确的指定一个Bean。传统上，这些名称可以是字母数字（'myBean'、'someService'等），但也可以包含特殊字符。如果你想为Bean引入其他别名，也可以在name中指定，用逗号，分号或空格分隔。作为历史性的说明，在Spring 3.1之前的版本中，id属性被定义为xsd:ID类型，它限制了可能的字符。从3.1开始，它被定义为xsd:string类型。请注意，bean id 唯一性仍然由容器强制执行，尽管不再由 XML 解析器执行。
-
-您不需要为Bean提供name或id，如果你不显示的提供name或id，容器就会为该Bean生成一个唯一的name。但是，如果你想通过使用ref元素来用name引用该Bean，您必须提供一个name。不提供名称的动机与使用内部Bean和自动注入合作者有关。
-
-
-
-在命名bean时惯例使用标准的Java惯例来命名实例字段名。也就是说，bean名称以小写字母开头，驼峰表示。如accountManager、accountService、userDao、loginController等。
-
-统一命名bean可以让你的配置更容易阅读和理解。此外，如果你使用Spring AOP，当你对一组名字相关的bean应用建议时，它有很大的帮助。
-
-通过classpath中的组件扫描，Spring为未命名的组件生成bean名称，遵循前面描述的规则：基本上，取简单的类名，并将其首字母变成小写。然而，在特殊情况下，当有多个字符，并且第一个和第二个字符都是大写时，原始的格式会被保留。这些规则与java.beans.Introspector.decapitalize（Spring在这里使用）定义的规则相同。
-
-### 在Bean定义之外为Bean取别名
-
-> In a bean definition itself, you can supply more than one name for the bean, by using a combination of up to one name specified by the id attribute and any number of other names in the name attribute. These names can be equivalent aliases to the same bean and are useful for some situations, such as letting each component in an application refer to a common dependency by using a bean name that is specific to that component itself.
->
-> Specifying all aliases where the bean is actually defined is not always adequate, however. It is sometimes desirable to introduce an alias for a bean that is defined elsewhere. This is commonly the case in large systems where configuration is split amongst each subsystem, with each subsystem having its own set of object definitions. In XML-based configuration metadata, you can use the <alias/> element to accomplish this. The following example shows how to do so:
-
-在Bean定义中，您可以为Bean提供一个以上的名称，使用由id属性指定的最多一个名称和使用name属性指定任意数量的其他名称。这些名称可以是同一个Bean的等价别名，对于某些情况来说是很有用的，比如让应用程序中的每个组件使用一个特定于该组件本身的Bean名称来引用一个共同的依赖关系。
-
-然而，在实际定义Bean的地方指定所有别名并不总是足够的。有时，我们需要为在其他地方定义的Bean引入一个别名。这种情况在大型系统中很常见，因为在这些系统中，配置被分割在每个子系统中，每个子系统都有自己的对象定义集。在基于XML的配置元数据中，您可以使用<alias/>元素来实现这一目的。下面的例子展示了如何做到这一点。
+Java 配置中的 Bean 覆盖 
+使用 Java 配置时，只要 @Bean 方法的返回类型与扫描到的 Bean 类匹配，该方法会静默覆盖同名的组件类 Bean。这意味着容器会优先调用 @Bean 工厂方法，而非 Bean 类中预先声明的构造函数。
+我们承认在测试场景中覆盖 Bean 较为便捷，Spring 也为此提供了显式支持（详见相关章节）。
+## 3.Bean的命名
+每个 Bean 有一个或多个标识符，这些标识符在托管该 Bean 的容器中必须唯一。Bean 通常只有一个标识符，若需多个，额外的标识符可视为别名（aliases）。
+### 3.1 XML 配置中的 Bean 命名
+在基于 XML 的配置元数据中，可通过 id 属性、name 属性或两者结合来指定 Bean 标识符：
+id 属性：仅能指定一个唯一 ID，通常为字母数字格式（如 myBean、someService），也可包含特殊字符。
+name 属性：可指定多个别名，用逗号（,）、分号（;）或空格分隔。
+尽管 id 属性在 XML 规范中为 xsd:string 类型，但 Bean ID 的唯一性由容器（而非 XML 解析器）保证。
+### 3.2 未显式命名的 Bean
+你无需为 Bean 提供 name 或 id：若未显式指定，容器会为该 Bean 生成唯一名称。但如果需要通过 ref 元素或服务定位器（Service Locator）风格的查找来引用该 Bean，则必须提供名称。不命名的常见场景包括内部 Bean 和自动装配协作对象。
+### 3.3 Bean 命名规范
+Bean 命名遵循 Java 实例字段的标准命名规范：以小写字母开头，后续采用驼峰命名法（如 accountManager、accountService、userDao、loginController）。
+统一的命名规范可提升配置的可读性，且在 Spring AOP 中，按名称为一组相关 Bean 应用通知时也会更便捷。
+### 3.4 类路径扫描的 Bean 命名
+类路径扫描时，Spring 会为未命名的组件生成 Bean 名称，规则如下：
+取类的简单名称，将首字母转为小写；
+特殊情况（罕见）：若类名前两个字符均为大写，则保留原大小写（与 java.beans.Introspector.decapitalize 规则一致，Spring 底层采用此方法）。
+### 3.5 Bean 别名（外部定义）
+在 Bean 定义内部，可通过 id 属性（最多一个）和 name 属性（多个）组合为 Bean 提供多个名称。但有时需要为其他位置定义的 Bean 引入别名（例如大型系统中，各子系统有独立配置）。
 
 ```xml
 <alias name="fromName" alias="toName"/>
 ```
-
 在这种情况下，名为fromName的bean（在同一个容器中）在使用这个别名定义之后，也可以被称为toName。
-
 例如，子系统 A 的配置元数据可以用 `subsystemA-dataSource` 的名称来引用一个 DataSource。子系统B的配置元数据可以用`subsystemB-dataSource`的名称来引用DataSource。当组成使用这两个子系统的主应用程序时，主应用程序以`myApp-dataSource`的名称来引用DataSource。要让这三个名称都引用同一个对象，可以在配置元数据中添加以下别名定义。
 
 ```XML
 <alias name="myApp-dataSource" alias="subsystemA-dataSource"/>
 <alias name="myApp-dataSource" alias="subsystemB-dataSource"/>
 ```
-
 现在每个子系统和主系统都可以通过一个唯一的name引用dataSource，并且不与其他定义发生冲突，但引用的是同一个dataSource。
 
 使用注解也可以定义多个Bean的别名。
 
-## 1.3.2 实例化Bean
-
-> A bean definition is essentially a recipe for creating one or more objects. The container looks at the recipe for a named bean when asked and uses the configuration metadata encapsulated by that bean definition to create (or acquire) an actual object.
->
-
-Bean definition 本质上是创建一个或多个对象的配方（食谱）。容器在被请求时查看Bean的配方，并使用该Bean定义封装的配置元数据来创建（或获取）一个实际的对象。
-
-如果您使用基于 XML 的配置元数据，您可以在 `<bean/>` 元素的 class 属性中指定要实例化的对象的类型（或类）。这个类属性（在内部，它是BeanDefinition实例上的一个Class属性）通常是强制性的。（关于例外情况，请参见[Instantiation by Using an Instance Factory Method](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-class-instance-factory-method) and [Bean Definition Inheritance](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-child-bean-definitions).）。您可以用两种方式之一来使用Class属性。
-
-- 通常，在容器本身通过反射调用其构造函数地直接创建bean的情况下，指定要构造的bean的class，有点相当于使用new操作符的Java代码。
-- 在容器调用类的静态工厂方法来创建bean的情况下，要指定包含静态工厂方法的实际类，这种情况不太常见。从静态工厂方法的调用中返回的对象类型可能是同一个类，也可能完全是另一个类。
+## 4.实例化Bean
+Bean 定义本质上是创建一个或多个对象的 “配方”。容器在收到请求时，会根据命名 Bean 的配方，使用 Bean 定义封装的配置元数据创建（或获取）实际对象。
+在基于 XML 的配置中，<bean/> 元素的 class 属性指定要实例化的对象类型，该属性（对应 BeanDefinition 的 Class 属性）通常是必需的（例外情况见《通过实例工厂方法实例化》和《Bean 定义继承》）。Class 属性有两种使用方式：
+- 直接构造：容器通过反射调用类的构造函数创建 Bean（等效于 Java 的 new 关键字）；
+- 静态工厂方法：容器调用类的静态工厂方法创建 Bean，此时 class 属性指定包含工厂方法的类，返回对象的类型可能与该类相同或不同。
 
 ### 通过构造器来实例化Bean
+通过构造函数创建 Bean 时，所有普通类都可与 Spring 兼容 —— 无需实现特定接口或遵循特殊编码规范，只需指定 Bean 类即可（若使用特定 IoC 方式，可能需要默认无参构造函数）。
 
-> When you create a bean by the constructor approach, all normal classes are usable by and compatible with Spring. That is, the class being developed does not need to implement any specific interfaces or to be coded in a specific fashion. Simply specifying the bean class should suffice. However, depending on what type of IoC you use for that specific bean, you may need a default (empty) constructor.
->
-> The Spring IoC container can manage virtually any class you want it to manage. It is not limited to managing true JavaBeans. Most Spring users prefer actual JavaBeans with only a default (no-argument) constructor and appropriate setters and getters modeled after the properties in the container. You can also have more exotic non-bean-style classes in your container. If, for example, you need to use a legacy connection pool that absolutely does not adhere to the JavaBean specification, Spring can manage it as well.
-
-当你通过构造函数的方法创建一个bean时，所有的普通类都可以被Spring使用，并且与Spring兼容。也就是说，被开发的类不需要实现任何特定的接口，也不需要以特定的方式进行编码。简单地指定bean类就应该足够了。然而，根据您为该特定Bean使用的IoC类型，您可能需要一个默认（空）构造函数。
-
-Spring IoC容器几乎可以管理您希望它管理的任何类。它不限于管理真正的JavaBeans。大多数Spring用户更喜欢实际的JavaBeans，只需要一个默认的（无参）构造函数和适当的setters 和getters ，以容器中的属性为模型。你也可以在你的容器中拥有更多奇特的非bean风格的类。例如，如果你需要使用一个绝对不遵守JavaBean规范的传统连接池，Spring也可以管理它。
-
+Spring IoC 容器几乎可管理任意类（不限于标准 JavaBean），但大多数用户偏好使用 “默认无参构造函数 + 对应 getter/setter” 的标准 JavaBean。即使是不遵循 JavaBean 规范的遗留类（如老式连接池），Spring 也能管理。
 ```xml
 <bean id="exampleBean" class="examples.ExampleBean"/>
 
@@ -224,9 +192,7 @@ public class ClientService {
 ```
 
 ### 实例工厂方法创建Bean
-
-类似于通过静态工厂方法进行实例化，使用实例工厂方法进行实例化会从容器中调用现有bean的非静态方法来创建新bean。 要使用此机制，请将class属性保留为空，并在factory-bean属性中，在当前（或父或祖先）容器中指定包含要创建该对象的实例方法的bean的名称。 使用factory-method属性设置工厂方法本身的名称。 以下示例显示了如何配置此类Bean：
-
+与静态工厂方法类似，但实例工厂方法是调用容器中现有 Bean 的非静态方法来创建新 Bean：
 ```xml
 <bean id="serviceLocator" class="examples.DefaultServiceLocator">
     <!-- inject any dependencies required by this locator bean -->
@@ -260,13 +226,10 @@ public class DefaultServiceLocator {
 
 ### 确定Bean的运行时类型
 
-> The runtime type of a specific bean is non-trivial to determine. A specified class in the bean metadata definition is just an initial class reference, potentially combined with a declared factory method or being a `FactoryBean` class which may lead to a different runtime type of the bean, or not being set at all in case of an instance-level factory method (which is resolved via the specified `factory-bean` name instead). Additionally, AOP proxying may wrap a bean instance with an interface-based proxy with limited exposure of the target bean’s actual type (just its implemented interfaces).
->
-> The recommended way to find out about the actual runtime type of a particular bean is a `BeanFactory.getType` call for the specified bean name. This takes all of the above cases into account and returns the type of object that a `BeanFactory.getBean` call is going to return for the same bean name.
-
-确定特定bean的运行时类型并非易事。 Bean元数据定义中的指定类只是初始类引用，可能与声明的工厂方法结合使用，或者是FactoryBean类，这可能导致Bean的运行时类型不同，或者在实例的情况下完全不进行设置 级工厂方法（通过指定的factory-bean名称解析）。 此外，AOP代理可以使用基于接口的代理包装bean实例，而目标Bean的实际类型（仅是其实现的接口）的暴露程度有限。
-
-找出特定bean的实际运行时类型的推荐方法是对指定bean名称的BeanFactory.getType调用。 这考虑了上述所有情况，并返回了针对相同bean名称的BeanFactory.getBean调用将返回的对象的类型。
+确定 Bean 的运行时类型并非易事：
+- Bean 元数据中的 class 仅为初始引用，结合工厂方法或 FactoryBean 时，实际运行时类型可能不同；
+- AOP 代理可能为 Bean 包装接口代理，导致目标 Bean 的实际类型仅暴露其实现的接口。
+推荐方式：调用 BeanFactory.getType(beanName) 获取 Bean 的实际运行时类型，该方法会考虑上述所有情况，返回与 BeanFactory.getBean(beanName) 一致的对象类型。
 
 ## 附录：Bean 的生命周期
 
@@ -283,7 +246,6 @@ Spring统一管理Bean的生命周期
 3. BeanPostprocessor的before和after方法,和中间的InitializingBean和init-method方法
 
 4. 检查单例 Bean 是否实现了 `DisposableBean` 接口，并注册销毁时的回调。通常在 Spring 容器关闭时会调用这些销毁方法（例如通过调用 `ConfigurableApplicationContext.close()`）；不应依赖容器内部的手动方法来触发销毁。
-
 
 下面是按方法执行的前后顺序排列
 
