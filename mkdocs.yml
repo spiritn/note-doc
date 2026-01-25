@@ -79,12 +79,13 @@ nav:
 
   # Spring 框架相关文档
   - spring:
-      - 概览Overview: java/spring/spring/Overview.md
-      - IOC容器: java/spring/spring/IocContainer.md
-      - Resource: java/spring/spring/Resource.md
+      - 概览: java/spring/spring/01-Overview.md
+      - IOC容器: java/spring/spring/02-IocContainer.md
+      - IOC容器2: java/spring/spring/03-Ioc容器.md
+      - Resource: java/spring/spring/04-Resource.md
       - Validation: java/spring/spring/Validation-DataBinding-Type-Conversion.md
       - AOP: java/spring/spring/spring-AOP.md
-      - 其他: java/spring/spring/Null-safetyAndLogging.md
+      - Null-safe: java/spring/spring/Null-safetyAndLogging.md
       - spring常见问题: java/spring/spring/Spring常见问题.md
   - springboot:
       - 简介: java/spring/spring-boot/GettingStarted.md

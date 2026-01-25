@@ -165,7 +165,7 @@ public class ResourceHandler {
         System.out.println(diResource.getDescription());
 
         // 从本地File System获取
-        Resource resource = applicationContext.getResource("file:///E:/code/github/doc-for-spring/pages/spring/Overview.md");
+        Resource resource = applicationContext.getResource("file:///E:/code/github/doc-for-spring/pages/spring/01-Overview.md");
 
         // 从classpath获取
          Resource classpathResource = applicationContext.getResource("classpath:/application.properties");
