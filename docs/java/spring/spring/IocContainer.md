@@ -390,8 +390,6 @@ public interface BeanNameAware {
 }
 ```
 
-> The callback is invoked after population of normal bean properties but before an initialization callback such as `InitializingBean`, `afterPropertiesSet`, or a custom init-method.
-
 这个接口的回调在bean属性生成之后，但是在初始化方法（ `InitializingBean`.`afterPropertiesSet`, 或者自定义的init-method）回调之前。
 
 ## 1.6.3 其他Aware接口
@@ -1144,8 +1142,6 @@ public class AppConfig {
 }
 ```
 
-
-
 ## 1.12.4  `@Configuration`注解的使用
 
 @Configuration是类级别的注解，表示该是Bean定义的源。`@Configuration`类内部通过@Bean注解的public方法来声明Bean，`@Configuration`类中的@Bean方法也可以用来声明Bean之间的依赖关系。
@@ -1191,9 +1187,6 @@ public abstract class CommandManager {
     protected abstract Command createCommand();
 }
 ```
-
-> By using Java configuration, you can create a subclass of `CommandManager` where the abstract `createCommand()` method is overridden in such a way that it looks up a new (prototype) command object. The following example shows how to do so:
-
 通过使用Java配置，您可以创建CommandManager的子类，其中抽象的createCommand()方法被重载，以使其查找一个新的（原型）命令对象。
 
 ```java
@@ -1680,10 +1673,6 @@ System.out.println("Does my environment contain the 'my-property' property? " + 
 > 这些默认属性源存在于StandardEnvironment中，用于独立的应用程序。StandardServletEnvironment被填充了额外的默认属性源，包括servlet config和servlet上下文参数。它可以选择启用一个JndiPropertySource。
 
 具体来说，当你使用StandardEnvironment时，如果运行时存在my-property系统属性或my-property环境变量，则调用env.containsProperty("my-property")返回true。
-
->  The search performed is hierarchical. By default, system properties have precedence over environment variables. So, if the `my-property` property happens to be set in both places during a call to `env.getProperty("my-property")`, the system property value “wins” and is returned. Note that property values are not merged but rather completely overridden by a preceding entry.
->
-> For a common `StandardServletEnvironment`, the full hierarchy is as follows, with the highest-precedence entries at the top:
 
 执行的搜索是分层的。默认情况下，系统属性优先于环境变量。因此，如果在调用env.getProperty("my-property")的过程中，my-property属性恰好在两个地方都被设置了，那么系统属性值就会 "获胜 "并被返回。请注意，属性值不会被合并，而是被前面的条目完全覆盖。
 
